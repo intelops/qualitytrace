@@ -1,0 +1,11 @@
+type: DataStore
+spec:
+  name: elastic APM
+  type: elasticapm
+  elasticapm:
+    addresses:
+      - https://es01:9200
+    username: elastic
+    password: changeme
+    index: traces-apm-default
+    insecureSkipVerify: true

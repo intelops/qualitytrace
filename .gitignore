@@ -1,7 +1,5 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
 # Binaries for programs and plugins
+cypress-videos/
 *.exe
 *.exe~
 *.dll
@@ -16,6 +14,19 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+swagger/
 
-# Go workspace file
-go.work
+# Common text editors
+.vscode/
+.idea/
+server/vendor
+dist/
+
+# .DS_Store
+.DS_Store
+config.yml
+server/tracetest.yaml
+server/html
+
+__debug*
+web/cypress/downloads

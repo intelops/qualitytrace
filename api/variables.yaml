@@ -1,0 +1,28 @@
+openapi: 3.0.0
+
+components:
+  schemas:
+    MissingVariablesError:
+      type: object
+      properties:
+        missingVariables:
+          type: array
+          items:
+            $ref: "#/components/schemas/MissingVariable"
+    MissingVariable:
+      type: object
+      properties:
+        testId:
+          type: string
+        variables:
+          type: array
+          items:
+            $ref: "#/components/schemas/Variable"
+
+    Variable:
+      type: object
+      properties:
+        key:
+          type: string
+        defaultValue:
+          type: string

@@ -1,0 +1,184 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema-pro.json
+project_name: tracetest
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+release:
+  # discussion_category_name: General
+  draft: false
+  prerelease: "true"
+before:
+  hooks:
+    - go mod tidy
+env:
+  - VERSION={{ if index .Env "VERSION"  }}{{ .Env.VERSION }}{{ else }}dev{{ end }}
+  - TRACETEST_ENV={{ if index .Env "TRACETEST_ENV"  }}{{ .Env.TRACETEST_ENV }}{{ else }}dev{{ end }}
+  - ANALYTICS_BE_KEY={{ if index .Env "ANALYTICS_BE_KEY"  }}{{ .Env.ANALYTICS_BE_KEY }}{{ else }}{{ end }}
+  - ANALYTICS_FE_KEY={{ if index .Env "ANALYTICS_FE_KEY"  }}{{ .Env.ANALYTICS_FE_KEY }}{{ else }}{{ end }}
+  - TRACETEST_DEFAULT_CLOUD_ENDPOINT={{ if index .Env "TRACETEST_DEFAULT_CLOUD_ENDPOINT"  }}{{ .Env.TRACETEST_DEFAULT_CLOUD_ENDPOINT }}{{ else }}{{ end }}
+builds:
+  - id: server
+    binary: tracetest-server
+    main: ./server/main.go
+    ldflags:
+    - -X github.com/intelops/qualityTrace/server/version.Version={{ .Env.VERSION }}
+    - -X github.com/intelops/qualityTrace/server/version.Env={{ .Env.TRACETEST_ENV }}
+    - -X github.com/intelops/qualityTrace/server/analytics.SecretKey={{ .Env.ANALYTICS_BE_KEY }}
+    - -X github.com/intelops/qualityTrace/server/analytics.FrontendKey={{ .Env.ANALYTICS_FE_KEY }}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+    - "386"
+    - amd64
+    - arm
+    - arm64
+    goarm:
+    - "7"
+
+  - id: cli
+    binary: tracetest
+    main: ./cli/main.go
+    ldflags:
+    - -X github.com/intelops/qualityTrace/cli/config.Version={{ .Env.VERSION }}
+    - -X github.com/intelops/qualityTrace/cli/config.DefaultCloudEndpoint={{ .Env.TRACETEST_DEFAULT_CLOUD_ENDPOINT }}
+    - -X github.com/intelops/qualityTrace/cli/config.Env={{ .Env.TRACETEST_ENV }}
+    - -X github.com/intelops/qualityTrace/cli/analytics.SecretKey={{ .Env.ANALYTICS_BE_KEY }}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+    - "386"
+    - amd64
+    - arm
+    - arm64
+    goarm:
+    - "7"
+
+dockers:
+- image_templates:
+  - 'intelops/qualityTrace:{{ .Env.VERSION }}-amd64'
+  extra_files:
+    - web/build
+    - server/migrations
+  build_flag_templates:
+  - "--pull"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.name={{.ProjectName}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.version={{.Version}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--platform=linux/amd64"
+  goos: linux
+  goarch: amd64
+  use: buildx
+
+- image_templates:
+  - 'intelops/qualityTrace:{{ .Env.VERSION }}-arm64'
+  extra_files:
+    - web/build
+    - server/migrations
+  build_flag_templates:
+  - "--pull"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.name={{.ProjectName}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.version={{.Version}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--platform=linux/arm64/v8"
+  goos: linux
+  goarch: arm64
+  use: buildx
+
+# agent
+- image_templates:
+  - 'intelops/qualityTrace-agent:{{ .Env.VERSION }}-amd64'
+  dockerfile: "Dockerfile.agent"
+  extra_files:
+    - agent/
+  build_flag_templates:
+  - "--pull"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.name={{.ProjectName}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.version={{.Version}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--platform=linux/amd64"
+  goos: linux
+  goarch: amd64
+  use: buildx
+
+- image_templates:
+  - 'intelops/qualityTrace-agent:{{ .Env.VERSION }}-arm64'
+  dockerfile: "Dockerfile.agent"
+  extra_files:
+    - agent/
+  build_flag_templates:
+  - "--pull"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.name={{.ProjectName}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.version={{.Version}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--platform=linux/arm64/v8"
+  goos: linux
+  goarch: arm64
+  use: buildx
+
+docker_manifests:
+- name_template: 'intelops/qualityTrace:{{ .Env.VERSION }}'
+  image_templates:
+  - 'intelops/qualityTrace:{{ .Env.VERSION }}-amd64'
+  - 'intelops/qualityTrace:{{ .Env.VERSION }}-arm64'
+
+# agent
+- name_template: 'intelops/qualityTrace-agent:{{ .Env.VERSION }}'
+  image_templates:
+  - 'intelops/qualityTrace-agent:{{ .Env.VERSION }}-amd64'
+  - 'intelops/qualityTrace-agent:{{ .Env.VERSION }}-arm64'
+
+archives:
+- name_template: >-
+    {{ .ProjectName }}_
+    {{- .Version }}_
+    {{- .Os }}_
+    {{- if eq .Arch "386" }}i386
+    {{- else }}{{ .Arch }}{{ end }}
+    {{- with .Arm }}v{{ . }}{{ end }}
+    {{- with .Mips }}_{{ . }}{{ end }}
+    {{- if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}
+checksum:
+  name_template: 'checksums.txt'
+
+universal_binaries:
+- replace: true
+
+nfpms:
+- vendor: Kubeshop
+  homepage: https://tracetest.kubeshop.io/
+  maintainer: Sebastian Choren <sebastian@kubeshop.io>
+  license: MIT
+  formats:
+    - deb
+    - rpm
+  file_name_template: >-
+    {{ .ProjectName }}_
+    {{- .Version }}_
+    {{- .Os }}_
+    {{- if eq .Arch "386" }}i386
+    {{- else }}{{ .Arch }}{{ end }}
+    {{- with .Arm }}v{{ . }}{{ end }}
+    {{- with .Mips }}_{{ . }}{{ end }}
+    {{- if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}
+  deb:
+    lintian_overrides:
+      - statically-linked-binary

@@ -1,0 +1,47 @@
+---
+id: agent
+title: Tracetest Agent (Private Access)
+description: The Tracetest Agent enables Tracetest to access your application under test and to ingest trace data from your OpenTelemetry Collector or tracing backend. Learn about Tracetest Agent concepts and how it works when running in your environment as an executable, Docker container, or in your Cloud Native infrastructure.
+keywords:
+  - tracetest
+  - trace-based testing
+  - observability
+  - distributed tracing
+  - testing
+image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_Thumbnail_14_rsvkmo.jpg
+---
+
+This page explains how Tracetest accesses your private application (VPC, firewall, etc.) and its traces to run tests.
+
+If your application is in a private environment, you will use the Tracetest Agent in your environment to run tests and ingest trace data from your OpenTelemetry Collector or tracing backend.
+
+Tracetest Agent is a lightweight, dependency-free, agent that runs in your environment as an executable, Docker container, or in your Cloud Native infrastructure.
+
+If you have a [publicly accessible application, then view this page](/concepts/cloud-agent).
+
+## Get Started
+
+Go to your Environment Access Settings page.
+
+![Agent Settings](https://res.cloudinary.com/djwdcmwdz/image/upload/v1712586955/docs/app.tracetest.io_organizations_ttorg_2179a9cd8ba8dfa5_environments_ttenv_597cf82c754c2a01_settings_ykn53w.png)
+
+Select **"Application is in a private environment"**. Use the `--api-key` to run the Tracetest Agent in your environment.
+
+![](https://res.cloudinary.com/djwdcmwdz/image/upload/v1712587335/docs/app.tracetest.io_organizations_ttorg_2179a9cd8ba8dfa5_environments_ttenv_597cf82c754c2a01_settings_1_iumdfz.png)
+
+Configure the tracing backend you're using via the tracing backend tab or use the supplied OTLP endpoints to alter your OpenTelemetry Collector configuration to send trace information via either gRPC or HTTP directly to Tracetest.
+
+## How It Works
+
+- Tracetest Agent listens for new tests you run from [Tracetest](https://app.tracetest.io). It executes tests in the environment where it is running and returns the response from the trigger. The environment can be either `localhost`, Docker, or Kubernetes.
+- Tracetest Agent listens on OTLP ports `4317` (gRPC) and `4318` (HTTP) for OpenTelemetry trace spans to capture distributed trace data and relay it to [Tracetest](https://app.tracetest.io).
+- Be able to connect to a trace data store that is not accessible outside of your environment. Eg. a Jaeger instance running in the cluster without an ingress controller.
+- With both the response and trace, you build tests and create assertions with data from either or both of them.
+
+## Architecture
+
+![](https://res.cloudinary.com/djwdcmwdz/image/upload/v1697464028/docs/agent-saas-oct-16-whitebg_i4stow.png)
+
+:::note
+Want to start Tracetest Agent? Check out [this page to get started](../getting-started/installation).
+:::

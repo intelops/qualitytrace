@@ -1,0 +1,45 @@
+type: Test
+spec:
+  id: v4QKJR4Vg
+  name: Create HTTP Test with existing ID
+  description: Test step of 'HTTP Test Feature - Test Suite'
+  trigger:
+    type: http
+    httpRequest:
+      url: ${var:TARGET_URL}/api/tests
+      method: POST
+      headers:
+      - key: Content-Type
+        value: application/json
+      body: |
+        {
+          "type": "Test",
+          "spec": {
+            "id": "${var:EXAMPLE_TEST_ID}",
+            "name": "Pokemon - List - Get a Pokemon",
+            "trigger": {
+              "type": "http",
+              "httpRequest": {
+                "url": "${var:DEMO_APP_URL}/pokemon?take=20&skip=0",
+                "method": "GET",
+                "body": "",
+                "headers": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          }
+        }
+  specs:
+  - selector: span[name = "Tracetest trigger"]
+    assertions:
+    - attr:tracetest.selected_spans.count = 1
+    - attr:tracetest.response.status = 400
+  - selector: span[name="POST /api/tests" tracetest.span.type="http"]
+    assertions:
+    - attr:tracetest.selected_spans.count = 1
+    - attr:tracetest.span.status_code = "STATUS_CODE_ERROR"
+    - attr:tracetest.span.status_description contains "test with same ID already exists"

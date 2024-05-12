@@ -1,0 +1,8 @@
+type: DataStore
+spec:
+  name: OpenSearch
+  type: opensearch
+  opensearch:
+    addresses:
+      - http://opensearch:9200
+    index: traces

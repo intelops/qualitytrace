@@ -1,0 +1,39 @@
+---
+id: overview
+title: Configuration
+description: Tracetest allows you to quickly build integration and end-to-end tests, powered by your OpenTelemetry traces. Learn how to configure Tracetest.
+keywords:
+  - tracetest
+  - trace-based testing
+  - observability
+  - distributed tracing
+  - testing
+image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_Thumbnail_14_rsvkmo.jpg
+---
+
+To enable Tracetest to run end-to-end tests against trace data, you need to configure Tracetest to access your app. Tracetest is designed to work with tracing backends, or to ingest trace data via an OTLP ingest endpoint.
+
+## Enable Tracetest to Access Your Application
+
+There are two configuration options for triggering tests and ingesting trace data into Tracetest:
+
+- [Tracetest Agent configuration (private access)](/configuration/agent): You run an agent locally in your environment, as a process, or in Docker/Kubernetes as a container. Prefferred option if you are using a VPC, firewall, etc.
+- [Tracetest Cloud Agent configuration (public access)](/configuration/cloud-agent): We run an agent in your Tracetest account with publicly accesible endpoints. You manage nothing. Prefferred option if you are using serverless architectures.
+
+## Connecting Tracetest to Tracing Backends
+
+Tracetest supports [two types of tracing backend integrations](/configuration/connecting-to-data-stores/overview):
+
+- Native connection (polling)
+- OTLP ingest endpoint
+
+:::note Want to see your options?
+[View the list of supported tracing backends, here.](/configuration/connecting-to-data-stores/overview#supported-tracing-backends)
+:::
+
+## Access and Tracing Backend Configuration Examples
+
+- View the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualityTrace/tree/main/examples).
+- Follow the [**Recipes**](/examples-tutorials/recipes) for guided walkthroughs of sample use cases.
+
+We will be adding new data stores over the next couple of months - [let us know](https://github.com/intelops/qualityTrace/issues/new/choose) any additional data stores you would like to see us support.

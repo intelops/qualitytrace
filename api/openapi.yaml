@@ -1,0 +1,1550 @@
+openapi: 3.0.0
+info:
+  version: 0.2.1
+  title: TraceTest
+  description: OpenAPI definition for TraceTest endpoint and resources
+servers:
+  - url: /api
+paths:
+  # TestSuites
+  /testsuites:
+    get:
+      tags:
+        - resource-api
+      summary: "Get testsuites"
+      description: "get testsuites"
+      operationId: getTestSuites
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+        - $ref: "./parameters.yaml#/components/parameters/query"
+        - $ref: "./parameters.yaml#/components/parameters/runnableResourceSortBy"
+        - $ref: "./parameters.yaml#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./testsuites.yaml#/components/schemas/TestSuiteResourceList"
+            text/yaml:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  items:
+                    type: array
+                    items:
+                      $ref: "./testsuites.yaml#/components/schemas/TestSuiteResource"
+        400:
+          description: "invalid query for testsuites, some data was sent in incorrect format."
+        500:
+          description: "problem with getting testsuites"
+    post:
+      tags:
+        - resource-api
+      summary: "Create new TestSuite"
+      description: "Create new TestSuite"
+      operationId: createTestSuite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./testsuites.yaml#/components/schemas/TestSuiteResource"
+          text/yaml:
+            schema:
+              $ref: "./testsuites.yaml#/components/schemas/TestSuiteResource"
+      responses:
+        201:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./testsuites.yaml#/components/schemas/TestSuiteResource"
+            text/yaml:
+              schema:
+                $ref: "./testsuites.yaml#/components/schemas/TestSuiteResource"
+        400:
+          description: "trying to create a TestSuite with an already existing ID"
+        500:
+          description: "problem creating a TestSuite"
+  /testsuites/{testSuiteId}:
+    get:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testSuiteId"
+      summary: "get TestSuite"
+      description: "get TestSuite"
+      operationId: getTestSuite
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./testsuites.yaml#/components/schemas/TestSuiteResource"
+            text/yaml:
+              schema:
+                $ref: "./testsuites.yaml#/components/schemas/TestSuiteResource"
+        404:
+          description: "TestSuite not found"
+        500:
+          description: "problem getting an TestSuite"
+    put:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testSuiteId"
+      summary: "update TestSuite"
+      description: "update TestSuite action"
+      operationId: updateTestSuite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./testsuites.yaml#/components/schemas/TestSuiteResource"
+          text/yaml:
+            schema:
+              $ref: "./testsuites.yaml#/components/schemas/TestSuiteResource"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./testsuites.yaml#/components/schemas/TestSuiteResource"
+            text/yaml:
+              schema:
+                $ref: "./testsuites.yaml#/components/schemas/TestSuiteResource"
+        400:
+          description: "invalid TestSuite, some data was sent in incorrect format."
+        404:
+          description: "TestSuite not found"
+        500:
+          description: "problem updating a TestSuite"
+    delete:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testSuiteId"
+      summary: "delete a TestSuite"
+      description: "delete a TestSuite"
+      operationId: deleteTestSuite
+      responses:
+        204:
+          description: successful operation
+        404:
+          description: "TestSuite not found"
+        500:
+          description: "problem deleting a TestSuite"
+  /testsuites/{testSuiteId}/version/{version}:
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testSuiteId"
+        - $ref: "./parameters.yaml#/components/parameters/version"
+      summary: "get a TestSuite specific version"
+      description: "get a TestSuite specific version"
+      operationId: getTestSuiteVersion
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./testsuites.yaml#/components/schemas/TestSuite"
+        500:
+          description: "problem with getting a test"
+
+  /testsuites/{testSuiteId}/run:
+    post:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testSuiteId"
+      summary: "run TestSuite"
+      description: "run a particular TestSuite"
+      operationId: runTestSuite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./tests.yaml#/components/schemas/RunInformation"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./testsuites.yaml#/components/schemas/TestSuiteRun"
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testSuiteId"
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+      summary: "Get all runs from a particular TestSuite"
+      description: "Get all runs from a particular TestSuite"
+      operationId: getTestSuiteRuns
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "./testsuites.yaml#/components/schemas/TestSuiteRun"
+  /testsuites/{testSuiteId}/run/{runId}:
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testSuiteId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: "Get a specific run from a particular TestSuite"
+      description: "Get a specific run from a particular TestSuite"
+      operationId: getTestSuiteRun
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "./testsuites.yaml#/components/schemas/TestSuiteRun"
+        404:
+          description: TestSuite run not found
+
+    delete:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testSuiteId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: "Delete a specific run from a particular TestSuite"
+      description: "Delete a specific run from a particular TestSuite"
+      operationId: deleteTestSuiteRun
+      responses:
+        204:
+          description: OK
+        404:
+          description: TestSuite run not found
+
+  # Tests
+  /tests:
+    get:
+      tags:
+        - resource-api
+      summary: "Get tests"
+      description: "get tests"
+      operationId: getTests
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+        - $ref: "./parameters.yaml#/components/parameters/query"
+        - $ref: "./parameters.yaml#/components/parameters/runnableResourceSortBy"
+        - $ref: "./parameters.yaml#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/TestResourceList"
+            text/yaml:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/TestResourceList"
+        400:
+          description: "invalid query for test, some data was sent in incorrect format."
+        500:
+          description: "problem with getting tests"
+    post:
+      tags:
+        - resource-api
+      summary: "Create new test"
+      description: "Create new test action"
+      operationId: createTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./tests.yaml#/components/schemas/TestResource"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/TestResource"
+        400:
+          description: "trying to create a test with an already existing ID"
+    put:
+      tags:
+        - resource-api
+      summary: "Upsert new test"
+      description: "Upsert new test action"
+      operationId: upsertTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./tests.yaml#/components/schemas/TestResource"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/TestResource"
+  /tests/{testId}:
+    get:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+      summary: "get test"
+      description: "get test"
+      operationId: getTest
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/TestResource"
+        500:
+          description: "problem with getting a test"
+    put:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+      summary: "update test"
+      description: "update test action"
+      operationId: updateTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./tests.yaml#/components/schemas/TestResource"
+      responses:
+        204:
+          description: successful operation
+        500:
+          description: "problem with updating test"
+    delete:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+      summary: "delete a test"
+      description: "delete a test"
+      operationId: deleteTest
+      responses:
+        "204":
+          description: OK
+  /tests/{testId}/run:
+    post:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+      summary: "run test"
+      description: "run a particular test"
+      operationId: runTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./tests.yaml#/components/schemas/RunInformation"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/TestRun"
+        422:
+          description: some variables are missing
+          content:
+            application/json:
+              schema:
+                $ref: "./variables.yaml#/components/schemas/MissingVariablesError"
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+      summary: "get the runs for a test"
+      description: "get the runs from a particular test"
+      operationId: getTestRuns
+      responses:
+        200:
+          description: successful operation
+          headers:
+            X-Total-Count:
+              schema:
+                type: integer
+              description: Total records count
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "./tests.yaml#/components/schemas/TestRun"
+  /tests/{testId}/run/{runId}/select:
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+        - $ref: "./parameters.yaml#/components/parameters/query"
+      summary: "retrieve spans that will be selected by selector"
+      description: "get the spans ids that would be selected by a specific selector query"
+      operationId: getTestResultSelectedSpans
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/SelectedSpansResult"
+  /tests/{testId}/run/{runId}/dry-run:
+    put:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: "run given assertions against the traces from the given run without persisting anything"
+      description: "use this method to test a definition against an actual trace without creating a new version or persisting anything"
+      operationId: dryRunAssertion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./tests.yaml#/components/schemas/TestSpecs"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/AssertionResults"
+  /tests/{testId}/run/{runId}/rerun:
+    post:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: "rerun a test run"
+      description: "rerun a test run"
+      operationId: rerunTestRun
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/TestRun"
+  /tests/{testId}/run/{runId}/junit.xml:
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: "get test run results in JUnit xml format"
+      description: "get test run results in JUnit xml format"
+      operationId: getRunResultJUnit
+      responses:
+        200:
+          description: JUnit formatted file
+          content:
+            application/xml:
+              schema:
+                type: string
+  /tests/{testId}/run/{runId}/export:
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: export test and test run information
+      description: export test and test run information for debugging
+      operationId: exportTestRun
+      responses:
+        200:
+          description: successfuly exported test and test run information
+          content:
+            application/json:
+              schema:
+                $ref: "tests.yaml#/components/schemas/ExportedTestInformation"
+
+  /tests/{testId}/run/{runId}/search-spans:
+    post:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: get spans fileter by query
+      description: get spans fileter by query
+      operationId: searchSpans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: query to filter spans, can be either a full text search or a Span Query Language query
+      responses:
+        200:
+          description: trace containing matching spans only
+          content:
+            application/json:
+              schema:
+                $ref: "tests.yaml#/components/schemas/SearchSpansResult"
+
+  /tests/import:
+    post:
+      tags:
+        - api
+      summary: import test and test run information
+      description: import test and test run information for debugging
+      operationId: importTestRun
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./tests.yaml#/components/schemas/ExportedTestInformation"
+      responses:
+        200:
+          description: successfuly imported test and test run information
+          content:
+            application/json:
+              schema:
+                $ref: "tests.yaml#/components/schemas/ExportedTestInformation"
+  /tests/{testId}/run/{runId}:
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: "get test Run"
+      description: "get a particular test Run"
+      operationId: getTestRun
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/TestRun"
+    delete:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: "delete a test run"
+      description: "delete a test run"
+      operationId: deleteTestRun
+      responses:
+        "204":
+          description: OK
+    # TODO: remove this as soon as we refactor our queues
+    patch:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: "update a test run"
+      description: "update a test run"
+      operationId: updateTestRun
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./tests.yaml#/components/schemas/TestRun"
+      responses:
+        200:
+          description: successfuly updated the test run
+          content:
+            application/json:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/TestRun"
+
+  /tests/{testId}/definition:
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+      operationId: getTestSpecs
+      summary: "Get definition for a test"
+      description: "Gets definition for a test"
+      responses:
+        201:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "./tests.yaml#/components/schemas/TestSpecs"
+  /tests/{testId}/version/{version}:
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/version"
+      summary: "get a test specific version"
+      description: "get a test specific version"
+      operationId: getTestVersion
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./tests.yaml#/components/schemas/Test"
+        500:
+          description: "problem with getting a test"
+  /tests/{testId}/run/{runId}/stop:
+    post:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: "stops the execution of a test run"
+      description: "stops the execution of a test run"
+      operationId: stopTestRun
+      responses:
+        200:
+          description: successful operation
+        422:
+          description: could not stop execution, probably it's not running anymore
+
+  /tests/{testId}/run/{runId}/skipPolling:
+    post:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: "skips the trace collection of a test run"
+      description: "skips the trace collection of a test run"
+      operationId: skipTraceCollection
+      responses:
+        200:
+          description: successful operation
+        422:
+          description: could not stop execution, probably it's not running anymore
+
+  # Test events
+  /tests/{testId}/run/{runId}/events:
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/testId"
+        - $ref: "./parameters.yaml#/components/parameters/runId"
+      summary: "get events from a test run"
+      description: "get events from a test run"
+      operationId: getTestRunEvents
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "./testEvents.yaml#/components/schemas/TestRunEvent"
+
+  # Expressions
+  /expressions/resolve:
+    post:
+      tags:
+        - api
+      summary: resolves an expression and returns the result string
+      description: resolves an expression and returns the result string
+      operationId: ExpressionResolve
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./expressions.yaml#/components/schemas/ResolveRequestInfo"
+      responses:
+        200:
+          description: successfully resolved the expression
+          content:
+            application/json:
+              schema:
+                $ref: "./expressions.yaml#/components/schemas/ResolveResponseInfo"
+
+  # Resources (Tests, TestSuites)
+  /resources:
+    get:
+      tags:
+        - api
+      summary: "Get resources"
+      description: "get resources"
+      operationId: getResources
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+        - $ref: "./parameters.yaml#/components/parameters/query"
+        - $ref: "./parameters.yaml#/components/parameters/runnableResourceSortBy"
+        - $ref: "./parameters.yaml#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: successful operation
+          headers:
+            X-Total-Count:
+              schema:
+                type: integer
+              description: Total records count
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "./resources.yaml#/components/schemas/Resource"
+
+  # Configuration
+  /config/connection:
+    post:
+      tags:
+        - api
+      summary: "Tests the config data store/exporter connection"
+      description: "Tests the config data store/exporter connection"
+      operationId: testConnection
+      requestBody:
+        content:
+          text/json:
+            schema:
+              $ref: "./dataStores.yaml#/components/schemas/DataStore"
+      responses:
+        201:
+          description: Test connection Result
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/TestConnectionResponse"
+  /config/connection/otlp:
+    get:
+      tags:
+        - api
+      summary: get information about the OTLP connection
+      description: get information about the OTLP connection
+      operationId: getOTLPConnectionInformation
+      responses:
+        200:
+          description: The connection information was retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/OTLPTestConnectionResponse"
+        408:
+          description: The connection information was not available and the connection timed out
+  /config/connection/otlp/reset:
+    post:
+      tags:
+        - api
+      summary: reset the OTLP connection span count
+      description: reset the OTLP connection span count
+      operationId: resetOTLPConnectionInformation
+      responses:
+        200:
+          description: Ok
+  /configs:
+    get:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+        - $ref: "./parameters.yaml#/components/parameters/switchableResourceSortBy"
+        - $ref: "./parameters.yaml#/components/parameters/sortDirection"
+      summary: "List Tracetest configuration"
+      description: "List Tracetest configuration"
+      operationId: listConfiguration
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/ConfigurationResourceList"
+            text/yaml:
+              schema:
+                $ref: "./config.yaml#/components/schemas/ConfigurationResourceList"
+        500:
+          description: "problem getting the configuration list"
+  /configs/{configId}:
+    get:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/configId"
+      summary: "Get Tracetest configuration"
+      description: "Get Tracetest configuration"
+      operationId: getConfiguration
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/ConfigurationResource"
+            text/yaml:
+              schema:
+                $ref: "./config.yaml#/components/schemas/ConfigurationResource"
+        500:
+          description: "problem getting a configuration"
+    put:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/configId"
+      summary: "Update Tracetest configuration"
+      description: "Update Tracetest configuration"
+      operationId: updateConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./config.yaml#/components/schemas/ConfigurationResource"
+          text/yaml:
+            schema:
+              $ref: "./config.yaml#/components/schemas/ConfigurationResource"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/ConfigurationResource"
+            text/yaml:
+              schema:
+                $ref: "./config.yaml#/components/schemas/ConfigurationResource"
+        500:
+          description: "problem updating configuration"
+
+  /pollingprofiles:
+    get:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+        - $ref: "./parameters.yaml#/components/parameters/switchableResourceSortBy"
+        - $ref: "./parameters.yaml#/components/parameters/sortDirection"
+      summary: "List Polling Profile Configuration"
+      description: "List Polling Profile configuration"
+      operationId: listPollingProfile
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/PollingProfileList"
+            text/yaml:
+              schema:
+                $ref: "./config.yaml#/components/schemas/PollingProfileList"
+        500:
+          description: "problem getting the polling profile list"
+  # Polling Profile
+  /pollingprofiles/{pollingProfileId}:
+    get:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/pollingProfileId"
+      summary: "Get Polling Profile"
+      description: "Get a polling profile used on Tracetest to configure how to fetch traces in a test."
+      operationId: getPollingProfile
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/PollingProfile"
+            text/yaml:
+              schema:
+                $ref: "./config.yaml#/components/schemas/PollingProfile"
+        404:
+          description: "polling profile not found"
+        500:
+          description: "problem getting a polling profile"
+    put:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/pollingProfileId"
+      summary: "Update a Polling Profile"
+      description: "Update a polling profile used on Tracetest to configure how to fetch traces in a test."
+      operationId: updatePollingProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./config.yaml#/components/schemas/PollingProfile"
+          text/yaml:
+            schema:
+              $ref: "./config.yaml#/components/schemas/PollingProfile"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/PollingProfile"
+            text/yaml:
+              schema:
+                $ref: "./config.yaml#/components/schemas/PollingProfile"
+        400:
+          description: "invalid polling profile, some data was sent in incorrect format."
+        404:
+          description: "polling profile not found"
+        500:
+          description: "problem updating a polling profile"
+
+  # Demo
+  /demos:
+    get:
+      tags:
+        - resource-api
+      summary: "List Demonstrations"
+      description: "List demonstrations used on Tracetest as quick start examples."
+      operationId: listDemos
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+        - $ref: "./parameters.yaml#/components/parameters/switchableResourceSortBy"
+        - $ref: "./parameters.yaml#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/DemoList"
+            text/yaml:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  items:
+                    type: array
+                    items:
+                      $ref: "./config.yaml#/components/schemas/Demo"
+        400:
+          description: "invalid query for demos, some data was sent in incorrect format."
+        500:
+          description: "problem listing demos"
+    post:
+      tags:
+        - resource-api
+      summary: "Create a Demonstration setting"
+      description: "Create a demonstration used on Tracetest as quick start examples."
+      operationId: createDemo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./config.yaml#/components/schemas/Demo"
+          text/yaml:
+            schema:
+              $ref: "./config.yaml#/components/schemas/Demo"
+      responses:
+        201:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/Demo"
+            text/yaml:
+              schema:
+                $ref: "./config.yaml#/components/schemas/Demo"
+        500:
+          description: "problem creating a demo"
+  /demos/{demoId}:
+    get:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/demoId"
+      summary: "Get Demonstration setting"
+      description: "Get a demonstration used on Tracetest as quick start examples."
+      operationId: getDemo
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/Demo"
+            text/yaml:
+              schema:
+                $ref: "./config.yaml#/components/schemas/Demo"
+        404:
+          description: "demo not found"
+        500:
+          description: "problem getting a demo"
+    put:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/demoId"
+      summary: "Update a Demonstration setting"
+      description: "Update a demonstration used on Tracetest as quick start examples."
+      operationId: updateDemo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./config.yaml#/components/schemas/Demo"
+          text/yaml:
+            schema:
+              $ref: "./config.yaml#/components/schemas/Demo"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./config.yaml#/components/schemas/Demo"
+            text/yaml:
+              schema:
+                $ref: "./config.yaml#/components/schemas/Demo"
+        400:
+          description: "invalid demo, some data was sent in incorrect format."
+        404:
+          description: "demo not found"
+        500:
+          description: "problem updating a demo"
+    delete:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/demoId"
+      summary: "Delete a Demonstration setting"
+      description: "Delete a demonstration used on Tracetest as quick start examples."
+      operationId: deleteDemo
+      responses:
+        204:
+          description: successful operation
+        400:
+          description: "invalid demo, some data was sent in incorrect format."
+        404:
+          description: "demo not found"
+        500:
+          description: "problem deleting a demo"
+
+  /datastores:
+    get:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+        - $ref: "./parameters.yaml#/components/parameters/switchableResourceSortBy"
+        - $ref: "./parameters.yaml#/components/parameters/sortDirection"
+      summary: "List Data Store"
+      description: "List Data Store"
+      operationId: listDataStore
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./dataStores.yaml#/components/schemas/DataStoreList"
+            text/yaml:
+              schema:
+                $ref: "./dataStores.yaml#/components/schemas/DataStoreList"
+        500:
+          description: "problem getting the data store list"
+
+  # Data Stores
+  /datastores/{dataStoreId}:
+    get:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/dataStoreId"
+      summary: "Get a Data Store"
+      description: "Get a Data Store"
+      operationId: getDataStore
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./dataStores.yaml#/components/schemas/DataStoreResource"
+        404:
+          description: "data store not found"
+        500:
+          description: "problem with getting a data store"
+    put:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/dataStoreId"
+      summary: "Update a Data Store"
+      description: "Update a Data Store"
+      operationId: updateDataStore
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./dataStores.yaml#/components/schemas/DataStore"
+      responses:
+        204:
+          description: successful operation
+        400:
+          description: "invalid data store, some data was sent in incorrect format."
+        500:
+          description: "problem with updating data store"
+
+  # VariableSets
+  /variableSets:
+    get:
+      tags:
+        - resource-api
+      summary: "List VariableSets"
+      description: "List VariableSets available in Tracetest."
+      operationId: listVariableSets
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+        - $ref: "./parameters.yaml#/components/parameters/switchableResourceSortBy"
+        - $ref: "./parameters.yaml#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./variableSets.yaml#/components/schemas/VariableSetResourceList"
+            text/yaml:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  items:
+                    type: array
+                    items:
+                      $ref: "./variableSets.yaml#/components/schemas/VariableSetResource"
+        400:
+          description: "invalid query for VariableSets, some data was sent in incorrect format."
+        500:
+          description: "problem listing VariableSets"
+    post:
+      tags:
+        - resource-api
+      summary: "Create a VariableSet"
+      description: "Create a VariableSet that can be used by tests and test suites"
+      operationId: createVariableSet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./variableSets.yaml#/components/schemas/VariableSetResource"
+          text/yaml:
+            schema:
+              $ref: "./variableSets.yaml#/components/schemas/VariableSetResource"
+      responses:
+        201:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./variableSets.yaml#/components/schemas/VariableSetResource"
+            text/yaml:
+              schema:
+                $ref: "./variableSets.yaml#/components/schemas/VariableSetResource"
+        500:
+          description: "problem creating an VariableSet"
+
+  /variableSets/{variableSetId}:
+    get:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/variableSetId"
+      summary: "Get a specific VariableSet"
+      description: "Get one VariableSet by its id"
+      operationId: getVariableSet
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./variableSets.yaml#/components/schemas/VariableSetResource"
+            text/yaml:
+              schema:
+                $ref: "./variableSets.yaml#/components/schemas/VariableSetResource"
+        404:
+          description: "VariableSet not found"
+        500:
+          description: "problem getting an VariableSet"
+    put:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/variableSetId"
+      summary: "Update a VariableSet"
+      description: "Update a VariableSet used on Tracetest"
+      operationId: updateVariableSet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./variableSets.yaml#/components/schemas/VariableSetResource"
+          text/yaml:
+            schema:
+              $ref: "./variableSets.yaml#/components/schemas/VariableSetResource"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./variableSets.yaml#/components/schemas/VariableSetResource"
+            text/yaml:
+              schema:
+                $ref: "./variableSets.yaml#/components/schemas/VariableSetResource"
+        400:
+          description: "invalid VariableSet, some data was sent in incorrect format."
+        404:
+          description: "VariableSet not found"
+        500:
+          description: "problem updating an VariableSet"
+    delete:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/variableSetId"
+      summary: "Delete a variable set"
+      description: "Delete a variable set from Tracetest"
+      operationId: deleteVariableSet
+      responses:
+        204:
+          description: successful operation
+        400:
+          description: "invalid VariableSet, some data was sent in incorrect format."
+        404:
+          description: "VariableSet not found"
+        500:
+          description: "problem deleting an variable set"
+
+  /version.{fileExtension}:
+    get:
+      tags:
+        - api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/fileExtension"
+      summary: "Get the version of the API"
+      description: "Get the version of the API"
+      operationId: getVersion
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./version.yaml#/components/schemas/Version"
+        500:
+          description: "problem getting the version of the API"
+
+  # Linters
+  /linters:
+    get:
+      tags:
+        - resource-api
+      summary: "List Linters"
+      description: "List Linters available in Tracetest."
+      operationId: listLinters
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+        - $ref: "./parameters.yaml#/components/parameters/switchableResourceSortBy"
+        - $ref: "./parameters.yaml#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./linters.yaml#/components/schemas/LinterResourceList"
+            text/yaml:
+              schema:
+                $ref: "./linters.yaml#/components/schemas/LinterResourceList"
+        400:
+          description: "invalid query for Linters, some data was sent in incorrect format."
+        500:
+          description: "problem listing Linters"
+    post:
+      tags:
+        - resource-api
+      summary: "Create an Linter"
+      description: "Create an Linter that can be used by tests and Linters"
+      operationId: createLinter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./linters.yaml#/components/schemas/LinterResource"
+          text/yaml:
+            schema:
+              $ref: "./linters.yaml#/components/schemas/LinterResource"
+      responses:
+        201:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./linters.yaml#/components/schemas/LinterResource"
+            text/yaml:
+              schema:
+                $ref: "./linters.yaml#/components/schemas/LinterResource"
+        500:
+          description: "problem creating an Linter"
+
+  /linters/{linterId}:
+    get:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/linterId"
+      summary: "Get a specific Linter"
+      description: "Get one Linter by its id"
+      operationId: getLinter
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./linters.yaml#/components/schemas/LinterResource"
+            text/yaml:
+              schema:
+                $ref: "./linters.yaml#/components/schemas/LinterResource"
+        404:
+          description: "Linter not found"
+        500:
+          description: "problem getting a Linter"
+    put:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/linterId"
+      summary: "Update a Linter"
+      description: "Update a Linter used on Tracetest"
+      operationId: updateLinter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./linters.yaml#/components/schemas/LinterResource"
+          text/yaml:
+            schema:
+              $ref: "./linters.yaml#/components/schemas/LinterResource"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./linters.yaml#/components/schemas/LinterResource"
+            text/yaml:
+              schema:
+                $ref: "./linters.yaml#/components/schemas/LinterResource"
+        400:
+          description: "invalid Linter, some data was sent in incorrect format."
+        404:
+          description: "Linter not found"
+        500:
+          description: "problem updating an Linter"
+    delete:
+      tags:
+        - resource-api
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/linterId"
+      summary: "Delete an Linter"
+      description: "Delete an Linter from Tracetest"
+      operationId: deleteLinter
+      responses:
+        204:
+          description: successful operation
+        400:
+          description: "invalid Linter, some data was sent in incorrect format."
+        404:
+          description: "Linter not found"
+        500:
+          description: "problem deleting an Linter"
+
+  /wizard:
+    get:
+      tags:
+        - api
+      summary: "Get a specific wizard"
+      description: "Get the configured Wizard, showing the state of each step."
+      operationId: getWizard
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./wizards.yaml#/components/schemas/Wizard"
+        404:
+          description: "Wizard not found"
+        500:
+          description: "problem getting a Wizard"
+    put:
+      tags:
+        - api
+      summary: "Update a Wizard"
+      description: "Update a Wizard used on Tracetest"
+      operationId: updateWizard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./wizards.yaml#/components/schemas/Wizard"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./wizards.yaml#/components/schemas/Wizard"
+        400:
+          description: "invalid Wizard, some data was sent in incorrect format."
+        404:
+          description: "Wizard not found"
+        500:
+          description: "problem updating an Wizard"
+
+  # Run Groups
+  /rungroups:
+    get:
+      tags:
+        - api
+      summary: "Get all run groups"
+      description: "Get all the run groups in the system"
+      operationId: getRunGroups
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+        - $ref: "./parameters.yaml#/components/parameters/status"
+        - $ref: "./parameters.yaml#/components/parameters/runnableResourceSortBy"
+        - $ref: "./parameters.yaml#/components/parameters/sortDirection"
+      responses:
+        200:
+          description: successful operation
+          headers:
+            X-Total-Count:
+              schema:
+                type: integer
+              description: Total records count
+          content:
+            application/json:
+              schema:
+                $ref: "./runGroups.yaml#/components/schemas/RunGroupList"
+        404:
+          description: "Run Groups not found"
+        500:
+          description: "problem getting the Run Groups"
+    post:
+      tags:
+        - api
+      summary: "Create a RunGroup"
+      description: "Create a RunGroup used on Tracetest"
+      operationId: createRunGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./runGroups.yaml#/components/schemas/RunGroup"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./runGroups.yaml#/components/schemas/RunGroup"
+        400:
+          description: "invalid RunGroup, some data was sent in incorrect format."
+        404:
+          description: "RunGroup not found"
+        500:
+          description: "problem updating an RunGroup"
+  /rungroups/{runGroupId}:
+    parameters:
+      - $ref: "./parameters.yaml#/components/parameters/runGroupId"
+    get:
+      tags:
+        - api
+      summary: "Get a run group"
+      description: "Get a run groups in the system"
+      operationId: getRunGroup
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./runGroups.yaml#/components/schemas/RunGroup"
+        404:
+          description: "Run Group not found"
+        500:
+          description: "problem getting the Run Group"
+  /runs:
+    get:
+      tags:
+        - api
+      summary: "Get all runs from a run group"
+      description: "Get all runs from a run group"
+      operationId: getRunsFromRunGroup
+      parameters:
+        - $ref: "./parameters.yaml#/components/parameters/take"
+        - $ref: "./parameters.yaml#/components/parameters/skip"
+        - $ref: "./parameters.yaml#/components/parameters/runGroupIds"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "./runGroups.yaml#/components/schemas/RunGroupRun"
+        404:
+          description: "Run Group not found"
+        500:
+          description: "problem getting the Run Group runs"
