@@ -1,0 +1,80 @@
+# Right side interpolation
+
+attr:qualityTrace.span.type
+
+==>
+
+Program(Expression(ComposedValue(OutsideInput(Source,Identifier))))
+
+
+# Expression for both sides
+
+attr:qualityTrace.span.duration + 2
+
+==>
+
+Program(Expression(ComposedValue(OutsideInput(Source,Identifier)),Operator,ComposedValue(Number)))
+
+# Raw Arithmetic Operation
+
+5 + 5
+
+==>
+
+Program(Expression(ComposedValue(Number),Operator,ComposedValue(Number)))
+
+# Raw Logic Operation
+
+10
+
+==>
+
+Program(Expression(ComposedValue(Number)))
+
+# String Concatenation Expression
+
+"Ecuador" + attr:http.message
+
+==>
+
+Program(Expression(ComposedValue(ComposedString(Quotes,String,Quotes)),Operator,ComposedValue(OutsideInput(Source,Identifier))))
+
+# String Interpolation
+
+attr:http.message
+
+==>
+
+Program(Expression(ComposedValue(OutsideInput(Source,Identifier))))
+
+# Duration
+
+120ms
+
+==>
+
+Program(Expression(ComposedValue(Duration)))
+
+# Duration With Space
+
+120 ms
+
+==>
+
+Program(Expression(ComposedValue(Duration)))
+
+# Complete Expression
+
+attr:http.response.body | json_path '$.name' = env:IMPORTED_POKEMON_NAME
+
+==>
+
+Program(Expression(ComposedValue(OutsideInput(Source,Identifier),Pipe,SupportedParsers(JsonPath(Word)))),Comparator,Expression(ComposedValue(OutsideInput(Source,Identifier))))
+
+# Complete Expression With Index
+
+attr:http.response.body | json_path '$[0].name' = env:IMPORTED_POKEMON_NAME
+
+==>
+
+Program(Expression(ComposedValue(OutsideInput(Source,Identifier),Pipe,SupportedParsers(JsonPath(Word)))),Comparator,Expression(ComposedValue(OutsideInput(Source,Identifier))))

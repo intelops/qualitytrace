@@ -1,0 +1,30 @@
+type: Test
+spec:
+  id: oCzHevQVR8
+  name: Re-Run HTTP Test
+  description: Test step of 'HTTP Test Feature - Test Suite'
+  trigger:
+    type: http
+    httpRequest:
+      url: ${var:TARGET_URL}/api/tests/${var:HTTP_TEST_ID}/run/${var:HTTP_TEST_RUN_ID}/rerun
+      method: POST
+      headers:
+      - key: Content-Type
+        value: application/json
+  specs:
+  - selector: span[name = "Tracetest trigger"]
+    assertions:
+    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualityTrace.response.status = 200
+  - selector: span[name="POST /api/tests/{testId}/run/{runId}/rerun" qualityTrace.span.type="http"]
+    assertions:
+    - attr:qualityTrace.selected_spans.count = 1
+  - selector: span[name = "query INSERT"]
+    assertions:
+    - attr:qualityTrace.selected_spans.count = 1
+  - selector: span[name = "exec UPDATE"]
+    assertions:
+    - attr:qualityTrace.selected_spans.count = 1
+  - selector: span[name = "Execute assertions"]
+    assertions:
+    - attr:qualityTrace.run.assertion_runner.all_assertions_passed = "true"

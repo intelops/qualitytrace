@@ -1,0 +1,64 @@
+type: Test
+spec:
+  id: dvsf860sdv
+  name: Create Kafka Test
+  description: Test step of 'Kafka Test Feature - Test Suite'
+  trigger:
+    type: http
+    httpRequest:
+      url: ${var:TARGET_URL}/api/tests
+      method: POST
+      headers:
+        - key: Content-Type
+          value: application/json
+      body: |
+        {
+          "type": "Test",
+          "spec": {
+            "name": "Import a Pokemon reading a Stream",
+            "trigger": {
+              "type": "kafka",
+              "kafka": {
+                "brokerUrls": ["${var:DEMO_APP_KAFKA_BROKER}"],
+                "topic": "pokemon",
+                "headers": [],
+                "messageKey": "snorlax-key",
+                "messageValue": "{\"id\": 143}"
+              }
+            },
+            "specs": [
+              {
+                "selector":"span[qualityTrace.span.type=\"messaging\" name=\"pokemon process\" messaging.system=\"kafka\" messaging.destination=\"pokemon\" messaging.destination_kind=\"topic\" messaging.operation=\"process\"]",
+                "assertions": ["attr:messaging.system = \"kafka\""],
+                "name": "A message was received from Kafka stream"
+              },
+              {
+                "selector":"span[qualityTrace.span.type=\"general\" name=\"import pokemon\"]",
+                "assertions": ["attr:name = \"import pokemon\""],
+                "name": "Import Pokemon use case was triggered"
+              }
+            ]
+          }
+        }
+  specs:
+    - name: Tracetest API returned a valid HTTP code for test creation
+      selector: span[name = "Tracetest trigger"]
+      assertions:
+        - attr:qualityTrace.selected_spans.count = 1
+        - attr:qualityTrace.response.status = 201
+    - name: Tracetest API endpoint 'POST /api/tests' was called once
+      selector: span[name="POST /api/tests" qualityTrace.span.type="http"]
+      assertions:
+        - attr:qualityTrace.selected_spans.count = 1
+    - name: Just one test was added into the database
+      selector: span[name = "exec INSERT"]
+      assertions:
+        - attr:qualityTrace.selected_spans.count = 1
+    - name: The test was added on the correct database table
+      selector: span[name = "exec INSERT"]:first
+      assertions:
+        - attr:sql.query contains "INSERT INTO tests"
+  outputs:
+    - name: KAFKA_TEST_ID
+      selector: span[name = "Tracetest trigger"]
+      value: attr:qualityTrace.response.body | json_path '$.spec.id'

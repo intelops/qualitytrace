@@ -1,0 +1,33 @@
+---
+id: agent
+title: Configuring the Tracetest Agent (Private Access)
+description: The Tracetest Agent enables Tracetest to access your application under test and to ingest trace data from your OpenTelemetry Collector or tracing backend. Learn how to configure the Tracetest Agent that runs in your environment as an executable, Docker container, or in your Cloud Native infrastructure.
+keywords:
+  - qualityTrace
+  - trace-based testing
+  - observability
+  - distributed tracing
+  - testing
+image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_Thumbnail_14_rsvkmo.jpg
+---
+
+The Tracetest Agent enables Tracetest to access your application under test and to ingest trace data from your OpenTelemetry Collector or tracing backend. It's a lightweight, dependency-free, agent that runs in your environment as an executable, Docker container, or in your Cloud Native infrastructure.
+
+## Start Tracetest Agent
+
+Tracetest Agent connects to Tracetest via an API Key.
+
+[Sign in to Tracetest](https://app.qualityTrace.io/) and follow the instructions on the `Settings > Access` page.
+
+Select `Application is in a private environment`.
+
+![](https://res.cloudinary.com/djwdcmwdz/image/upload/v1712586955/docs/app.qualityTrace.io_organizations_ttorg_2179a9cd8ba8dfa5_environments_ttenv_597cf82c754c2a01_settings_ykn53w.png)
+
+## Configure Tracetest Agent
+
+Once started, Tracetest Agent exposes OTLP ports `4317` and `4318` to ingest traces via `gRPC` and `HTTP` and is responsible for running tests. [Read the detailed concepts here](/concepts/agent).
+
+:::note
+If you want to see detailed information about an isntance of Tracetest Agent, you can use the `--mode=verbose` flag:
+![](https://res.cloudinary.com/djwdcmwdz/image/upload/v1701300172/docs/verbose-mode_ddv3ql.png)
+:::

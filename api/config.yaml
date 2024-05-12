@@ -1,0 +1,203 @@
+openapi: 3.0.0
+components:
+  schemas:
+    TestConnectionResponse:
+      type: object
+      properties:
+        successful:
+          type: boolean
+        steps:
+          type: array
+          items:
+            $ref: "#/components/schemas/ConnectionResult"
+    ConnectionResult:
+      type: object
+      properties:
+        portCheck:
+          $ref: "#/components/schemas/ConnectionTestStep"
+        connectivity:
+          $ref: "#/components/schemas/ConnectionTestStep"
+        authentication:
+          $ref: "#/components/schemas/ConnectionTestStep"
+        fetchTraces:
+          $ref: "#/components/schemas/ConnectionTestStep"
+    ConnectionTestStep:
+      type: object
+      properties:
+        passed:
+          type: boolean
+        status:
+          type: string
+          enum:
+            - passed
+            - warning
+            - failed
+        message:
+          type: string
+        error:
+          type: string
+    ConfigurationResourceList:
+      type: object
+      properties:
+        count:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ConfigurationResource"
+    ConfigurationResource:
+      type: object
+      description: "Represents a configuration structured into the Resources format."
+      properties:
+        type:
+          type: string
+          description: "Represents the type of this resource. It should always be set as 'Config'."
+          enum:
+            - Config
+        spec:
+          type: object
+          description: "Represents the set of configuration common options for Tracetest."
+          properties:
+            id:
+              type: string
+              description: "ID of the configuration resource. It should always be set as 'current'."
+              enum:
+                - current
+            name:
+              type: string
+              description: "Name given for this configuration set. It should always be set as 'Config'."
+              enum:
+                - Config
+            analyticsEnabled:
+              type: boolean
+              description: "Flag telling if a user allow Tracetest to send analytics about its usage."
+          required:
+            - analyticsEnabled
+    PollingProfileList:
+      type: object
+      properties:
+        count:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/PollingProfile"
+    PollingProfile:
+      type: object
+      description: "Represents a polling profile structured into the Resources format."
+      properties:
+        type:
+          type: string
+          description: "Represents the type of this resource. It should always be set as 'PollingProfile'."
+          enum:
+            - PollingProfile
+        spec:
+          type: object
+          description: "Represents the attributes of a Polling Profile."
+          properties:
+            id:
+              type: string
+              description: "ID of this Polling Profile."
+            name:
+              type: string
+              description: "Name given for this profile."
+            default:
+              type: boolean
+              description: "Is default polling profile"
+            strategy:
+              type: string
+              description: "Name of the strategy that will be used on this profile."
+              enum:
+                - periodic
+            periodic:
+              type: object
+              description: "Configuration for the strategy 'periodic'. It only should be filled if the field strategy is equals to 'periodic'."
+              properties:
+                retryDelay:
+                  description: "Time that the poller should wait until try to fetch more traces. It should be written in duration format (example: 1s, 30s, 1m)."
+                  type: string
+                timeout:
+                  description: "Total time that the poller should try to continue to fetch traces. It should be written in duration format (example: 1s, 30s, 1m)."
+                  type: string
+          required:
+            - id
+            - name
+            - strategy
+    DemoPokeshop:
+      type: object
+      description: "Represents the settings of the Pokeshop API demonstration."
+      properties:
+        httpEndpoint:
+          type: string
+          description: "HTTP endpoint for Pokeshop API"
+        grpcEndpoint:
+          type: string
+          description: "gRPC endpoint for Pokeshop API"
+        kafkaBroker:
+          type: string
+          description: "kafka broker for Pokeshop API"
+    DemoOpenTelemetryStore:
+      type: object
+      description: "Represents the settings of the Open Telemetry Store demonstration."
+      properties:
+        frontendEndpoint:
+          type: string
+          description: "Address of the root URL for the Frontend microservice on Open Telemetry Store."
+        productCatalogEndpoint:
+          type: string
+          description: "Address of the root URL for the Product Catalog microservice on Open Telemetry Store."
+        cartEndpoint:
+          type: string
+          description: "Address of the root URL for the Cart microservice on Open Telemetry Store."
+        checkoutEndpoint:
+          type: string
+          description: "Address of the root URL for the Checkout microservice on Open Telemetry Store."
+    Demo:
+      type: object
+      description: "Represents a demonstration API structured into the Resources format."
+      properties:
+        type:
+          type: string
+          description: "Represents the type of this resource. It should always be set as 'Demo'."
+          enum:
+            - Demo
+        spec:
+          description: "Represents the attributes of a Demonstration API."
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+              description: "String defining that this demo is a Open Telemetry Store demo."
+              enum:
+                - otelstore
+                - pokeshop
+            name:
+              type: string
+              description: Name of the demo
+            enabled:
+              type: boolean
+              description: "Flag telling if this API is enabled on Tracetest."
+            pokeshop:
+              $ref: "#/components/schemas/DemoPokeshop"
+            opentelemetryStore:
+              $ref: "#/components/schemas/DemoOpenTelemetryStore"
+          required:
+            - enabled
+    DemoList:
+      type: object
+      properties:
+        count:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: "./config.yaml#/components/schemas/Demo"
+    OTLPTestConnectionResponse:
+      type: object
+      properties:
+        spanCount:
+          type: integer
+        lastSpanTimestamp:
+          type: date

@@ -1,0 +1,9 @@
+type: VariableSet
+spec:
+  id: qualityTraceing-vars
+  name: qualityTraceing-vars
+  values:
+    - key: POKESHOP_API_URL
+      value: https://demo-pokeshop.qualityTrace.io
+    - key: POKESHOP_KAFKA_BROKER
+      value: demo-pokeshop.qualityTrace.io:9092

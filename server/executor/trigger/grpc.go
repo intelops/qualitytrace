@@ -1,0 +1,235 @@
+package trigger
+
+import (
+	"context"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"strconv"
+	"strings"
+
+	"github.com/fullstorydev/grpcurl"
+	"github.com/golang/protobuf/jsonpb"
+	"github.com/golang/protobuf/proto"
+	"github.com/intelops/qualityTrace/agent/workers/trigger"
+	"github.com/intelops/qualityTrace/server/test"
+	"github.com/jhump/protoreflect/desc"
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
+)
+
+func GRPC() Triggerer {
+	return &grpcTriggerer{}
+}
+
+type grpcTriggerer struct{}
+
+func (te *grpcTriggerer) Trigger(ctx context.Context, test test.Test, opts *TriggerOptions) (Response, error) {
+	response := Response{
+		Result: trigger.TriggerResult{
+			Type: te.Type(),
+		},
+	}
+
+	triggerObj := test.Trigger
+	if triggerObj.Type != trigger.TriggerTypeGRPC {
+		return response, fmt.Errorf(`trigger type "%s" not supported by GRPC triggerer`, triggerObj.Type)
+	}
+
+	if triggerObj.GRPC == nil {
+		return response, fmt.Errorf("no settings provided for GRPC triggerer")
+	}
+
+	tReq := triggerObj.GRPC
+
+	conn, err := te.dial(ctx, tReq.Address)
+	if err != nil {
+		return response, fmt.Errorf("cannot dial service: %w", err)
+	}
+
+	desc, err := protoDescription(tReq.ProtobufFile)
+	if err != nil {
+		return response, fmt.Errorf("cannot read descriptors: %w", err)
+	}
+
+	options := grpcurl.FormatOptions{
+		EmitJSONDefaultFields: true,
+		IncludeTextSeparator:  true,
+		AllowUnknownFields:    true,
+	}
+
+	rf, _, err := grpcurl.RequestParserAndFormatter(grpcurl.FormatJSON, desc, strings.NewReader(tReq.Request), options)
+	if err != nil {
+		return response, fmt.Errorf("failed to construct request parser and formatter for %w", err)
+	}
+
+	anyResolver := grpcurl.AnyResolverFromDescriptorSource(desc)
+	marshaler := jsonpb.Marshaler{
+		EmitDefaults: true,
+		Indent:       "  ",
+		AnyResolver:  anyResolver,
+	}
+
+	h := &eventHandler{
+		marshaller: marshaler,
+	}
+
+	md := tReq.MD()
+	otelgrpc.Inject(ctx, md, otelgrpc.WithPropagators(propagators()))
+
+	err = grpcurl.InvokeRPC(ctx, desc, conn, tReq.Method, mdToHeaders(md), h, rf.Next)
+	if err != nil {
+		return response, err
+	}
+
+	response.Result.GRPC = &trigger.GRPCResponse{
+		Metadata:   mapHeaders(h.respMD),
+		StatusCode: int(h.respCode),
+		Status:     h.respCode.String(),
+		Body:       h.respBody,
+	}
+
+	response.SpanAttributes = map[string]string{
+		"qualityTrace.run.trigger.grpc.response_status_code": strconv.Itoa(int(h.respCode)),
+		"qualityTrace.run.trigger.grpc.response_status":      h.respCode.String(),
+	}
+
+	return response, nil
+}
+
+func (t *grpcTriggerer) Type() trigger.TriggerType {
+	return trigger.TriggerTypeGRPC
+}
+
+func (t *grpcTriggerer) Resolve(ctx context.Context, test test.Test, opts *ResolveOptions) (test.Test, error) {
+	grpc := test.Trigger.GRPC
+
+	if grpc == nil {
+		return test, fmt.Errorf("no settings provided for GRPC triggerer")
+	}
+
+	address, err := opts.Executor.ResolveStatement(WrapInQuotes(grpc.Address, "\""))
+	if err != nil {
+		return test, err
+	}
+	grpc.Address = address
+
+	for _, h := range grpc.Metadata {
+		h.Key, err = opts.Executor.ResolveStatement(WrapInQuotes(h.Key, "\""))
+		if err != nil {
+			return test, err
+		}
+
+		h.Value, err = opts.Executor.ResolveStatement(WrapInQuotes(h.Value, "\""))
+		if err != nil {
+			return test, err
+		}
+	}
+
+	if grpc.Request != "" {
+		grpc.Request, err = opts.Executor.ResolveStatement(WrapInQuotes(grpc.Request, "'"))
+		if err != nil {
+			return test, err
+		}
+	}
+
+	grpc.Method, err = opts.Executor.ResolveStatement(WrapInQuotes(grpc.Method, "\""))
+	if err != nil {
+		return test, err
+	}
+
+	return test, nil
+}
+
+func mdToHeaders(md *metadata.MD) []string {
+	h := []string{}
+
+	for k, vs := range *md {
+		h = append(h, k+": "+strings.Join(vs, " "))
+	}
+
+	return h
+}
+
+func protoDescription(content string) (grpcurl.DescriptorSource, error) {
+	tmpFile, err := ioutil.TempFile(os.TempDir(), "protofile")
+	if err != nil {
+		return nil, fmt.Errorf("cannot create tmp file: %w", err)
+	}
+	defer os.Remove(tmpFile.Name())
+
+	if _, err = tmpFile.Write([]byte(content)); err != nil {
+		return nil, fmt.Errorf("cannot write tmp file: %w", err)
+	}
+
+	if err := tmpFile.Close(); err != nil {
+		return nil, fmt.Errorf("cannot close tmp file: %w", err)
+	}
+
+	desc, err := grpcurl.DescriptorSourceFromProtoFiles([]string{os.TempDir()}, tmpFile.Name())
+	if err != nil {
+		return nil, fmt.Errorf("cannot parse proto file: %w", err)
+	}
+
+	return desc, nil
+
+}
+
+func mapHeaders(md metadata.MD) []trigger.GRPCHeader {
+	var mappedHeaders []trigger.GRPCHeader
+	for key, headers := range md {
+		for _, val := range headers {
+			val := trigger.GRPCHeader{
+				Key:   key,
+				Value: val,
+			}
+			mappedHeaders = append(mappedHeaders, val)
+		}
+	}
+
+	return mappedHeaders
+}
+
+func (t *grpcTriggerer) dial(ctx context.Context, address string) (*grpc.ClientConn, error) {
+	var creds credentials.TransportCredentials
+	network := "tcp"
+
+	return grpcurl.BlockingDial(
+		ctx, network, address, creds,
+	)
+}
+
+var _ grpcurl.InvocationEventHandler = (*eventHandler)(nil)
+
+type eventHandler struct {
+	marshaller jsonpb.Marshaler
+	respBody   string
+	respCode   codes.Code
+	respMD     metadata.MD
+}
+
+func (h *eventHandler) OnResolveMethod(md *desc.MethodDescriptor) {}
+
+func (h *eventHandler) OnSendHeaders(md metadata.MD) {
+}
+
+func (h *eventHandler) OnReceiveHeaders(md metadata.MD) {
+	h.respMD = md
+}
+
+func (h *eventHandler) OnReceiveResponse(resp proto.Message) {
+	j, err := h.marshaller.MarshalToString(resp)
+	if err != nil {
+		panic(err)
+	}
+
+	h.respBody = j
+}
+
+func (h *eventHandler) OnReceiveTrailers(stat *status.Status, md metadata.MD) {
+	h.respCode = stat.Code()
+}

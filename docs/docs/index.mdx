@@ -1,0 +1,139 @@
+---
+id: index
+title: Welcome to Tracetest Docs! 👋
+description: Tracetest is a trace-based testing tool for building integration and end-to-end tests in minutes using your OpenTelemetry traces. Assert against your trace data at every point of a request transaction.
+hide_table_of_contents: false
+keywords:
+  - qualityTrace
+  - trace-based testing
+  - observability
+  - distributed tracing
+  - testing
+image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_Thumbnail_14_rsvkmo.jpg
+breadcrumb_label: Nothing
+---
+
+import CodeBlock from '@theme/CodeBlock';
+
+Tracetest is a trace-based testing tool for integration and end-to-end testing using [OpenTelemetry](https://opentelemetry.io/) traces. Verify end-to-end transactions and side-effects across microservices & event-driven apps by using trace data as test specs.
+
+```mdx-code-block
+import {WelcomeGuideCardsRow} from '@site/src/components/WelcomeGuide';
+
+<WelcomeGuideCardsRow />
+```
+
+## Why Tracetest?
+
+You can:
+
+- **Assert** against both the **response and trace data** at every point of a request transaction.
+- **Assert** on the **timing of trace spans**.
+  - Eg. A database span executes within `100ms`.
+- **Wildcard assertions** across common types of activities.
+  - Eg. All gRPC return codes should be `0`.
+  - Eg. All database calls should happen in less than `100ms`.
+- **Assert** against **side-effects** in your distributed system.
+  - Eg. Message queues, async API calls, external APIs, etc.
+- **Integrate** with your **existing distributed tracing solution**.
+- Define multiple test triggers:
+  - HTTP requests
+  - gRPC requests
+  - Trace IDs
+  - and many more...
+- Save and run tests manually and via CI build jobs.
+- Verify and analyze the quality of your OpenTelemetry instrumentation to enforce rules and standards.
+- Test long-running processes.
+- Write detailed trace-based tests as:
+  - End-to-end tests
+  - Integration tests
+- **Build tests in minutes**.
+
+<div className="row">
+  <div className="col col--12 margin-bottom--lg">
+    <div>
+      <div className="card__body">
+        <p align="center">
+          <b>Visually - Build tests in the Web UI</b>
+        </p>
+      </div>
+      <div className="card__footer">
+        <img src="https://res.cloudinary.com/djwdcmwdz/image/upload/v1688476657/docs/screely-1688476653521_omxe4r.png" />
+      </div>
+    </div>
+  </div>
+  <div className="col col--12 margin-bottom--lg">
+    <div>
+      <div className="card__body">
+        <p align="center">
+          <b>Programmatically - Build tests in YAML</b>
+        </p>
+      </div>
+      <div className="card__footer">
+        <CodeBlock
+          language="yaml"
+        >
+        {`
+    type: Test
+    spec:
+      id: Yg9sN-94g
+      name: Pokeshop - Import
+      description: Import a Pokemon
+      trigger:
+        type: http
+        httpRequest:
+          url: http://demo-api:8081/pokemon/import
+          method: POST
+          headers:
+          - key: Content-Type
+            value: application/json
+          body: '{"id":52}'
+      specs:
+      - name: 'All Database Spans: Processing time is less than 100ms'
+        selector: span[qualityTrace.span.type="database"]
+        assertions:
+        - attr:qualityTrace.span.duration < 100ms
+        `}
+        </CodeBlock> 
+      </div>
+    </div>
+  </div>
+</div>
+
+## Getting Started
+
+Tracetest is a cloud-native application, designed to run in the cloud. [Get started in three ways](/getting-started/overview).
+
+### Cloud-based Managed Tracetest (Free to get started!)
+
+The easiest and most reliable way to test microservices and distributed apps with OpenTelemetry distributed traces is signing up for free at [app.qualityTrace.io](https://app.qualityTrace.io/). After creating an account, getting started is as easy as [installing the Tracetest Agent](/getting-started/installation).
+
+### Enterprise Self-hosted Tracetest (Coming soon...)
+
+Get the same experience as with the Cloud-based Managed Tracetest but self-hosted in your own infrastructure. [Book a call](https://dub.sh/qualityTrace-demo) to get into early access.
+
+### Hobby Self-hosted Open-source Tracetest Core
+
+[Deploy a hobby self-hosted instance of Tracetest Core](/core/getting-started/installation) as a Docker container. It's not suitable for production, but a great way to start using Tracetest Core in local environments.
+
+## Architecture
+
+Understand how Tracetest works.
+
+1. Trigger a test and generate a trace response.
+2. Fetch traces to render and analyze them.
+3. Add assertions to traces.
+4. See test results.
+5. Run tests as part of CI/CD pipelines.
+
+![Marketechture](https://res.cloudinary.com/djwdcmwdz/image/upload/v1686654113/docs/qualityTrace-marketechture-jun12-v3_ffj2e2.png)
+
+## Who uses Tracetest?
+
+Our users are typically developers or QA engineers building distributed systems with microservices using back-end languages like Go, Rust, Node.js and Python.
+
+## What makes Tracetest special?
+
+Tracetest can be compared with Cypress or Selenium; however Tracetest is fundamentally different.
+
+Cypress and Selenium are constrained by using the browser for testing. Tracetest bypasses this entirely by using your existing OpenTelemetry instrumentation and trace data to run tests and assertions against traces in every step of a request transaction.

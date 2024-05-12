@@ -1,0 +1,154 @@
+package cmd
+
+import (
+	"context"
+	"fmt"
+	"os"
+
+	"github.com/intelops/qualityTrace/cli/analytics"
+	"github.com/intelops/qualityTrace/cli/cmdutil"
+	"github.com/intelops/qualityTrace/cli/config"
+	"github.com/intelops/qualityTrace/cli/formatters"
+	"github.com/intelops/qualityTrace/cli/openapi"
+	"github.com/spf13/cobra"
+	"go.uber.org/zap"
+)
+
+var (
+	cliLogger      = &zap.Logger{}
+	cliConfig      config.Config
+	openapiClient  = &openapi.APIClient{}
+	versionText    string
+	isVersionMatch bool
+)
+
+type setupConfig struct {
+	shouldValidateConfig          bool
+	shouldValidateVersionMismatch bool
+	optionalResourceName          bool
+}
+
+type setupOption func(*setupConfig)
+
+func SkipConfigValidation() setupOption {
+	return func(sc *setupConfig) {
+		sc.shouldValidateConfig = false
+	}
+}
+
+func SkipVersionMismatchCheck() setupOption {
+	return func(sc *setupConfig) {
+		sc.shouldValidateVersionMismatch = false
+	}
+}
+
+func WithOptionalResourceName() setupOption {
+	return func(sc *setupConfig) {
+		sc.optionalResourceName = true
+	}
+}
+
+func setupCommand(options ...setupOption) func(cmd *cobra.Command, args []string) {
+	config := setupConfig{
+		shouldValidateConfig:          true,
+		shouldValidateVersionMismatch: true,
+		optionalResourceName:          false,
+	}
+	for _, option := range options {
+		option(&config)
+	}
+
+	return func(cmd *cobra.Command, args []string) {
+		setupOutputFormat(cmd)
+		setupLogger(cmd, args)
+		loadConfig(cmd, args)
+		overrideConfig()
+		setupVersion()
+		setupResources()
+		setupRunners()
+
+		if config.shouldValidateConfig {
+			validateConfig(cmd, args)
+		}
+
+		if config.shouldValidateVersionMismatch {
+			validateVersionMismatch()
+		}
+
+		if config.optionalResourceName {
+			resourceParams.optional = true
+		}
+
+		analytics.Init()
+	}
+}
+
+func overrideConfig() {
+	if overrideEndpoint != "" {
+		scheme, endpoint, _, err := config.ParseServerURL(overrideEndpoint)
+		if err != nil {
+			msg := fmt.Sprintf("cannot parse endpoint %s", overrideEndpoint)
+			cliLogger.Error(msg, zap.Error(err))
+			ExitCLI(1)
+		}
+		cliConfig.Scheme = scheme
+		cliConfig.Endpoint = endpoint
+		cliConfig.EndpointOverriden = true
+	}
+}
+
+func setupRunners() {
+	c := config.GetAPIClient(cliConfig)
+	*openapiClient = *c
+}
+
+func setupOutputFormat(cmd *cobra.Command) {
+	o := formatters.Output(output)
+	if output == "" {
+		o = formatters.Pretty
+	}
+	if !formatters.ValidOutput(o) {
+		fmt.Fprintf(os.Stderr, "Invalid output format %s. Available formats are [%s]\n", output, outputFormatsString)
+		ExitCLI(1)
+	}
+}
+
+func loadConfig(cmd *cobra.Command, args []string) {
+	config, err := config.LoadConfig(configFile)
+	if err != nil {
+		cliLogger.Fatal("could not load config", zap.Error(err))
+	}
+
+	cliConfig = config
+}
+
+func validateConfig(cmd *cobra.Command, args []string) {
+	if cliConfig.IsEmpty() {
+		cliLogger.Warn("You haven't configured your CLI, some commands might fail!")
+		cliLogger.Warn("Run 'qualityTrace configure' to configure your CLI")
+	}
+}
+
+func setupLogger(cmd *cobra.Command, args []string) {
+	cliLogger = cmdutil.GetLogger(cmdutil.WithVerbose(verbose))
+}
+
+func teardownCommand(cmd *cobra.Command, args []string) {
+	cliLogger.Sync()
+}
+
+func setupVersion() {
+	versionText, isVersionMatch = config.GetVersion(context.Background(), cliConfig)
+}
+
+func validateVersionMismatch() {
+	if !isVersionMatch && os.Getenv("TRACETEST_DEV") == "" {
+		fmt.Fprintf(os.Stderr, versionText+`
+✖️ Error: Version Mismatch
+The CLI version and the server version are not compatible. To fix this, you'll need to make sure that both your CLI and server are using compatible versions.
+We recommend upgrading both of them to the latest available version. Check out our documentation https://docs.qualityTrace.io/configuration/upgrade for simple instructions on how to upgrade.
+Thank you for using Tracetest! We apologize for any inconvenience caused.
+`)
+		ExitCLI(1)
+	}
+}

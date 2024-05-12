@@ -1,0 +1,40 @@
+type: Test
+spec:
+  id: TCzN6DQ4g0
+  name: Run gRPC Test with invalid metadata
+  description: ""
+  trigger:
+    type: http
+    httpRequest:
+      url: ${var:TARGET_URL}/api/tests/${var:GRPC_TEST_INVALID_METADATA_ID}/run
+      method: POST
+      headers:
+      - key: Content-Type
+        value: application/json
+      body: '{}'
+  specs:
+  - selector: span[name = "Tracetest trigger"]
+    assertions:
+    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualityTrace.response.status = 200
+  - selector: span[name = "POST /api/tests/{testId}/run" qualityTrace.span.type = "http"]
+    assertions:
+    - attr:qualityTrace.selected_spans.count = 1
+  - selector: span[name = "Trigger test"]
+    assertions:
+    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualityTrace.run.trigger.test_id = "${var:GRPC_TEST_INVALID_METADATA_ID}"
+    - attr:qualityTrace.run.trigger.type = "grpc"
+    - attr:qualityTrace.run.trigger.grpc.response_status_code = 0
+    - attr:qualityTrace.run.trigger.grpc.response_status = "OK"
+  - selector: span[name = "Fetching trace"]
+    assertions:
+    - attr:qualityTrace.selected_spans.count > 0
+    - attr:qualityTrace.run.trace_poller.test_id = "${var:GRPC_TEST_INVALID_METADATA_ID}"
+  - selector: span[name = "Evaluating trace"]:last
+    assertions:
+    - attr:qualityTrace.run.trace_poller.succesful = "true"
+  - selector: span[name = "Execute assertions"]
+    assertions:
+    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualityTrace.run.assertion_runner.all_assertions_passed = "true"

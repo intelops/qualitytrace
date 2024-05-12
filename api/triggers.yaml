@@ -1,0 +1,69 @@
+openapi: 3.0.0
+components:
+  schemas:
+    Trigger:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            [
+              "http",
+              "grpc",
+              "traceid",
+              "kafka",
+              "cypress",
+              "playwright",
+              "artillery",
+              "k6",
+            ]
+        httpRequest:
+          $ref: "./http.yaml#/components/schemas/HTTPRequest"
+        grpc:
+          $ref: "./grpc.yaml#/components/schemas/GRPCRequest"
+        traceid:
+          $ref: "./traceid.yaml#/components/schemas/TRACEIDRequest"
+        kafka:
+          $ref: "./kafka.yaml#/components/schemas/KafkaRequest"
+
+    TriggerResult:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            [
+              "http",
+              "grpc",
+              "traceid",
+              "kafka",
+              "cypress",
+              "playwright",
+              "artillery",
+              "k6",
+            ]
+        triggerResult:
+          type: object
+          properties:
+            http:
+              $ref: "./http.yaml#/components/schemas/HTTPResponse"
+            grpc:
+              $ref: "./grpc.yaml#/components/schemas/GRPCResponse"
+            traceid:
+              $ref: "./traceid.yaml#/components/schemas/TRACEIDResponse"
+            kafka:
+              $ref: "./kafka.yaml#/components/schemas/KafkaResponse"
+            error:
+              $ref: "#/components/schemas/TriggerError"
+
+    TriggerError:
+      type: object
+      properties:
+        connectionError:
+          type: boolean
+        runningOnContainer:
+          type: boolean
+        targetsLocalhost:
+          type: boolean
+        message:
+          type: string

@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qualityTrace-agent
+  labels:
+    app: qualityTrace-agent
+spec:
+  selector:
+    matchLabels:
+      app: qualityTrace-agent
+  template:
+    metadata:
+      labels:
+        app: qualityTrace-agent
+    spec:
+      containers:
+        - name: qualityTrace-agent
+          image: intelops/qualityTrace-agent:TAG
+          env:
+            - name: TRACETEST_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: qualityTrace-agent-secret
+                  key: api-key
+
+          ports:
+            - containerPort: 4317
+            - containerPort: 4318
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qualityTrace-agent
+  labels:
+    app: qualityTrace-agent
+spec:
+  selector:
+    app: qualityTrace-agent
+  ports:
+    - name: grpc-collector-entrypoint
+      protocol: TCP
+      port: 4317
+      targetPort: 4317
+    - name: http-collector-entrypoint
+      protocol: TCP
+      port: 4318
+      targetPort: 4318

@@ -1,0 +1,29 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  batch:
+    timeout: 100ms
+
+exporters:
+  logging:
+    loglevel: debug
+
+  otlp/1:
+    endpoint: qualityTrace:4317
+    tls:
+      insecure: true
+
+extensions:
+  health_check: {}
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces/1:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp/1]

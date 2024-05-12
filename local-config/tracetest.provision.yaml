@@ -1,0 +1,32 @@
+---
+type: DataStore
+spec:
+  name: OpenTelemetry Collector
+  type: otlp
+  default: true
+---
+type: Demo
+spec:
+  name: "Pokeshop"
+  enabled: true
+  type: pokeshop
+  pokeshop:
+    grpcEndpoint: demo-api:8082
+    httpEndpoint: http://demo-api:8081
+---
+type: PollingProfile
+spec:
+  strategy: periodic
+  default: true
+  periodic:
+    timeout: 30s
+    retryDelay: 1s
+    selectorMatchRetries: 3
+---
+type: TestRunner
+spec:
+  id: current
+  name: default
+  requiredGates:
+    - analyzer-score
+    - test-specs

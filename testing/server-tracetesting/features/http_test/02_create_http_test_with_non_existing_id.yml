@@ -1,0 +1,44 @@
+type: Test
+spec:
+  id: oCkHevQ4R-
+  name: Create HTTP Test with non-existing ID
+  description: Test step of 'HTTP Test Feature - Test Suite'
+  trigger:
+    type: http
+    httpRequest:
+      url: ${var:TARGET_URL}/api/tests
+      method: POST
+      headers:
+      - key: Content-Type
+        value: application/json
+      body: |
+        {
+          "type": "Test",
+          "spec": {
+            "id": "${var:EXAMPLE_TEST_ID}",
+            "name": "Pokemon - List - Get a Pokemon",
+            "trigger": {
+              "type": "http",
+              "httpRequest": {
+                "url": "${var:DEMO_APP_URL}/pokemon?take=20&skip=0",
+                "method": "GET",
+                "body": "",
+                "headers": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          }
+        }
+  specs:
+  - selector: span[name = "Tracetest trigger"]
+    assertions:
+    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualityTrace.response.status = 201
+    - attr:qualityTrace.response.body | json_path '$.spec.id' = var:EXAMPLE_TEST_ID
+  - selector: span[name="POST /api/tests" qualityTrace.span.type="http"]
+    assertions:
+    - attr:qualityTrace.selected_spans.count = 1

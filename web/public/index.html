@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link href="%PUBLIC_URL%/favicon.ico" rel="icon" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="#2f1e61" name="theme-color" />
+    <meta
+      content="Tracetest - Build integration and end-to-end tests in minutes, instead of days, using OpenTelemetry and trace-based testing."
+      name="description"
+    />
+    <meta name="robots" content="noindex" />
+    <link href="%PUBLIC_URL%/logo192.png" rel="apple-touch-icon" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link href="%PUBLIC_URL%/manifest.json" rel="manifest" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Tracetest</title>
+    <script>
+      const parser = {
+        toArray(value) {
+          try {
+            return JSON.parse(value) || [];
+          } catch (error) {
+            return [];
+          }
+        },
+        toBoolean(value) {
+          return value === 'true';
+        },
+        toObject(value) {
+          try {
+            return JSON.parse(value) || {};
+          } catch (error) {
+            return {};
+          }
+        },
+        toString(value) {
+          return value;
+        },
+      };
+
+      function getTemplateValue(value, defaultValue, parser) {
+        // hack: we cannot add double curly brackets on our code otherwise the go template
+        // module will try to parse it and it will fail.
+        var curlyBracket = String.fromCharCode(123);
+        var startingTemplateToken = `${curlyBracket}${curlyBracket}`;
+        if (!value || value.startsWith(startingTemplateToken)) {
+          return parser(defaultValue);
+        }
+
+        return parser(value);
+      }
+
+      function injectVariables() {
+        window.ENV = {
+          measurementId: getTemplateValue('{{ .AnalyticsKey }}', '', parser.toString),
+          analyticsEnabled: getTemplateValue('{{ .AnalyticsEnabled }}', 'false', parser.toBoolean),
+          serverPathPrefix: getTemplateValue('{{ .ServerPathPrefix }}', '/', parser.toString),
+          serverID: getTemplateValue('{{ .ServerID }}', '', parser.toString),
+          appVersion: getTemplateValue('{{ .AppVersion }}', '', parser.toString),
+          env: getTemplateValue('{{ .Env }}', '', parser.toString),
+          experimentalFeatures: getTemplateValue('{{ .ExperimentalFeatures }}', '[]', parser.toArray),
+          isTracetestDev: getTemplateValue('{{ .IsTracetestDev }}', 'false', parser.toBoolean),
+          posthogKey: 'phc_Rg59ClPckoqa5p4onheukqHKJFPbTJkiNzECjIG4lMj',
+        };
+
+        var base = document.createElement('base');
+        base.href = window.ENV.serverPathPrefix;
+        document.getElementsByTagName('head')[0].appendChild(base);
+      }
+
+      injectVariables();
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

@@ -1,0 +1,58 @@
+import {SupportedDataStores} from '../types/DataStore.types';
+
+export const SupportedDataStoresToName = {
+  [SupportedDataStores.AWSXRay]: 'AWS X-Ray',
+  [SupportedDataStores.AzureAppInsights]: 'Azure App Insights',
+  [SupportedDataStores.Datadog]: 'Datadog',
+  [SupportedDataStores.Dynatrace]: 'Dynatrace',
+  [SupportedDataStores.ElasticApm]: 'Elastic APM',
+  [SupportedDataStores.Honeycomb]: 'Honeycomb',
+  [SupportedDataStores.Instana]: 'Instana',
+  [SupportedDataStores.JAEGER]: 'Jaeger',
+  [SupportedDataStores.Lightstep]: 'Lightstep',
+  [SupportedDataStores.NewRelic]: 'New Relic',
+  [SupportedDataStores.OpenSearch]: 'OpenSearch',
+  [SupportedDataStores.OtelCollector]: 'OpenTelemetry',
+  [SupportedDataStores.SignalFX]: 'SignalFX',
+  [SupportedDataStores.Signoz]: 'Signoz',
+  [SupportedDataStores.SumoLogic]: 'Sumo Logic',
+  [SupportedDataStores.TEMPO]: 'Tempo',
+} as const;
+
+export const SupportedDataStoresToDocsLink = {
+  [SupportedDataStores.AWSXRay]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/aws-x-ray',
+  [SupportedDataStores.AzureAppInsights]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/azure-app-insights',
+  [SupportedDataStores.Datadog]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/datadog',
+  [SupportedDataStores.Dynatrace]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/dynatrace',
+  [SupportedDataStores.ElasticApm]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/elasticapm',
+  [SupportedDataStores.Honeycomb]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/honeycomb',
+  [SupportedDataStores.Instana]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/instana',
+  [SupportedDataStores.JAEGER]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/jaeger',
+  [SupportedDataStores.Lightstep]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/lightstep',
+  [SupportedDataStores.NewRelic]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/new-relic',
+  [SupportedDataStores.OpenSearch]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/opensearch',
+  [SupportedDataStores.OtelCollector]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/opentelemetry-collector',
+  [SupportedDataStores.SignalFX]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/signalfx',
+  [SupportedDataStores.Signoz]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/signoz',
+  [SupportedDataStores.SumoLogic]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/sumologic',
+  [SupportedDataStores.TEMPO]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/tempo',
+} as const;
+
+export const SupportedDataStoresToDefaultEndpoint = {
+  [SupportedDataStores.AWSXRay]: '',
+  [SupportedDataStores.AzureAppInsights]: '',
+  [SupportedDataStores.Datadog]: '',
+  [SupportedDataStores.Dynatrace]: 'https://abc12345.live.dynatrace.com/api/v2/otlp',
+  [SupportedDataStores.ElasticApm]: 'http://elasticsearch:9200',
+  [SupportedDataStores.Honeycomb]: '',
+  [SupportedDataStores.Instana]: '',
+  [SupportedDataStores.JAEGER]: 'jaeger:16685',
+  [SupportedDataStores.Lightstep]: '',
+  [SupportedDataStores.NewRelic]: '',
+  [SupportedDataStores.OpenSearch]: 'http://opensearch:9200',
+  [SupportedDataStores.OtelCollector]: '',
+  [SupportedDataStores.SignalFX]: '',
+  [SupportedDataStores.Signoz]: '',
+  [SupportedDataStores.SumoLogic]: '',
+  [SupportedDataStores.TEMPO]: 'tempo:9095',
+} as const;

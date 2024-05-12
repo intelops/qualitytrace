@@ -1,0 +1,19 @@
+openapi: 3.0.0
+components:
+  schemas:
+    Version:
+      type: object
+      properties:
+        version:
+          type: string
+          example: 1.0.0
+        type:
+          type: string
+          enum:
+            - oss
+        uiEndpoint:
+          type: string
+        agentEndpoint:
+          type: string
+        apiEndpoint:
+          type: string
