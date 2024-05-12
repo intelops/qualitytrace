@@ -3,7 +3,7 @@ id: tempo
 title: Grafana Tempo
 description: Use Grafana Tempo as the trace data store for Tracetest. You can use the native connection from Tracetest to pull telemetry data directly from Tempo.
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -87,7 +87,7 @@ If you are using Docker and the `gRPC` endpoint like in the screenshot below, us
 tempo:9095
 ```
 
-![tempo grpc](https://res.cloudinary.com/djwdcmwdz/image/upload/v1710422510/docs/app.tracetest.io_organizations_ttorg_e66318ba6544b856_environments_ttenv_ad034a744607c050_settings_tab_agent_1_fc2ccz.png)
+![tempo grpc](https://res.cloudinary.com/djwdcmwdz/image/upload/v1710422510/docs/app.qualityTrace.io_organizations_ttorg_e66318ba6544b856_environments_ttenv_ad034a744607c050_settings_tab_agent_1_fc2ccz.png)
 
 If you are using Docker and the `HTTP` URL like in the screenshot below, use the service name as the hostname with port `80` or no specified port like this:
 
@@ -95,7 +95,7 @@ If you are using Docker and the `HTTP` URL like in the screenshot below, use the
 http://tempo
 ```
 
-![Tempo http](https://res.cloudinary.com/djwdcmwdz/image/upload/v1710422502/docs/app.tracetest.io_organizations_ttorg_e66318ba6544b856_environments_ttenv_ad034a744607c050_settings_tab_agent_gqqnjy.png)
+![Tempo http](https://res.cloudinary.com/djwdcmwdz/image/upload/v1710422502/docs/app.qualityTrace.io_organizations_ttorg_e66318ba6544b856_environments_ttenv_ad034a744607c050_settings_tab_agent_gqqnjy.png)
 
 ## Connect Tracetest to Tempo with the CLI
 
@@ -136,9 +136,9 @@ spec:
 Proceed to run this command in the terminal, and specify the file above.
 
 ```bash
-tracetest apply datastore -f my/data-store/file/location.yaml
+qualityTrace apply datastore -f my/data-store/file/location.yaml
 ```
 
 :::tip
-To learn more, [read the recipe on running a sample app with Tempo and Tracetest](/examples-tutorials/recipes/running-tracetest-with-tempo).
+To learn more, [read the recipe on running a sample app with Tempo and Tracetest](/examples-tutorials/recipes/running-qualityTrace-with-tempo).
 :::

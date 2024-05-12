@@ -54,7 +54,7 @@ const Search = ({runId, testId}: IProps) => {
       <Col flex="auto">
         <Editor
           type={SupportedEditors.Selector}
-          placeholder={'Try `span[tracetest.span.type="general" name="Tracetest trigger"]` or just "Tracetest trigger"'}
+          placeholder={'Try `span[qualityTrace.span.type="general" name="Tracetest trigger"]` or just "Tracetest trigger"'}
           onChange={query => {
             onSearch(query);
             setSearch(query);

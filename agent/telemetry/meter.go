@@ -33,7 +33,7 @@ func GetMeter(ctx context.Context, otelExporterEndpoint, serviceName string) (me
 		return nil, fmt.Errorf("could not create meter provider: %w", err)
 	}
 
-	return provider.Meter("tracetest.agent"), nil
+	return provider.Meter("qualityTrace.agent"), nil
 }
 
 func newMeterProvider(ctx context.Context, otelExporterEndpoint, serviceName string) (metric.MeterProvider, error) {

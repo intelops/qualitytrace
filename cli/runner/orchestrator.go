@@ -46,7 +46,7 @@ type RunOptions struct {
 
 	// ResourceType defines what is the type of resource that is being run. It's value
 	// is filled automatically when the user define the type of resource that will be run
-	// when they enter: tracetest run <resource-name> --id <id>
+	// when they enter: qualityTrace run <resource-name> --id <id>
 	ResourceType string
 }
 

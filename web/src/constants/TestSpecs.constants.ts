@@ -4,7 +4,7 @@ export type TSnippet = Required<IValues>;
 
 export const HTTP_SPANS_STATUS_CODE: TSnippet = {
   name: 'All HTTP Spans: Status  code is 200',
-  selector: 'span[tracetest.span.type="http"]',
+  selector: 'span[qualityTrace.span.type="http"]',
   assertions: [
     {
       left: 'attr:http.status_code',
@@ -16,10 +16,10 @@ export const HTTP_SPANS_STATUS_CODE: TSnippet = {
 
 export const TRIGGER_SPAN_RESPONSE_TIME: TSnippet = {
   name: 'Trigger Span: Response time is less than 200ms',
-  selector: 'span[tracetest.span.type="general" name="Tracetest trigger"]',
+  selector: 'span[qualityTrace.span.type="general" name="Tracetest trigger"]',
   assertions: [
     {
-      left: 'attr:tracetest.span.duration',
+      left: 'attr:qualityTrace.span.duration',
       comparator: '<',
       right: '200ms',
     },
@@ -28,10 +28,10 @@ export const TRIGGER_SPAN_RESPONSE_TIME: TSnippet = {
 
 export const DB_SPANS_RESPONSE_TIME: TSnippet = {
   name: 'All Database Spans: Processing time is less than 100ms',
-  selector: 'span[tracetest.span.type="database"]',
+  selector: 'span[qualityTrace.span.type="database"]',
   assertions: [
     {
-      left: 'attr:tracetest.span.duration',
+      left: 'attr:qualityTrace.span.duration',
       comparator: '<',
       right: '100ms',
     },
@@ -40,10 +40,10 @@ export const DB_SPANS_RESPONSE_TIME: TSnippet = {
 
 export const TRIGGER_SPAN_RESPONSE_BODY_CONTAINS: TSnippet = {
   name: 'Trigger Span: Response body contains "this string"',
-  selector: 'span[tracetest.span.type="general" name="Tracetest trigger"]',
+  selector: 'span[qualityTrace.span.type="general" name="Tracetest trigger"]',
   assertions: [
     {
-      left: 'attr:tracetest.response.body',
+      left: 'attr:qualityTrace.response.body',
       comparator: 'contains',
       right: '"this string"',
     },
@@ -52,7 +52,7 @@ export const TRIGGER_SPAN_RESPONSE_BODY_CONTAINS: TSnippet = {
 
 export const GRPC_SPANS_STATUS_CODE: TSnippet = {
   name: 'All gRPC Spans: Status is Ok',
-  selector: 'span[tracetest.span.type="rpc" rpc.system="grpc"]',
+  selector: 'span[qualityTrace.span.type="rpc" rpc.system="grpc"]',
   assertions: [
     {
       left: 'attr:rpc.grpc.status_code',
@@ -64,7 +64,7 @@ export const GRPC_SPANS_STATUS_CODE: TSnippet = {
 
 export const DB_SPANS_QUALITY_DB_STATEMENT_PRESENT: TSnippet = {
   name: 'All Database Spans: db.statement should always be defined (QUALITY)',
-  selector: 'span[tracetest.span.type="database"]',
+  selector: 'span[qualityTrace.span.type="database"]',
   assertions: [
     {
       left: 'attr:db.system',

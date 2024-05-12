@@ -24,15 +24,15 @@ spec:
   specs:
   - selector: span[name = "Tracetest trigger"]
     assertions:
-      - attr:tracetest.selected_spans.count = 1
-      - attr:tracetest.response.status = 200
-      - attr:tracetest.response.body | json_path '$.spec.name' = "test-testsuite-updated"
-  - selector: span[name="PUT /api/testsuites/{id}" tracetest.span.type="http"]
+      - attr:qualityTrace.selected_spans.count = 1
+      - attr:qualityTrace.response.status = 200
+      - attr:qualityTrace.response.body | json_path '$.spec.name' = "test-testsuite-updated"
+  - selector: span[name="PUT /api/testsuites/{id}" qualityTrace.span.type="http"]
     assertions:
-      - attr:tracetest.selected_spans.count = 1
+      - attr:qualityTrace.selected_spans.count = 1
   - selector: span[name = "exec INSERT"]
     assertions:
-      - attr:tracetest.selected_spans.count = 2
+      - attr:qualityTrace.selected_spans.count = 2
   - selector: span[name = "exec INSERT"]:first
     assertions:
       - attr:sql.query contains "INSERT INTO test_suites"

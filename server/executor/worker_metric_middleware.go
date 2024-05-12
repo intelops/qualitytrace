@@ -30,7 +30,7 @@ func NewWorkerMetricMiddlewareBuilder(meter metric.Meter) WorkerMiddlewareBuilde
 }
 
 func (b *metricWorkerMiddlewareBuilder) New(name string, next pipeline.StepProcessor[Job]) pipeline.StepProcessor[Job] {
-	metricPrefix := fmt.Sprintf("tracetest.worker.%s", name)
+	metricPrefix := fmt.Sprintf("qualityTrace.worker.%s", name)
 
 	latencyHistogram, _ := b.meter.Int64Histogram(fmt.Sprintf("%s.latency", metricPrefix))
 

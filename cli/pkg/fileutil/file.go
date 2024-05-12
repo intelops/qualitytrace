@@ -42,7 +42,7 @@ func ReadDirFileNames(path string) []string {
 
 	var result []string
 	for _, file := range files {
-		// TODO: add validation for file extensions, tracetest runnable definitions (?)
+		// TODO: add validation for file extensions, qualityTrace runnable definitions (?)
 		if file.IsDir() {
 			result = append(result, ReadDirFileNames(filepath.Join(path, file.Name()))...)
 		} else {

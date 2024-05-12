@@ -40,19 +40,19 @@ func (pe InstrumentedPollerExecutor) ExecuteRequest(ctx context.Context, job *Jo
 	}
 
 	attrs := []attribute.KeyValue{
-		attribute.String("tracetest.run.trace_poller.trace_id", job.Run.TraceID.String()),
-		attribute.String("tracetest.run.trace_poller.span_id", job.Run.SpanID.String()),
-		attribute.Bool("tracetest.run.trace_poller.succesful", res.Finished()),
-		attribute.String("tracetest.run.trace_poller.test_id", string(job.Test.ID)),
-		attribute.Int("tracetest.run.trace_poller.amount_retrieved_spans", spanCount),
+		attribute.String("qualityTrace.run.trace_poller.trace_id", job.Run.TraceID.String()),
+		attribute.String("qualityTrace.run.trace_poller.span_id", job.Run.SpanID.String()),
+		attribute.Bool("qualityTrace.run.trace_poller.succesful", res.Finished()),
+		attribute.String("qualityTrace.run.trace_poller.test_id", string(job.Test.ID)),
+		attribute.Int("qualityTrace.run.trace_poller.amount_retrieved_spans", spanCount),
 	}
 
 	if res.reason != "" {
-		attrs = append(attrs, attribute.String("tracetest.run.trace_poller.finish_reason", res.reason))
+		attrs = append(attrs, attribute.String("qualityTrace.run.trace_poller.finish_reason", res.reason))
 	}
 
 	if err != nil {
-		attrs = append(attrs, attribute.String("tracetest.run.trace_poller.error", err.Error()))
+		attrs = append(attrs, attribute.String("qualityTrace.run.trace_poller.error", err.Error()))
 		span.RecordError(err)
 	}
 

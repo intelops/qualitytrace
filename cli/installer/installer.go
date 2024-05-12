@@ -23,10 +23,10 @@ func Start() {
 Hi! Welcome to the TraceTest server installer. I'll help you set up your TraceTest server by asking you a few questions
 and configuring your system with all the requirements, so you can start TraceTesting right away!
 
-To get more info about TraceTest, you can check our docs at https://kubeshop.github.io/tracetest/
+To get more info about TraceTest, you can check our docs at https://kubeshop.github.io/qualityTrace/
 
 If you have any issues, please let us know by creating an issue (https://github.com/intelops/qualityTrace/issues/new/choose)
-or reach us on Slack https://dub.sh/tracetest-community
+or reach us on Slack https://dub.sh/qualityTrace-community
 
 `)
 
@@ -97,23 +97,23 @@ func setInstallationType(ui cliUI.UI, config configuration) {
 	if InstallationMode == WithoutDemoInstallationModeType { // check if it was previously chosen
 		ui.Println("Do you have OpenTelemetry based tracing already set up, or would you like us to install a demo tracing environment and app?")
 		ui.Println("  > I have a tracing environment already. Just install Tracetest")
-		config.set("installer.only_tracetest", true)
+		config.set("installer.only_qualityTrace", true)
 		return
 	}
 
 	if InstallationMode == WithDemoInstallationModeType { // check if it was previously chosen
 		ui.Println("Do you have OpenTelemetry based tracing already set up, or would you like us to install a demo tracing environment and app?")
 		ui.Println("  > Just learning tracing! Install Tracetest, OpenTelemetry Collector and the sample app.")
-		config.set("installer.only_tracetest", false)
+		config.set("installer.only_qualityTrace", false)
 		return
 	}
 
 	option := ui.Select("Do you have OpenTelemetry based tracing already set up, or would you like us to install a demo tracing environment and app?", []cliUI.Option{
 		{Text: "I have a tracing environment already. Just install Tracetest", Fn: func(ui cliUI.UI) {
-			config.set("installer.only_tracetest", true)
+			config.set("installer.only_qualityTrace", true)
 		}},
 		{Text: "Just learning tracing! Install Tracetest, OpenTelemetry Collector and the sample app.", Fn: func(ui cliUI.UI) {
-			config.set("installer.only_tracetest", false)
+			config.set("installer.only_qualityTrace", false)
 		}},
 	}, 0)
 

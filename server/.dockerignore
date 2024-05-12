@@ -1,4 +1,4 @@
 config.yaml
 config.yaml.sample
 coverage.out
-tracetest-server
+qualityTrace-server

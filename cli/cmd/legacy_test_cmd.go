@@ -11,9 +11,9 @@ import (
 var testCmd = &cobra.Command{
 	GroupID:    cmdGroupResources.ID,
 	Use:        "test",
-	Short:      "Manage your tracetest tests",
-	Long:       "Manage your tracetest tests",
-	Deprecated: "Please use `tracetest (apply|delete|export|get|list) test` commands instead.",
+	Short:      "Manage your qualityTrace tests",
+	Long:       "Manage your qualityTrace tests",
+	Deprecated: "Please use `qualityTrace (apply|delete|export|get|list) test` commands instead.",
 	PreRun:     setupCommand(),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
@@ -25,7 +25,7 @@ var testListCmd = &cobra.Command{
 	Use:        "list",
 	Short:      "List all tests",
 	Long:       "List all tests",
-	Deprecated: "Please use `tracetest list test` command instead.",
+	Deprecated: "Please use `qualityTrace list test` command instead.",
 	PreRun:     setupCommand(),
 	Run: func(_ *cobra.Command, _ []string) {
 		listCmd.Run(listCmd, []string{"test"})
@@ -37,7 +37,7 @@ var testExportCmd = &cobra.Command{
 	Use:        "export",
 	Short:      "Exports a test into a file",
 	Long:       "Exports a test into a file",
-	Deprecated: "Please use `tracetest export test` command instead.",
+	Deprecated: "Please use `qualityTrace export test` command instead.",
 	PreRun:     setupCommand(),
 	Run: func(_ *cobra.Command, _ []string) {
 		exportCmd.Run(exportCmd, []string{"test"})
@@ -56,7 +56,7 @@ var testRunCmd = &cobra.Command{
 	Use:        "run",
 	Short:      "Run a test on your Tracetest server",
 	Long:       "Run a test on your Tracetest server",
-	Deprecated: "Please use `tracetest run test` command instead.",
+	Deprecated: "Please use `qualityTrace run test` command instead.",
 	PreRun:     setupCommand(),
 	Run: func(_ *cobra.Command, _ []string) {
 		// map old flags to new ones

@@ -15,15 +15,15 @@ This is a simple test to check if Tracetest is working correctly given it was pr
 The steps that we should follow are:
 
 - [ ] Open WebUI and go to `/settings` page. The provisioned Data Store should be selected.
-- [ ] Run `tracetest export datastore --id current` and check if the data was exported correctly.
-- [ ] Create a test on WebUI that calls a demo API (like [Pokeshop](https://docs.tracetest.io/live-examples/pokeshop/overview) or [Open Telemetry Store](https://docs.tracetest.io/live-examples/opentelemetry-store/overview)). This test should fetch traces correctly and run without errors.
+- [ ] Run `qualityTrace export datastore --id current` and check if the data was exported correctly.
+- [ ] Create a test on WebUI that calls a demo API (like [Pokeshop](https://docs.qualityTrace.io/live-examples/pokeshop/overview) or [Open Telemetry Store](https://docs.qualityTrace.io/live-examples/opentelemetry-store/overview)). This test should fetch traces correctly and run without errors.
 
 ### Checklist on version release
 
 This is the entire checklist on what we should do to assert that Tracetest is working fine on each version release. On each version release, we can copy the contents of this checklist and open a Github Discussion to start each test.
 
 - [ ] Check if our release pipeline on [Release Tracetest](https://github.com/intelops/qualityTrace/actions/workflows/release-version.yml) workflow on Github Actions worked correctly.
-- [ ] Double check [Detailed installation](https://docs.tracetest.io/getting-started/detailed-installation) doc and see if everything is documented correctly
+- [ ] Double check [Detailed installation](https://docs.qualityTrace.io/getting-started/detailed-installation) doc and see if everything is documented correctly
 
 ### Tests to validate RC
 
@@ -36,13 +36,13 @@ This is the entire checklist on what we should do to assert that Tracetest is wo
 
 - Test Tracetest examples
 
-  - [ ] [Amazon X-Ray example](https://github.com/intelops/qualityTrace/tree/main/examples/tracetest-amazon-x-ray)
-  - [ ] [Datadog example](https://github.com/intelops/qualityTrace/tree/main/examples/tracetest-datadog)
-  - [ ] [Dynatrace example](https://github.com/intelops/qualityTrace/tree/main/examples/tracetest-dynatrace)
-  - [ ] [Elastic APM example](https://github.com/intelops/qualityTrace/tree/main/examples/tracetest-elasticapm)
-  - [ ] [Lightstep example](https://github.com/intelops/qualityTrace/tree/main/examples/tracetest-lightstep)
-  - [ ] [New Relic example](https://github.com/intelops/qualityTrace/tree/main/examples/tracetest-new-relic)
-  - [ ] [SignalFX example](https://github.com/intelops/qualityTrace/tree/main/examples/tracetest-signalfx)
+  - [ ] [Amazon X-Ray example](https://github.com/intelops/qualityTrace/tree/main/examples/qualityTrace-amazon-x-ray)
+  - [ ] [Datadog example](https://github.com/intelops/qualityTrace/tree/main/examples/qualityTrace-datadog)
+  - [ ] [Dynatrace example](https://github.com/intelops/qualityTrace/tree/main/examples/qualityTrace-dynatrace)
+  - [ ] [Elastic APM example](https://github.com/intelops/qualityTrace/tree/main/examples/qualityTrace-elasticapm)
+  - [ ] [Lightstep example](https://github.com/intelops/qualityTrace/tree/main/examples/qualityTrace-lightstep)
+  - [ ] [New Relic example](https://github.com/intelops/qualityTrace/tree/main/examples/qualityTrace-new-relic)
+  - [ ] [SignalFX example](https://github.com/intelops/qualityTrace/tree/main/examples/qualityTrace-signalfx)
   - [ ] [Tempo Cloud example](https://github.com/intelops/qualityTrace/tree/main/examples/quick-start-grafana-cloud-tempo-nodejs)
 
 - Test specific features added/changed on this release:

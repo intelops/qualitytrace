@@ -35,7 +35,7 @@ func init() {
 	serverInstallCmd.Flags().StringVar(&installerParams.KubernetesContext, "kubernetes-context", "", "Kubernetes context used to install Tracetest. It will be only used if 'run-environment' is set as 'kubernetes'.")
 
 	// these commands will not have shorthand parameters to avoid colision with existing ones in other commands
-	serverInstallCmd.Flags().Var(&installerParams.InstallationMode, "mode", "Indicate the type of demo environment to be installed with Tracetest. It can be 'with-demo' or 'just-tracetest'.")
+	serverInstallCmd.Flags().Var(&installerParams.InstallationMode, "mode", "Indicate the type of demo environment to be installed with Tracetest. It can be 'with-demo' or 'just-qualityTrace'.")
 	serverInstallCmd.Flags().Var(&installerParams.RunEnvironment, "run-environment", "Type of environment were Tracetest will be installed. It can be 'docker' or 'kubernetes'.")
 
 	serverCmd.AddCommand(serverInstallCmd)
@@ -74,7 +74,7 @@ func (p installerParameters) Validate(cmd *cobra.Command, args []string) []cmdut
 	if cmd.Flags().Lookup("mode").Changed && slices.Contains(AllowedInstallationMode, p.InstallationMode) {
 		errors = append(errors, cmdutil.ParamError{
 			Parameter: "mode",
-			Message:   "mode must be one of 'not-chosen', 'with-demo' or 'just-tracetest'",
+			Message:   "mode must be one of 'not-chosen', 'with-demo' or 'just-qualityTrace'",
 		})
 	}
 

@@ -17,7 +17,7 @@ describe('SpanSelectors', () => {
 
     it('should return matchedSpans when selector matches', () => {
       const matchedSpans = ['pokeshop'];
-      const selector = `span[tracetest.span.type="http"]`;
+      const selector = `span[qualityTrace.span.type="http"]`;
       const result = SpanSelectors.selectMatchedSpans({
         spans: {matchedSpans},
         testSpecs: {
@@ -29,8 +29,8 @@ describe('SpanSelectors', () => {
     });
 
     it('should return matchedSpans when selector does not matches', () => {
-      const selector = `span[tracetest.span.type="http"]`;
-      const selectedSpec = `span[tracetest.span.type="gRPC"]`;
+      const selector = `span[qualityTrace.span.type="http"]`;
+      const selectedSpec = `span[qualityTrace.span.type="gRPC"]`;
       const result = SpanSelectors.selectMatchedSpans({
         spans: {matchedSpans: ['pokeshop']},
         testSpecs: {

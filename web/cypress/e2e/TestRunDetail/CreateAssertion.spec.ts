@@ -30,7 +30,7 @@ describe('Create Assertion', () => {
 
     cy.get('[data-cy=assertion-check-attribute] [contenteditable="true"]')
       .last()
-      .type('tracetest.span.ty', {delay: 100});
+      .type('qualityTrace.span.ty', {delay: 100});
     cy.get(getAttributeListId(0)).click();
     cy.get('[data-cy=assertion-check-value] .cm-content').last().click();
     cy.get(getValueFromList(1)).last().click();
@@ -62,7 +62,7 @@ describe('Create Assertion', () => {
     cy.get('[data-cy=editor-fallback]').should('not.exist');
     cy.get('[data-cy=selector-editor] [contenteditable]')
       .clear()
-      .type('span[tracetest.span.type = "http"] span[tracetest.span.type = "database"]:first');
+      .type('span[qualityTrace.span.type = "http"] span[qualityTrace.span.type = "database"]:first');
 
     cy.get('[data-cy=assertion-check-attribute] [contenteditable="true"]').type('db.name', {delay: 100});
     cy.get(getAttributeListId(0)).click();
@@ -106,7 +106,7 @@ describe('Create Assertion', () => {
     cy.get('[data-cy=assertion-form]').should('be.visible');
     cy.get('[data-cy=editor-fallback]').should('not.exist');
 
-    cy.get('[data-cy=selector-editor] [contenteditable]').clear().type('span[tracetest.span.type = "database"]:last');
+    cy.get('[data-cy=selector-editor] [contenteditable]').clear().type('span[qualityTrace.span.type = "database"]:last');
 
     cy.selectOperator(0);
 

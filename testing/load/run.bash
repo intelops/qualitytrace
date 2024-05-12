@@ -2,7 +2,7 @@
 
 set -ex
 
-TRACETEST_CLI=${TRACETEST_CLI:-"tracetest"}
+TRACETEST_CLI=${TRACETEST_CLI:-"qualityTrace"}
 cmdExitCode=$("$TRACETEST_CLI" &> /dev/null; echo $?)
 if [ $cmdExitCode -ne 0 ]; then
   echo "\$TRACETEST_CLI not set to executable. set to $TRACETEST_CLI";
@@ -24,22 +24,22 @@ $DOCKER_COMPOSE up > $DOCKER_LOG 2>&1 &
 TIMEOUT=5m ../../scripts/wait-for-port.sh 11633
 ../../scripts/wait-for-port.sh 8081
 sleep 5
-$TRACETEST apply test -f tracetest-test.yaml
+$TRACETEST apply test -f qualityTrace-test.yaml
 
 rm -f ./k6
 
-# this build needs to happen outside the tracetest dir
+# this build needs to happen outside the qualityTrace dir
 # otherwise go compiler complains about go.mod in parent dir
 currentDir=$(pwd)
 dir=$(mktemp -d)
 cd $dir
 go install go.k6.io/xk6/cmd/xk6@latest
-xk6 build v0.42.0 --with github.com/kubeshop/xk6-tracetest \
+xk6 build v0.42.0 --with github.com/kubeshop/xk6-qualityTrace \
   --replace go.buf.build/grpc/go/prometheus/prometheus=buf.build/gen/go/prometheus/prometheus/protocolbuffers/go@latest \
   --replace go.buf.build/grpc/go/gogo/protobuf=buf.build/gen/go/gogo/protobuf/protocolbuffers/go@latest
 mv ./k6 $currentDir
 cd $currentDir
 
-./k6 run load-test.js -o xk6-tracetest
+./k6 run load-test.js -o xk6-qualityTrace
 
 # $DOCKER_COMPOSE down

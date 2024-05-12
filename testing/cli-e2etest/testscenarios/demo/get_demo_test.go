@@ -6,8 +6,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -22,7 +22,7 @@ func addGetDemoPreReqs(t *testing.T, env environment.Manager) string {
 	newDemoPath := env.GetTestResourcePath(t, "new-demo")
 	helpers.InjectIdIntoDemoFile(t, newDemoPath, "")
 
-	result := tracetestcli.Exec(t, fmt.Sprintf("apply demo --file %s", newDemoPath), tracetestcli.WithCLIConfig(cliConfig))
+	result := qualityTracecli.Exec(t, fmt.Sprintf("apply demo --file %s", newDemoPath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	demo := helpers.UnmarshalYAML[types.DemoResource](t, result.StdOut)
@@ -45,7 +45,7 @@ func TestGetDemo(t *testing.T) {
 
 		// When I try to get a demo on yaml mode
 		// Then it should return a error message
-		result := tracetestcli.Exec(t, "get demo --id some-demo --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get demo --id some-demo --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "Resource demo with ID some-demo not found")
 	})
@@ -60,7 +60,7 @@ func TestGetDemo(t *testing.T) {
 		// When I try to get a demo on yaml mode
 		// Then it should print a YAML
 		command := fmt.Sprintf("get demo --id %s --output yaml", registeredDemoId)
-		result := tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		demo := helpers.UnmarshalYAML[types.DemoResource](t, result.StdOut)
@@ -83,7 +83,7 @@ func TestGetDemo(t *testing.T) {
 		// When I try to get a demo on json mode
 		// Then it should print a json
 		command := fmt.Sprintf("get demo --id %s --output json", registeredDemoId)
-		result := tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		demo := helpers.UnmarshalJSON[types.DemoResource](t, result.StdOut)
@@ -106,7 +106,7 @@ func TestGetDemo(t *testing.T) {
 		// When I try to get a demo on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, demo item and empty line
 		command := fmt.Sprintf("get demo --id %s --output pretty", registeredDemoId)
-		result := tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

@@ -25,7 +25,7 @@ describe('Validator', () => {
     });
 
     it('should be valid', () => {
-      expect(Validator.required('https://tracetest.io/')).toBeTruthy();
+      expect(Validator.required('https://qualityTrace.io/')).toBeTruthy();
       expect(Validator.url('http://demo')).toBe(true);
       expect(Validator.url('http://demo.com')).toBe(true);
       expect(Validator.url('https://www.demo.com')).toBe(true);

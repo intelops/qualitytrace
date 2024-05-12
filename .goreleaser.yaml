@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://goreleaser.com/static/schema-pro.json
-project_name: tracetest
+project_name: qualityTrace
 changelog:
   sort: asc
   filters:
@@ -23,7 +23,7 @@ env:
   - TRACETEST_DEFAULT_CLOUD_ENDPOINT={{ if index .Env "TRACETEST_DEFAULT_CLOUD_ENDPOINT"  }}{{ .Env.TRACETEST_DEFAULT_CLOUD_ENDPOINT }}{{ else }}{{ end }}
 builds:
   - id: server
-    binary: tracetest-server
+    binary: qualityTrace-server
     main: ./server/main.go
     ldflags:
     - -X github.com/intelops/qualityTrace/server/version.Version={{ .Env.VERSION }}
@@ -45,7 +45,7 @@ builds:
     - "7"
 
   - id: cli
-    binary: tracetest
+    binary: qualityTrace
     main: ./cli/main.go
     ldflags:
     - -X github.com/intelops/qualityTrace/cli/config.Version={{ .Env.VERSION }}
@@ -182,7 +182,7 @@ universal_binaries:
 
 nfpms:
 - vendor: Kubeshop
-  homepage: https://tracetest.kubeshop.io/
+  homepage: https://qualityTrace.kubeshop.io/
   maintainer: Sebastian Choren <sebastian@kubeshop.io>
   license: MIT
   formats:
@@ -211,9 +211,9 @@ publishers:
 brews:
 - repository:
     owner: kubeshop
-    name: homebrew-tracetest
+    name: homebrew-qualityTrace
   commit_author:
     name: Brew Bot
     email: brewbot@kubeshop.io
-  homepage: https://tracetest.kubeshop.io/
+  homepage: https://qualityTrace.kubeshop.io/
   license: "MIT"

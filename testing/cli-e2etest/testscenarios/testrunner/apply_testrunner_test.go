@@ -6,8 +6,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -30,12 +30,12 @@ func TestApplyTestRunner(t *testing.T) {
 	// Then it should be applied with success
 	testRunnerPath := env.GetTestResourcePath(t, "new-testrunner")
 
-	result := tracetestcli.Exec(t, fmt.Sprintf("apply testrunner --file %s", testRunnerPath), tracetestcli.WithCLIConfig(cliConfig))
+	result := qualityTracecli.Exec(t, fmt.Sprintf("apply testrunner --file %s", testRunnerPath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	// When I try to get a testRunner again
 	// Then it should return the testRunner applied on the last step, with analytics disabled
-	result = tracetestcli.Exec(t, "get testrunner --id current", tracetestcli.WithCLIConfig(cliConfig))
+	result = qualityTracecli.Exec(t, "get testrunner --id current", qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	testRunner := helpers.UnmarshalYAML[types.TestRunnerResource](t, result.StdOut)

@@ -3,7 +3,7 @@ id: upgrade
 title: Upgrade Tracetest Version
 description: This page explains how to upgrade the version of your Tracetest Core Server and CLI if their version are incompatible.
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -18,14 +18,14 @@ If you've ever seen this error, you've come to the right page:
 ```text
 ✖️ Error: Version Mismatch
 The CLI version and the server version are not compatible. To fix this, you'll need to make sure that both your CLI and server are using compatible versions.
-We recommend upgrading both of them to the latest available version. Check out our documentation https://docs.tracetest.io/configuration/upgrade for simple instructions on how to upgrade.
+We recommend upgrading both of them to the latest available version. Check out our documentation https://docs.qualityTrace.io/configuration/upgrade for simple instructions on how to upgrade.
 Thank you for using Tracetest! We apologize for any inconvenience caused.
 ```
 
 This means your Tracetest CLI and Server versions must be the same.
 
 ```sh
-tracetest version
+qualityTrace version
 ```
 
 ```text title="Expected output"
@@ -49,27 +49,27 @@ curl -L https://raw.githubusercontent.com/intelops/qualityTrace/main/install-cli
 ```sh
 brew upgrade
 brew update
-brew install intelops/qualityTrace/tracetest
+brew install intelops/qualityTrace/qualityTrace
 ```
 
 ### APT
 
 ```sh
 sudo apt-get update
-sudo apt-get install tracetest
+sudo apt-get install qualityTrace
 ```
 
 ### YUM
 
 ```sh
 sudo yum update
-sudo yum install tracetest --refresh
+sudo yum install qualityTrace --refresh
 ```
 
 ### Windows
 
 ```sh
-choco source add --name=kubeshop_repo --source=https://chocolatey.kubeshop.io/chocolatey ; choco upgrade tracetest
+choco source add --name=kubeshop_repo --source=https://chocolatey.kubeshop.io/chocolatey ; choco upgrade qualityTrace
 ```
 
 ## Upgrade Tracetest Server Version

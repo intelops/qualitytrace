@@ -3,7 +3,7 @@ id: undefined-variables
 title: Undefined Variables
 description: When variables from a Variable Set are undefined and you run a Test or Test Suite, any variables that are needed will be prompted for.
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -14,7 +14,7 @@ image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_T
 When a user runs a test or a Test Suite, any variables that will be needed but are not defined will be prompted for:
 
 ```sh
-tracetest run test -f path/to/test.yaml
+qualityTrace run test -f path/to/test.yaml
 ```
 
 ```text title="Output:"
@@ -27,7 +27,7 @@ POKENAME:
 Undefined variables are dependent on the variable set selected and whether or not the variable is defined in the current variable set. Select the variable set to run the Test or Test Suite by passing it into the test run command.
 
 ```sh
-tracetest list variableset
+qualityTrace list variableset
 ```
 
 ```text title="Output:"
@@ -37,7 +37,7 @@ tracetest list variableset
 ```
 
 ```sh
-tracetest get variableset --id testvars
+qualityTrace get variableset --id testvars
 ```
 
 ```text title="Output:"
@@ -55,7 +55,7 @@ spec:
 ```
 
 ```sh
-tracetest run test -f path/to/test.yaml --vars testvars
+qualityTrace run test -f path/to/test.yaml --vars testvars
 ```
 
 ```text title="Output:"

@@ -10,7 +10,6 @@ import (
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/intelops/qualityTrace/agent/tracedb"
 	"github.com/intelops/qualityTrace/server/analytics"
 	"github.com/intelops/qualityTrace/server/assertions/comparator"
@@ -43,13 +42,14 @@ import (
 	"github.com/intelops/qualityTrace/server/variableset"
 	"github.com/intelops/qualityTrace/server/version"
 	"github.com/intelops/qualityTrace/server/wizard"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/nats-io/nats.go"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"
 )
 
 var (
-	pgChannelName = "tracetest_queue"
+	pgChannelName = "qualityTrace_queue"
 )
 
 var EmptyDemoEnabled []string
@@ -71,7 +71,7 @@ func New(config *config.AppConfig) (*App, error) {
 }
 
 func (app *App) Version() string {
-	return fmt.Sprintf("tracetest-server %s (%s)", version.Version, version.Env)
+	return fmt.Sprintf("qualityTrace-server %s (%s)", version.Version, version.Env)
 }
 
 func (app *App) Stop() {
@@ -657,7 +657,7 @@ func tracesConversionConfig() traces.ConversionConfig {
 	tcc := traces.NewConversionConfig()
 	// hardcoded for now. In the future we will get those values from the database
 	tcc.AddTimeFields(
-		"tracetest.span.duration",
+		"qualityTrace.span.duration",
 	)
 
 	return tcc

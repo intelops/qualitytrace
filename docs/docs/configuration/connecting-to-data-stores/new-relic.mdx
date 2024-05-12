@@ -3,7 +3,7 @@ id: new-relic
 title: New Relic
 description: Use New Relic as the trace data store for Tracetest. Configure the OpenTelemetry Collector to receive traces and forward them to both Tracetest and New Relic.
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -21,11 +21,11 @@ Examples of configuring Tracetest with New Relic can be found in the [`examples`
 
 In your OpenTelemetry Collector config file:
 
-- Set the `exporter` to `otlp/tracetest`
+- Set the `exporter` to `otlp/qualityTrace`
 - Set the `endpoint` to your Tracetest instance on port `4317`
 
 :::tip
-If you are running Tracetest with Docker and Tracetest's service name is `tracetest`, then the endpoint might look like this `http://tracetest:4317`
+If you are running Tracetest with Docker and Tracetest's service name is `qualityTrace`, then the endpoint might look like this `http://qualityTrace:4317`
 :::
 
 Additionally, add another config:
@@ -53,8 +53,8 @@ exporters:
   logging:
     logLevel: debug
   # OTLP for Tracetest
-  otlp/tracetest:
-    endpoint: tracetest:4317 # Send traces to Tracetest. Read more in docs here:  https://docs.tracetest.io/configuration/connecting-to-data-stores/opentelemetry-collector
+  otlp/qualityTrace:
+    endpoint: qualityTrace:4317 # Send traces to Tracetest. Read more in docs here:  https://docs.qualityTrace.io/configuration/connecting-to-data-stores/opentelemetry-collector
     tls:
       insecure: true
   # OTLP for New Relic
@@ -70,10 +70,10 @@ service:
     # Your probably already have a traces pipeline, you don't have to change it.
     # Add these two to your configuration. Just make sure to not have two
     # pipelines with the same name
-    traces/tracetest:
+    traces/qualityTrace:
       receivers: [otlp] # your receiver
       processors: [batch]
-      exporters: [otlp/tracetest] # your exporter pointing to your tracetest instance
+      exporters: [otlp/qualityTrace] # your exporter pointing to your qualityTrace instance
     traces/newrelic:
       receivers: [otlp] # your receiver
       processors: [batch]
@@ -105,9 +105,9 @@ spec:
 Proceed to run this command in the terminal and specify the file above.
 
 ```bash
-tracetest apply datastore -f my/data-store/file/location.yaml
+qualityTrace apply datastore -f my/data-store/file/location.yaml
 ```
 
 :::tip
-To learn more, [read the recipe on running a sample app with New Relic and Tracetest](/examples-tutorials/recipes/running-tracetest-with-new-relic).
+To learn more, [read the recipe on running a sample app with New Relic and Tracetest](/examples-tutorials/recipes/running-qualityTrace-with-new-relic).
 :::

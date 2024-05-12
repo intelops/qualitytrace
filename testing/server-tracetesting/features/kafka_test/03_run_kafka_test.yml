@@ -16,29 +16,29 @@ spec:
   - name: Tracetest API started to run the test correctly
     selector: span[name = "Tracetest trigger"]
     assertions:
-    - attr:tracetest.selected_spans.count = 1
-    - attr:tracetest.response.status = 200
+    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualityTrace.response.status = 200
   - name: Tracetest API endpoint 'POST /api/tests/{testId}/run' was called once
-    selector: span[name = "POST /api/tests/{testId}/run" tracetest.span.type = "http"]
+    selector: span[name = "POST /api/tests/{testId}/run" qualityTrace.span.type = "http"]
     assertions:
-    - attr:tracetest.selected_spans.count = 1
+    - attr:qualityTrace.selected_spans.count = 1
   - name: The test trigger was executed correctly
     selector: span[name = "Trigger test"]
     assertions:
-    - attr:tracetest.selected_spans.count = 1
-    - attr:tracetest.run.trigger.test_id = "${var:KAFKA_TEST_ID}"
-    - attr:tracetest.run.trigger.type = "kafka"
+    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualityTrace.run.trigger.test_id = "${var:KAFKA_TEST_ID}"
+    - attr:qualityTrace.run.trigger.type = "kafka"
   - name: The trace poller was started
     selector: span[name = "Fetching trace"]
     assertions:
-    - attr:tracetest.selected_spans.count > 0
-    - attr:tracetest.run.trace_poller.test_id = "${var:KAFKA_TEST_ID}"
+    - attr:qualityTrace.selected_spans.count > 0
+    - attr:qualityTrace.run.trace_poller.test_id = "${var:KAFKA_TEST_ID}"
   - name: The trace poller finished with success
     selector: span[name = "Evaluating trace"]:last
     assertions:
-    - attr:tracetest.run.trace_poller.succesful = "true"
+    - attr:qualityTrace.run.trace_poller.succesful = "true"
   - name: All assertions were validated and passed
     selector: span[name = "Execute assertions"]
     assertions:
-    - attr:tracetest.selected_spans.count = 1
-    - attr:tracetest.run.assertion_runner.all_assertions_passed = "true"
+    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualityTrace.run.assertion_runner.all_assertions_passed = "true"

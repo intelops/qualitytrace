@@ -4,7 +4,7 @@ title: Welcome to Tracetest Docs! 👋
 description: Tracetest is a trace-based testing tool for building integration and end-to-end tests in minutes using your OpenTelemetry traces. Assert against your trace data at every point of a request transaction.
 hide_table_of_contents: false
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -90,9 +90,9 @@ You can:
           body: '{"id":52}'
       specs:
       - name: 'All Database Spans: Processing time is less than 100ms'
-        selector: span[tracetest.span.type="database"]
+        selector: span[qualityTrace.span.type="database"]
         assertions:
-        - attr:tracetest.span.duration < 100ms
+        - attr:qualityTrace.span.duration < 100ms
         `}
         </CodeBlock> 
       </div>
@@ -106,11 +106,11 @@ Tracetest is a cloud-native application, designed to run in the cloud. [Get star
 
 ### Cloud-based Managed Tracetest (Free to get started!)
 
-The easiest and most reliable way to test microservices and distributed apps with OpenTelemetry distributed traces is signing up for free at [app.tracetest.io](https://app.tracetest.io/). After creating an account, getting started is as easy as [installing the Tracetest Agent](/getting-started/installation).
+The easiest and most reliable way to test microservices and distributed apps with OpenTelemetry distributed traces is signing up for free at [app.qualityTrace.io](https://app.qualityTrace.io/). After creating an account, getting started is as easy as [installing the Tracetest Agent](/getting-started/installation).
 
 ### Enterprise Self-hosted Tracetest (Coming soon...)
 
-Get the same experience as with the Cloud-based Managed Tracetest but self-hosted in your own infrastructure. [Book a call](https://dub.sh/tracetest-demo) to get into early access.
+Get the same experience as with the Cloud-based Managed Tracetest but self-hosted in your own infrastructure. [Book a call](https://dub.sh/qualityTrace-demo) to get into early access.
 
 ### Hobby Self-hosted Open-source Tracetest Core
 
@@ -126,7 +126,7 @@ Understand how Tracetest works.
 4. See test results.
 5. Run tests as part of CI/CD pipelines.
 
-![Marketechture](https://res.cloudinary.com/djwdcmwdz/image/upload/v1686654113/docs/tracetest-marketechture-jun12-v3_ffj2e2.png)
+![Marketechture](https://res.cloudinary.com/djwdcmwdz/image/upload/v1686654113/docs/qualityTrace-marketechture-jun12-v3_ffj2e2.png)
 
 ## Who uses Tracetest?
 

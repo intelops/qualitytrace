@@ -128,7 +128,7 @@ func (i *ingester) Ingest(ctx context.Context, request *pb.ExportTraceServiceReq
 		i.log("processing trace %d/%d traceID %s", ix+1, len(receivedTraces), modelTrace.ID.String())
 		err = i.processTrace(ctx, modelTrace, ix, requestType)
 		if err != nil {
-			span.RecordError(err, trace.WithAttributes(attribute.String("tracetest.ingestor.trace_id", modelTrace.ID.String())))
+			span.RecordError(err, trace.WithAttributes(attribute.String("qualityTrace.ingestor.trace_id", modelTrace.ID.String())))
 			return nil, err
 		}
 	}
@@ -162,7 +162,7 @@ func countSpans(resourceSpans []*v1.ResourceSpans) int {
 func (i *ingester) processTrace(ctx context.Context, modelTrace traces.Trace, ix int, requestType RequestType) error {
 	ctx, span := i.tracer.Start(ctx, "process otlp trace")
 	span.SetAttributes(
-		attribute.String("tracetest.ingestor.trace_id", modelTrace.ID.String()),
+		attribute.String("qualityTrace.ingestor.trace_id", modelTrace.ID.String()),
 	)
 	defer span.End()
 

@@ -3,7 +3,7 @@ id: installation
 title: Installing Tracetest Core
 description: Get started with installing Tracetest Core. Tracetest Core allows you to quickly build integration and end-to-end tests, powered by your OpenTelemetry traces.
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -35,14 +35,14 @@ Tracetest Core runs as a standalone container. It runs a Server and exposes a We
 You have three options to install Tracetest Server:
 
 - Using the Tracetest CLI to guide your installation in Docker and Kubernetes.
-- Using the official [Helm chart](https://github.com/kubeshop/helm-charts/tree/main/charts/tracetest).
+- Using the official [Helm chart](https://github.com/kubeshop/helm-charts/tree/main/charts/qualityTrace).
 - Using the [Docker Compose Quick Start with the Pokeshop Sample App](https://github.com/intelops/qualityTrace/tree/main/examples/quick-start-pokeshop).
 
 <Tabs groupId="installation">
   <TabItem value="cli" label="Tracetest CLI" default>
 
 ```bash title="Terminal"
-tracetest server install
+qualityTrace server install
 ```
 
 <Tabs groupId="container-orchestrators">
@@ -64,7 +64,7 @@ Do you have OpenTelemetry based tracing already set up, or would you like us to 
 > Just learning tracing! Install Tracetest, OpenTelemetry Collector and the sample app.
 ```
 
-Choosing any option, this installer will create a `tracetest` directory in the current directory and add a `docker-compose.yaml` file to it.
+Choosing any option, this installer will create a `qualityTrace` directory in the current directory and add a `docker-compose.yaml` file to it.
 
 - If you choose the first option, the `docker-compose.yaml` will have only Tracetest Core and its dependencies.
 - **By choosing the second option, a sample app called [Pokeshop](/live-examples/pokeshop/overview) will be installed with Tracetest Core, allowing you to create sample tests right away!**
@@ -107,13 +107,13 @@ flowchart TD
 ```
 </details>
 
-**Start Docker Compose from the directory where you ran `tracetest server install`.**
+**Start Docker Compose from the directory where you ran `qualityTrace server install`.**
 
 <CodeBlock
   language="bash"
   title="Terminal"
 >
-{`docker compose -f tracetest/docker-compose.yaml up -d`}
+{`docker compose -f qualityTrace/docker-compose.yaml up -d`}
 </CodeBlock>
 
 This will start the Tracetest Server and expose the Web UI on [`http://localhost:11633`](http://localhost:11633).
@@ -137,9 +137,9 @@ Do you have OpenTelemetry based tracing already set up, or would you like us to 
 > Just learning tracing! Install Tracetest, OpenTelemetry Collector and the sample app.
 ```
 
-Choosing any option, this installer will create a `tracetest` namespace in the Kubernetes context you choose and create deployments for Tracetest Core and its dependencies.
+Choosing any option, this installer will create a `qualityTrace` namespace in the Kubernetes context you choose and create deployments for Tracetest Core and its dependencies.
 
-- If you choose the first option, the `tracetest` namespace will only contain Tracetest Core and its dependencies.
+- If you choose the first option, the `qualityTrace` namespace will only contain Tracetest Core and its dependencies.
 - **By choosing the second option, a sample app called [Pokeshop](/live-examples/pokeshop/overview) will be installed in a `demo` namespace alongside Tracetest Core, allowing you to create sample tests right away!**
 
 <details>
@@ -188,7 +188,7 @@ export CONTAINER_PORT=$(kubectl get pod --namespace demo $POD_NAME -o jsonpath="
 kubectl --namespace demo port-forward $POD_NAME 8080:$CONTAINER_PORT
 echo "Open http://127.0.0.1:8080 to view the Pokeshop demo app"
 
-kubectl --kubeconfig <path-to-your-home>/.kube/config --context <your-cluster-context> --namespace tracetest port-forward svc/tracetest 11633
+kubectl --kubeconfig <path-to-your-home>/.kube/config --context <your-cluster-context> --namespace qualityTrace port-forward svc/qualityTrace 11633
 echo "Open http://127.0.0.1:11633 to view the Tracetest Web UI"
 ```
 
@@ -202,7 +202,7 @@ Access the Tracetest Web UI on [`http://localhost:11633`](http://localhost:11633
 
 First, be sure that you have [Helm](https://helm.sh/) installed in your machine.
 
-The Tracetest Helm charts are located [here](https://github.com/kubeshop/helm-charts/tree/main/charts/tracetest).
+The Tracetest Helm charts are located [here](https://github.com/kubeshop/helm-charts/tree/main/charts/qualityTrace).
 
 You can install them locally on your machine with the command:
 
@@ -214,20 +214,20 @@ helm repo update
 After that, you can install Tracetest with `helm install`:
 
 ```bash title=Terminal
-helm install tracetest intelops/qualityTrace --namespace=tracetest --create-namespace
+helm install qualityTrace intelops/qualityTrace --namespace=qualityTrace --create-namespace
 ```
 
 Or, generate a manifest file and apply it manually in your Kubernetes cluster:
 
 ```bash title=Terminal
-helm template tracetest intelops/qualityTrace > tracetest-kubernetes-manifests.yaml
-kubectl apply -f ./tracetest-kubernetes-manifests.yaml
+helm template qualityTrace intelops/qualityTrace > qualityTrace-kubernetes-manifests.yaml
+kubectl apply -f ./qualityTrace-kubernetes-manifests.yaml
 ```
 
 **Access the Tracetest Server by port forwarding to the Tracetest `service`.**
 
 ```bash title=Terminal
-kubectl --kubeconfig <path-to-your-home>/.kube/config --context <your-cluster-context> --namespace tracetest port-forward svc/tracetest 11633
+kubectl --kubeconfig <path-to-your-home>/.kube/config --context <your-cluster-context> --namespace qualityTrace port-forward svc/qualityTrace 11633
 ```
 
 Access the Tracetest Web UI on [`http://localhost:11633`](http://localhost:11633).

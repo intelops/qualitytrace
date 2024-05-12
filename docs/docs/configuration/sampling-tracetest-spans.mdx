@@ -1,9 +1,9 @@
 ---
-id: sampling-tracetest-spans
+id: sampling-qualityTrace-spans
 title: Sampling Tracetest Spans
 description: When running Tracetest in production, your test spans could not be sampled by your probabilistic sampler. Here's how to avoid sampling out Tracetest test spans.
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -65,11 +65,11 @@ processors:
   # If this configuration fails on your collector, make sure to update it to a newer version.
   # This is the recommended way of filtering spans based on the `trace_state`. It's faster and less
   # resource intensive than using a `tail_sampling` approach.
-  filter/tracetest:
+  filter/qualityTrace:
     error_mode: ignore
     traces:
       span:
-        - 'trace_state["tracetest"] != "true"'
+        - 'trace_state["qualityTrace"] != "true"'
 
 exporters:
   otlp/jaeger:
@@ -85,9 +85,9 @@ service:
       exporters: [otlp/jaeger]
 
   pipelines:
-    traces/tracetest:
+    traces/qualityTrace:
       receivers: [otlp]
-      processors: [filter/tracetest, batch]
+      processors: [filter/qualityTrace, batch]
       exporters: [otlp/jaeger]
 ```
 
@@ -102,9 +102,9 @@ processors:
   tail_sampling:
     decision_wait: 5s
     policies:
-      - name: tracetest-spans
+      - name: qualityTrace-spans
         type: trace_state
-        trace_state: { key: tracetest, values: ["true"] }
+        trace_state: { key: qualityTrace, values: ["true"] }
 ```
 
 With this configuration, you will still get 5% of all your traces, but you will also ensure that all your test traces are collected and sent to

@@ -4,7 +4,7 @@ title: OpenTelemetry Store - Checkout
 description: The OpenTelemetry Demo is an example application published by the OpenTelemtry CNCF project. This use case covers paying for products in a shopping cart.
 hide_table_of_contents: false
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -103,7 +103,7 @@ Now you can validate this entire use case.
 To replicate this entire test on Tracetest, you can replicate these steps on our Web UI or using our CLI, saving the following test definition as the file `test-definition.yml` and later running:
 
 ```sh
-tracetest run test -f test-definition.yml
+qualityTrace run test -f test-definition.yml
 ```
 
 We are assuming that the Frontend service is exposed on `http://otel-demo-frontend:8080`:
@@ -124,24 +124,24 @@ spec:
       body: '{"userId":"2491f868-88f1-4345-8836-d5d8511a9f83","email":"someone@example.com","address":{"streetAddress":"1600
         Amphitheatre Parkway","state":"CA","country":"United States","city":"Mountain View","zipCode":"94043"},"userCurrency":"USD","creditCard":{"creditCardCvv":672,"creditCardExpirationMonth":1,"creditCardExpirationYear":2030,"creditCardNumber":"4432-8015-6152-0454"}}'
   specs:
-  - selector: span[tracetest.span.type="rpc" name="hipstershop.CheckoutService/PlaceOrder"
+  - selector: span[qualityTrace.span.type="rpc" name="hipstershop.CheckoutService/PlaceOrder"
       rpc.system="grpc" rpc.method="PlaceOrder" rpc.service="hipstershop.CheckoutService"]
     assertions: # checking if an order was placed
     - attr:app.user.id = "2491f868-88f1-4345-8836-d5d8511a9f83"
     - attr:app.order.items.count = 1
-  - selector: span[tracetest.span.type="rpc" name="hipstershop.PaymentService/Charge"
+  - selector: span[qualityTrace.span.type="rpc" name="hipstershop.PaymentService/Charge"
       rpc.system="grpc" rpc.method="Charge" rpc.service="hipstershop.PaymentService"]
     assertions: # checking if the user was charged
     - attr:rpc.grpc.status_code  =  0
-    - attr:tracetest.selected_spans.count >= 1
-  - selector: span[tracetest.span.type="rpc" name="hipstershop.ShippingService/ShipOrder"
+    - attr:qualityTrace.selected_spans.count >= 1
+  - selector: span[qualityTrace.span.type="rpc" name="hipstershop.ShippingService/ShipOrder"
       rpc.system="grpc" rpc.method="ShipOrder" rpc.service="hipstershop.ShippingService"]
     assertions: # checking if the product was shipped
     - attr:rpc.grpc.status_code = 0
-    - attr:tracetest.selected_spans.count >= 1
-  - selector: span[tracetest.span.type="rpc" name="hipstershop.CartService/EmptyCart"
+    - attr:qualityTrace.selected_spans.count >= 1
+  - selector: span[qualityTrace.span.type="rpc" name="hipstershop.CartService/EmptyCart"
       rpc.system="grpc" rpc.method="EmptyCart" rpc.service="hipstershop.CartService"]
     assertions: # checking if the cart was set empty
     - attr:rpc.grpc.status_code = 0
-    - attr:tracetest.selected_spans.count >= 1
+    - attr:qualityTrace.selected_spans.count >= 1
 ```

@@ -7,8 +7,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -19,7 +19,7 @@ func addListAnalyzerPreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	configPath := env.GetTestResourcePath(t, "new-analyzer")
 
-	result := tracetestcli.Exec(t, fmt.Sprintf("apply analyzer --file %s", configPath), tracetestcli.WithCLIConfig(cliConfig))
+	result := qualityTracecli.Exec(t, fmt.Sprintf("apply analyzer --file %s", configPath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -39,7 +39,7 @@ func TestListAnalyzer(t *testing.T) {
 		// When I try to list analyzer on pretty mode and there is no analyzer previously registered
 		// Then it should print an empty table
 		// Then it should print a table with 4 lines printed: header, separator, the default analyzer item and empty line
-		result := tracetestcli.Exec(t, "list analyzer --sortBy name --output pretty", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "list analyzer --sortBy name --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "current")
 
@@ -56,7 +56,7 @@ func TestListAnalyzer(t *testing.T) {
 
 		// When I try to list a analyzer by an invalid field
 		// Then I should receive an error
-		result := tracetestcli.Exec(t, "list analyzer --sortBy id --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "list analyzer --sortBy id --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 1)
 		require.Contains(result.StdErr, "invalid sort field: id") // TODO: think on how to improve this error handling
 	})
@@ -68,7 +68,7 @@ func TestListAnalyzer(t *testing.T) {
 
 		// When I try to list analyzer again on yaml mode
 		// Then it should print a YAML list with one item
-		result := tracetestcli.Exec(t, "list analyzer --sortBy name --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "list analyzer --sortBy name --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		analyzerYAML := helpers.UnmarshalYAMLSequence[types.AnalyzerResource](t, result.StdOut)
@@ -89,7 +89,7 @@ func TestListAnalyzer(t *testing.T) {
 
 		// When I try to list analyzer again on json mode
 		// Then it should print a JSON list with one item
-		result := tracetestcli.Exec(t, "list analyzer --sortBy name --output json", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "list analyzer --sortBy name --output json", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		analyzerList := helpers.UnmarshalJSON[types.ResourceList[types.AnalyzerResource]](t, result.StdOut)
@@ -110,7 +110,7 @@ func TestListAnalyzer(t *testing.T) {
 
 		// When I try to list analyzer again on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, analyzer item and empty line
-		result := tracetestcli.Exec(t, "list analyzer --sortBy name --output pretty", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "list analyzer --sortBy name --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

@@ -2,12 +2,12 @@
 
 @skip { space }
 
-// attr:tracetest.span.type = "${env:TRACETEST_SPAN_TYPE}"
-// att:tracetest.span.duration + 2 = 5 + env:TRACETEST_SPAN_DURATION
+// attr:qualityTrace.span.type = "${env:TRACETEST_SPAN_TYPE}"
+// att:qualityTrace.span.duration + 2 = 5 + env:TRACETEST_SPAN_DURATION
 // 5 + 5 = 10
 // 10 != 20
 // "Jorge" == "Ecuador" + ${attr:http.message}
-// att:http.message = "error at line ${attr:tracetest.span.duration}"
+// att:http.message = "error at line ${attr:qualityTrace.span.duration}"
 
 expression {Expression (Comparator Expression)*}
 

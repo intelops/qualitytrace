@@ -1,8 +1,8 @@
 import {SupportedDataStores} from 'types/DataStore.types';
 
-export const tracetest = `# OTLP for Tracetest
-  otlp/tracetest:
-    endpoint: tracetest:4317 # Send traces to Tracetest. Read more in docs here:  https://docs.tracetest.io/configuration/connecting-to-data-stores/opentelemetry-collector
+export const qualityTrace = `# OTLP for Tracetest
+  otlp/qualityTrace:
+    endpoint: qualityTrace:4317 # Send traces to Tracetest. Read more in docs here:  https://docs.qualityTrace.io/configuration/connecting-to-data-stores/opentelemetry-collector
     tls:
       insecure: true`;
 
@@ -30,10 +30,10 @@ exporters:
 
 service:
   pipelines:
-    traces/tracetest:
+    traces/qualityTrace:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/tracetest]
+      exporters: [otlp/qualityTrace]
     traces/lightstep:
       receivers: [otlp]
       processors: [batch]
@@ -58,7 +58,7 @@ service:
     traces/1:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/tracetest]
+      exporters: [otlp/qualityTrace]
 `;
 
 export const NewRelic = (traceTestBlock: string) => `receivers:
@@ -87,10 +87,10 @@ exporters:
 
 service:
   pipelines:
-    traces/tracetest:
+    traces/qualityTrace:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/tracetest]
+      exporters: [otlp/qualityTrace]
     traces/newrelic:
       receivers: [otlp]
       processors: [batch]
@@ -120,10 +120,10 @@ exporters:
       # Read more in docs here: https://docs.datadoghq.com/opentelemetry/otel_collector_datadog_exporter
 service:
   pipelines:
-    traces/tracetest:
+    traces/qualityTrace:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/tracetest]
+      exporters: [otlp/qualityTrace]
     traces/datadog:
       receivers: [otlp]
       processors: [batch]
@@ -155,10 +155,10 @@ exporters:
 
 service:
   pipelines:
-    traces/tracetest:
+    traces/qualityTrace:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/tracetest]
+      exporters: [otlp/qualityTrace]
     traces/honeycomb:
       receivers: [otlp]
       processors: [batch]
@@ -182,10 +182,10 @@ exporters:
 
 service:
   pipelines:
-    traces/tracetest:
+    traces/qualityTrace:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/tracetest]
+      exporters: [otlp/qualityTrace]
     traces/appinsights:
       receivers: [otlp]
       exporters: [azuremonitor]
@@ -215,10 +215,10 @@ exporters:
 
 service:
   pipelines:
-    traces/tracetest:
+    traces/qualityTrace:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging, otlp/tracetest]
+      exporters: [logging, otlp/qualityTrace]
     traces/signoz:
       receivers: [otlp]
       processors: [batch]
@@ -249,10 +249,10 @@ exporters:
 
 service:
   pipelines:
-    traces/tracetest:
+    traces/qualityTrace:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging, otlp/tracetest]
+      exporters: [logging, otlp/qualityTrace]
     traces/dynatrace:
       receivers: [otlp]
       processors: [batch]
@@ -284,10 +284,10 @@ exporters:
 
 service:
   pipelines:
-    traces/tracetest:
+    traces/qualityTrace:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging, otlp/tracetest]
+      exporters: [logging, otlp/qualityTrace]
     traces/instana:
       receivers: [otlp]
       processors: [batch]
@@ -295,15 +295,15 @@ service:
 `;
 
 export const CollectorConfigMap = {
-  [SupportedDataStores.AzureAppInsights]: AzureAppInsights(tracetest),
-  [SupportedDataStores.Datadog]: Datadog(tracetest),
-  [SupportedDataStores.Dynatrace]: Dynatrace(tracetest),
-  [SupportedDataStores.Honeycomb]: Honeycomb(tracetest),
-  [SupportedDataStores.Instana]: Instana(tracetest),
-  [SupportedDataStores.Lightstep]: Lightstep(tracetest),
-  [SupportedDataStores.NewRelic]: NewRelic(tracetest),
-  [SupportedDataStores.OtelCollector]: OtelCollector(tracetest),
-  [SupportedDataStores.Signoz]: Signoz(tracetest),
+  [SupportedDataStores.AzureAppInsights]: AzureAppInsights(qualityTrace),
+  [SupportedDataStores.Datadog]: Datadog(qualityTrace),
+  [SupportedDataStores.Dynatrace]: Dynatrace(qualityTrace),
+  [SupportedDataStores.Honeycomb]: Honeycomb(qualityTrace),
+  [SupportedDataStores.Instana]: Instana(qualityTrace),
+  [SupportedDataStores.Lightstep]: Lightstep(qualityTrace),
+  [SupportedDataStores.NewRelic]: NewRelic(qualityTrace),
+  [SupportedDataStores.OtelCollector]: OtelCollector(qualityTrace),
+  [SupportedDataStores.Signoz]: Signoz(qualityTrace),
 } as const;
 
 export const CollectorConfigFunctionMap = {

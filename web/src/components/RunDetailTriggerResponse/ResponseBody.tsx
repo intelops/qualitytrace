@@ -22,7 +22,7 @@ const ResponseBody = ({body = '', bodyMimeType = '', state, onCreateTestOutput, 
       </S.ResponseBodyContent>
       <S.ResponseBodyActions>
         <AttributeActions
-          attribute={{key: 'tracetest.response.body', value: body}}
+          attribute={{key: 'qualityTrace.response.body', value: body}}
           onCreateTestOutput={onCreateTestOutput}
           onCreateTestSpec={onCreateTestSpec}
         />

@@ -23,7 +23,7 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:     "tracetest",
+	Use:     "qualityTrace",
 	Short:   "CLI to configure, install and execute tests on a Tracetest server",
 	Long:    `CLI to configure, install and execute tests on a Tracetest server`,
 	PreRun:  setupCommand(),

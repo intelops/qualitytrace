@@ -15,8 +15,8 @@ var (
 	appInstance *app.App
 
 	rootCmd = &cobra.Command{
-		Use:   "tracetest-server",
-		Short: "tracetest server",
+		Use:   "qualityTrace-server",
+		Short: "qualityTrace server",
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 			var err error
 			appInstance, err = app.New(cfg)

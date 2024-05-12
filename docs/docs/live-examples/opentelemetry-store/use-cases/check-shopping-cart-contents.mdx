@@ -4,7 +4,7 @@ title: OpenTelemetry Store - Check shopping cart contents
 description: The OpenTelemetry Demo is an example application published by the OpenTelemtry CNCF project. This use case covers seeing all the products in the shopping cart.
 hide_table_of_contents: false
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -78,7 +78,7 @@ Now you can validate this entire use case.
 To replicate this entire test on Tracetest, you can replicate these steps on our Web UI or using our CLI, saving the following test definition as the file `test-definition.yml` and later running:
 
 ```sh
-tracetest run test -f test-definition.yml
+qualityTrace run test -f test-definition.yml
 ```
 
 We are assuming that the Frontend service is exposed on `http://otel-demo-frontend:8080`:
@@ -96,11 +96,11 @@ spec:
       - key: Content-Type
         value: application/json
   specs:
-  - selector: span[tracetest.span.type="rpc" name="hipstershop.ProductCatalogService/GetProduct"
+  - selector: span[qualityTrace.span.type="rpc" name="hipstershop.ProductCatalogService/GetProduct"
       rpc.system="grpc" rpc.method="GetProduct" rpc.service="hipstershop.ProductCatalogService"]
     assertions:
     - attr:app.product.id = "66VCHSJNUP"
-  - selector: span[tracetest.span.type="general" name="Tracetest trigger"]
+  - selector: span[qualityTrace.span.type="general" name="Tracetest trigger"]
     assertions:
-    - attr:tracetest.response.body | json_path '$.items.length' = 1
+    - attr:qualityTrace.response.body | json_path '$.items.length' = 1
 ```

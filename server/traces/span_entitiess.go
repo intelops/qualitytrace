@@ -13,15 +13,15 @@ import (
 )
 
 const (
-	TracetestMetadataFieldStartTime         string = "tracetest.span.start_time"
-	TracetestMetadataFieldEndTime           string = "tracetest.span.end_time"
-	TracetestMetadataFieldDuration          string = "tracetest.span.duration"
-	TracetestMetadataFieldType              string = "tracetest.span.type"
-	TracetestMetadataFieldName              string = "tracetest.span.name"
-	TracetestMetadataFieldParentID          string = "tracetest.span.parent_id"
-	TracetestMetadataFieldKind              string = "tracetest.span.kind"
-	TracetestMetadataFieldStatusCode        string = "tracetest.span.status_code"
-	TracetestMetadataFieldStatusDescription string = "tracetest.span.status_description"
+	TracetestMetadataFieldStartTime         string = "qualityTrace.span.start_time"
+	TracetestMetadataFieldEndTime           string = "qualityTrace.span.end_time"
+	TracetestMetadataFieldDuration          string = "qualityTrace.span.duration"
+	TracetestMetadataFieldType              string = "qualityTrace.span.type"
+	TracetestMetadataFieldName              string = "qualityTrace.span.name"
+	TracetestMetadataFieldParentID          string = "qualityTrace.span.parent_id"
+	TracetestMetadataFieldKind              string = "qualityTrace.span.kind"
+	TracetestMetadataFieldStatusCode        string = "qualityTrace.span.status_code"
+	TracetestMetadataFieldStatusDescription string = "qualityTrace.span.status_description"
 )
 
 func NewAttributes(inputs ...map[string]string) Attributes {
@@ -359,15 +359,15 @@ func (span Span) setTriggerResultAttributes(result trigger.TriggerResult) Span {
 	case trigger.TriggerTypeHTTP:
 		resp := result.HTTP
 		jsonheaders, _ := json.Marshal(resp.Headers)
-		span.Attributes.Set("tracetest.response.status", strconv.Itoa(resp.StatusCode))
-		span.Attributes.Set("tracetest.response.body", resp.Body)
-		span.Attributes.Set("tracetest.response.headers", string(jsonheaders))
+		span.Attributes.Set("qualityTrace.response.status", strconv.Itoa(resp.StatusCode))
+		span.Attributes.Set("qualityTrace.response.body", resp.Body)
+		span.Attributes.Set("qualityTrace.response.headers", string(jsonheaders))
 	case trigger.TriggerTypeGRPC:
 		resp := result.GRPC
 		jsonheaders, _ := json.Marshal(resp.Metadata)
-		span.Attributes.Set("tracetest.response.status", strconv.Itoa(resp.StatusCode))
-		span.Attributes.Set("tracetest.response.body", resp.Body)
-		span.Attributes.Set("tracetest.response.headers", string(jsonheaders))
+		span.Attributes.Set("qualityTrace.response.status", strconv.Itoa(resp.StatusCode))
+		span.Attributes.Set("qualityTrace.response.body", resp.Body)
+		span.Attributes.Set("qualityTrace.response.headers", string(jsonheaders))
 	}
 
 	return span

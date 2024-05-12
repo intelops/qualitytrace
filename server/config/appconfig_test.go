@@ -63,9 +63,9 @@ func TestFlags(t *testing.T) {
 
 		cfg := configFromFile(t, "./testdata/basic.yaml")
 
-		assert.Equal(t, "postgres://postgres:postgres@postgres:5432/tracetest?sslmode=disable", cfg.PostgresConnString())
+		assert.Equal(t, "postgres://postgres:postgres@postgres:5432/qualityTrace?sslmode=disable", cfg.PostgresConnString())
 
-		assert.Equal(t, "/tracetest", cfg.ServerPathPrefix())
+		assert.Equal(t, "/qualityTrace", cfg.ServerPathPrefix())
 		assert.Equal(t, 9999, cfg.ServerPort())
 	})
 
@@ -77,8 +77,8 @@ func TestFlags(t *testing.T) {
 
 		t.Run("OK", func(t *testing.T) {
 			// copy an example config file to the default location
-			err := copyFile("./testdata/basic.yaml", "./tracetest.yaml")
-			defer os.Remove("./tracetest.yaml")
+			err := copyFile("./testdata/basic.yaml", "./qualityTrace.yaml")
+			defer os.Remove("./qualityTrace.yaml")
 
 			require.NoError(t, err)
 
@@ -91,8 +91,8 @@ func TestFlags(t *testing.T) {
 
 		t.Run("MustHaveExtension", func(t *testing.T) {
 			// copy an example config file to the default location
-			err := copyFile("./testdata/basic.yaml", "./tracetest")
-			defer os.Remove("./tracetest")
+			err := copyFile("./testdata/basic.yaml", "./qualityTrace")
+			defer os.Remove("./qualityTrace")
 
 			require.NoError(t, err)
 

@@ -67,7 +67,7 @@ func installSed(ui cliUI.UI) {
 func kubernetesInstaller(config configuration, ui cliUI.UI) {
 	execCmdIgnoreErrors(kubectlCmd(config, "create namespace "+config.String("k8s.namespace")))
 
-	if !config.Bool("installer.only_tracetest") {
+	if !config.Bool("installer.only_qualityTrace") {
 		installCollector(config, ui)
 	}
 	installTracetest(config, ui)
@@ -88,19 +88,19 @@ func installTracetest(conf configuration, ui cliUI.UI) {
 	installTracetestChart(conf, ui)
 	fixTracetestConfiguration(conf, ui)
 
-	if !conf.Bool("installer.only_tracetest") {
+	if !conf.Bool("installer.only_qualityTrace") {
 		installOtelCollector(conf, ui)
 	}
 
-	execCmd(kubectlNamespaceCmd(conf, "delete pods -l app.kubernetes.io/name=tracetest"), ui)
+	execCmd(kubectlNamespaceCmd(conf, "delete pods -l app.kubernetes.io/name=qualityTrace"), ui)
 
-	if !conf.Bool("installer.only_tracetest") {
+	if !conf.Bool("installer.only_qualityTrace") {
 		installDemo(conf, ui)
 	}
 
 	ui.Success("Install successful!")
 	ui.Println(fmt.Sprintf(`
-To access tracetest:
+To access qualityTrace:
 
 	%s
 
@@ -109,14 +109,14 @@ Then, use your browser to navigate to:
   http://localhost:11633
 
 Happy TraceTesting =)
-`, kubectlNamespaceCmd(conf, "port-forward svc/tracetest 11633")))
+`, kubectlNamespaceCmd(conf, "port-forward svc/qualityTrace 11633")))
 
 }
 
 func installDemo(conf configuration, ui cliUI.UI) {
 	helm := helmCmd(conf, "")
 	script := strings.ReplaceAll(demoScript, "#helm#", helm)
-	script = fmt.Sprintf(script, conf.String("tracetest.backend.endpoint.collector"))
+	script = fmt.Sprintf(script, conf.String("qualityTrace.backend.endpoint.collector"))
 
 	execCmd(script, ui)
 }
@@ -139,17 +139,17 @@ func installOtelCollector(conf configuration, ui cliUI.UI) {
 }
 
 func fixTracetestConfiguration(conf configuration, ui cliUI.UI) {
-	c := getTracetestConfigFileContents("tracetest-postgresql", "tracetest", "not-secure-database-password", ui, conf)
-	ttc := createTmpFile("tracetest-config", string(c), ui)
+	c := getTracetestConfigFileContents("qualityTrace-postgresql", "qualityTrace", "not-secure-database-password", ui, conf)
+	ttc := createTmpFile("qualityTrace-config", string(c), ui)
 	defer os.Remove(ttc.Name())
 
 	p := getTracetestProvisionFileContents(ui, conf)
-	ttp := createTmpFile("tracetest-provisioning", string(p), ui)
+	ttp := createTmpFile("qualityTrace-provisioning", string(p), ui)
 	defer os.Remove(ttp.Name())
 
 	execCmd(
 		kubectlNamespaceCmd(conf,
-			"create configmap tracetest --from-file="+ttc.Name()+" --from-file="+ttp.Name()+" -o yaml --dry-run=client",
+			"create configmap qualityTrace --from-file="+ttc.Name()+" --from-file="+ttp.Name()+" -o yaml --dry-run=client",
 			"| sed 's#"+path.Base(ttc.Name())+"#config.yaml#'",
 			"| sed 's#"+path.Base(ttp.Name())+"#provisioning.yaml#' |",
 			kubectlNamespaceCmd(conf, "replace -f -"),
@@ -160,7 +160,7 @@ func fixTracetestConfiguration(conf configuration, ui cliUI.UI) {
 
 func installTracetestChart(conf configuration, ui cliUI.UI) {
 	cmd := []string{
-		"upgrade --install tracetest intelops/qualityTrace",
+		"upgrade --install qualityTrace intelops/qualityTrace",
 		"--namespace " + conf.String("k8s.namespace") + " --create-namespace",
 	}
 
@@ -169,7 +169,7 @@ func installTracetestChart(conf configuration, ui cliUI.UI) {
 	}
 
 	if os.Getenv("TRACETEST_DEV") != "" {
-		cmd = append(cmd, "--set env.tracetestDev=true")
+		cmd = append(cmd, "--set env.qualityTraceDev=true")
 	}
 
 	execCmd(helmCmd(conf, cmd...), ui)
@@ -344,12 +344,12 @@ func configureKubernetes(conf configuration, ui cliUI.UI) configuration {
 	context := getKubernetesContext(conf, ui)
 	conf.set("k8s.context", context)
 
-	conf.set("k8s.namespace", "tracetest")
+	conf.set("k8s.namespace", "qualityTrace")
 	return conf
 }
 
 func configureIngress(conf configuration, ui cliUI.UI) configuration {
-	conf.set("k8s.ingress-host", "tracetest")
+	conf.set("k8s.ingress-host", "qualityTrace")
 	return conf
 }
 

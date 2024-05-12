@@ -40,13 +40,13 @@ func TestParserSingleSpanIntProperty(t *testing.T) {
 }
 
 func TestParserSingleSpanMultipleAttributes(t *testing.T) {
-	expression := "span[service.name=\"Pokeshop\" tracetest.span.type=\"http\"]"
+	expression := "span[service.name=\"Pokeshop\" qualityTrace.span.type=\"http\"]"
 
 	selector := parseExpressionOrFail(t, expression)
 
 	assert.Equal(t, "service.name", selector.SpanSelectors[0].Filters[0].Property)
 	assert.Equal(t, "\"Pokeshop\"", *selector.SpanSelectors[0].Filters[0].Value.String)
-	assert.Equal(t, "tracetest.span.type", selector.SpanSelectors[0].Filters[1].Property)
+	assert.Equal(t, "qualityTrace.span.type", selector.SpanSelectors[0].Filters[1].Property)
 	assert.Equal(t, "\"http\"", *selector.SpanSelectors[0].Filters[1].Value.String)
 }
 
@@ -61,11 +61,11 @@ func TestParserSingleSpanUsingContainsComparator(t *testing.T) {
 }
 
 func TestParserSingleSpanWithNthChild(t *testing.T) {
-	expression := "span[tracetest.span.type=\"http\"]:nth_child(2)"
+	expression := "span[qualityTrace.span.type=\"http\"]:nth_child(2)"
 
 	selector := parseExpressionOrFail(t, expression)
 
-	assert.Equal(t, "tracetest.span.type", selector.SpanSelectors[0].Filters[0].Property)
+	assert.Equal(t, "qualityTrace.span.type", selector.SpanSelectors[0].Filters[0].Property)
 	assert.Equal(t, "=", selector.SpanSelectors[0].Filters[0].Operator)
 	assert.Equal(t, "\"http\"", *selector.SpanSelectors[0].Filters[0].Value.String)
 	assert.Equal(t, "nth_child", selector.SpanSelectors[0].PseudoClass.Type)
@@ -73,41 +73,41 @@ func TestParserSingleSpanWithNthChild(t *testing.T) {
 }
 
 func TestParserWithSpanHierarchy(t *testing.T) {
-	expression := "span[service.name=\"Pokeshop\"] span[tracetest.span.type=\"http\"]"
+	expression := "span[service.name=\"Pokeshop\"] span[qualityTrace.span.type=\"http\"]"
 
 	selector := parseExpressionOrFail(t, expression)
 
 	assert.Equal(t, "service.name", selector.SpanSelectors[0].Filters[0].Property)
-	assert.Equal(t, "tracetest.span.type", selector.SpanSelectors[0].ChildSelector.Filters[0].Property)
+	assert.Equal(t, "qualityTrace.span.type", selector.SpanSelectors[0].ChildSelector.Filters[0].Property)
 	assert.Equal(t, "\"http\"", *selector.SpanSelectors[0].ChildSelector.Filters[0].Value.String)
 }
 
 func TestParserWithMultipleSpans(t *testing.T) {
-	expression := "span[tracetest.span.type=\"http\"], span[tracetest.span.type=\"grpc\"]"
+	expression := "span[qualityTrace.span.type=\"http\"], span[qualityTrace.span.type=\"grpc\"]"
 
 	selector := parseExpressionOrFail(t, expression)
 
-	assert.Equal(t, "tracetest.span.type", selector.SpanSelectors[0].Filters[0].Property)
+	assert.Equal(t, "qualityTrace.span.type", selector.SpanSelectors[0].Filters[0].Property)
 	assert.Equal(t, "\"http\"", *selector.SpanSelectors[0].Filters[0].Value.String)
 	assert.Nil(t, selector.SpanSelectors[0].ChildSelector)
 
-	assert.Equal(t, "tracetest.span.type", selector.SpanSelectors[1].Filters[0].Property)
+	assert.Equal(t, "qualityTrace.span.type", selector.SpanSelectors[1].Filters[0].Property)
 	assert.Equal(t, "\"grpc\"", *selector.SpanSelectors[1].Filters[0].Value.String)
 	assert.Nil(t, selector.SpanSelectors[0].ChildSelector)
 }
 
 func TestParserWithMultipleSpansAndHierarchy(t *testing.T) {
-	expression := "span[tracetest.span.type=\"http\"], span[service.name=\"Pokeshop\"] span[tracetest.span.type=\"grpc\"]"
+	expression := "span[qualityTrace.span.type=\"http\"], span[service.name=\"Pokeshop\"] span[qualityTrace.span.type=\"grpc\"]"
 
 	selector := parseExpressionOrFail(t, expression)
 
-	assert.Equal(t, "tracetest.span.type", selector.SpanSelectors[0].Filters[0].Property)
+	assert.Equal(t, "qualityTrace.span.type", selector.SpanSelectors[0].Filters[0].Property)
 	assert.Equal(t, "\"http\"", *selector.SpanSelectors[0].Filters[0].Value.String)
 	assert.Nil(t, selector.SpanSelectors[0].ChildSelector)
 
 	assert.Equal(t, "service.name", selector.SpanSelectors[1].Filters[0].Property)
 	assert.Equal(t, "\"Pokeshop\"", *selector.SpanSelectors[1].Filters[0].Value.String)
 	assert.NotNil(t, selector.SpanSelectors[1].ChildSelector)
-	assert.Equal(t, "tracetest.span.type", selector.SpanSelectors[1].ChildSelector.Filters[0].Property)
+	assert.Equal(t, "qualityTrace.span.type", selector.SpanSelectors[1].ChildSelector.Filters[0].Property)
 	assert.Equal(t, "\"grpc\"", *selector.SpanSelectors[1].ChildSelector.Filters[0].Value.String)
 }

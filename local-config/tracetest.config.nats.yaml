@@ -12,7 +12,7 @@ nats:
 telemetry:
   exporters:
     collector:
-      serviceName: tracetest
+      serviceName: qualityTrace
       sampling: 100 # 100%
       exporter:
         type: collector

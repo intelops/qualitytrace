@@ -4,7 +4,7 @@ title: Pokeshop API - Import Pokemon from Stream
 description: As a testing ground, the Tracetest team has implemented a sample API instrumented with OpenTelemetry around the PokeAPI. This use case showcases a more complex scenario involving an async process.
 hide_table_of_contents: false
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -77,7 +77,7 @@ Now you can validate this entire use case.
 If you want to replicate this entire test with Tracetest, you can replicate these steps in the Web UI or using the CLI, saving the following test definition as the file `test-definition.yml` and running:
 
 ```sh
-tracetest run test -f test-definition.yml
+qualityTrace run test -f test-definition.yml
 ```
 
 ```yaml
@@ -96,22 +96,22 @@ spec:
       messageKey: snorlax-key
       messageValue: "{\"id\":143}"
   specs:
-  - selector: span[tracetest.span.type="messaging" name="pokemon process" messaging.system="kafka" messaging.destination="pokemon" messaging.destination_kind="topic" messaging.operation="process"]
+  - selector: span[qualityTrace.span.type="messaging" name="pokemon process" messaging.system="kafka" messaging.destination="pokemon" messaging.destination_kind="topic" messaging.operation="process"]
     name: A message was received from Kafka stream
     assertions:
     - attr:messaging.system = "kafka"
-  - selector: span[tracetest.span.type="general" name="import pokemon"]
+  - selector: span[qualityTrace.span.type="general" name="import pokemon"]
     name: Import Pokemon use case was triggered
     assertions:
     - attr:name = "import pokemon"
-  - selector: span[tracetest.span.type="http" name="GET" http.method="GET"]
+  - selector: span[qualityTrace.span.type="http" name="GET" http.method="GET"]
     name: PokeAPI should return a valid response
     assertions:
     - attr:http.response.body  =  '{"name":"snorlax"}'
     - attr:http.status_code  =  200
-  - selector: span[tracetest.span.type="database"]
+  - selector: span[qualityTrace.span.type="database"]
     name: The database should respond with low latency (< 200ms)
     assertions:
-    - attr:tracetest.span.duration <= 200ms
+    - attr:qualityTrace.span.duration <= 200ms
 
 ```

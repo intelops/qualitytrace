@@ -10,7 +10,7 @@ import (
 func TestExporter(t *testing.T) {
 	t.Run("OK", func(t *testing.T) {
 		expectedExporter := &config.TelemetryExporterOption{
-			ServiceName: "tracetest",
+			ServiceName: "qualityTrace",
 			Sampling:    100,
 			Exporter: config.ExporterConfig{
 				Type: "collector",

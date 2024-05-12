@@ -19,7 +19,7 @@ exporters:
     endpoint: jaeger:14250
     tls:
       insecure: true
-  otlp/tracetest:
+  otlp/qualityTrace:
     endpoint: host.docker.internal:4317
     tls:
       insecure: true
@@ -29,4 +29,4 @@ service:
     traces:
       receivers: [otlp]
       processors: [probabilistic_sampler, batch]
-      exporters: [jaeger, otlp/tracetest, logging]
+      exporters: [jaeger, otlp/qualityTrace, logging]

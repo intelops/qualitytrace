@@ -12,6 +12,6 @@ describe('Span', () => {
     const value = rawSpan.attributes!['service.name'];
     expect(span.attributes['service.name'].value).toEqual(value);
     expect(span.name).toEqual(rawSpan.name);
-    expect(span.duration).toEqual(rawSpan.attributes!['tracetest.span.duration']);
+    expect(span.duration).toEqual(rawSpan.attributes!['qualityTrace.span.duration']);
   });
 });

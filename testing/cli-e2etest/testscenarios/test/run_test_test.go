@@ -6,8 +6,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -28,7 +28,7 @@ func TestRunTestSuiteInsteadOfTest(t *testing.T) {
 		testFil := env.GetTestResourcePath(t, "import")
 
 		command := fmt.Sprintf("run testsuite -f %s", testFil)
-		result := tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 2)
 	})
 }
@@ -50,7 +50,7 @@ func TestRunTestWithHttpTriggerAndVariableSetFile(t *testing.T) {
 
 		// When I try to get a variable set
 		// Then it should return a message saying that the variable set was not found
-		result := tracetestcli.Exec(t, "get variableset --id pokeapi-env", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get variableset --id pokeapi-env", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "Resource variableset with ID pokeapi-env not found")
 
@@ -60,14 +60,14 @@ func TestRunTestWithHttpTriggerAndVariableSetFile(t *testing.T) {
 		testFile := env.GetTestResourcePath(t, "http-trigger-with-environment-file")
 
 		command := fmt.Sprintf("run test -f %s --vars %s", testFile, environmentFile)
-		result = tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+		result = qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "✔ It should add a Pokemon correctly")
 		require.Contains(result.StdOut, "✔ It should save the correct data")
 
 		// When I try to get the variable set created on the previous step
 		// Then it should retrieve it correctly
-		result = tracetestcli.Exec(t, "get variableset --id pokeapi-env --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result = qualityTracecli.Exec(t, "get variableset --id pokeapi-env --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		environmentVars := helpers.UnmarshalYAML[types.VariableSetResource](t, result.StdOut)
@@ -90,7 +90,7 @@ func TestRunTestWithHttpTriggerAndVariableSetFile(t *testing.T) {
 		// Then it should be created correctly
 		environmentFile := env.GetTestResourcePath(t, "variableSet-file")
 
-		result := tracetestcli.Exec(t, fmt.Sprintf("apply variableset --file %s", environmentFile), tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", environmentFile), qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		environmentVars := helpers.UnmarshalYAML[types.VariableSetResource](t, result.StdOut)
@@ -109,7 +109,7 @@ func TestRunTestWithHttpTriggerAndVariableSetFile(t *testing.T) {
 		testFile := env.GetTestResourcePath(t, "http-trigger-with-environment-file")
 
 		command := fmt.Sprintf("run test -f %s --vars pokeapi-env", testFile)
-		result = tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+		result = qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "✔ It should add a Pokemon correctly")
 		require.Contains(result.StdOut, "✔ It should save the correct data")
@@ -124,7 +124,7 @@ func TestRunTestWithHttpTriggerAndVariableSetFile(t *testing.T) {
 		// Then it should be created correctly
 		environmentFile := env.GetTestResourcePath(t, "variableSet-file")
 
-		result := tracetestcli.Exec(t, fmt.Sprintf("apply variableset --file %s", environmentFile), tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", environmentFile), qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		environmentVars := helpers.UnmarshalYAML[types.VariableSetResource](t, result.StdOut)
@@ -143,7 +143,7 @@ func TestRunTestWithHttpTriggerAndVariableSetFile(t *testing.T) {
 		testFile := env.GetTestResourcePath(t, "http-trigger-with-environment-file")
 
 		command := fmt.Sprintf("run test -f %s --environment pokeapi-env", testFile)
-		result = tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+		result = qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "✔ It should add a Pokemon correctly")
 		require.Contains(result.StdOut, "✔ It should save the correct data")
@@ -170,7 +170,7 @@ func TestRunTestWithGrpcTrigger(t *testing.T) {
 		testFile := env.GetTestResourcePath(t, "grpc-trigger-embedded-protobuf")
 
 		command := fmt.Sprintf("run test -f %s", testFile)
-		result := tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "✔ It calls Pokeshop correctly") // checks if the assertion was succeeded
 	})
@@ -188,7 +188,7 @@ func TestRunTestWithGrpcTrigger(t *testing.T) {
 		testFile := env.GetTestResourcePath(t, "grpc-trigger-reference-protobuf")
 
 		command := fmt.Sprintf("run test -f %s", testFile)
-		result := tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "✔ It calls Pokeshop correctly") // checks if the assertion was succeeded
 	})
@@ -214,7 +214,7 @@ func TestRunTestWithKafkaTrigger(t *testing.T) {
 		testFile := env.GetTestResourcePath(t, "kafka-trigger")
 
 		command := fmt.Sprintf("run test -f %s", testFile)
-		result := tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		// checks if the assertions were succeeded
 		require.Contains(result.StdOut, "✔ Import Pokemon use case was triggered")

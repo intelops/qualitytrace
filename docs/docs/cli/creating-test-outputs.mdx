@@ -3,7 +3,7 @@ id: creating-test-outputs
 title: Defining Test Outputs in Text Files
 description: Test outputs allow for exporting values from a test so they become available in Variable Sets of a Test Suite.
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -74,7 +74,7 @@ You can get a list of SQL operations:
 ```yaml
 outputs:
 - name: SQL_OPS
-  selector: span[tracetest.span.type = "database"]
+  selector: span[qualityTrace.span.type = "database"]
   value: attr:sql.operation
   # result: SQL_OPS = ["INSERT", "INSERT", "SELECT", "UPDATE"]
 ```
@@ -84,7 +84,7 @@ Since the value is an array, you can also apply filters to it:
 ```yaml
 outputs:
 - name: LAST_SQL_OP
-  selector: span[tracetest.span.type = "database"]
+  selector: span[qualityTrace.span.type = "database"]
   value: attr:sql.operation | get_index 'last'
   # result: LAST_SQL_OP = "INSERT"
 ```

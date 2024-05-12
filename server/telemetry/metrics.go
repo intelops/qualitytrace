@@ -19,7 +19,7 @@ func NewMeter(ctx context.Context, cfg exporterConfig) (metric.Meter, error) {
 		return nil, fmt.Errorf("could not create meter provider: %w", err)
 	}
 
-	return provider.Meter("tracetest"), nil
+	return provider.Meter("qualityTrace"), nil
 }
 
 func newMeterProvider(ctx context.Context, cfg exporterConfig) (metric.MeterProvider, error) {

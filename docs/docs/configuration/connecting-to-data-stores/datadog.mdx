@@ -3,7 +3,7 @@ id: datadog
 title: Datadog
 description: Use Datadog as the trace data store for Tracetest. Configure the OpenTelemetry Collector to receive traces and forward them to both Tracetest and Datadog.
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -21,11 +21,11 @@ Examples of configuring Tracetest with Datadog can be found in the [`examples` f
 
 In your OpenTelemetry Collector config file:
 
-- Set the `exporter` to `otlp/tracetest`
+- Set the `exporter` to `otlp/qualityTrace`
 - Set the `endpoint` to your Tracetest instance on port `4317`
 
 :::tip
-If you are running Tracetest with Docker, and Tracetest's service name is `tracetest`, then the endpoint might look like this `http://tracetest:4317`
+If you are running Tracetest with Docker, and Tracetest's service name is `qualityTrace`, then the endpoint might look like this `http://qualityTrace:4317`
 :::
 
 Additionally, add another config:
@@ -56,9 +56,9 @@ processors:
 exporters:
   # OTLP for Tracetest
   # Send traces to Tracetest.
-  # Read more in docs here: https://docs.tracetest.io/configuration/connecting-to-data-stores/opentelemetry-collector
-  otlp/tracetest:
-    endpoint: tracetest:4317
+  # Read more in docs here: https://docs.qualityTrace.io/configuration/connecting-to-data-stores/opentelemetry-collector
+  otlp/qualityTrace:
+    endpoint: qualityTrace:4317
     tls:
       insecure: true
 
@@ -72,10 +72,10 @@ exporters:
 
 service:
   pipelines:
-    traces/tracetest:
+    traces/qualityTrace:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/tracetest] # exporter sending traces to your Tracetest instance
+      exporters: [otlp/qualityTrace] # exporter sending traces to your Tracetest instance
     traces/datadog:
       receivers: [otlp]
       processors: [batch]
@@ -107,9 +107,9 @@ spec:
 Proceed to run this command in the terminal and specify the file above.
 
 ```bash
-tracetest apply datastore -f my/data-store/file/location.yaml
+qualityTrace apply datastore -f my/data-store/file/location.yaml
 ```
 
 :::tip
-To learn more, [read the recipe for running a sample app with Datadog and Tracetest](/examples-tutorials/recipes/running-tracetest-with-datadog).
+To learn more, [read the recipe for running a sample app with Datadog and Tracetest](/examples-tutorials/recipes/running-qualityTrace-with-datadog).
 :::

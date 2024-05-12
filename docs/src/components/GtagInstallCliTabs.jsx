@@ -19,7 +19,7 @@ export default function GtagInstallCliTabs() {
               language="bash"
               title="Terminal"
               >
-            {`brew install intelops/qualityTrace/tracetest`}
+            {`brew install intelops/qualityTrace/qualityTrace`}
           </CodeBlock>
         </div>
       </TabItem>
@@ -39,7 +39,7 @@ export default function GtagInstallCliTabs() {
               language="bash"
               title="Terminal"
           >
-          {`choco source add --name=kubeshop_repo --source=https://chocolatey.kubeshop.io/chocolatey ; choco install tracetest`}
+          {`choco source add --name=kubeshop_repo --source=https://chocolatey.kubeshop.io/chocolatey ; choco install qualityTrace`}
           </CodeBlock>
         </div>
       </TabItem>

@@ -83,7 +83,7 @@ func (te *httpTriggerer) Trigger(ctx context.Context, triggerConfig Trigger, opt
 	mapped := mapResp(resp)
 	response.Result.HTTP = &mapped
 	response.SpanAttributes = map[string]string{
-		"tracetest.run.trigger.http.response_code": strconv.Itoa(resp.StatusCode),
+		"qualityTrace.run.trigger.http.response_code": strconv.Itoa(resp.StatusCode),
 	}
 
 	return response, nil

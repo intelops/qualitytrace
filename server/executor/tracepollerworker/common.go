@@ -54,7 +54,7 @@ func handleError(ctx context.Context, job executor.Job, err error, state *worker
 	log.Printf("[TracePoller] Test %s Run %d, Error: %s", job.Test.ID, job.Run.ID, err.Error())
 
 	span.RecordError(err)
-	span.SetAttributes(attribute.String("tracetest.run.trace_poller.error", err.Error()))
+	span.SetAttributes(attribute.String("qualityTrace.run.trace_poller.error", err.Error()))
 }
 
 func handleDBError(err error) {
@@ -72,18 +72,18 @@ func populateSpan(span trace.Span, job executor.Job, reason string, done *bool) 
 	}
 
 	attrs := []attribute.KeyValue{
-		attribute.String("tracetest.run.trace_poller.trace_id", job.Run.TraceID.String()),
-		attribute.String("tracetest.run.trace_poller.span_id", job.Run.SpanID.String()),
-		attribute.String("tracetest.run.trace_poller.test_id", string(job.Test.ID)),
-		attribute.Int("tracetest.run.trace_poller.amount_retrieved_spans", spanCount),
+		attribute.String("qualityTrace.run.trace_poller.trace_id", job.Run.TraceID.String()),
+		attribute.String("qualityTrace.run.trace_poller.span_id", job.Run.SpanID.String()),
+		attribute.String("qualityTrace.run.trace_poller.test_id", string(job.Test.ID)),
+		attribute.Int("qualityTrace.run.trace_poller.amount_retrieved_spans", spanCount),
 	}
 
 	if done != nil {
-		attrs = append(attrs, attribute.Bool("tracetest.run.trace_poller.succesful", *done))
+		attrs = append(attrs, attribute.Bool("qualityTrace.run.trace_poller.succesful", *done))
 	}
 
 	if reason != "" {
-		attrs = append(attrs, attribute.String("tracetest.run.trace_poller.finish_reason", reason))
+		attrs = append(attrs, attribute.String("qualityTrace.run.trace_poller.finish_reason", reason))
 	}
 
 	span.SetAttributes(attrs...)

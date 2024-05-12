@@ -15,9 +15,9 @@ spec:
   specs:
     - selector: span[name = "Tracetest trigger"]
       assertions:
-        - attr:tracetest.selected_spans.count = 1
-        - attr:tracetest.response.status = 200
-        - attr:tracetest.response.body | json_path '$.items[*].spec.id' contains var:TRANSACTION_ID # check if the testsuite is listed
-    - selector: span[name="GET /api/testsuites" tracetest.span.type="http"]
+        - attr:qualityTrace.selected_spans.count = 1
+        - attr:qualityTrace.response.status = 200
+        - attr:qualityTrace.response.body | json_path '$.items[*].spec.id' contains var:TRANSACTION_ID # check if the testsuite is listed
+    - selector: span[name="GET /api/testsuites" qualityTrace.span.type="http"]
       assertions:
-        - attr:tracetest.selected_spans.count = 1
+        - attr:qualityTrace.selected_spans.count = 1

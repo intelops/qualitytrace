@@ -6,8 +6,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -28,12 +28,12 @@ func TestApplyAnalyzer(t *testing.T) {
 	// Then it should be applied with success
 	configPath := env.GetTestResourcePath(t, "new-analyzer")
 
-	result := tracetestcli.Exec(t, fmt.Sprintf("apply analyzer --file %s", configPath), tracetestcli.WithCLIConfig(cliConfig))
+	result := qualityTracecli.Exec(t, fmt.Sprintf("apply analyzer --file %s", configPath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	// When I try to get a analyzer again
 	// Then it should return the analyzer applied on the last step, with analytics disabled
-	result = tracetestcli.Exec(t, "get analyzer --id current", tracetestcli.WithCLIConfig(cliConfig))
+	result = qualityTracecli.Exec(t, "get analyzer --id current", qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	analyzer := helpers.UnmarshalYAML[types.AnalyzerResource](t, result.StdOut)

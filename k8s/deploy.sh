@@ -47,10 +47,10 @@ kubectl --namespace $NAME create configmap $NAME --from-file=$CONFIG_FILE --from
   | sed 's#'$(basename $CONFIG_FILE)'#config.yaml#' \
   | kubectl --namespace $NAME replace -f -
 
-kubectl --namespace $NAME delete pods -l app.kubernetes.io/name=tracetest
+kubectl --namespace $NAME delete pods -l app.kubernetes.io/name=qualityTrace
 
 TIME_OUT=30m
-CONDITION='[[ $(kubectl get pods  --namespace '$NAME' -lapp.kubernetes.io/name=tracetest -o jsonpath="{.items[*].status.phase}") = "Running" ]]'
+CONDITION='[[ $(kubectl get pods  --namespace '$NAME' -lapp.kubernetes.io/name=qualityTrace -o jsonpath="{.items[*].status.phase}") = "Running" ]]'
 IF_TRUE='echo "pods ready"'
 IF_FALSE='echo "pods not ready. retrying"'
 

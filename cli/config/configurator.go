@@ -142,7 +142,7 @@ func (c Configurator) getServerURL(prev *Config) (string, error) {
 
 	// if flag was passed, don't show prompt
 	if c.flags.ServerURL == "" {
-		serverURL = c.ui.TextInput("What tracetest server do you want to use?", c.lastUsedURL(prev))
+		serverURL = c.ui.TextInput("What qualityTrace server do you want to use?", c.lastUsedURL(prev))
 	}
 
 	if err := validateServerURL(serverURL); err != nil {

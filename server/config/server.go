@@ -32,7 +32,7 @@ var serverOptions = options{
 	},
 	{
 		key:          "postgres.dbname",
-		defaultValue: "tracetest",
+		defaultValue: "qualityTrace",
 		description:  "Postgres DB database name",
 	},
 	{

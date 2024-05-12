@@ -71,10 +71,10 @@ func (w *TestConnectionWorker) Test(ctx context.Context, request *proto.DataStor
 	ctx, span := w.tracer.Start(ctx, "TestConnectionRequest Worker operation")
 	defer span.End()
 
-	runCounter, _ := w.meter.Int64Counter("tracetest.agent.testconnectionworker.runs")
+	runCounter, _ := w.meter.Int64Counter("qualityTrace.agent.testconnectionworker.runs")
 	runCounter.Add(ctx, 1)
 
-	errorCounter, _ := w.meter.Int64Counter("tracetest.agent.testconnectionworker.errors")
+	errorCounter, _ := w.meter.Int64Counter("qualityTrace.agent.testconnectionworker.errors")
 
 	w.logger.Debug("Received datastore connection test request")
 	w.observer.StartDataStoreConnection(request)

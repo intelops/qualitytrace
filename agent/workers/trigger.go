@@ -105,10 +105,10 @@ func (w *TriggerWorker) Trigger(ctx context.Context, request *proto.TriggerReque
 	ctx, span := w.tracer.Start(ctx, "TriggerRequest Worker operation")
 	defer span.End()
 
-	runCounter, _ := w.meter.Int64Counter("tracetest.agent.triggerworker.runs")
+	runCounter, _ := w.meter.Int64Counter("qualityTrace.agent.triggerworker.runs")
 	runCounter.Add(ctx, 1)
 
-	errorCounter, _ := w.meter.Int64Counter("tracetest.agent.triggerworker.errors")
+	errorCounter, _ := w.meter.Int64Counter("qualityTrace.agent.triggerworker.errors")
 
 	w.logger.Debug("Trigger request received", zap.Any("triggerRequest", request))
 	w.observer.StartTriggerExecution(request)

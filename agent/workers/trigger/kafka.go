@@ -44,8 +44,8 @@ func (te *kafkaTriggerer) Trigger(ctx context.Context, triggerConfig Trigger, op
 	}
 
 	response.SpanAttributes = map[string]string{
-		"tracetest.run.trigger.kafka.partition": result.Partition,
-		"tracetest.run.trigger.kafka.offset":    result.Offset,
+		"qualityTrace.run.trigger.kafka.partition": result.Partition,
+		"qualityTrace.run.trigger.kafka.offset":    result.Offset,
 	}
 
 	return response, nil

@@ -13,7 +13,7 @@ spec:
   specs:
     - selector: span[name = "non existent"]
       assertions:
-      - attr:tracetest.selected_spans.count > 0
+      - attr:qualityTrace.selected_spans.count > 0
     - selector: span[name = "Tracetest trigger"]
       assertions:
-      - attr:tracetest.selected_spans.count > 0
+      - attr:qualityTrace.selected_spans.count > 0

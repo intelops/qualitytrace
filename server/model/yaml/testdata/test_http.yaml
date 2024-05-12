@@ -10,4 +10,4 @@ spec:
   specs:
   - selector: span[name = "Tracetest trigger"]
     assertions:
-    - tracetest.response.status = 200
+    - qualityTrace.response.status = 200

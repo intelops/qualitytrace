@@ -3,7 +3,7 @@ id: overview
 title: CI/CD Automation
 description: Overview of running automated trace-based testing with Tracetest in CI/CD pipelines.
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -27,8 +27,8 @@ Tracetest is designed to work with all CI/CD platforms and automation tools. To 
 
 To read more about integrating Tracetest with CI/CD tools, check out tutorials in our blog:
 
-- [Integrating Tracetest with GitHub Actions in a CI pipeline](https://kubeshop.io/blog/integrating-tracetest-with-github-actions-in-a-ci-pipeline)
-- [50% Faster CI Pipelines with GitHub Actions](https://tracetest.io/blog/50-faster-ci-pipelines-with-github-actions)
+- [Integrating Tracetest with GitHub Actions in a CI pipeline](https://kubeshop.io/blog/integrating-qualityTrace-with-github-actions-in-a-ci-pipeline)
+- [50% Faster CI Pipelines with GitHub Actions](https://qualityTrace.io/blog/50-faster-ci-pipelines-with-github-actions)
 
 ## Running Tracetest CLI from Docker
 
@@ -38,9 +38,9 @@ Many integrations with CI/CD tools can be accomplished by running the [Tracetest
 
 Use the command below, substituting the following placeholders:
 
-- `your-tracetest-server-url` - the URL to the running Tracetest server you wish to execute the test on. Example: `http://localhost:11633/`
+- `your-qualityTrace-server-url` - the URL to the running Tracetest server you wish to execute the test on. Example: `http://localhost:11633/`
 - `file-path` - The path to the saved Tracetest test. Example: `./mytest.yaml`
 
 ```bash wordWrap=true
-docker run --rm -it -v$(pwd):$(pwd) -w $(pwd) --network host --entrypoint tracetest intelops/qualityTrace:latest -s <your-tracetest-server-url> run test --file <file-path>
+docker run --rm -it -v$(pwd):$(pwd) -w $(pwd) --network host --entrypoint qualityTrace intelops/qualityTrace:latest -s <your-qualityTrace-server-url> run test --file <file-path>
 ```

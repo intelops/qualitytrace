@@ -16,7 +16,7 @@ import (
 
 func RunMultipleFiles(ctx context.Context, httpClient *resourcemanager.HTTPClient, runParams *cmdutil.RunParameters, cliConfig *config.Config, runnerRegistry cliRunner.Registry, format string) (int, error) {
 	if cliConfig.Jwt == "" {
-		return cliRunner.ExitCodeGeneralError, fmt.Errorf("you should be authenticated to run multiple files, please run 'tracetest configure'")
+		return cliRunner.ExitCodeGeneralError, fmt.Errorf("you should be authenticated to run multiple files, please run 'qualityTrace configure'")
 	}
 
 	variableSetPreprocessor := preprocessor.VariableSet(cmdutil.GetLogger())

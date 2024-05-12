@@ -4,98 +4,98 @@ const pages = [
     
     {
         type: "doc",
-		label: "tracetest",
-		id: "cli/reference/tracetest"
+		label: "qualityTrace",
+		id: "cli/reference/qualityTrace"
 	},
     {
         type: "doc",
-		label: "tracetest apply",
-		id: "cli/reference/tracetest_apply"
+		label: "qualityTrace apply",
+		id: "cli/reference/qualityTrace_apply"
 	},
     {
         type: "doc",
-		label: "tracetest completion",
-		id: "cli/reference/tracetest_completion"
+		label: "qualityTrace completion",
+		id: "cli/reference/qualityTrace_completion"
 	},
     {
         type: "doc",
-		label: "tracetest completion bash",
-		id: "cli/reference/tracetest_completion_bash"
+		label: "qualityTrace completion bash",
+		id: "cli/reference/qualityTrace_completion_bash"
 	},
     {
         type: "doc",
-		label: "tracetest completion fish",
-		id: "cli/reference/tracetest_completion_fish"
+		label: "qualityTrace completion fish",
+		id: "cli/reference/qualityTrace_completion_fish"
 	},
     {
         type: "doc",
-		label: "tracetest completion powershell",
-		id: "cli/reference/tracetest_completion_powershell"
+		label: "qualityTrace completion powershell",
+		id: "cli/reference/qualityTrace_completion_powershell"
 	},
     {
         type: "doc",
-		label: "tracetest completion zsh",
-		id: "cli/reference/tracetest_completion_zsh"
+		label: "qualityTrace completion zsh",
+		id: "cli/reference/qualityTrace_completion_zsh"
 	},
     {
         type: "doc",
-		label: "tracetest configure",
-		id: "cli/reference/tracetest_configure"
+		label: "qualityTrace configure",
+		id: "cli/reference/qualityTrace_configure"
 	},
     {
         type: "doc",
-		label: "tracetest dashboard",
-		id: "cli/reference/tracetest_dashboard"
+		label: "qualityTrace dashboard",
+		id: "cli/reference/qualityTrace_dashboard"
 	},
     {
         type: "doc",
-		label: "tracetest delete",
-		id: "cli/reference/tracetest_delete"
+		label: "qualityTrace delete",
+		id: "cli/reference/qualityTrace_delete"
 	},
     {
         type: "doc",
-		label: "tracetest export",
-		id: "cli/reference/tracetest_export"
+		label: "qualityTrace export",
+		id: "cli/reference/qualityTrace_export"
 	},
     {
         type: "doc",
-		label: "tracetest get",
-		id: "cli/reference/tracetest_get"
+		label: "qualityTrace get",
+		id: "cli/reference/qualityTrace_get"
 	},
     {
         type: "doc",
-		label: "tracetest list",
-		id: "cli/reference/tracetest_list"
+		label: "qualityTrace list",
+		id: "cli/reference/qualityTrace_list"
 	},
     {
         type: "doc",
-		label: "tracetest run",
-		id: "cli/reference/tracetest_run"
+		label: "qualityTrace run",
+		id: "cli/reference/qualityTrace_run"
 	},
     {
         type: "doc",
-		label: "tracetest server",
-		id: "cli/reference/tracetest_server"
+		label: "qualityTrace server",
+		id: "cli/reference/qualityTrace_server"
 	},
     {
         type: "doc",
-		label: "tracetest server install",
-		id: "cli/reference/tracetest_server_install"
+		label: "qualityTrace server install",
+		id: "cli/reference/qualityTrace_server_install"
 	},
     {
         type: "doc",
-		label: "tracetest start",
-		id: "cli/reference/tracetest_start"
+		label: "qualityTrace start",
+		id: "cli/reference/qualityTrace_start"
 	},
     {
         type: "doc",
-		label: "tracetest version",
-		id: "cli/reference/tracetest_version"
+		label: "qualityTrace version",
+		id: "cli/reference/qualityTrace_version"
 	},
     {
         type: "doc",
-		label: "tracetest wait",
-		id: "cli/reference/tracetest_wait"
+		label: "qualityTrace wait",
+		id: "cli/reference/qualityTrace_wait"
 	},
 ]
 

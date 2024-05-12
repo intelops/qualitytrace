@@ -44,7 +44,7 @@ func (w *dsTestConnectionRequest) ProcessItem(ctx context.Context, job Job) {
 
 	if err != nil {
 		pollingSpan.RecordError(err)
-		pollingSpan.SetAttributes(attribute.String("tracetest.run.trace_poller.error", err.Error()))
+		pollingSpan.SetAttributes(attribute.String("qualityTrace.run.trace_poller.error", err.Error()))
 		return
 	}
 

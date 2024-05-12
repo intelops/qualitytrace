@@ -18,7 +18,7 @@ func GetMachineID() string {
 }
 
 func getMachineID() string {
-	id, err := machineid.ProtectedID("tracetest")
+	id, err := machineid.ProtectedID("qualityTrace")
 	if err == nil {
 		return id
 	}

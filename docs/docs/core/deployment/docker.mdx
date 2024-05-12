@@ -3,7 +3,7 @@ id: docker
 title:  Docker Deployment
 description: Guides for deploying Tracetest Core with Docker. Tracetest Core allows you to quickly build integration and end-to-end tests, powered by your OpenTelemetry traces.
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -22,7 +22,7 @@ Tracetest Core runs in parallel with your Dockerized application, allowing you t
 After installing the CLI, run:
 
 ```bash
-tracetest server install
+qualityTrace server install
 ```
 
 ```bash title="Expected output"
@@ -45,20 +45,20 @@ Select `Using Docker Compose` and follow the instructions.
 
 **Result**:
 
-- `tracetest/` directory (configurable) with a `docker-compose.yaml` and other config files.
+- `qualityTrace/` directory (configurable) with a `docker-compose.yaml` and other config files.
 - [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/), if selected.
 - [PokeShop demo app](https://github.com/kubeshop/pokeshop/), if selected.
 
 **How to start**:
 
-In the folder where you ran `tracetest server install`, run this command to start the Tracetest cluster:
+In the folder where you ran `qualityTrace server install`, run this command to start the Tracetest cluster:
 
 ```bash
-docker compose -f tracetest/docker-compose.yaml up -d
+docker compose -f qualityTrace/docker-compose.yaml up -d
 ```
 
 ```bash title="Condensed expected output from the Tracetest container:"
-Starting tracetest ...
+Starting qualityTrace ...
 ...
 2022/11/28 18:24:09 HTTP Server started
 ...

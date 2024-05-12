@@ -44,7 +44,7 @@ func TestDecode(t *testing.T) {
 						{
 							Selector: `span[name = "Tracetest trigger"]`,
 							Assertions: []string{
-								"tracetest.response.status = 200",
+								"qualityTrace.response.status = 200",
 							},
 						},
 					},

@@ -24,9 +24,9 @@ var pokeshopTrace = traces.Trace{
 		Kind: "http",
 		ID:   postImportSpanID,
 		Attributes: traces.NewAttributes(map[string]string{
-			"service.name":        "Pokeshop",
-			"tracetest.span.type": "http",
-			"http.status_code":    "201",
+			"service.name":           "Pokeshop",
+			"qualityTrace.span.type": "http",
+			"http.status_code":       "201",
 		}),
 		Name: "POST /import",
 		Children: []*traces.Span{
@@ -34,9 +34,9 @@ var pokeshopTrace = traces.Trace{
 				ID:   insertPokemonDatabaseSpanID,
 				Kind: "db",
 				Attributes: traces.NewAttributes(map[string]string{
-					"service.name":        "Pokeshop",
-					"tracetest.span.type": "db",
-					"db.statement":        "INSERT INTO pokemon (id) values (?)",
+					"service.name":           "Pokeshop",
+					"qualityTrace.span.type": "db",
+					"db.statement":           "INSERT INTO pokemon (id) values (?)",
 				}),
 				Name: "Insert pokemon into database",
 			},
@@ -44,9 +44,9 @@ var pokeshopTrace = traces.Trace{
 				ID:   getPokemonFromExternalAPISpanID,
 				Kind: "general",
 				Attributes: traces.NewAttributes(map[string]string{
-					"service.name":        "Pokeshop-worker",
-					"tracetest.span.type": "http",
-					"http.status_code":    "200",
+					"service.name":           "Pokeshop-worker",
+					"qualityTrace.span.type": "http",
+					"http.status_code":       "200",
 				}),
 				Name: "Get pokemon from external API",
 				Children: []*traces.Span{
@@ -54,9 +54,9 @@ var pokeshopTrace = traces.Trace{
 						Kind: "db",
 						ID:   updatePokemonDatabaseSpanID,
 						Attributes: traces.NewAttributes(map[string]string{
-							"service.name":        "Pokeshop-worker",
-							"tracetest.span.type": "db",
-							"db.statement":        "UPDATE pokemon (name = ?) WHERE id = ?",
+							"service.name":           "Pokeshop-worker",
+							"qualityTrace.span.type": "db",
+							"db.statement":           "UPDATE pokemon (name = ?) WHERE id = ?",
 						}),
 						Name: "Update pokemon on database",
 					},
@@ -104,32 +104,32 @@ func TestSelector(t *testing.T) {
 		},
 		{
 			Name:            "SelectorWithMultipleAttributes",
-			Expression:      `span[service.name="Pokeshop" tracetest.span.type="db"]`,
+			Expression:      `span[service.name="Pokeshop" qualityTrace.span.type="db"]`,
 			ExpectedSpanIds: []trace.SpanID{insertPokemonDatabaseSpanID},
 		},
 		{
 			Name:            "SelectorWithChildSelector",
-			Expression:      `span[service.name="Pokeshop-worker"] span[tracetest.span.type="db"]`,
+			Expression:      `span[service.name="Pokeshop-worker"] span[qualityTrace.span.type="db"]`,
 			ExpectedSpanIds: []trace.SpanID{updatePokemonDatabaseSpanID},
 		},
 		{
 			Name:            "SelectorToSelectAllChildrenSpans",
-			Expression:      `span[service.name="Pokeshop" tracetest.span.type="http"] span[]`,
+			Expression:      `span[service.name="Pokeshop" qualityTrace.span.type="http"] span[]`,
 			ExpectedSpanIds: []trace.SpanID{insertPokemonDatabaseSpanID, getPokemonFromExternalAPISpanID, updatePokemonDatabaseSpanID},
 		},
 		{
 			Name:            "SelectorWithFirstPseudoClass",
-			Expression:      `span[tracetest.span.type="db"]:first`,
+			Expression:      `span[qualityTrace.span.type="db"]:first`,
 			ExpectedSpanIds: []trace.SpanID{insertPokemonDatabaseSpanID},
 		},
 		{
 			Name:            "SelectorWithFirstPseudoClass",
-			Expression:      `span[tracetest.span.type="db"]:last`,
+			Expression:      `span[qualityTrace.span.type="db"]:last`,
 			ExpectedSpanIds: []trace.SpanID{updatePokemonDatabaseSpanID},
 		},
 		{
 			Name:            "SelectorWithNthChildPseudoClass",
-			Expression:      `span[tracetest.span.type="db"]:nth_child(2)`,
+			Expression:      `span[qualityTrace.span.type="db"]:nth_child(2)`,
 			ExpectedSpanIds: []trace.SpanID{updatePokemonDatabaseSpanID},
 		},
 		{

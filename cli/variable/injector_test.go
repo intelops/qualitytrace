@@ -52,8 +52,8 @@ func TestInjectorWithStruct(t *testing.T) {
 				{
 					Selector: "http.url = \"${POKEMON_API_URL}\"",
 					Assertions: []string{
-						"tracetest.span.duration < 100",
-						`tracetest.response.body contains '"id": ${EXPECTED_POKEMON_ID}'`,
+						"qualityTrace.span.duration < 100",
+						`qualityTrace.response.body contains '"id": ${EXPECTED_POKEMON_ID}'`,
 					},
 				},
 			},
@@ -75,8 +75,8 @@ func TestInjectorWithStruct(t *testing.T) {
 				{
 					Selector: "http.url = \"http://pokemon.api:11633\"",
 					Assertions: []string{
-						"tracetest.span.duration < 100",
-						`tracetest.response.body contains '"id": 521'`,
+						"qualityTrace.span.duration < 100",
+						`qualityTrace.response.body contains '"id": 521'`,
 					},
 				},
 			},

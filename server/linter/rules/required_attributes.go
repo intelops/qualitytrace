@@ -20,7 +20,7 @@ var (
 )
 
 func (r requiredAttributesRule) validateSpan(span *traces.Span) analyzer.Result {
-	switch span.Attributes.Get("tracetest.span.type") {
+	switch span.Attributes.Get("qualityTrace.span.type") {
 	case "http":
 		return r.validateHttpSpan(span)
 	case "database":

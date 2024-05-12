@@ -16,7 +16,7 @@ func getResource(cfg *config.TelemetryExporterOption) (*resource.Resource, error
 		return nil, fmt.Errorf("could not get OS hostname: %w", err)
 	}
 
-	serviceName := "tracetest"
+	serviceName := "qualityTrace"
 	if cfg != nil && cfg.ServiceName != "" {
 		serviceName = cfg.ServiceName
 	}

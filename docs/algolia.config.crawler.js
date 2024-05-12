@@ -1,16 +1,16 @@
 new Crawler({
   rateLimit: 8,
   maxDepth: 10,
-  startUrls: ["https://docs.tracetest.io/"],
+  startUrls: ["https://docs.qualityTrace.io/"],
   renderJavaScript: false,
   sitemaps: [],
   ignoreCanonicalTo: false,
-  discoveryPatterns: ["https://docs.tracetest.io/**"],
+  discoveryPatterns: ["https://docs.qualityTrace.io/**"],
   schedule: "at 1:39 PM on Friday",
   actions: [
     {
-      indexName: "tracetest",
-      pathsToMatch: ["https://docs.tracetest.io/**"],
+      indexName: "qualityTrace",
+      pathsToMatch: ["https://docs.qualityTrace.io/**"],
       recordExtractor: ({ helpers }) => {
         return helpers.docsearch({
           recordProps: {
@@ -33,7 +33,7 @@ new Crawler({
     },
   ],
   initialIndexSettings: {
-    tracetest: {
+    qualityTrace: {
       attributesForFaceting: ["type", "lang"],
       attributesToRetrieve: [
         "hierarchy",

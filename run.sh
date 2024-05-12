@@ -11,12 +11,12 @@ if [ "$NATS" == "true" ]; then
 fi
 
 help_message() {
-  echo "usage: ./run.sh [cypress|tracetests|up|stop|build|down|tracetest-logs|logs|ps|restart]"
+  echo "usage: ./run.sh [cypress|qualityTraces|up|stop|build|down|qualityTrace-logs|logs|ps|restart]"
 }
 
 restart() {
-  docker compose $opts kill tracetest
-  docker compose $opts up -d tracetest
+  docker compose $opts kill qualityTrace
+  docker compose $opts up -d qualityTrace
   docker compose $opts restart otel-collector
 }
 
@@ -24,8 +24,8 @@ logs() {
   docker compose $opts logs -f
 }
 
-tracetest-logs() {
-  docker compose $opts logs -f tracetest
+qualityTrace-logs() {
+  docker compose $opts logs -f qualityTrace
 }
 
 ps() {
@@ -41,7 +41,7 @@ build() {
   make build-docker
   # the previous commands builds the cli binary for linux (because its the os in docker)
   # if the script is run on another os, like macos, we need to rebuild for the binary to match the os
-  make dist/tracetest
+  make dist/qualityTrace
 }
 
 up() {
@@ -72,19 +72,19 @@ cypress() {
   npm run cy:run
 }
 
-tracetests() {
+qualityTraces() {
 
-  echo "Running tracetests"
+  echo "Running qualityTraces"
 
   SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-  export TRACETEST_CLI=${SCRIPT_DIR}/dist/tracetest
+  export TRACETEST_CLI=${SCRIPT_DIR}/dist/qualityTrace
   export TARGET_URL=http://localhost:11633
   export TRACETEST_ENDPOINT=localhost:11633
   export DEMO_APP_URL=http://demo-api:8081
   export DEMO_APP_GRPC_URL=demo-rpc:8082
 
-  cd testing/server-tracetesting
+  cd testing/server-qualityTraceing
   ./run.bash
 }
 
@@ -100,8 +100,8 @@ while [[ $# -gt 0 ]]; do
       CMD+=("cypress-ci")
       shift
       ;;
-    tracetests)
-      CMD+=("tracetests")
+    qualityTraces)
+      CMD+=("qualityTraces")
       shift
       ;;
     up)
@@ -120,8 +120,8 @@ while [[ $# -gt 0 ]]; do
       CMD+=("down")
       shift
       ;;
-    tracetest-logs)
-      CMD+=("tracetest-logs")
+    qualityTrace-logs)
+      CMD+=("qualityTrace-logs")
       shift
       ;;
     logs)

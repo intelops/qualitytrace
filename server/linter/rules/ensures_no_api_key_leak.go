@@ -30,7 +30,7 @@ func (r ensuresNoApiKeyLeakRule) Evaluate(ctx context.Context, trace traces.Trac
 
 	if config.ErrorLevel != analyzer.ErrorLevelDisabled {
 		for _, span := range trace.Flat {
-			if span.Attributes.Get("tracetest.span.type") == "http" {
+			if span.Attributes.Get("qualityTrace.span.type") == "http" {
 				result := r.validate(span)
 				if !result.Passed {
 					passed = false

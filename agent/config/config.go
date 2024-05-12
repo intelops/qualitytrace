@@ -36,11 +36,11 @@ func LoadConfig() (Config, error) {
 		viper.EnvKeyReplacer(strings.NewReplacer(".", "_")),
 	)
 
-	tracetestFolder := getTracetestFolder()
+	qualityTraceFolder := getTracetestFolder()
 
-	vp.SetEnvPrefix("tracetest")
-	vp.AddConfigPath(tracetestFolder)
-	vp.AddConfigPath("tracetest-agent.yaml")
+	vp.SetEnvPrefix("qualityTrace")
+	vp.AddConfigPath(qualityTraceFolder)
+	vp.AddConfigPath("qualityTrace-agent.yaml")
 	vp.SetConfigName("agent")
 	vp.SetConfigType("env")
 	vp.AutomaticEnv()
@@ -48,7 +48,7 @@ func LoadConfig() (Config, error) {
 	vp.SetDefault("AGENT_NAME", getHostname())
 	vp.SetDefault("API_KEY", "")
 	vp.SetDefault("ENVIRONMENT_ID", "")
-	vp.SetDefault("SERVER_URL", "https://app.tracetest.io")
+	vp.SetDefault("SERVER_URL", "https://app.qualityTrace.io")
 	vp.SetDefault("COLLECTOR_ENDPOINT", "")
 	vp.SetDefault("MODE", "")
 	vp.SetDefault("OTLP_SERVER.GRPC_PORT", 4317)
@@ -77,7 +77,7 @@ func getTracetestFolder() string {
 		return "."
 	}
 
-	return path.Join(homeFolder, ".tracetest")
+	return path.Join(homeFolder, ".qualityTrace")
 }
 
 func getHostname() string {

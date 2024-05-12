@@ -1,6 +1,6 @@
 version: "3.2"
 services:
-  tracetest:
+  qualityTrace:
     restart: unless-stopped
     image: intelops/qualityTrace:${TAG:-latest}
     extra_hosts:
@@ -9,10 +9,10 @@ services:
       context: .
     volumes:
       - type: bind
-        source: ./local-config/tracetest.config.yaml
-        target: /app/tracetest.yaml
+        source: ./local-config/qualityTrace.config.yaml
+        target: /app/qualityTrace.yaml
       - type: bind
-        source: ./local-config/tracetest.provision.yaml
+        source: ./local-config/qualityTrace.provision.yaml
         target: /app/provisioning.yaml
     ports:
       - 11633:11633
@@ -58,4 +58,4 @@ services:
     volumes:
       - ./local-config/collector.config.yaml:/otel-local-config.yaml
     depends_on:
-      - tracetest
+      - qualityTrace

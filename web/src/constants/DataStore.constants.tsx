@@ -20,22 +20,22 @@ export const SupportedDataStoresToName = {
 } as const;
 
 export const SupportedDataStoresToDocsLink = {
-  [SupportedDataStores.AWSXRay]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/aws-x-ray',
-  [SupportedDataStores.AzureAppInsights]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/azure-app-insights',
-  [SupportedDataStores.Datadog]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/datadog',
-  [SupportedDataStores.Dynatrace]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/dynatrace',
-  [SupportedDataStores.ElasticApm]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/elasticapm',
-  [SupportedDataStores.Honeycomb]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/honeycomb',
-  [SupportedDataStores.Instana]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/instana',
-  [SupportedDataStores.JAEGER]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/jaeger',
-  [SupportedDataStores.Lightstep]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/lightstep',
-  [SupportedDataStores.NewRelic]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/new-relic',
-  [SupportedDataStores.OpenSearch]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/opensearch',
-  [SupportedDataStores.OtelCollector]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/opentelemetry-collector',
-  [SupportedDataStores.SignalFX]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/signalfx',
-  [SupportedDataStores.Signoz]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/signoz',
-  [SupportedDataStores.SumoLogic]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/sumologic',
-  [SupportedDataStores.TEMPO]: 'https://docs.tracetest.io/configuration/connecting-to-data-stores/tempo',
+  [SupportedDataStores.AWSXRay]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/aws-x-ray',
+  [SupportedDataStores.AzureAppInsights]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/azure-app-insights',
+  [SupportedDataStores.Datadog]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/datadog',
+  [SupportedDataStores.Dynatrace]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/dynatrace',
+  [SupportedDataStores.ElasticApm]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/elasticapm',
+  [SupportedDataStores.Honeycomb]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/honeycomb',
+  [SupportedDataStores.Instana]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/instana',
+  [SupportedDataStores.JAEGER]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/jaeger',
+  [SupportedDataStores.Lightstep]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/lightstep',
+  [SupportedDataStores.NewRelic]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/new-relic',
+  [SupportedDataStores.OpenSearch]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/opensearch',
+  [SupportedDataStores.OtelCollector]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/opentelemetry-collector',
+  [SupportedDataStores.SignalFX]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/signalfx',
+  [SupportedDataStores.Signoz]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/signoz',
+  [SupportedDataStores.SumoLogic]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/sumologic',
+  [SupportedDataStores.TEMPO]: 'https://docs.qualityTrace.io/configuration/connecting-to-data-stores/tempo',
 } as const;
 
 export const SupportedDataStoresToDefaultEndpoint = {

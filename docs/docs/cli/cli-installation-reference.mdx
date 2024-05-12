@@ -3,9 +3,9 @@ id: cli-installation-reference
 title: CLI Installation Reference
 description: This page contains a reference of all options for installing Tracetest CLI. Tracetest has a command line interface (CLI) which includes Tracetest Agent - Enables Tracetest to access your application under test and to ingest trace data from your OpenTelemetry Collector or tracing backend. Tracetest Core Install Wizard - Helps install the Tracetest Core Server into Docker or Kubernetes.
 keywords:
-  - tracetest
-  - tracetest cli
-  - tracetest reference
+  - qualityTrace
+  - qualityTrace cli
+  - qualityTrace reference
   - trace-based testing
   - observability
   - distributed tracing
@@ -47,7 +47,7 @@ You can also manually install it with one of the following methods.
 #### Homebrew
 
 ```sh
-brew install intelops/qualityTrace/tracetest
+brew install intelops/qualityTrace/qualityTrace
 ```
 
 #### APT
@@ -57,27 +57,27 @@ brew install intelops/qualityTrace/tracetest
 sudo apt-get update && sudo apt-get install -y apt-transport-https ca-certificates
 
 # add repo
-echo "deb [trusted=yes] https://apt.fury.io/tracetest/ /" | sudo tee /etc/apt/sources.list.d/fury.list
+echo "deb [trusted=yes] https://apt.fury.io/qualityTrace/ /" | sudo tee /etc/apt/sources.list.d/fury.list
 
 # update and install
 sudo apt-get update
-sudo apt-get install tracetest
+sudo apt-get install qualityTrace
 ```
 
 #### YUM
 
 ```sh
 # add repository
-cat <<EOF | sudo tee /etc/yum.repos.d/tracetest.repo
-[tracetest]
+cat <<EOF | sudo tee /etc/yum.repos.d/qualityTrace.repo
+[qualityTrace]
 name=Tracetest
-baseurl=https://yum.fury.io/tracetest/
+baseurl=https://yum.fury.io/qualityTrace/
 enabled=1
 gpgcheck=0
 EOF
 
 # install
-sudo yum install tracetest --refresh
+sudo yum install qualityTrace --refresh
 ```
 
 ### Windows
@@ -85,12 +85,12 @@ sudo yum install tracetest --refresh
 #### Chocolatey
 
 ```bash
-choco source add --name=kubeshop_repo --source=https://chocolatey.kubeshop.io/chocolatey ; choco install tracetest
+choco source add --name=kubeshop_repo --source=https://chocolatey.kubeshop.io/chocolatey ; choco install qualityTrace
 ```
 
 #### From source
 
-Download one of the files from the latest tag, extract to your machine, and then [add the tracetest binary to your PATH variable](https://stackoverflow.com/a/41895179).
+Download one of the files from the latest tag, extract to your machine, and then [add the qualityTrace binary to your PATH variable](https://stackoverflow.com/a/41895179).
 
 ## Installing a specific version of the Tracetest CLI
 

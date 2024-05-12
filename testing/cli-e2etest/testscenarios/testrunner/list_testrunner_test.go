@@ -7,8 +7,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -20,7 +20,7 @@ func addListConfigPreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	testRunnerPath := env.GetTestResourcePath(t, "new-testrunner")
 
-	result := tracetestcli.Exec(t, fmt.Sprintf("apply testrunner --file %s", testRunnerPath), tracetestcli.WithCLIConfig(cliConfig))
+	result := qualityTracecli.Exec(t, fmt.Sprintf("apply testrunner --file %s", testRunnerPath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -41,7 +41,7 @@ func TestListConfig(t *testing.T) {
 		// When I try to list testrunner on pretty mode and there is no testrunner previously registered
 		// Then it should print an empty table
 		// Then it should print a table with 5 lines printed: header, separator, the default testrunner item, an entire line for the second gate and empty line
-		result := tracetestcli.Exec(t, "list testrunner --sortBy name --output pretty", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "list testrunner --sortBy name --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "current")
 
@@ -58,7 +58,7 @@ func TestListConfig(t *testing.T) {
 
 		// When I try to list a testrunner by an invalid field
 		// Then I should receive an error
-		result := tracetestcli.Exec(t, "list testrunner --sortBy id --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "list testrunner --sortBy id --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 1)
 		require.Contains(result.StdErr, "invalid sort field: id") // TODO: think on how to improve this error handling
 	})
@@ -70,7 +70,7 @@ func TestListConfig(t *testing.T) {
 
 		// When I try to list testrunner again on yaml mode
 		// Then it should print a YAML list with one item
-		result := tracetestcli.Exec(t, "list testrunner --sortBy name --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "list testrunner --sortBy name --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		testRunner := helpers.UnmarshalYAML[types.TestRunnerResource](t, result.StdOut)
@@ -89,7 +89,7 @@ func TestListConfig(t *testing.T) {
 
 		// When I try to list testrunner again on json mode
 		// Then it should print a JSON list with one item
-		result := tracetestcli.Exec(t, "list testrunner --sortBy name --output json", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "list testrunner --sortBy name --output json", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		testRunnerList := helpers.UnmarshalJSON[types.ResourceList[types.TestRunnerResource]](t, result.StdOut)
@@ -112,7 +112,7 @@ func TestListConfig(t *testing.T) {
 
 		// When I try to list testrunner again on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, testrunner item and empty line
-		result := tracetestcli.Exec(t, "list testrunner --sortBy name --output pretty", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "list testrunner --sortBy name --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

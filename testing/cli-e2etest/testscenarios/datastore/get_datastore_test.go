@@ -6,8 +6,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -18,7 +18,7 @@ func addGetDatastorePreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	dataStorePath := env.GetEnvironmentResourcePath(t, "data-store")
 
-	result := tracetestcli.Exec(t, fmt.Sprintf("apply datastore --file %s", dataStorePath), tracetestcli.WithCLIConfig(cliConfig))
+	result := qualityTracecli.Exec(t, fmt.Sprintf("apply datastore --file %s", dataStorePath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -38,7 +38,7 @@ func TestGetDatastore(t *testing.T) {
 
 		// When I try to get a datastore on yaml mode
 		// Then it should print a YAML list with one item
-		result := tracetestcli.Exec(t, "get datastore --id current --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get datastore --id current --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		require.Equal(0, result.ExitCode)
 
 		dataStoresYAML := helpers.UnmarshalYAMLSequence[types.DataStoreResource](t, result.StdOut)
@@ -56,7 +56,7 @@ func TestGetDatastore(t *testing.T) {
 
 		// When I try to get a datastore on yaml mode
 		// Then it should print a YAML
-		result := tracetestcli.Exec(t, "get datastore --id current --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get datastore --id current --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		dataStore := helpers.UnmarshalYAML[types.DataStoreResource](t, result.StdOut)
@@ -73,7 +73,7 @@ func TestGetDatastore(t *testing.T) {
 
 		// When I try to get a datastore on json mode
 		// Then it should print a json
-		result := tracetestcli.Exec(t, "get datastore --id current --output json", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get datastore --id current --output json", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		dataStores := helpers.UnmarshalJSON[types.DataStoreResource](t, result.StdOut)
@@ -90,7 +90,7 @@ func TestGetDatastore(t *testing.T) {
 
 		// When I try to get a datastore on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, data store item and empty line
-		result := tracetestcli.Exec(t, "get datastore --id current --output pretty", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get datastore --id current --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

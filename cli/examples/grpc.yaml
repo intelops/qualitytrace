@@ -47,6 +47,6 @@ trigger:
         "id": 52
       }
 specs:
-- selector: span[tracetest.span.type="rpc"]
+- selector: span[qualityTrace.span.type="rpc"]
   assertions:
-  - tracetest.selected_spans.count = 1
+  - qualityTrace.selected_spans.count = 1

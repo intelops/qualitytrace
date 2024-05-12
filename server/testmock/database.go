@@ -14,7 +14,7 @@ import (
 	"github.com/orlangure/gnomock/preset/postgres"
 )
 
-const baseDatabaseName = "tracetest"
+const baseDatabaseName = "qualityTrace"
 
 var singletonTestDatabaseEnvironment *testDatabaseEnvironment
 
@@ -136,7 +136,7 @@ func createRandomDatabaseForTest(baseDatabase string) (*sql.DB, error) {
 
 	connStr := fmt.Sprintf(
 		"host=%s port=%d user=%s password=%s  dbname=%s sslmode=disable",
-		db.container.Host, db.container.DefaultPort(), "tracetest", "tracetest", newDatabaseName,
+		db.container.Host, db.container.DefaultPort(), "qualityTrace", "qualityTrace", newDatabaseName,
 	)
 
 	return sql.Open("postgres", connStr)
@@ -144,8 +144,8 @@ func createRandomDatabaseForTest(baseDatabase string) (*sql.DB, error) {
 
 func getPostgresContainer() (*gnomock.Container, error) {
 	preset := postgres.Preset(
-		postgres.WithUser("tracetest", "tracetest"),
-		postgres.WithDatabase("tracetest"),
+		postgres.WithUser("qualityTrace", "qualityTrace"),
+		postgres.WithDatabase("qualityTrace"),
 	)
 
 	dbContainer, err := gnomock.Start(preset)
@@ -159,7 +159,7 @@ func getPostgresContainer() (*gnomock.Container, error) {
 func getMainDatabaseConnection(container *gnomock.Container) (*sql.DB, error) {
 	connStr := fmt.Sprintf(
 		"host=%s port=%d user=%s password=%s  dbname=%s sslmode=disable",
-		container.Host, container.DefaultPort(), "tracetest", "tracetest", "postgres",
+		container.Host, container.DefaultPort(), "qualityTrace", "qualityTrace", "postgres",
 	)
 
 	return sql.Open("postgres", connStr)

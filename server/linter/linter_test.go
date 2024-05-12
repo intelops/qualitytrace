@@ -79,7 +79,7 @@ func spanWithAttributes(spanType string, attributes map[string]string) traces.Sp
 		span.Attributes.Set(name, value)
 	}
 
-	span.Attributes.Set("tracetest.span.type", spanType)
+	span.Attributes.Set("qualityTrace.span.type", spanType)
 
 	return span
 }

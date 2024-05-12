@@ -84,7 +84,7 @@ func TestSuccessfulTestRunOutputWithResult(t *testing.T) {
 						},
 						Results: []openapi.AssertionResult{
 							{
-								Assertion: openapi.PtrString(`attr:tracetest.span.duration <= 200ms`),
+								Assertion: openapi.PtrString(`attr:qualityTrace.span.duration <= 200ms`),
 								AllPassed: openapi.PtrBool(true),
 								SpanResults: []openapi.AssertionSpanResult{
 									{
@@ -139,7 +139,7 @@ func TestFailingTestOutput(t *testing.T) {
 						},
 						Results: []openapi.AssertionResult{
 							{
-								Assertion: openapi.PtrString(`attr:tracetest.span.duration <= 200ms`),
+								Assertion: openapi.PtrString(`attr:qualityTrace.span.duration <= 200ms`),
 								AllPassed: openapi.PtrBool(true),
 								SpanResults: []openapi.AssertionSpanResult{
 									{
@@ -170,7 +170,7 @@ func TestFailingTestOutput(t *testing.T) {
 								},
 							},
 							{
-								Assertion: openapi.PtrString(`attr:tracetest.span.duration <= 200ms`),
+								Assertion: openapi.PtrString(`attr:qualityTrace.span.duration <= 200ms`),
 								AllPassed: openapi.PtrBool(true),
 								SpanResults: []openapi.AssertionSpanResult{
 									{
@@ -193,11 +193,11 @@ func TestFailingTestOutput(t *testing.T) {
 	expectedOutput := `✘ Testcase 2 (http://localhost:11633/test/9876543/run/1/test) - trace id: cb5e80748cc06f8a63f6b96c056defec
 	✔ Validate span duration
 		✔ #123456
-			✔ attr:tracetest.span.duration <= 200ms (157ms)
+			✔ attr:qualityTrace.span.duration <= 200ms (157ms)
 	✘ span[name = "my other span"]
 		✘ #456789
 			✘ attr:http.status = 200 (404) (http://localhost:11633/test/9876543/run/1/test?selectedAssertion=1&selectedSpan=456789)
-			✔ attr:tracetest.span.duration <= 200ms (68ms)
+			✔ attr:qualityTrace.span.duration <= 200ms (68ms)
 `
 	assert.Equal(t, expectedOutput, output)
 }
@@ -231,7 +231,7 @@ func TestFailingTestOutputWithPadding(t *testing.T) {
 						},
 						Results: []openapi.AssertionResult{
 							{
-								Assertion: openapi.PtrString(`attr:tracetest.span.duration <= 200ms`),
+								Assertion: openapi.PtrString(`attr:qualityTrace.span.duration <= 200ms`),
 								AllPassed: openapi.PtrBool(true),
 								SpanResults: []openapi.AssertionSpanResult{
 									{
@@ -262,7 +262,7 @@ func TestFailingTestOutputWithPadding(t *testing.T) {
 								},
 							},
 							{
-								Assertion: openapi.PtrString(`attr:tracetest.span.duration <= 200ms`),
+								Assertion: openapi.PtrString(`attr:qualityTrace.span.duration <= 200ms`),
 								AllPassed: openapi.PtrBool(true),
 								SpanResults: []openapi.AssertionSpanResult{
 									{
@@ -285,11 +285,11 @@ func TestFailingTestOutputWithPadding(t *testing.T) {
 	expectedOutput := `	✘ Testcase 2 (http://localhost:11633/test/9876543/run/1/test) - trace id: cb5e80748cc06f8a63f6b96c056defec
 		✔ Validate span duration
 			✔ #123456
-				✔ attr:tracetest.span.duration <= 200ms (157ms)
+				✔ attr:qualityTrace.span.duration <= 200ms (157ms)
 		✘ span[name = "my other span"]
 			✘ #456789
 				✘ attr:http.status = 200 (404) (http://localhost:11633/test/9876543/run/1/test?selectedAssertion=1&selectedSpan=456789)
-				✔ attr:tracetest.span.duration <= 200ms (68ms)
+				✔ attr:qualityTrace.span.duration <= 200ms (68ms)
 `
 	assert.Equal(t, expectedOutput, output)
 }

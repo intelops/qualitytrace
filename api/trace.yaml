@@ -43,8 +43,8 @@ components:
             description: attribute value
           example:
             span.name: "POST /create"
-            tracetest.span.type: "http"
-            tracetest.span.duration: "2000"
+            qualityTrace.span.type: "http"
+            qualityTrace.span.duration: "2000"
         children:
           type: array
           items:

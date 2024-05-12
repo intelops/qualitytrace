@@ -5,7 +5,7 @@ ENV TRACETEST_API_KEY ""
 
 WORKDIR /app
 
-COPY ./tracetest /app/tracetest
+COPY ./qualityTrace /app/qualityTrace
 COPY ./agent/entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 

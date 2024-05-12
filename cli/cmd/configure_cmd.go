@@ -19,8 +19,8 @@ var (
 var configureCmd = &cobra.Command{
 	GroupID: cmdGroupConfig.ID,
 	Use:     "configure",
-	Short:   "Configure your tracetest CLI",
-	Long:    "Configure your tracetest CLI",
+	Short:   "Configure your qualityTrace CLI",
+	Long:    "Configure your qualityTrace CLI",
 	PreRun:  setupLogger,
 	Run: WithResultHandler(WithParamsHandler(configParams)(func(ctx context.Context, cmd *cobra.Command, _ []string) (string, error) {
 		flags := agentConfig.Flags{

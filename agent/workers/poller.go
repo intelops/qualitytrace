@@ -101,10 +101,10 @@ func (w *PollerWorker) Poll(ctx context.Context, request *proto.PollingRequest) 
 	ctx, span := w.tracer.Start(ctx, "PollingRequest Worker operation")
 	defer span.End()
 
-	runCounter, _ := w.meter.Int64Counter("tracetest.agent.pollerworker.runs")
+	runCounter, _ := w.meter.Int64Counter("qualityTrace.agent.pollerworker.runs")
 	runCounter.Add(ctx, 1)
 
-	errorCounter, _ := w.meter.Int64Counter("tracetest.agent.pollerworker.errors")
+	errorCounter, _ := w.meter.Int64Counter("qualityTrace.agent.pollerworker.errors")
 
 	w.logger.Debug("Received polling request", zap.Any("request", request))
 	w.observer.StartTracePoll(request)

@@ -25,7 +25,7 @@ dist/
 # .DS_Store
 .DS_Store
 config.yml
-server/tracetest.yaml
+server/qualityTrace.yaml
 server/html
 
 __debug*

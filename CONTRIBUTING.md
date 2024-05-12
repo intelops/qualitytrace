@@ -2,7 +2,7 @@
 
 Thank you for looking at this. We, at Tracetest, are really excited to have you contribute on the project with us.
 
-The main lines of communication with our team are through [Github issues](https://github.com/intelops/qualityTrace/issues/new/choose) or [Slack](https://dub.sh/tracetest-community). Feel free to ask any questions!
+The main lines of communication with our team are through [Github issues](https://github.com/intelops/qualityTrace/issues/new/choose) or [Slack](https://dub.sh/qualityTrace-community). Feel free to ask any questions!
 
 ## Developing 
 
@@ -16,11 +16,11 @@ Written in Golang, the CLI code is stored in the folder `./cli`. You can see wha
 
 To test its integration with our API, you can run a local API server on your machine by running one of our [examples](./examples/) with `docker compose`. For instance:
 ```sh
-cd ./examples/tracetest-jaeger
+cd ./examples/qualityTrace-jaeger
 docker compose up -d
 ```
 
-Remember that you need a file pointing to that server by configuring the CLI using the `tracetest configure` command or using the flag `-c` with a valid config file location, like `config.yaml` with the following content:
+Remember that you need a file pointing to that server by configuring the CLI using the `qualityTrace configure` command or using the flag `-c` with a valid config file location, like `config.yaml` with the following content:
 ```yaml
 scheme: http
 endpoint: localhost:11633
@@ -42,7 +42,7 @@ Written in Typescript and using Node.js tools, the Web UI code is stored in the 
 
 Like the CLI, to connect to the API, you can run a local API server on your machine by running one of our [examples](./examples/) with `docker compose`. For instance:
 ```sh
-cd ./examples/tracetest-jaeger
+cd ./examples/qualityTrace-jaeger
 docker compose up -d
 ```
 
@@ -105,7 +105,7 @@ We provide a [Makefile](./Makefile) with a few targets that helps build all the 
 > **A note on go builds:**
 > When running **make build-docker**, the go binaries are built to be run inside a docker container.
 > Docker containers are always Linux, regardless of the host OS. 
-> This means that if you run **make build-docker** on a mac, the targets `dist/tracetest` and `dist/tracetest-server` won't run on the mac host.
+> This means that if you run **make build-docker** on a mac, the targets `dist/qualityTrace` and `dist/qualityTrace-server` won't run on the mac host.
 > You need to rebuild the go binaries (using **make build-go**)after building the docker image if you want to run them directly on the host MacOS.
 
 ### run.sh script
@@ -120,21 +120,21 @@ This script provides a few commands to help manage this test target deployment. 
 **Build everything, and start clean**
 
 ```sh
-./run.sh down build up tracetest-logs
+./run.sh down build up qualityTrace-logs
 ```
 
-This command firt resets the environment (`down` == `docker compose down`), build the docker image (`build` == `make docker-build`), starts the environment (`up` == `docker compose up -d`) and finally starts following the tracetest logs (`tracetest-logs` == `docker compose -f tracetest`)
+This command firt resets the environment (`down` == `docker compose down`), build the docker image (`build` == `make docker-build`), starts the environment (`up` == `docker compose up -d`) and finally starts following the qualityTrace logs (`qualityTrace-logs` == `docker compose -f qualityTrace`)
 
 **Run the server e2e trace based tests**
 ```sh
-./run.sh tracetests
+./run.sh qualityTraces
 ```
 
 THis will run the server e2e trace based testing suite, also known as [dogfooding](https://es.wikipedia.org/wiki/Dogfooding). This assumes the test environment is already started.
 
 **Clean, start, run tests, and reset**
 ```sh
-./run.sh down build up tracetests down
+./run.sh down build up qualityTraces down
 ```
 
 This resets the state, build, starts the test environment, runs the trace based test suit, and resets everything agian.

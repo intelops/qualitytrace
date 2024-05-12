@@ -20,7 +20,7 @@ import (
 )
 
 func getTracetestApp(options ...testmock.TestingAppOption) (*app.App, error) {
-	tracetestApp, err := testmock.GetTestingApp(options...)
+	qualityTraceApp, err := testmock.GetTestingApp(options...)
 	if err != nil {
 		return nil, err
 	}
@@ -29,24 +29,24 @@ func getTracetestApp(options ...testmock.TestingAppOption) (*app.App, error) {
 	wg.Add(1)
 
 	go func() {
-		tracetestApp.Start()
+		qualityTraceApp.Start()
 		time.Sleep(1 * time.Second)
 		wg.Done()
 	}()
 
 	wg.Wait()
 
-	return tracetestApp, nil
+	return qualityTraceApp, nil
 }
 
 func TestServerPrefix(t *testing.T) {
 	_, err := getTracetestApp(
-		testmock.WithServerPrefix("/tracetest"),
+		testmock.WithServerPrefix("/qualityTrace"),
 		testmock.WithHttpPort(8000),
 	)
 	require.NoError(t, err)
 
-	expectedEndpoint := "http://localhost:8000/tracetest"
+	expectedEndpoint := "http://localhost:8000/qualityTrace"
 	tests := getTests(t, expectedEndpoint)
 	assert.NotNil(t, tests)
 

@@ -1,9 +1,9 @@
 postgres:
   host: ${NAME}-postgresql
-  user: tracetest
+  user: qualityTrace
   password: not-secure-database-password
   port: 5432
-  dbname: tracetest
+  dbname: qualityTrace
   params: sslmode=disable
 
 poolingConfig:
@@ -30,18 +30,18 @@ telemetry:
     jaeger:
       type: jaeger
       jaeger:
-        endpoint: jaeger-query.tracetest:16685
+        endpoint: jaeger-query.qualityTrace:16685
         tls:
           insecure: true
 
   exporters:
     collector:
-      serviceName: tracetest
+      serviceName: qualityTrace
       sampling: 100 # 100%
       exporter:
         type: collector
         collector:
-          endpoint: otel-collector.tracetest:4317
+          endpoint: otel-collector.qualityTrace:4317
 
 server:
   telemetry:

@@ -51,7 +51,7 @@ func newSpanContext(ctx context.Context) trace.SpanContext {
 		sid = spanCtx.SpanID()
 	}
 
-	tracestate, _ := trace.ParseTraceState("tracetest=true")
+	tracestate, _ := trace.ParseTraceState("qualityTrace=true")
 	var tf trace.TraceFlags
 	return trace.NewSpanContext(trace.SpanContextConfig{
 		TraceID:    tid,
@@ -110,7 +110,7 @@ func (te *httpTriggerer) Trigger(ctx context.Context, test test.Test, opts *Trig
 	mapped := mapResp(resp)
 	response.Result.HTTP = &mapped
 	response.SpanAttributes = map[string]string{
-		"tracetest.run.trigger.http.response_code": strconv.Itoa(resp.StatusCode),
+		"qualityTrace.run.trigger.http.response_code": strconv.Itoa(resp.StatusCode),
 	}
 
 	return response, nil

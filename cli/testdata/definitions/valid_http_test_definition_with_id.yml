@@ -6,7 +6,7 @@ spec:
   trigger:
     type: http
     httpRequest:
-      url: http://pokemon-demo.tracetest.io/pokemon/import
+      url: http://pokemon-demo.qualityTrace.io/pokemon/import
       method: POST
       headers:
       - key: Content-Type
@@ -15,7 +15,7 @@ spec:
   specs:
   - selector: span[name = "POST /pokemon/import"]
     assertions:
-    - tracetest.span.duration <= 100ms
+    - qualityTrace.span.duration <= 100ms
     - http.status_code = 200
   - selector: span[name = "send message to queue"]
     assertions:
@@ -29,4 +29,4 @@ spec:
   - selector: span[name = "consume message from queue"]:last span[name = "save pokemon on database"]
     assertions:
     - db.repository.operation = "create"
-    - tracetest.span.duration <= 100ms
+    - qualityTrace.span.duration <= 100ms

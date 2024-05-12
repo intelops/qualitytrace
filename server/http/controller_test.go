@@ -30,9 +30,9 @@ var (
 				ID:   id.NewRandGenerator().SpanID(),
 				Name: "POST /pokemon/import",
 				Attributes: traces.NewAttributes(map[string]string{
-					"tracetest.span.type": "http",
-					"service.name":        "pokeshop",
-					"http.response.body":  `{"id":52}`,
+					"qualityTrace.span.type": "http",
+					"service.name":           "pokeshop",
+					"http.response.body":     `{"id":52}`,
 				}),
 			},
 		},
@@ -46,7 +46,7 @@ func TestContains_Issue617(t *testing.T) {
 		Specs: []openapi.TestSpec{
 			{
 				SelectorParsed: openapi.Selector{
-					Query: `span[tracetest.span.type = "http" service.name = "pokeshop"  name = "POST /pokemon/import"]`,
+					Query: `span[qualityTrace.span.type = "http" service.name = "pokeshop"  name = "POST /pokemon/import"]`,
 				},
 				Assertions: []string{
 					`attr:http.response.body contains 52`,
@@ -60,12 +60,12 @@ func TestContains_Issue617(t *testing.T) {
 		Results: []openapi.AssertionResultsResultsInner{
 			{
 				Selector: openapi.Selector{
-					Query: `span[tracetest.span.type = "http" service.name = "pokeshop"  name = "POST /pokemon/import"]`,
+					Query: `span[qualityTrace.span.type = "http" service.name = "pokeshop"  name = "POST /pokemon/import"]`,
 					Structure: []openapi.SpanSelector{
 						{
 							Filters: []openapi.SelectorFilter{
 								{
-									Property: "tracetest.span.type",
+									Property: "qualityTrace.span.type",
 									Operator: "=",
 									Value:    "http",
 								},

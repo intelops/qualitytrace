@@ -41,7 +41,7 @@ func Connect(dsn string) (*sql.DB, error) {
 					trace.WithQueryParams(true),
 					trace.WithRowsAffected(true),
 					trace.WithSpanNameFormatter(dbSpanNameFormatter),
-					trace.WithDefaultAttributes(attribute.String("service.name", "tracetest")),
+					trace.WithDefaultAttributes(attribute.String("service.name", "qualityTrace")),
 				),
 			),
 		),

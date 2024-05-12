@@ -15,7 +15,7 @@ export enum SupportedIntegrations {
 const Cypress: IIntegration = {
   name: SupportedIntegrations.CYPRESS,
   title: 'Cypress',
-  url: 'https://docs.tracetest.io/tools-and-integrations/cypress',
+  url: 'https://docs.qualityTrace.io/tools-and-integrations/cypress',
   isActive: true,
   isAvailable: false,
 };
@@ -23,7 +23,7 @@ const Cypress: IIntegration = {
 const K6: IIntegration = {
   name: SupportedIntegrations.K6,
   title: 'K6',
-  url: 'https://docs.tracetest.io/tools-and-integrations/k6',
+  url: 'https://docs.qualityTrace.io/tools-and-integrations/k6',
   isActive: true,
   isAvailable: true,
 };
@@ -31,7 +31,7 @@ const K6: IIntegration = {
 const Playwright: IIntegration = {
   name: SupportedIntegrations.PLAYWRIGHT,
   title: 'Playwright',
-  url: 'https://docs.tracetest.io/tools-and-integrations/playwright',
+  url: 'https://docs.qualityTrace.io/tools-and-integrations/playwright',
   isActive: true,
   isAvailable: false,
 };

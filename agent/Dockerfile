@@ -5,5 +5,5 @@ WORKDIR /app
 
 ENV TRACETEST_API_KEY ""
 
-ENTRYPOINT [ "tracetest", "start", "--api-key", "$TRACETEST_API_KEY" ]
+ENTRYPOINT [ "qualityTrace", "start", "--api-key", "$TRACETEST_API_KEY" ]
 

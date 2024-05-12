@@ -17,9 +17,9 @@ func GetConfigAsEnvVars() *EnvironmentVars {
 
 	enableCLIDebug := (os.Getenv("ENABLE_CLI_DEBUG") == "true")
 
-	tracetestCommand := os.Getenv("TRACETEST_CLI")
-	if tracetestCommand == "" {
-		tracetestCommand = "tracetest"
+	qualityTraceCommand := os.Getenv("TRACETEST_CLI")
+	if qualityTraceCommand == "" {
+		qualityTraceCommand = "qualityTrace"
 	}
 
 	testEnvironment := os.Getenv("TEST_ENVIRONMENT")
@@ -29,7 +29,7 @@ func GetConfigAsEnvVars() *EnvironmentVars {
 
 	return &EnvironmentVars{
 		EnableCLIDebug:   enableCLIDebug,
-		TracetestCommand: tracetestCommand,
+		TracetestCommand: qualityTraceCommand,
 		TestEnvironment:  testEnvironment,
 	}
 }

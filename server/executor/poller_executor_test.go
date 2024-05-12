@@ -35,7 +35,7 @@ func Test_PollerExecutor_ExecuteRequest_NoRootSpan_NoSpanCase(t *testing.T) {
 
 	// Scenario: Trace without any spans, even root span
 	// Given the trigger execution returns 0 spans
-	// And tracetest does not send the root span
+	// And qualityTrace does not send the root span
 	// When the server do the polling process
 	// Then it will not send a finished flag
 	// And it will return a connection error on every call
@@ -71,7 +71,7 @@ func Test_PollerExecutor_ExecuteRequest_NoRootSpan_OneSpanCase(t *testing.T) {
 	// Scenario: Trace with only 1 span, without root span
 	// Given the trigger execution returns 1 span on the second iteration
 	// And find no trace on the first iteration
-	// And tracetest does not send the root span
+	// And qualityTrace does not send the root span
 	// When the server do the polling process
 	// Then it should stop at the third iteration
 	// And it should handle the trace error on first iteration
@@ -121,7 +121,7 @@ func Test_PollerExecutor_ExecuteRequest_NoRootSpan_TwoSpansCase(t *testing.T) {
 	// Scenario: Trace with 2 span, without root span
 	// Given the trigger execution returns 1 span on second iteration and another one on third iteration
 	// And find no trace on the first iteration
-	// And tracetest does not send the root span
+	// And qualityTrace does not send the root span
 	// When the server do the polling process
 	// Then it should stop at the fourth iteration
 	// And it should handle the trace error on first iteration
@@ -187,7 +187,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_NoSpanCase(t *testing.T) {
 
 	// Scenario: Trace without any spans, only root span
 	// Given the trigger execution returns 0 spans
-	// And tracetest sent the root span
+	// And qualityTrace sent the root span
 	// When the server do the polling process
 	// Then it should stop on third iteration
 	// And it should handle the trace error on first iteration
@@ -237,7 +237,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_OneSpanCase(t *testing.T) {
 	// Scenario: Trace with only 1 span, plus a root span
 	// Given the trigger execution returns 1 span on second iteration
 	// And find no trace on the first iteration
-	// And tracetest sent the root span
+	// And qualityTrace sent the root span
 	// When the server do the polling process
 	// Then it should stop at the second iteration
 	// And it should handle the trace error on first iteration
@@ -300,7 +300,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_OneDelayedSpanCase(t *testi
 	// Scenario: Trace with only 1 delayed span, plus a root span
 	// Given the trigger execution returns 1 span on fourth iteration
 	// And find no trace on the first iteration
-	// And tracetest sent the root span
+	// And qualityTrace sent the root span
 	// When the server do the polling process
 	// Then it should stop at the fifth iteration
 	// And it should handle the trace error on first iteration
@@ -367,7 +367,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_TwoSpansCase(t *testing.T) 
 	// Scenario: Trace with 2 span, plus a root span
 	// Given the trigger execution returns 1 span on second iteration and another one on third iteration
 	// And find no trace on the first iteration
-	// And tracetest sent the root span
+	// And qualityTrace sent the root span
 	// When the server do the polling process
 	// Then it should stop at the third iteration
 	// And it should handle the trace error on first iteration

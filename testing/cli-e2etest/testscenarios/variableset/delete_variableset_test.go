@@ -6,8 +6,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -26,7 +26,7 @@ func TestDeleteVariableSet(t *testing.T) {
 
 	// When I try to delete a variable set that don't exist
 	// Then it should return an error and say that this resource does not exist
-	result := tracetestcli.Exec(t, "delete variableset --id .env", tracetestcli.WithCLIConfig(cliConfig))
+	result := qualityTracecli.Exec(t, "delete variableset --id .env", qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 1)
 	require.Contains(result.StdErr, "Resource variableset with ID .env not found")
 
@@ -34,7 +34,7 @@ func TestDeleteVariableSet(t *testing.T) {
 	// Then it should be applied with success
 	newEnvironmentPath := env.GetTestResourcePath(t, "new-varSet")
 
-	result = tracetestcli.Exec(t, fmt.Sprintf("apply variableset --file %s", newEnvironmentPath), tracetestcli.WithCLIConfig(cliConfig))
+	result = qualityTracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", newEnvironmentPath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	environmentVars := helpers.UnmarshalYAML[types.VariableSetResource](t, result.StdOut)
@@ -43,13 +43,13 @@ func TestDeleteVariableSet(t *testing.T) {
 
 	// When I try to delete the environment
 	// Then it should delete with success
-	result = tracetestcli.Exec(t, "delete variableset --id .env", tracetestcli.WithCLIConfig(cliConfig))
+	result = qualityTracecli.Exec(t, "delete variableset --id .env", qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 	require.Contains(result.StdOut, "✔ Variableset successfully deleted")
 
 	// When I try to get an environment again
 	// Then it should return a message saying that the environment was not found
-	result = tracetestcli.Exec(t, "get variableset --id .env --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+	result = qualityTracecli.Exec(t, "get variableset --id .env --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 	require.Contains(result.StdOut, "Resource variableset with ID .env not found")
 }

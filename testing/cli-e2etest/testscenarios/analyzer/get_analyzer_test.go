@@ -6,8 +6,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -18,7 +18,7 @@ func addGetAnalyzerPreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	configPath := env.GetTestResourcePath(t, "new-analyzer")
 
-	result := tracetestcli.Exec(t, fmt.Sprintf("apply analyzer --file %s", configPath), tracetestcli.WithCLIConfig(cliConfig))
+	result := qualityTracecli.Exec(t, fmt.Sprintf("apply analyzer --file %s", configPath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -38,7 +38,7 @@ func TestGetAnalyzer(t *testing.T) {
 
 		// When I try to get a analyzer on yaml mode
 		// Then it should print a YAML with the default analyzer
-		result := tracetestcli.Exec(t, "get analyzer --id current --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get analyzer --id current --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		require.Equal(0, result.ExitCode)
 
 		analyzer := helpers.UnmarshalYAML[types.AnalyzerResource](t, result.StdOut)
@@ -59,7 +59,7 @@ func TestGetAnalyzer(t *testing.T) {
 
 		// When I try to get a config on yaml mode
 		// Then it should print a YAML
-		result := tracetestcli.Exec(t, "get analyzer --id current --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get analyzer --id current --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		require.Equal(0, result.ExitCode)
 
 		analyzer := helpers.UnmarshalYAML[types.AnalyzerResource](t, result.StdOut)
@@ -78,7 +78,7 @@ func TestGetAnalyzer(t *testing.T) {
 
 		// When I try to get a analyzer on json mode
 		// Then it should print a json
-		result := tracetestcli.Exec(t, "get analyzer --id current --output json", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get analyzer --id current --output json", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		analyzer := helpers.UnmarshalJSON[types.AnalyzerResource](t, result.StdOut)
@@ -102,7 +102,7 @@ func TestGetAnalyzer(t *testing.T) {
 
 		// When I try to get a analyzer on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, a analyzer item and empty line
-		result := tracetestcli.Exec(t, "get analyzer --id current --output pretty", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get analyzer --id current --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

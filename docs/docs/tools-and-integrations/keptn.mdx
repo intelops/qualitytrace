@@ -3,7 +3,7 @@ id: keptn
 title: Running Tracetest with Keptn
 description: Tracetest can be integrated and used with Keptn. This guide shows running Tracetest tests from Keptn.
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -11,7 +11,7 @@ keywords:
 image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_Thumbnail_14_rsvkmo.jpg
 ---
 
-[Tracetest](https://tracetest.io/) is a testing tool based on OpenTelemetry that permits you to test your distributed application. It allows you to use your trace data generated on your OpenTelemetry tools to check and assert if your application has the desired behavior defined by your test definitions.
+[Tracetest](https://qualityTrace.io/) is a testing tool based on OpenTelemetry that permits you to test your distributed application. It allows you to use your trace data generated on your OpenTelemetry tools to check and assert if your application has the desired behavior defined by your test definitions.
 
 [Keptn](https://keptn.sh/) is a powerful tool to automate the lifecycle of your application running on Kubernetes. One of the tasks that we can do with `keptn` is to test an application and see if it is healthy and ready to be used by your users.
 
@@ -20,20 +20,20 @@ By using the Keptn [Job Executor Service](https://github.com/keptn-contrib/job-e
 ```yaml
 apiVersion: v2
 actions:
-- name: "Run tracetest on your service"
+- name: "Run qualityTrace on your service"
   events:
     - name: "sh.keptn.event.test.triggered"
   tasks:
-    - name: "Run tracetest"
+    - name: "Run qualityTrace"
       files:
         - data/test-definition.yaml
-        - data/tracetest-cli-config.yaml
+        - data/qualityTrace-cli-config.yaml
       image: "intelops/qualityTrace:latest"
       cmd:
-        - tracetest
+        - qualityTrace
       args:
         - --config
-        - /keptn/data/tracetest-cli-config.yaml
+        - /keptn/data/qualityTrace-cli-config.yaml
         - test
         - run
         - --file
@@ -51,7 +51,7 @@ In your Kubernetes cluster you should have:
 
 1. `Keptn 1.0.x` [installed](https://keptn.sh/docs/1.0.x/install/).
 2. `Job Executor Service 0.3.x` [installed](https://github.com/keptn-contrib/job-executor-service/blob/main/docs/INSTALL.md).
-3. `Tracetest` server [installed](https://docs.tracetest.io/deployment/kubernetes) on the `tracetest` namespace. 
+3. `Tracetest` server [installed](https://docs.qualityTrace.io/deployment/kubernetes) on the `qualityTrace` namespace. 
 
 On your machine you should have:
 
@@ -73,7 +73,7 @@ To do that, we will do the following steps:
 apiVersion: "spec.keptn.sh/0.2.2"
 kind: "Shipyard"
 metadata:
- name: "shipyard-keptn-tracetest-integration"
+ name: "shipyard-keptn-qualityTrace-integration"
 spec:
  stages:
    - name: "production"
@@ -83,26 +83,26 @@ spec:
            - name: "test"
 ```
 
-2. Create a new `keptn-tracetest-integration` project using that `shipyard` file:
+2. Create a new `keptn-qualityTrace-integration` project using that `shipyard` file:
 ```sh
-keptn create project keptn-tracetest-integration -y -s shipyard.yaml
+keptn create project keptn-qualityTrace-integration -y -s shipyard.yaml
 ```
  
 **Note:** Keptn may ask you to have a Git repository for this project to enable GitOps. If so, you need to create an empty Git repository and a Git token and pass it through the flags `--git-remote-url`, `--git-user`, and `--git-token`. More details about this setup can be seen on [Keptn docs/Git-based upstream](https://keptn.sh/docs/1.0.x/manage/git_upstream).
  
 3. Create a `pokeshop` service:
 ```sh
-keptn create service pokeshop --project keptn-tracetest-integration -y
+keptn create service pokeshop --project keptn-qualityTrace-integration -y
 ```
  
 ### 2. Add Tracetest files and job files as resources of a service.
  
 Now, we will set up a job associated with the `pokeshop` service, listening to the task event `test-services`:
  
-1. Create the [`tracetest-cli-config.yaml`](https://github.com/intelops/qualityTrace/tree/main/examples/keptn-integration/tracetest-cli-config.yaml) configuration file for the Tracetest CLI in your current directory, identifying the Tracetest instance that should run the tests:
+1. Create the [`qualityTrace-cli-config.yaml`](https://github.com/intelops/qualityTrace/tree/main/examples/keptn-integration/qualityTrace-cli-config.yaml) configuration file for the Tracetest CLI in your current directory, identifying the Tracetest instance that should run the tests:
 ```yaml
 scheme: http
-endpoint: tracetest.tracetest.svc.cluster.local:11633
+endpoint: qualityTrace.qualityTrace.svc.cluster.local:11633
 ```
 
 2. Create the [`test-definition.yaml`](https://github.com/intelops/qualityTrace/tree/main/examples/keptn-integration/test-definition.yaml) Tracetest test definition in your current directory:
@@ -123,13 +123,13 @@ spec:
   specs:
   - selector: span[name = “Tracetest trigger”]
     assertions:
-    - attr:tracetest.span.duration < 500ms
+    - attr:qualityTrace.span.duration < 500ms
 ```
  
 3. Add these files as resources for the `pokeshop` service:
 ```sh
-keptn add-resource --project keptn-tracetest-integration --service pokeshop --stage production --resource test-definition.yaml --resourceUri data/test-definition.yaml
-keptn add-resource --project keptn-tracetest-integration --service pokeshop --stage production --resource tracetest-cli-config.yaml --resourceUri data/tracetest-cli-config.yaml
+keptn add-resource --project keptn-qualityTrace-integration --service pokeshop --stage production --resource test-definition.yaml --resourceUri data/test-definition.yaml
+keptn add-resource --project keptn-qualityTrace-integration --service pokeshop --stage production --resource qualityTrace-cli-config.yaml --resourceUri data/qualityTrace-cli-config.yaml
 ```
 
 These files will be located in the folder `data` and will be injected into our Keptn job that we will set up in the next step.
@@ -138,20 +138,20 @@ These files will be located in the folder `data` and will be injected into our K
 ```yaml
 apiVersion: v2
 actions:
-- name: "Run tracetest on your service"
+- name: "Run qualityTrace on your service"
   events:
     - name: "sh.keptn.event.test.triggered"
   tasks:
-    - name: "Run tracetest"
+    - name: "Run qualityTrace"
       files:
         - data/test-definition.yaml
-        - data/tracetest-cli-config.yaml
+        - data/qualityTrace-cli-config.yaml
       image: "intelops/qualityTrace:latest"
       cmd:
-        - tracetest
+        - qualityTrace
       args:
         - --config
-        - /keptn/data/tracetest-cli-config.yaml
+        - /keptn/data/qualityTrace-cli-config.yaml
         - test
         - run
         - --file
@@ -162,20 +162,20 @@ This job will run Tracetest every time a `test` event happens, listening to the 
 
 5. Add this job as a resource on Keptn:
 ```sh
-keptn add-resource --project keptn-tracetest-integration --service pokeshop --stage production --resource job-config.yaml --resourceUri job/config.yaml
+keptn add-resource --project keptn-qualityTrace-integration --service pokeshop --stage production --resource job-config.yaml --resourceUri job/config.yaml
 ```
  
 ### 3. Setup a Job Executor Service to see events emitted by the test step.
  
-To guarantee that our job will be called by Keptn when we execute the `deployment` sequence, we need to configure the integration `Job Executor Service` on `keptn-tracetest-integration` project to listen to `sh.keptn.event.test.triggered` events if it is not configured. We can do that only through the Keptn Bridge (their Web UI), by going to our project, choosing the `Settings` option, and later `Integrations`.
+To guarantee that our job will be called by Keptn when we execute the `deployment` sequence, we need to configure the integration `Job Executor Service` on `keptn-qualityTrace-integration` project to listen to `sh.keptn.event.test.triggered` events if it is not configured. We can do that only through the Keptn Bridge (their Web UI), by going to our project, choosing the `Settings` option, and later `Integrations`.
  
-Choose the `job-executor-service` integration, and add a subscription to the event `sh.keptn.event.test.triggered` and the project `keptn-tracetest-integration`.
+Choose the `job-executor-service` integration, and add a subscription to the event `sh.keptn.event.test.triggered` and the project `keptn-qualityTrace-integration`.
  
 ### 4. Run sequence when needed.
  
 Finally, to see the integration running, we only need to execute the following command:
 ```sh
-keptn trigger sequence test-sequence --project keptn-tracetest-integration --service pokeshop --stage production
+keptn trigger sequence test-sequence --project keptn-qualityTrace-integration --service pokeshop --stage production
 ```
 
-Now you should be able to see the sequence running for `keptn-tracetest-integration` project on Keptn Bridge.
+Now you should be able to see the sequence running for `keptn-qualityTrace-integration` project on Keptn Bridge.

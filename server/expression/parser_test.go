@@ -225,9 +225,9 @@ func TestStringInterpolation(t *testing.T) {
 		},
 		{
 			Name:  "should_support_json_formatting",
-			Query: `attr:tracetest.response.body = '{"userID":"${attr:myapp.myspan.user_id}"}'`,
+			Query: `attr:qualityTrace.response.body = '{"userID":"${attr:myapp.myspan.user_id}"}'`,
 			ExpectedOutput: expression.Statement{
-				Left:       attrExpr("tracetest.response.body"),
+				Left:       attrExpr("qualityTrace.response.body"),
 				Comparator: "=",
 				Right: &expression.Expr{
 					Left: &expression.Term{
@@ -281,7 +281,7 @@ func TestFilters(t *testing.T) {
 		},
 		{
 			Name:  "should_allow_filter_on_right_hand_side",
-			Query: `attr:user_id = attr:tracetest.response.body | json_path '.id'`,
+			Query: `attr:user_id = attr:qualityTrace.response.body | json_path '.id'`,
 			ExpectedOutput: expression.Statement{
 				Left: &expression.Expr{
 					Left: &expression.Term{
@@ -291,7 +291,7 @@ func TestFilters(t *testing.T) {
 				Comparator: "=",
 				Right: &expression.Expr{
 					Left: &expression.Term{
-						Attribute: attrp("tracetest.response.body"),
+						Attribute: attrp("qualityTrace.response.body"),
 					},
 					Filters: []*expression.Filter{
 						{
@@ -386,7 +386,7 @@ func TestFilters(t *testing.T) {
 		},
 		{
 			Name:  "should_allow_filters_inside_string_interpolation",
-			Query: `attr:message = "welcome to tracetest, ${attr:tracetest.response.body | json_path '.name'}"`,
+			Query: `attr:message = "welcome to qualityTrace, ${attr:qualityTrace.response.body | json_path '.name'}"`,
 			ExpectedOutput: expression.Statement{
 				Left: &expression.Expr{
 					Left: &expression.Term{
@@ -397,11 +397,11 @@ func TestFilters(t *testing.T) {
 				Right: &expression.Expr{
 					Left: &expression.Term{
 						Str: &expression.Str{
-							Text: "welcome to tracetest, %s",
+							Text: "welcome to qualityTrace, %s",
 							Args: []expression.Expr{
 								{
 									Left: &expression.Term{
-										Attribute: attrp("tracetest.response.body"),
+										Attribute: attrp("qualityTrace.response.body"),
 									},
 									Filters: []*expression.Filter{
 										{

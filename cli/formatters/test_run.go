@@ -151,7 +151,7 @@ func (f testRun) formatFailedTest(test openapi.Test, run openapi.TestRun) string
 
 		for _, result := range specResult.Results {
 			for _, spanResult := range result.SpanResults {
-				// meta assertions such as tracetest.selected_spans.count don't have a spanID,
+				// meta assertions such as qualityTrace.selected_spans.count don't have a spanID,
 				// so they will be treated differently. To overcome them, we will place all
 				// meta assertions under the "spanID = "meta"
 				spanID := "meta"

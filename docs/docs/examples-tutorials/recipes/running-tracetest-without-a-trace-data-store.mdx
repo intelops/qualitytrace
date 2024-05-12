@@ -1,10 +1,10 @@
 ---
-id: running-tracetest-without-a-trace-data-store
+id: running-qualityTrace-without-a-trace-data-store
 title: Node.js and OpenTelemetry
 description: Quick start how to configure a Node.js app to use OpenTelemetry instrumentation with traces, and Tracetest for enhancing your E2E and integration tests with trace-based testing.
 hide_table_of_contents: true
 keywords:
-  - tracetest
+  - qualityTrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -20,14 +20,14 @@ import CodeBlock from '@theme/CodeBlock';
 [Check out the source code on GitHub here.](https://github.com/intelops/qualityTrace/tree/main/examples/quick-start-nodejs)
 :::
 
-Build integration and end-to-end tests in minutes, instead of days, using [OpenTelemetry](https://opentelemetry.io/) and [Tracetest](https://tracetest.io/).
+Build integration and end-to-end tests in minutes, instead of days, using [OpenTelemetry](https://opentelemetry.io/) and [Tracetest](https://qualityTrace.io/).
 
 ## Node.js App with Tracetest
 
 This is a quick start on how to configure a Node.js app to use OpenTelemetry instrumentation with traces, and Tracetest for enhancing your E2E and integration tests with trace-based testing.
 
 ```mdx-code-block
-<Tabs groupId="running-tracetest-without-a-trace-data-store">
+<Tabs groupId="running-qualityTrace-without-a-trace-data-store">
   <TabItem value="Tracetest" label="Tracetest" default>
 ```
 
@@ -44,7 +44,7 @@ The project contains Tracetest Agent and a Node.js app.
 Install and run Tracetest Agent locally.
 
 ```bash title=Terminal
-tracetest start
+qualityTrace start
 ```
 
 Once started, Tracetest Agent will:
@@ -161,7 +161,7 @@ This will start the Node.js app and send the traces to Tracetest Agent.
 
 ## Run Tracetest Tests
 
-Open [Tracetest](https://app.tracetest.io/) and start creating tests! Make sure to use the `http://localhost:8080/` URL in your test creation.
+Open [Tracetest](https://app.qualityTrace.io/) and start creating tests! Make sure to use the `http://localhost:8080/` URL in your test creation.
 
 ```mdx-code-block
   </TabItem>
@@ -180,12 +180,12 @@ The project is built with Docker Compose. It contains two distinct `docker-compo
 The `docker-compose.yaml` file and `Dockerfile` in the root directory are for the Node.js app.
 
 ### 2. Tracetest Core
-The `docker-compose.yaml` file, `collector.config.yaml`, `tracetest-provision.yaml`, and `tracetest.config.yaml` in the `tracetest` directory are for the setting up Tracetest and the OpenTelemetry Collector.
+The `docker-compose.yaml` file, `collector.config.yaml`, `qualityTrace-provision.yaml`, and `qualityTrace.config.yaml` in the `qualityTrace` directory are for the setting up Tracetest and the OpenTelemetry Collector.
 
-The `tracetest` directory is self-contained and will run all the prerequisites for enabling OpenTelemetry traces and trace-based testing with Tracetest.
+The `qualityTrace` directory is self-contained and will run all the prerequisites for enabling OpenTelemetry traces and trace-based testing with Tracetest.
 
 ### Docker Compose Network
-All `services` in the `docker-compose.yaml` are on the same network and will be reachable by hostname from within other services. E.g. `tracetest:4317` in the `collector.config.yaml` will map to the `tracetest` service, where the port `4317` is the port where Tracetest accepts traces.
+All `services` in the `docker-compose.yaml` are on the same network and will be reachable by hostname from within other services. E.g. `qualityTrace:4317` in the `collector.config.yaml` will map to the `qualityTrace` service, where the port `4317` is the port where Tracetest accepts traces.
 
 ## Node.js App
 
@@ -275,7 +275,7 @@ Let's fix this by configuring Tracetest and OpenTelemetry Collector.
 
 ## Tracetest Core
 
-The `docker-compose.yaml` in the `tracetest` directory is configured with three services.
+The `docker-compose.yaml` in the `qualityTrace` directory is configured with three services.
 
 - **Postgres** - Postgres is a prerequisite for Tracetest to work. It stores trace data when running the trace-based tests.
 - [**OpenTelemetry Collector**](https://opentelemetry.io/docs/collector/) - A vendor-agnostic implementation of how to receive, process and export telemetry data.
@@ -284,15 +284,15 @@ The `docker-compose.yaml` in the `tracetest` directory is configured with three 
 ```yaml
 version: "3"
 services:
-  tracetest:
+  qualityTrace:
     image: intelops/qualityTrace:latest
     platform: linux/amd64
     volumes:
       - type: bind
-        source: ./tracetest/tracetest-config.yaml
-        target: /app/tracetest.yaml
+        source: ./qualityTrace/qualityTrace-config.yaml
+        target: /app/qualityTrace.yaml
       - type: bind
-        source: ./tracetest/tracetest-provision.yaml
+        source: ./qualityTrace/qualityTrace-provision.yaml
         target: /app/provisioning.yaml
     ports:
       - 11633:11633
@@ -325,19 +325,19 @@ services:
       - "--config"
       - "/otel-local-config.yaml"
     volumes:
-      - ./tracetest/collector.config.yaml:/otel-local-config.yaml
+      - ./qualityTrace/collector.config.yaml:/otel-local-config.yaml
 
 ```
 
-Tracetest Core depends on both Postgres and the OpenTelemetry Collector. Both Tracetest Core and the OpenTelemetry Collector require config files to be loaded via a volume. The volumes are mapped from the root directory into the `tracetest` directory and the respective config files.
+Tracetest Core depends on both Postgres and the OpenTelemetry Collector. Both Tracetest Core and the OpenTelemetry Collector require config files to be loaded via a volume. The volumes are mapped from the root directory into the `qualityTrace` directory and the respective config files.
 
 To start both the Node.js app and Tracetest Core we will run this command:
 
 ```bash
-docker-compose -f docker-compose.yaml -f tracetest/docker-compose.yaml up # add --build if the images are not built already
+docker-compose -f docker-compose.yaml -f qualityTrace/docker-compose.yaml up # add --build if the images are not built already
 ```
 
-The `tracetest-config.yaml` file contains the basic setup of connecting Tracetest Core to the Postgres instance.
+The `qualityTrace-config.yaml` file contains the basic setup of connecting Tracetest Core to the Postgres instance.
 
 ```yaml
 postgres:
@@ -350,11 +350,11 @@ postgres:
 
 ```
 
-The `tracetest-provision.yaml` file provisions the trace data store and polling to store in the Postgres database. The data store is set to OTLP, meaning the traces will be sent to Tracetest Core.
+The `qualityTrace-provision.yaml` file provisions the trace data store and polling to store in the Postgres database. The data store is set to OTLP, meaning the traces will be sent to Tracetest Core.
 
 But how are traces sent to Tracetest?
 
-The `collector.config.yaml` explains that. It receives traces via either `grpc` or `http`. Then, exports them to Tracetest's OLTP endpoint `tracetest:4317`.
+The `collector.config.yaml` explains that. It receives traces via either `grpc` or `http`. Then, exports them to Tracetest's OLTP endpoint `qualityTrace:4317`.
 
 ```yaml
 receivers:
@@ -371,9 +371,9 @@ exporters:
   logging:
     loglevel: debug
   otlp/1:
-    endpoint: tracetest:4317
+    endpoint: qualityTrace:4317
     # Send traces to Tracetest.
-    # Read more in docs here: https://docs.tracetest.io/configuration/connecting-to-data-stores/opentelemetry-collector
+    # Read more in docs here: https://docs.qualityTrace.io/configuration/connecting-to-data-stores/opentelemetry-collector
     tls:
       insecure: true
 
@@ -391,7 +391,7 @@ service:
 To start both the Node.js app and Tracetest, run this command:
 
 ```bash
-docker-compose -f docker-compose.yaml -f tracetest/docker-compose.yaml up # add --build if the images are not built already
+docker-compose -f docker-compose.yaml -f qualityTrace/docker-compose.yaml up # add --build if the images are not built already
 ```
 
 This will start your Tracetest Core instance on `http://localhost:11633/`.
@@ -405,4 +405,4 @@ Open the URL and start creating tests! Make sure to use the `http://app:8080/` U
 
 ## Learn More
 
-Feel free to check out our [examples in GitHub](https://github.com/intelops/qualityTrace/tree/main/examples) and join our [Slack Community](https://dub.sh/tracetest-community) for more info!
+Feel free to check out our [examples in GitHub](https://github.com/intelops/qualityTrace/tree/main/examples) and join our [Slack Community](https://dub.sh/qualityTrace-community) for more info!

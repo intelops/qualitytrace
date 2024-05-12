@@ -6,8 +6,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -28,12 +28,12 @@ func TestApplyConfig(t *testing.T) {
 	// Then it should be applied with success
 	configPath := env.GetTestResourcePath(t, "new-config")
 
-	result := tracetestcli.Exec(t, fmt.Sprintf("apply config --file %s", configPath), tracetestcli.WithCLIConfig(cliConfig))
+	result := qualityTracecli.Exec(t, fmt.Sprintf("apply config --file %s", configPath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	// When I try to get a config again
 	// Then it should return the config applied on the last step, with analytics disabled
-	result = tracetestcli.Exec(t, "get config --id current", tracetestcli.WithCLIConfig(cliConfig))
+	result = qualityTracecli.Exec(t, "get config --id current", qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	config := helpers.UnmarshalYAML[types.ConfigResource](t, result.StdOut)

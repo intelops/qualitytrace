@@ -98,7 +98,7 @@ func (e instrumentedAssertionExecutor) Assert(ctx context.Context, defs test.Spe
 
 	result, allPassed := e.assertionExecutor.Assert(ctx, defs, trace, ds)
 	span.SetAttributes(
-		attribute.Bool("tracetest.run.assertion_runner.all_assertions_passed", allPassed),
+		attribute.Bool("qualityTrace.run.assertion_runner.all_assertions_passed", allPassed),
 	)
 
 	return result, allPassed

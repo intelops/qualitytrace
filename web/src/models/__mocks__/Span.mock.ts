@@ -12,7 +12,7 @@ const SpanMock: IMockFactory<Span, TRawSpan> = () => ({
       endTime: faker.date.recent().getMilliseconds(),
       attributes: {
         'service.name': 'mock',
-        'tracetest.span.duration': '10',
+        'qualityTrace.span.duration': '10',
       },
       children: [],
       ...data,

@@ -7,8 +7,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -31,7 +31,7 @@ func TestApplyTestSuite(t *testing.T) {
 		// Then it should be applied with success
 		newTestSuitePath := env.GetTestResourcePath(t, "new-testsuite")
 
-		result := tracetestcli.Exec(t, fmt.Sprintf("apply testsuite --file %s", newTestSuitePath), tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", newTestSuitePath), qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		testsuite := helpers.UnmarshalYAML[types.TestSuiteResource](t, result.StdOut)
@@ -46,7 +46,7 @@ func TestApplyTestSuite(t *testing.T) {
 
 		// When I try to get the testsuite applied on the last step
 		// Then it should return it
-		result = tracetestcli.Exec(t, "get testsuite --id Qti5R3_VR --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result = qualityTracecli.Exec(t, "get testsuite --id Qti5R3_VR --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		require.Equal("TestSuite", testsuite.Type)
@@ -61,7 +61,7 @@ func TestApplyTestSuite(t *testing.T) {
 		// Then it should be applied with success
 		updatedNewTestSuitePath := env.GetTestResourcePath(t, "updated-new-testsuite")
 
-		result = tracetestcli.Exec(t, fmt.Sprintf("apply testsuite --file %s", updatedNewTestSuitePath), tracetestcli.WithCLIConfig(cliConfig))
+		result = qualityTracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", updatedNewTestSuitePath), qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		updatedTestSuite := helpers.UnmarshalYAML[types.TestSuiteResource](t, result.StdOut)
@@ -76,7 +76,7 @@ func TestApplyTestSuite(t *testing.T) {
 
 		// When I try to get the testsuite applied on the last step
 		// Then it should return it
-		result = tracetestcli.Exec(t, "get testsuite --id Qti5R3_VR --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result = qualityTracecli.Exec(t, "get testsuite --id Qti5R3_VR --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		updatedTestSuite = helpers.UnmarshalYAML[types.TestSuiteResource](t, result.StdOut)
@@ -97,7 +97,7 @@ func TestApplyTestSuite(t *testing.T) {
 
 		helpers.RemoveIDFromTestSuiteFile(t, testsuiteWithoutIDPath)
 
-		testsuiteWithoutIDResult := tracetestcli.Exec(t, fmt.Sprintf("apply testsuite --file %s", testsuiteWithoutIDPath), tracetestcli.WithCLIConfig(cliConfig))
+		testsuiteWithoutIDResult := qualityTracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", testsuiteWithoutIDPath), qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, testsuiteWithoutIDResult, 0)
 
 		content, err := os.ReadFile(testsuiteWithoutIDPath)
@@ -122,7 +122,7 @@ func TestApplyTestSuite(t *testing.T) {
 		// Then it should be applied with success
 		newTestSuitePath := env.GetTestResourcePath(t, "legacy-transaction")
 
-		result := tracetestcli.Exec(t, fmt.Sprintf("apply transaction --file %s", newTestSuitePath), tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, fmt.Sprintf("apply transaction --file %s", newTestSuitePath), qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		require.Contains(result.StdOut, "TestSuite")
@@ -134,7 +134,7 @@ func TestApplyTestSuite(t *testing.T) {
 
 		// When I try to get the testsuite applied on the last step
 		// Then it should return it
-		result = tracetestcli.Exec(t, "get transaction --id Qti5R3_VR --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result = qualityTracecli.Exec(t, "get transaction --id Qti5R3_VR --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		require.Contains(result.StdOut, "TestSuite")

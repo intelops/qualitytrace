@@ -45,7 +45,7 @@ func (op instrumentedOutputProcessor) process(ctx context.Context, outputs test.
 	}
 
 	span.SetAttributes(
-		attribute.String("tracetest.run.output_processor.outputs", string(encoded)),
+		attribute.String("qualityTrace.run.output_processor.outputs", string(encoded)),
 	)
 
 	return result, err

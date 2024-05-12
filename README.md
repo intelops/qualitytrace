@@ -1,9 +1,9 @@
-<a href="https://tracetest.io">
+<a href="https://qualityTrace.io">
   <p align="center">
     <picture>
-      <source media="(prefers-color-scheme: light)" srcset="assets/tracetest-logo-color-w-black-text.svg" width="auto" height="80">
-      <source media="(prefers-color-scheme: dark)" srcset="assets/tracetest-logo-color-w-white-text.svg" width="auto" height="80">
-      <img alt="Tracetest Logo" src="assets/tracetest-logo-color-w-black-text.svg" width="auto" height="80">
+      <source media="(prefers-color-scheme: light)" srcset="assets/qualityTrace-logo-color-w-black-text.svg" width="auto" height="80">
+      <source media="(prefers-color-scheme: dark)" srcset="assets/qualityTrace-logo-color-w-white-text.svg" width="auto" height="80">
+      <img alt="Tracetest Logo" src="assets/qualityTrace-logo-color-w-black-text.svg" width="auto" height="80">
     </picture>
   </p>
 </a>
@@ -16,7 +16,7 @@
 
 <b>
   <p align="center">
-    <a href="https://docs.tracetest.io/getting-started/installation">
+    <a href="https://docs.qualityTrace.io/getting-started/installation">
       Get Started! &nbsp;👉&nbsp;
     </a>
   </p>
@@ -24,13 +24,13 @@
 
 <b>
   <p align="center">
-    <a href="https://docs.tracetest.io/">Docs</a>&nbsp;|&nbsp;
-    <a href="https://docs.tracetest.io/examples-tutorials/overview">Tutorials</a>&nbsp;|&nbsp;
-    <a href="https://docs.tracetest.io/examples-tutorials/recipes">Recipes</a>&nbsp;|&nbsp;
+    <a href="https://docs.qualityTrace.io/">Docs</a>&nbsp;|&nbsp;
+    <a href="https://docs.qualityTrace.io/examples-tutorials/overview">Tutorials</a>&nbsp;|&nbsp;
+    <a href="https://docs.qualityTrace.io/examples-tutorials/recipes">Recipes</a>&nbsp;|&nbsp;
     <a href="https://github.com/intelops/qualityTrace/tree/main/examples">Examples</a>&nbsp;|&nbsp;
-    <a href="https://dub.sh/tracetest-community">Slack</a>&nbsp;|&nbsp;
-    <a href="https://tracetest.io/blog">Blog</a>&nbsp;|&nbsp;
-    <a href="https://tracetest.io">Website</a>
+    <a href="https://dub.sh/qualityTrace-community">Slack</a>&nbsp;|&nbsp;
+    <a href="https://qualityTrace.io/blog">Blog</a>&nbsp;|&nbsp;
+    <a href="https://qualityTrace.io">Website</a>
   </p>
 </b>
 
@@ -60,16 +60,16 @@
   <a href="https://github.com/intelops/qualityTrace/issues">
     <img src="https://img.shields.io/github/stars/intelops/qualityTrace?color=%23EAC54F&logo=github&label=Help us reach 1k stars! Now at:" alt="Help us reach 1k stars!" />
   </a>
-  <a href="https://tracetest.io/community">
+  <a href="https://qualityTrace.io/community">
     <img src="https://img.shields.io/badge/Join-Community!-purple" alt="Join our Community!" />
   </a>
-  <a href="https://dub.sh/tracetest-community">
+  <a href="https://dub.sh/qualityTrace-community">
     <img src="https://img.shields.io/badge/Chat-on Slack!-red" alt="Talk to us on Slack!" />
   </a>
   <a href="https://hub.docker.com/r/intelops/qualityTrace"><img title="Docker Pulls" src="https://img.shields.io/docker/pulls/intelops/qualityTrace?logo=docker"/></a>
   <a href="https://hub.docker.com/r/intelops/qualityTrace/tags?page=1&name=latest"><img title="Docker Image Size" src="https://img.shields.io/docker/image-size/intelops/qualityTrace/latest?logo=docker&label='intelops/qualityTrace:latest' image size"/></a>
-  <a href="https://twitter.com/tracetest_io">
-    <img src="https://img.shields.io/badge/follow-%40tracetest__io-1DA1F2?logo=twitter&style=social" alt="Tracetest Twitter" />
+  <a href="https://twitter.com/qualityTrace_io">
+    <img src="https://img.shields.io/badge/follow-%40qualityTrace__io-1DA1F2?logo=twitter&style=social" alt="Tracetest Twitter" />
   </a>
 </h4>
 
@@ -127,9 +127,9 @@ You can:
         body: '{"id":52}'
     specs:
     - name: 'All Database Spans: Processing time is less than 100ms'
-      selector: span[tracetest.span.type="database"]
+      selector: span[qualityTrace.span.type="database"]
       assertions:
-      - attr:tracetest.span.duration < 100ms
+      - attr:qualityTrace.span.duration < 100ms
   ```
 
 # 🚀 Getting Started
@@ -145,15 +145,15 @@ You can:
 
 ## Cloud-based Managed Tracetest (Free to get started!)
 
-The easiest and most reliable way to test microservices and distributed apps with OpenTelemetry distributed traces is signing up for free at [app.tracetest.io](https://app.tracetest.io/). After creating an account, getting started is as easy as [installing the Tracetest Agent](https://docs.tracetest.io/getting-started/installation).
+The easiest and most reliable way to test microservices and distributed apps with OpenTelemetry distributed traces is signing up for free at [app.qualityTrace.io](https://app.qualityTrace.io/). After creating an account, getting started is as easy as [installing the Tracetest Agent](https://docs.qualityTrace.io/getting-started/installation).
 
 ## Enterprise Self-hosted Tracetest (Coming soon...)
 
-Get the same experience as with the Cloud-based Managed Tracetest but self-hosted in your own infrastructure. [Book a call](https://dub.sh/tracetest-demo) to get into early access.
+Get the same experience as with the Cloud-based Managed Tracetest but self-hosted in your own infrastructure. [Book a call](https://dub.sh/qualityTrace-demo) to get into early access.
 
 ## Hobby Self-hosted Open-source Tracetest Core
 
-[Deploy a hobby self-hosted instance of Tracetest Core](https://docs.tracetest.io/core/getting-started/installation) as a Docker container. It's not suitable for production, but a great way to start using Tracetest Core in local environments.
+[Deploy a hobby self-hosted instance of Tracetest Core](https://docs.qualityTrace.io/core/getting-started/installation) as a Docker container. It's not suitable for production, but a great way to start using Tracetest Core in local environments.
 
 ### 1️⃣ Install the Tracetest CLI
 
@@ -161,56 +161,56 @@ Get the same experience as with the Cloud-based Managed Tracetest but self-hoste
 curl -L https://raw.githubusercontent.com/intelops/qualityTrace/main/install-cli.sh | bash -s
 ```
 
-> [:gear: Read the CLI installation docs for more options and instructions.](https://docs.tracetest.io/getting-started/installation#install-the-tracetest-cli)
+> [:gear: Read the CLI installation docs for more options and instructions.](https://docs.qualityTrace.io/getting-started/installation#install-the-qualityTrace-cli)
 
 ### 2️⃣ Install the Tracetest Server
 
 ```bash
-tracetest server install
+qualityTrace server install
 ```
 
-This command will launch an install wizard that automatically installs Tracetest and a [sample Pokeshop Demo app](https://docs.tracetest.io/live-examples/pokeshop/overview) into either Docker or Kubernetes based on your selection.
+This command will launch an install wizard that automatically installs Tracetest and a [sample Pokeshop Demo app](https://docs.qualityTrace.io/live-examples/pokeshop/overview) into either Docker or Kubernetes based on your selection.
 
-Or, install Tracetest with Helm. The Tracetest Helm charts are located [here](https://github.com/kubeshop/helm-charts/tree/main/charts/tracetest).
+Or, install Tracetest with Helm. The Tracetest Helm charts are located [here](https://github.com/kubeshop/helm-charts/tree/main/charts/qualityTrace).
 
 ```bash
-helm install tracetest intelops/qualityTrace --namespace=tracetest --create-namespace
+helm install qualityTrace intelops/qualityTrace --namespace=qualityTrace --create-namespace
 ```
 
-> [:gear: Read the Server installation docs for more options and instructions.](https://docs.tracetest.io/getting-started/installation#install-the-tracetest-server)
+> [:gear: Read the Server installation docs for more options and instructions.](https://docs.qualityTrace.io/getting-started/installation#install-the-qualityTrace-server)
 
 ### 3️⃣ Open Tracetest
 
 Once you've installed Tracetest Server, access the Tracetest Web UI on `http://localhost:11633`.
 
-Check out the [Opening Tracetest guide](https://docs.tracetest.io/core/getting-started/open) to start creating and running tests!
+Check out the [Opening Tracetest guide](https://docs.qualityTrace.io/core/getting-started/open) to start creating and running tests!
 
 # 🔥 Features
 
-- Works out of the box with your existing OpenTelemetry instrumentation, supporting [numerous trace data stores](https://docs.tracetest.io/configuration/overview/#supported-trace-data-stores), including:
+- Works out of the box with your existing OpenTelemetry instrumentation, supporting [numerous trace data stores](https://docs.qualityTrace.io/configuration/overview/#supported-trace-data-stores), including:
   - Jeager
   - Grafana Tempo
   - OpenSearch
   - Elastic
   - And, many more...
   - Tell us which other trace data stores you want supported!
-- Works out of the box by adding Tracetest as an [additional pipeline](https://docs.tracetest.io/configuration/connecting-to-data-stores/opentelemetry-collector) via your OpenTelemetry Collector config.
+- Works out of the box by adding Tracetest as an [additional pipeline](https://docs.qualityTrace.io/configuration/connecting-to-data-stores/opentelemetry-collector) via your OpenTelemetry Collector config.
 - Supporting multiple ways of creating a test, including HTTP, GRPC and Postman Collections.
 - Visualize the changes you are making to your trace as you develop, enabling Observability-Driven Development.
-- [Add assertions](https://docs.tracetest.io/using-tracetest/adding-assertions) based on response data from the trigger request and all trace data contained in the spans of your distributed trace.
-- Specify which spans to check in assertions via the [selector language](https://docs.tracetest.io/concepts/selectors).
+- [Add assertions](https://docs.qualityTrace.io/using-qualityTrace/adding-assertions) based on response data from the trigger request and all trace data contained in the spans of your distributed trace.
+- Specify which spans to check in assertions via the [selector language](https://docs.qualityTrace.io/concepts/selectors).
 - Define checks against the attributes in these spans, including properties, return status, or timing.
-- Create tests visually in the Tracetest Web UI or programatically via [YAML-based test definition files](https://docs.tracetest.io/cli/test-definition-file).
-- Use test definition files and the Tracetest CLI to [enable Gitops flows and CI/CD automation](https://docs.tracetest.io/ci-cd-automation/overview).
-- [Tracetest CLI](https://docs.tracetest.io/cli/cli-installation-reference) allows importing & exporting tests, running tests, and more.
-- [Version tests](https://docs.tracetest.io/concepts/versioning/) as the definition of the test is altered.
-- The [guided install](https://docs.tracetest.io/getting-started/installation) can include [an example "Pokeshop" microservice](https://docs.tracetest.io/live-examples/pokeshop/overview) that is instrumented with OpenTelemetry to use as an example application under test.
-- Create [environment variables](https://docs.tracetest.io/concepts/environments) to assert the same behavior across multiple environments (dev, staging, and production, for example)
-- Create [test outputs](https://docs.tracetest.io/web-ui/creating-test-outputs/) by defining a variable based on the information contained in a particular span's attributes.
-- Run [ad-hoc tests](https://docs.tracetest.io/concepts/ad-hoc-testing) by using undefined variables to enable supplying variables at runtime.
-- Define [test suites/transactions](https://docs.tracetest.io/concepts/transactions) to chain tests together and use variables obtained from a test in a subsequent test. These variables can also be loaded from the environment.
-- Run comprehensive [trace analysis and validation](https://docs.tracetest.io/analyzer/concepts) to adhere to OpenTelemetry rules and standards.
-- Configure [test runner](https://docs.tracetest.io/configuration/test-runner) behavior with required gates used when executing your tests to determine whether to mark the test as passed or failed.
+- Create tests visually in the Tracetest Web UI or programatically via [YAML-based test definition files](https://docs.qualityTrace.io/cli/test-definition-file).
+- Use test definition files and the Tracetest CLI to [enable Gitops flows and CI/CD automation](https://docs.qualityTrace.io/ci-cd-automation/overview).
+- [Tracetest CLI](https://docs.qualityTrace.io/cli/cli-installation-reference) allows importing & exporting tests, running tests, and more.
+- [Version tests](https://docs.qualityTrace.io/concepts/versioning/) as the definition of the test is altered.
+- The [guided install](https://docs.qualityTrace.io/getting-started/installation) can include [an example "Pokeshop" microservice](https://docs.qualityTrace.io/live-examples/pokeshop/overview) that is instrumented with OpenTelemetry to use as an example application under test.
+- Create [environment variables](https://docs.qualityTrace.io/concepts/environments) to assert the same behavior across multiple environments (dev, staging, and production, for example)
+- Create [test outputs](https://docs.qualityTrace.io/web-ui/creating-test-outputs/) by defining a variable based on the information contained in a particular span's attributes.
+- Run [ad-hoc tests](https://docs.qualityTrace.io/concepts/ad-hoc-testing) by using undefined variables to enable supplying variables at runtime.
+- Define [test suites/transactions](https://docs.qualityTrace.io/concepts/transactions) to chain tests together and use variables obtained from a test in a subsequent test. These variables can also be loaded from the environment.
+- Run comprehensive [trace analysis and validation](https://docs.qualityTrace.io/analyzer/concepts) to adhere to OpenTelemetry rules and standards.
+- Configure [test runner](https://docs.qualityTrace.io/configuration/test-runner) behavior with required gates used when executing your tests to determine whether to mark the test as passed or failed.
 
 # 🤔 How does Tracetest work?
 
@@ -225,7 +225,7 @@ Once the test is built, it can be run automatically as part of a build process. 
 
 # 📂 What does the test definition file look like?
 
-The Tracetest [test definition files](https://docs.tracetest.io/cli/test-definition-file) are written in a simple YAML format. You can write them directly or build them graphically via the UI. Here is an example of a test which:
+The Tracetest [test definition files](https://docs.qualityTrace.io/cli/test-definition-file) are written in a simple YAML format. You can write them directly or build them graphically via the UI. Here is an example of a test which:
 
 - Executes `POST` against the `pokemon/import` endpoint.
 - Verifies that the HTTP blocks return a `200` status code.
@@ -238,7 +238,7 @@ spec:
   name: DEMO Pokemon - Import - Import a Pokemon
   description: "Import a pokemon"
 
-  # Configure how tracetest triggers the operation on your application
+  # Configure how qualityTrace triggers the operation on your application
   # triggers can be http, grpc, etc
   trigger:
       type: http
@@ -254,16 +254,16 @@ spec:
   # and an assertion
   specs:
       # the selector defines which spans will be targeted by the assertions
-      selector: span[tracetest.span.type = "http"]
+      selector: span[qualityTrace.span.type = "http"]
       # the assertions define the checks to be run. In this case, all
       # http spans will be checked for a status code = 200
       - assertions:
           - http.status_code = 200
       # this next test ensures all the database spans execute in less
       # than 50 ms
-      selector: span[tracetest.span.type = "database"]
+      selector: span[qualityTrace.span.type = "database"]
       - assertions:
-          - tracetest.span.duration < "50ms"
+          - qualityTrace.span.duration < "50ms"
 ```
 
 # 🤖 How to run an automated test?
@@ -271,14 +271,14 @@ spec:
 Save a test definition file above as `pokeshop_import.yaml`. Use the CLI to run a test.
 
 ```bash
-tracetest run test --file /path/to/pokeshop_import.yaml
+qualityTrace run test --file /path/to/pokeshop_import.yaml
 ```
 
-Check out the [CI/CD docs](https://docs.tracetest.io/ci-cd-automation/overview) to learn more about test automation.
+Check out the [CI/CD docs](https://docs.qualityTrace.io/ci-cd-automation/overview) to learn more about test automation.
 
 # 🧪 Tests
 
-We strive to produce quality code and improve Tracetest rapidly and safely. Therefore, we have a full suite of both front-end and back-end tests. Cypress tests are running against the front-end code and (surprise, surprise) Tracetest against the back-end code. You can see the [test runs here](https://github.com/intelops/qualityTrace/actions/workflows/pull-request.yaml), and a blog post describing our [testing pipelines here](https://tracetest.io/blog/50-faster-ci-pipelines-with-github-actions).
+We strive to produce quality code and improve Tracetest rapidly and safely. Therefore, we have a full suite of both front-end and back-end tests. Cypress tests are running against the front-end code and (surprise, surprise) Tracetest against the back-end code. You can see the [test runs here](https://github.com/intelops/qualityTrace/actions/workflows/pull-request.yaml), and a blog post describing our [testing pipelines here](https://qualityTrace.io/blog/50-faster-ci-pipelines-with-github-actions).
 
 # 🎤 Feedback
 
@@ -287,8 +287,8 @@ Have an idea to improve Tracetest?
 You can:
 
 - [Create an issue here](https://github.com/intelops/qualityTrace/issues/new/choose)!
-- Join our [Slack](https://dub.sh/tracetest-community), and ask us any questions there.
-- Follow us on [Twitter at @tracetest_io](https://twitter.com/tracetest_io) for updates.
+- Join our [Slack](https://dub.sh/qualityTrace-community), and ask us any questions there.
+- Follow us on [Twitter at @qualityTrace_io](https://twitter.com/qualityTrace_io) for updates.
 - Give us a ⭐️ on Github if you like what we're doing!
 
 # 🌱 Contributing & Community
@@ -297,5 +297,5 @@ Whether it's big or small, we love contributions.
 
 Not sure where to get started? You can:
 
-- Visit our [Community Page](https://tracetest.io/community).
+- Visit our [Community Page](https://qualityTrace.io/community).
 - See our contributing guidelines [here](./CONTRIBUTING.md).

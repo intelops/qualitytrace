@@ -29,7 +29,7 @@ const GithubActions = () => {
         The endpoint parameter is the base address where your Tracetest Core Server is installed. <br /> Here&apos;s a
         full example of how to use it:{' '}
         <a href={GITHUB_ACTION_URL} target="__blank">
-          tracetest-cli-with-tracetest-core.yml
+          qualityTrace-cli-with-qualityTrace-core.yml
         </a>
       </S.Subtitle>
     </S.Container>

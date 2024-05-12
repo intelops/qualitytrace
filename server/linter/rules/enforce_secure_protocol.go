@@ -29,7 +29,7 @@ func (r enforceHttpsProtocolRule) Evaluate(ctx context.Context, trace traces.Tra
 
 	if config.ErrorLevel != analyzer.ErrorLevelDisabled {
 		for _, span := range trace.Flat {
-			if span.Attributes.Get("tracetest.span.type") == "http" {
+			if span.Attributes.Get("qualityTrace.span.type") == "http" {
 				result := r.validate(span)
 				if !result.Passed {
 					passed = false

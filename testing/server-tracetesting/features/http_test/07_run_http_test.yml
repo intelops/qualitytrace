@@ -15,32 +15,32 @@ spec:
   specs:
   - selector: span[name = "Tracetest trigger"]
     assertions:
-    - attr:tracetest.selected_spans.count = 1
-    - attr:tracetest.response.status = 200
+    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualityTrace.response.status = 200
     # Ensure startTime and endTime are present in span
-    - attr:tracetest.span.start_time > 0
-    - attr:tracetest.span.end_time > 0
-  - selector: span[name = "POST /api/tests/{testId}/run" tracetest.span.type = "http"]
+    - attr:qualityTrace.span.start_time > 0
+    - attr:qualityTrace.span.end_time > 0
+  - selector: span[name = "POST /api/tests/{testId}/run" qualityTrace.span.type = "http"]
     assertions:
-    - attr:tracetest.selected_spans.count = 1
+    - attr:qualityTrace.selected_spans.count = 1
   - selector: span[name = "Trigger test"]
     assertions:
-    - attr:tracetest.selected_spans.count = 1
-    - attr:tracetest.run.trigger.test_id = "${var:HTTP_TEST_ID}"
-    - attr:tracetest.run.trigger.type = "http"
-    - attr:tracetest.run.trigger.http.response_code = 200
+    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualityTrace.run.trigger.test_id = "${var:HTTP_TEST_ID}"
+    - attr:qualityTrace.run.trigger.type = "http"
+    - attr:qualityTrace.run.trigger.http.response_code = 200
   - selector: span[name = "Fetching trace"]
     assertions:
-    - attr:tracetest.selected_spans.count > 0
-    - attr:tracetest.run.trace_poller.test_id = "${var:HTTP_TEST_ID}"
+    - attr:qualityTrace.selected_spans.count > 0
+    - attr:qualityTrace.run.trace_poller.test_id = "${var:HTTP_TEST_ID}"
   - selector: span[name = "Evaluating trace"]:last
     assertions:
-    - attr:tracetest.run.trace_poller.succesful = "true"
+    - attr:qualityTrace.run.trace_poller.succesful = "true"
   - selector: span[name = "Execute assertions"]
     assertions:
-    - attr:tracetest.selected_spans.count = 1
-    - attr:tracetest.run.assertion_runner.all_assertions_passed = "true"
+    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualityTrace.run.assertion_runner.all_assertions_passed = "true"
   outputs:
   - name: HTTP_TEST_RUN_ID
     selector: span[name = "Tracetest trigger"]
-    value: attr:tracetest.response.body | json_path '$.id'
+    value: attr:qualityTrace.response.body | json_path '$.id'

@@ -2,13 +2,13 @@ import {SemanticAttributes, SemanticResourceAttributes} from '@opentelemetry/sem
 
 export const TraceTestAttributes = {
   NAME: 'name',
-  KIND: 'tracetest.span.kind',
-  TRACETEST_SPAN_TYPE: 'tracetest.span.type',
-  TRACETEST_SPAN_DURATION: 'tracetest.span.duration',
-  TRACETEST_RESPONSE_STATUS: 'tracetest.response.status',
-  TRACETEST_RESPONSE_BODY: 'tracetest.response.body',
-  TRACETEST_RESPONSE_HEADERS: 'tracetest.response.headers',
-  TRACETEST_SELECTED_SPANS_COUNT: 'tracetest.selected_spans.count',
+  KIND: 'qualityTrace.span.kind',
+  TRACETEST_SPAN_TYPE: 'qualityTrace.span.type',
+  TRACETEST_SPAN_DURATION: 'qualityTrace.span.duration',
+  TRACETEST_RESPONSE_STATUS: 'qualityTrace.response.status',
+  TRACETEST_RESPONSE_BODY: 'qualityTrace.response.body',
+  TRACETEST_RESPONSE_HEADERS: 'qualityTrace.response.headers',
+  TRACETEST_SELECTED_SPANS_COUNT: 'qualityTrace.selected_spans.count',
 };
 
 export const Attributes: Record<string, string> = {

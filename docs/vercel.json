@@ -73,7 +73,7 @@
     },
     {
       "destination": "/ci-cd-automation/tekton-pipeline",
-      "source": "/examples-tutorials/recipes/running-tracetest-with-tekton",
+      "source": "/examples-tutorials/recipes/running-qualityTrace-with-tekton",
       "statusCode": 301
     },
     {
@@ -118,12 +118,12 @@
     },
     {
       "destination": "/ci-cd-automation/tekton-pipeline",
-      "source": "/examples-tutorials/recipes/running-tracetest-with-tekton/",
+      "source": "/examples-tutorials/recipes/running-qualityTrace-with-tekton/",
       "statusCode": 301
     },
     {
       "destination": "/ci-cd-automation/tekton-pipeline",
-      "source": "/examples-tutorials/recipes/running-tracetest-with-tekton",
+      "source": "/examples-tutorials/recipes/running-qualityTrace-with-tekton",
       "statusCode": 301
     },
     {
@@ -138,12 +138,12 @@
     },
     {
       "destination": "/web-ui/creating-tests",
-      "source": "/using-tracetest/create-test/",
+      "source": "/using-qualityTrace/create-test/",
       "statusCode": 301
     },
     {
       "destination": "/web-ui/creating-tests",
-      "source": "/using-tracetest/create-test",
+      "source": "/using-qualityTrace/create-test",
       "statusCode": 301
     },
     {

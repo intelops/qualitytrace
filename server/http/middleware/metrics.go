@@ -34,7 +34,7 @@ func (m *httpMetricMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request)
 	}
 
 	if tenantID := TenantIDFromContext(r.Context()); tenantID != "" {
-		metricAttributes = append(metricAttributes, attribute.String("tracetest.tenant_id", tenantID))
+		metricAttributes = append(metricAttributes, attribute.String("qualityTrace.tenant_id", tenantID))
 	}
 
 	m.requestDurationHistogram.Record(r.Context(), duration.Milliseconds(), metric.WithAttributeSet(

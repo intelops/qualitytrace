@@ -6,8 +6,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -21,7 +21,7 @@ func addGetTestSuitePreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	newTestSuitePath := env.GetTestResourcePath(t, "new-testsuite")
 
-	result := tracetestcli.Exec(t, fmt.Sprintf("apply testsuite --file %s", newTestSuitePath), tracetestcli.WithCLIConfig(cliConfig))
+	result := qualityTracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", newTestSuitePath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -41,7 +41,7 @@ func TestGetTestSuite(t *testing.T) {
 
 		// When I try to get a TestSuite on yaml mode
 		// Then it should return a error message
-		result := tracetestcli.Exec(t, "get testsuite --id no-id --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get testsuite --id no-id --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "Resource testsuite with ID no-id not found")
 	})
@@ -55,7 +55,7 @@ func TestGetTestSuite(t *testing.T) {
 
 		// When I try to get a TestSuite on yaml mode
 		// Then it should print a YAML
-		result := tracetestcli.Exec(t, "get testsuite --id Qti5R3_VR --output yaml", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get testsuite --id Qti5R3_VR --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		testsuite := helpers.UnmarshalYAML[types.TestSuiteResource](t, result.StdOut)
@@ -76,7 +76,7 @@ func TestGetTestSuite(t *testing.T) {
 
 		// When I try to get a TestSuite on json mode
 		// Then it should print a json
-		result := tracetestcli.Exec(t, "get testsuite --id Qti5R3_VR --output json", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get testsuite --id Qti5R3_VR --output json", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		// it should return an augmented resource on get
@@ -101,7 +101,7 @@ func TestGetTestSuite(t *testing.T) {
 
 		// When I try to get a TestSuite on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, testsuite item and empty line
-		result := tracetestcli.Exec(t, "get testsuite --id Qti5R3_VR --output pretty", tracetestcli.WithCLIConfig(cliConfig))
+		result := qualityTracecli.Exec(t, "get testsuite --id Qti5R3_VR --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

@@ -47,16 +47,16 @@ func configureDockerCompose(conf configuration, ui cliUI.UI) configuration {
 }
 
 func configureDockerComposeOutput(conf configuration, ui cliUI.UI) configuration {
-	conf.set("output.dir", "tracetest/")
+	conf.set("output.dir", "qualityTrace/")
 
 	return conf
 }
 
 const (
-	dockerComposeFilename       = "docker-compose.yaml"
-	tracetestConfigFilename     = "tracetest.yaml"
-	tracetestProvisionFilename  = "tracetest-provision.yaml"
-	otelCollectorConfigFilename = "collector.config.yaml"
+	dockerComposeFilename         = "docker-compose.yaml"
+	qualityTraceConfigFilename    = "qualityTrace.yaml"
+	qualityTraceProvisionFilename = "qualityTrace-provision.yaml"
+	otelCollectorConfigFilename   = "collector.config.yaml"
 )
 
 func dockerComposeInstaller(config configuration, ui cliUI.UI) {
@@ -67,7 +67,7 @@ func dockerComposeInstaller(config configuration, ui cliUI.UI) {
 		ui.Exit(err.Error())
 	}
 
-	tracetestConfigFile := getTracetestConfigFileContents("postgres", "postgres", "postgres", ui, config)
+	qualityTraceConfigFile := getTracetestConfigFileContents("postgres", "postgres", "postgres", ui, config)
 
 	dockerComposeFile := getDockerComposeFileContents(ui, config)
 	dockerComposeFName := filepath.Join(dir, dockerComposeFilename)
@@ -80,19 +80,19 @@ func dockerComposeInstaller(config configuration, ui cliUI.UI) {
 
 	createDir(ui, dir)
 	saveFile(ui, dockerComposeFName, dockerComposeFile)
-	saveFile(ui, filepath.Join(dir, tracetestConfigFilename), tracetestConfigFile)
+	saveFile(ui, filepath.Join(dir, qualityTraceConfigFilename), qualityTraceConfigFile)
 
-	tracetestProvisionFile := getTracetestProvisionFileContents(ui, config)
-	saveFile(ui, filepath.Join(dir, tracetestProvisionFilename), tracetestProvisionFile)
+	qualityTraceProvisionFile := getTracetestProvisionFileContents(ui, config)
+	saveFile(ui, filepath.Join(dir, qualityTraceProvisionFilename), qualityTraceProvisionFile)
 
-	if !config.Bool("installer.only_tracetest") {
+	if !config.Bool("installer.only_qualityTrace") {
 		collectorConfigFile := getCollectorConfigFileContents(ui, config)
 		saveFile(ui, filepath.Join(dir, otelCollectorConfigFilename), collectorConfigFile)
 	}
 
 	ui.Success("Install successful!")
 	ui.Println(fmt.Sprintf(`
-To start tracetest:
+To start qualityTrace:
 
 	%s
 
@@ -107,7 +107,7 @@ Happy TraceTesting =)
 
 func getDockerComposeFileContents(ui cliUI.UI, config configuration) []byte {
 	project := getCompleteProject(ui, config)
-	include := []string{"tracetest", "postgres"}
+	include := []string{"qualityTrace", "postgres"}
 
 	if config.Bool("demo.enable.pokeshop") {
 		include = append(include, "cache", "queue", "stream", "demo-api", "demo-worker", "demo-rpc", "demo-streaming-worker", "otel-collector")
@@ -116,13 +116,13 @@ func getDockerComposeFileContents(ui cliUI.UI, config configuration) []byte {
 	// filter and update project
 	filterAndFixContainers(ui, project, include)
 
-	// set version for tracetest container
+	// set version for qualityTrace container
 	if err := fixTracetestContainer(config, project, cliConfig.Version); err != nil {
-		ui.Exit(fmt.Sprintf("cannot configure tracetest container: %s", err.Error()))
+		ui.Exit(fmt.Sprintf("cannot configure qualityTrace container: %s", err.Error()))
 	}
 
 	//remove provision parameters if we will not install a tracing backend
-	if !config.Bool("tracetest.backend.install") {
+	if !config.Bool("qualityTrace.backend.install") {
 		removeProvisioningInfo(ui, project)
 	}
 
@@ -173,7 +173,7 @@ func filterAndFixContainers(ui cliUI.UI, project *types.Project, included []stri
 }
 
 func removeProvisioningInfo(ui cliUI.UI, project *types.Project) {
-	const serviceName = "tracetest"
+	const serviceName = "qualityTrace"
 
 	tts, err := project.GetService(serviceName)
 	if err != nil {
@@ -206,9 +206,9 @@ func getCollectorConfigFileContents(ui cliUI.UI, config configuration) []byte {
 	exporter := "otlp/1"
 	exporters := msa{
 		"otlp/1": msa{
-			"endpoint": config.String("tracetest.backend.endpoint"),
+			"endpoint": config.String("qualityTrace.backend.endpoint"),
 			"tls": msa{
-				"insecure": config.Bool("tracetest.backend.tls.insecure"),
+				"insecure": config.Bool("qualityTrace.backend.tls.insecure"),
 			},
 		},
 	}
@@ -250,7 +250,7 @@ func saveFile(ui cliUI.UI, fname string, contents []byte) {
 }
 
 func fixTracetestContainer(config configuration, project *types.Project, version string) error {
-	const serviceName = "tracetest"
+	const serviceName = "qualityTrace"
 	tts, err := project.GetService(serviceName)
 	if err != nil {
 		return err
@@ -262,9 +262,9 @@ func fixTracetestContainer(config configuration, project *types.Project, version
 
 	tts.Image = "intelops/qualityTrace:" + version
 	tts.Build = nil
-	tts.Volumes[0].Source = tracetestConfigFilename
-	tracetestDevEnv := "${TRACETEST_DEV}"
-	tts.Environment["TRACETEST_DEV"] = &tracetestDevEnv
+	tts.Volumes[0].Source = qualityTraceConfigFilename
+	qualityTraceDevEnv := "${TRACETEST_DEV}"
+	tts.Environment["TRACETEST_DEV"] = &qualityTraceDevEnv
 
 	replaceService(project, serviceName, tts)
 
@@ -303,13 +303,13 @@ func getFileContentsForVersion(path, version string) ([]byte, error) {
 }
 
 func getCompleteProject(ui cliUI.UI, config configuration) *types.Project {
-	tracetestDCContents, err := getFileContentsForVersion("examples/collector/docker-compose.yml", cliConfig.Version)
+	qualityTraceDCContents, err := getFileContentsForVersion("examples/collector/docker-compose.yml", cliConfig.Version)
 	if err != nil {
 		ui.Exit(fmt.Errorf("cannot get docker-compose file: %w", err).Error())
 	}
 
 	configFiles := []types.ConfigFile{
-		{Filename: "docker-compose.yaml", Content: tracetestDCContents},
+		{Filename: "docker-compose.yaml", Content: qualityTraceDCContents},
 	}
 
 	if config.Bool("demo.enable.pokeshop") {
@@ -326,13 +326,13 @@ func getCompleteProject(ui cliUI.UI, config configuration) *types.Project {
 	}
 
 	project, err := loader.LoadWithContext(context.Background(), types.ConfigDetails{
-		WorkingDir:  fmt.Sprintf("%s/tracetest", workingDir),
+		WorkingDir:  fmt.Sprintf("%s/qualityTrace", workingDir),
 		ConfigFiles: configFiles,
 		Environment: map[string]string{
 			"TRACETEST_DEV": "",
 		},
 	}, func(o *loader.Options) {
-		o.SetProjectName("tracetest", true)
+		o.SetProjectName("qualityTrace", true)
 	})
 	if err != nil {
 		ui.Exit(fmt.Errorf("cannot parse docker-compose file: %w", err).Error())

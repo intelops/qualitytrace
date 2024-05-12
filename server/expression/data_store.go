@@ -14,7 +14,7 @@ type DataStore interface {
 }
 
 var attributeAlias = map[string]string{
-	"name": "tracetest.span.name",
+	"name": "qualityTrace.span.name",
 }
 
 type AttributeDataStore struct {

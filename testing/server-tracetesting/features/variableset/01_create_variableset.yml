@@ -32,20 +32,20 @@ spec:
   specs:
     - selector: span[name = "Tracetest trigger"]
       assertions:
-        - attr:tracetest.selected_spans.count = 1
-        - attr:tracetest.response.status = 201
+        - attr:qualityTrace.selected_spans.count = 1
+        - attr:qualityTrace.response.status = 201
         # ensure we can reference outputs declared in the same test
-        - attr:tracetest.response.body | json_path '$.spec.id' = var:VARIABLE_SET_ID
-    - selector: span[name="POST /api/variablesets" tracetest.span.type="http"]
+        - attr:qualityTrace.response.body | json_path '$.spec.id' = var:VARIABLE_SET_ID
+    - selector: span[name="POST /api/variablesets" qualityTrace.span.type="http"]
       assertions:
-        - attr:tracetest.selected_spans.count  =  1
+        - attr:qualityTrace.selected_spans.count  =  1
     - selector: span[name = "exec INSERT"]
       assertions:
-        - attr:tracetest.selected_spans.count = 1
+        - attr:qualityTrace.selected_spans.count = 1
     - selector: span[name = "exec INSERT"]:first
       assertions:
         - attr:sql.query contains "INSERT INTO variable_sets"
   outputs:
     - name: VARIABLE_SET_ID
       selector: span[name = "Tracetest trigger"]
-      value: attr:tracetest.response.body | json_path '$.spec.id'
+      value: attr:qualityTrace.response.body | json_path '$.spec.id'

@@ -2,26 +2,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tracetest-agent
+  name: qualityTrace-agent
   labels:
-    app: tracetest-agent
+    app: qualityTrace-agent
 spec:
   selector:
     matchLabels:
-      app: tracetest-agent
+      app: qualityTrace-agent
   template:
     metadata:
       labels:
-        app: tracetest-agent
+        app: qualityTrace-agent
     spec:
       containers:
-        - name: tracetest-agent
+        - name: qualityTrace-agent
           image: intelops/qualityTrace-agent:TAG
           env:
             - name: TRACETEST_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: tracetest-agent-secret
+                  name: qualityTrace-agent-secret
                   key: api-key
 
           ports:
@@ -36,12 +36,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tracetest-agent
+  name: qualityTrace-agent
   labels:
-    app: tracetest-agent
+    app: qualityTrace-agent
 spec:
   selector:
-    app: tracetest-agent
+    app: qualityTrace-agent
   ports:
     - name: grpc-collector-entrypoint
       protocol: TCP

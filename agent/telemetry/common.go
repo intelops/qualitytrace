@@ -10,7 +10,7 @@ import (
 )
 
 func getAgentServiceName(serviceName string) string {
-	return fmt.Sprintf("tracetest.agent-%s", serviceName)
+	return fmt.Sprintf("qualityTrace.agent-%s", serviceName)
 }
 
 func getResource(serviceName string) (*resource.Resource, error) {

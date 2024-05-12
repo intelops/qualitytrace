@@ -38,6 +38,6 @@ spec:
   type: jaeger
   default: true
   jaeger:
-    endpoint: jaeger-query.tracetest:16685
+    endpoint: jaeger-query.qualityTrace:16685
     tls:
       insecure: true

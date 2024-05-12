@@ -6,8 +6,8 @@ import (
 
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
 	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/tracetestcli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -28,7 +28,7 @@ func TestApplyDemo(t *testing.T) {
 	// Then it should be applied with success
 	newDemoPath := env.GetTestResourcePath(t, "new-demo")
 
-	result := tracetestcli.Exec(t, fmt.Sprintf("apply demo --file %s", newDemoPath), tracetestcli.WithCLIConfig(cliConfig))
+	result := qualityTracecli.Exec(t, fmt.Sprintf("apply demo --file %s", newDemoPath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	demo := helpers.UnmarshalYAML[types.DemoResource](t, result.StdOut)
@@ -45,7 +45,7 @@ func TestApplyDemo(t *testing.T) {
 	// When I try to get the demo applied on the last step
 	// Then it should return it
 	command := fmt.Sprintf("get demo --id %s --output yaml", demo.Spec.Id)
-	result = tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+	result = qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	demo = helpers.UnmarshalYAML[types.DemoResource](t, result.StdOut)
@@ -65,7 +65,7 @@ func TestApplyDemo(t *testing.T) {
 	helpers.Copy(updatedNewDemoPath+".tpl", updatedNewDemoPath)
 	helpers.InjectIdIntoDemoFile(t, updatedNewDemoPath, demo.Spec.Id)
 
-	result = tracetestcli.Exec(t, fmt.Sprintf("apply demo --file %s", updatedNewDemoPath), tracetestcli.WithCLIConfig(cliConfig))
+	result = qualityTracecli.Exec(t, fmt.Sprintf("apply demo --file %s", updatedNewDemoPath), qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	updatedDemo := helpers.UnmarshalYAML[types.DemoResource](t, result.StdOut)
@@ -81,7 +81,7 @@ func TestApplyDemo(t *testing.T) {
 	// When I try to get the demo applied on the last step
 	// Then it should return it
 	command = fmt.Sprintf("get demo --id %s --output yaml", updatedDemo.Spec.Id)
-	result = tracetestcli.Exec(t, command, tracetestcli.WithCLIConfig(cliConfig))
+	result = qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	updatedDemo = helpers.UnmarshalYAML[types.DemoResource](t, result.StdOut)
