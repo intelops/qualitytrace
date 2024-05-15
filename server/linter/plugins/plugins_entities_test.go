@@ -4,11 +4,11 @@ import (
 	"context"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/linter/plugins"
-	"github.com/intelops/qualityTrace/server/linter/rules"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/linter/plugins"
+	"github.com/intelops/qualitytrace/server/linter/rules"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/traces"
 	"github.com/stretchr/testify/assert"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -73,7 +73,7 @@ func spanWithAttributes(spanType string, attributes map[string]string) traces.Sp
 		span.Attributes.Set(name, value)
 	}
 
-	span.Attributes.Set("qualityTrace.span.type", spanType)
+	span.Attributes.Set("qualitytrace.span.type", spanType)
 
 	return span
 }

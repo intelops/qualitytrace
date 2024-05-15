@@ -5,10 +5,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -19,7 +19,7 @@ func addListConfigPreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	configPath := env.GetTestResourcePath(t, "new-config")
 
-	result := qualityTracecli.Exec(t, fmt.Sprintf("apply config --file %s", configPath), qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, fmt.Sprintf("apply config --file %s", configPath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -39,7 +39,7 @@ func TestListConfig(t *testing.T) {
 		// When I try to list config on pretty mode and there is no config previously registered
 		// Then it should print an empty table
 		// Then it should print a table with 4 lines printed: header, separator, the default config item and empty line
-		result := qualityTracecli.Exec(t, "list config --sortBy name --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list config --sortBy name --output pretty", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "current")
 
@@ -56,7 +56,7 @@ func TestListConfig(t *testing.T) {
 
 		// When I try to list a config by an invalid field
 		// Then I should receive an error
-		result := qualityTracecli.Exec(t, "list config --sortBy id --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list config --sortBy id --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 1)
 		require.Contains(result.StdErr, "invalid sort field: id") // TODO: think on how to improve this error handling
 	})
@@ -68,7 +68,7 @@ func TestListConfig(t *testing.T) {
 
 		// When I try to list config again on yaml mode
 		// Then it should print a YAML list with one item
-		result := qualityTracecli.Exec(t, "list config --sortBy name --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list config --sortBy name --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		configYAML := helpers.UnmarshalYAMLSequence[types.ConfigResource](t, result.StdOut)
@@ -87,7 +87,7 @@ func TestListConfig(t *testing.T) {
 
 		// When I try to list config again on json mode
 		// Then it should print a JSON list with one item
-		result := qualityTracecli.Exec(t, "list config --sortBy name --output json", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list config --sortBy name --output json", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		configList := helpers.UnmarshalJSON[types.ResourceList[types.ConfigResource]](t, result.StdOut)
@@ -107,7 +107,7 @@ func TestListConfig(t *testing.T) {
 
 		// When I try to list config again on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, config item and empty line
-		result := qualityTracecli.Exec(t, "list config --sortBy name --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list config --sortBy name --output pretty", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

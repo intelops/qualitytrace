@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/cli/formatters"
-	"github.com/intelops/qualityTrace/cli/openapi"
-	"github.com/intelops/qualityTrace/cli/pkg/fileutil"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/formatters"
+	"github.com/intelops/qualitytrace/cli/openapi"
+	"github.com/intelops/qualitytrace/cli/pkg/fileutil"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
 )
 
 type testFormatter interface {

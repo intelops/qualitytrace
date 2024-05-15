@@ -11,8 +11,8 @@ import (
 	"github.com/fullstorydev/grpcurl"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/test"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/test"
 	"github.com/jhump/protoreflect/desc"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
@@ -94,8 +94,8 @@ func (te *grpcTriggerer) Trigger(ctx context.Context, test test.Test, opts *Trig
 	}
 
 	response.SpanAttributes = map[string]string{
-		"qualityTrace.run.trigger.grpc.response_status_code": strconv.Itoa(int(h.respCode)),
-		"qualityTrace.run.trigger.grpc.response_status":      h.respCode.String(),
+		"qualitytrace.run.trigger.grpc.response_status_code": strconv.Itoa(int(h.respCode)),
+		"qualitytrace.run.trigger.grpc.response_status":      h.respCode.String(),
 	}
 
 	return response, nil

@@ -1,15 +1,15 @@
 version: "3"
 services:
 
-  qualityTrace:
-    image: intelops/qualityTrace:${TAG:-latest}
+  qualitytrace:
+    image: intelops/qualitytrace:${TAG:-latest}
     restart: unless-stopped
     volumes:
       - type: bind
-        source: ./qualityTrace-config.yaml
-        target: /app/qualityTrace.yaml
+        source: ./qualitytrace-config.yaml
+        target: /app/qualitytrace.yaml
       - type: bind
-        source: ./qualityTrace-provision.yaml
+        source: ./qualitytrace-provision.yaml
         target: /app/provisioning.yaml
     ports:
       - 11633:11633

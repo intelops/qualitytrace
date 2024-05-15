@@ -6,10 +6,10 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
-	"github.com/intelops/qualityTrace/server/config/demo"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/resourcemanager"
-	rmtests "github.com/intelops/qualityTrace/server/resourcemanager/testutil"
+	"github.com/intelops/qualitytrace/server/config/demo"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
+	rmtests "github.com/intelops/qualitytrace/server/resourcemanager/testutil"
 )
 
 func TestPokeshopDemoResource(t *testing.T) {

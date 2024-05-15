@@ -1,5 +1,5 @@
 export VERSION?=dev
-export TRACETEST_DEFAULT_CLOUD_ENDPOINT=https://app.qualityTrace.io
+export TRACETEST_DEFAULT_CLOUD_ENDPOINT=https://app.qualitytrace.io
 TAG?=$(VERSION)
 GORELEASER_VERSION=1.23.0-pro
 
@@ -15,14 +15,14 @@ endif
 
 
 CLI_SRC_FILES := $(shell find cli -type f)
-dist/qualityTrace: goreleaser-version generate-cli $(CLI_SRC_FILES)
+dist/qualitytrace: goreleaser-version generate-cli $(CLI_SRC_FILES)
 	goreleaser build --single-target --clean --snapshot --id cli
-	find ./dist -name 'qualityTrace' -exec cp {} ./dist \;
+	find ./dist -name 'qualitytrace' -exec cp {} ./dist \;
 
 SERVER_SRC_FILES := $(shell find server -type f)
-dist/qualityTrace-server: goreleaser-version generate-server $(SERVER_SRC_FILES)
+dist/qualitytrace-server: goreleaser-version generate-server $(SERVER_SRC_FILES)
 	goreleaser build --single-target --clean --snapshot --id server
-	find ./dist -name 'qualityTrace-server' -exec cp {} ./dist \;
+	find ./dist -name 'qualitytrace-server' -exec cp {} ./dist \;
 
 web/node_modules: web/package.json web/package-lock.json
 	cd web; npm install
@@ -31,10 +31,10 @@ WEB_SRC_FILES := $(shell find web -type f -not -path "*node_modules*" -not -path
 web/build: web/node_modules $(WEB_SRC_FILES)
 	cd web; npm run build
 
-dist/qualityTrace-docker-$(TAG).tar dist/qualityTrace-agent-docker-$(TAG).tar: $(CLI_SRC_FILES) $(SERVER_SRC_FILES) $(WEB_SRC_FILES) Dockerfile Dockerfile.agent agent/entrypoint.sh
+dist/qualitytrace-docker-$(TAG).tar dist/qualitytrace-agent-docker-$(TAG).tar: $(CLI_SRC_FILES) $(SERVER_SRC_FILES) $(WEB_SRC_FILES) Dockerfile Dockerfile.agent agent/entrypoint.sh
 	goreleaser release --clean --skip=announce --snapshot -f .goreleaser.dev.yaml
-	docker save --output dist/qualityTrace-docker-$(TAG).tar "intelops/qualityTrace:$(TAG)"
-	docker save --output dist/qualityTrace-agent-docker-$(TAG).tar "intelops/qualityTrace-agent:$(TAG)"
+	docker save --output dist/qualitytrace-docker-$(TAG).tar "intelops/qualitytrace:$(TAG)"
+	docker save --output dist/qualitytrace-agent-docker-$(TAG).tar "intelops/qualitytrace-agent:$(TAG)"
 
 help: Makefile ## show list of commands
 	@echo "Choose a command run:"
@@ -48,11 +48,11 @@ view-open-api: ## Run SwaggerUI locally to see OpenAPI documentation
 	@docker run --rm -p 9002:8080 -v $(shell pwd)/api:/api -e SWAGGER_JSON=/api/openapi.yaml swaggerapi/swagger-ui
 
 .PHONY: run build build-go build-web build-docker
-run: build-docker ## build and run qualityTrace using docker compose
+run: build-docker ## build and run qualitytrace using docker compose
 	docker compose up
-build-go: dist/qualityTrace dist/qualityTrace-server ## build all go code
+build-go: dist/qualitytrace dist/qualitytrace-server ## build all go code
 build-web: web/build ## build web
-build-docker: goreleaser-version web/build .goreleaser.dev.yaml dist/qualityTrace-docker-$(TAG).tar dist/qualityTrace-agent-docker-$(TAG).tar ## build and tag docker image as defined in .goreleaser.dev.yaml
+build-docker: goreleaser-version web/build .goreleaser.dev.yaml dist/qualitytrace-docker-$(TAG).tar dist/qualitytrace-agent-docker-$(TAG).tar ## build and tag docker image as defined in .goreleaser.dev.yaml
 
 .PHONY: generate generate-server generate-cli generate-web
 generate: generate-server generate-cli generate-web ## generate code entities from openapi definitions for all parts of the code
@@ -109,4 +109,4 @@ clean: ## cleans the build artifacts
 	rm -rf dist
 	rm -rf web/build
 	rm -rf web/node_modules
-	docker image rm "intelops/qualityTrace:$(TAG)"
+	docker image rm "intelops/qualitytrace:$(TAG)"

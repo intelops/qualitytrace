@@ -16,14 +16,14 @@ spec:
   - name: Tracetest API deleted the test last test created
     selector: span[name = "Tracetest trigger"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
-    - attr:qualityTrace.response.status = 204
+    - attr:qualitytrace.selected_spans.count = 1
+    - attr:qualitytrace.response.status = 204
   - name: Tracetest API endpoint 'DELETE /api/tests/{id}' was called once
-    selector: span[name="DELETE /api/tests/{id}" qualityTrace.span.type="http"]
+    selector: span[name="DELETE /api/tests/{id}" qualitytrace.span.type="http"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualitytrace.selected_spans.count = 1
   - name: All test entities were deleted
     selector: span[name = "exec DELETE"]
     assertions:
     # must delete test and runs. That's why we need 2 deletes
-    - attr:qualityTrace.selected_spans.count = 4
+    - attr:qualitytrace.selected_spans.count = 4

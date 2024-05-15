@@ -5,8 +5,8 @@ import (
 	"math"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/resourcemanager"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
 )
 
 type Strategy string

@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/intelops/qualityTrace/cli/cmdutil"
-	"github.com/intelops/qualityTrace/cli/config"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
-	"github.com/intelops/qualityTrace/cli/ui"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/config"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/ui"
 
 	"github.com/spf13/cobra"
 )

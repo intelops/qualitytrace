@@ -3,8 +3,8 @@ package expression_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/expression"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/expression"
+	"github.com/intelops/qualitytrace/server/traces"
 )
 
 func BenchmarkSimpleExpressions(b *testing.B) {

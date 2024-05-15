@@ -3,11 +3,11 @@ package pages
 import (
 	"fmt"
 
-	"github.com/intelops/qualityTrace/agent/ui"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/components"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/events"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/models"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/sensors"
+	"github.com/intelops/qualitytrace/agent/ui"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/components"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/events"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/models"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/sensors"
 	"github.com/rivo/tview"
 )
 

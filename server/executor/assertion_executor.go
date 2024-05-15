@@ -3,11 +3,11 @@ package executor
 import (
 	"context"
 
-	"github.com/intelops/qualityTrace/server/assertions/selectors"
-	"github.com/intelops/qualityTrace/server/expression"
-	"github.com/intelops/qualityTrace/server/pkg/maps"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/assertions/selectors"
+	"github.com/intelops/qualitytrace/server/expression"
+	"github.com/intelops/qualitytrace/server/pkg/maps"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/traces"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -98,7 +98,7 @@ func (e instrumentedAssertionExecutor) Assert(ctx context.Context, defs test.Spe
 
 	result, allPassed := e.assertionExecutor.Assert(ctx, defs, trace, ds)
 	span.SetAttributes(
-		attribute.Bool("qualityTrace.run.assertion_runner.all_assertions_passed", allPassed),
+		attribute.Bool("qualitytrace.run.assertion_runner.all_assertions_passed", allPassed),
 	)
 
 	return result, allPassed

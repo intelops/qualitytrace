@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/intelops/qualityTrace/server/http/middleware"
+	"github.com/intelops/qualitytrace/server/http/middleware"
 )
 
 func Tenant(ctx context.Context, query string, params ...any) (string, []any) {

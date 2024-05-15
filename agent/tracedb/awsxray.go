@@ -17,10 +17,10 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/xray"
-	"github.com/intelops/qualityTrace/agent/tracedb/connection"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/agent/tracedb/connection"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/traces"
 	conventions "go.opentelemetry.io/collector/semconv/v1.6.1"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -101,10 +101,10 @@ func (db *awsxrayDB) TestConnection(ctx context.Context) model.ConnectionResult 
 		connection.WithAuthenticationTest(connection.NewTestStep(func(ctx context.Context) (string, error) {
 			_, err := db.GetTraceByID(ctx, db.GetTraceID().String())
 			if err != nil && strings.Contains(strings.ToLower(err.Error()), "403") {
-				return `Tracetest tried to execute an AWS XRay API request but it failed due to authentication issues`, err
+				return `Qualitytrace tried to execute an AWS XRay API request but it failed due to authentication issues`, err
 			}
 
-			return "Tracetest managed to authenticate with the AWS Services", nil
+			return "Qualitytrace managed to authenticate with the AWS Services", nil
 		})),
 	)
 
@@ -206,9 +206,9 @@ func generateSpan(seg *segment, parent *traces.Span) (traces.Span, error) {
 			return span, err
 		}
 
-		attributes.Set(traces.TracetestMetadataFieldParentID, parentID.String())
+		attributes.Set(traces.QualitytraceMetadataFieldParentID, parentID.String())
 	} else if parent != nil {
-		attributes.Set(traces.TracetestMetadataFieldParentID, parent.ID.String())
+		attributes.Set(traces.QualitytraceMetadataFieldParentID, parent.ID.String())
 	}
 
 	// decode span id

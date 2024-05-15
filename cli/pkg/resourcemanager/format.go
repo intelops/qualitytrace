@@ -65,7 +65,7 @@ func (j jsonFormat) String() string {
 
 func (j jsonFormat) BuildRequest(req *http.Request, _ Verb) error {
 	req.Header.Set("Accept", j.ContentType())
-	req.Header.Set("X-Tracetest-Augmented", "true")
+	req.Header.Set("X-Qualitytrace-Augmented", "true")
 	return nil
 }
 

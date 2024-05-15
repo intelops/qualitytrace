@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/intelops/qualityTrace/agent/telemetry"
+	"github.com/intelops/qualitytrace/agent/telemetry"
 
-	"github.com/intelops/qualityTrace/agent/client"
-	"github.com/intelops/qualityTrace/agent/event"
-	"github.com/intelops/qualityTrace/agent/proto"
-	"github.com/intelops/qualityTrace/agent/tracedb"
-	"github.com/intelops/qualityTrace/server/model"
+	"github.com/intelops/qualitytrace/agent/client"
+	"github.com/intelops/qualitytrace/agent/event"
+	"github.com/intelops/qualitytrace/agent/proto"
+	"github.com/intelops/qualitytrace/agent/tracedb"
+	"github.com/intelops/qualitytrace/server/model"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
@@ -71,10 +71,10 @@ func (w *TestConnectionWorker) Test(ctx context.Context, request *proto.DataStor
 	ctx, span := w.tracer.Start(ctx, "TestConnectionRequest Worker operation")
 	defer span.End()
 
-	runCounter, _ := w.meter.Int64Counter("qualityTrace.agent.testconnectionworker.runs")
+	runCounter, _ := w.meter.Int64Counter("qualitytrace.agent.testconnectionworker.runs")
 	runCounter.Add(ctx, 1)
 
-	errorCounter, _ := w.meter.Int64Counter("qualityTrace.agent.testconnectionworker.errors")
+	errorCounter, _ := w.meter.Int64Counter("qualitytrace.agent.testconnectionworker.errors")
 
 	w.logger.Debug("Received datastore connection test request")
 	w.observer.StartDataStoreConnection(request)

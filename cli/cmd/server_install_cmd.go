@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/intelops/qualityTrace/cli/cmdutil"
-	"github.com/intelops/qualityTrace/cli/installer"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/installer"
 	"github.com/spf13/cobra"
 	"golang.org/x/exp/slices"
 )
@@ -16,8 +16,8 @@ var installerParams = &installerParameters{
 
 var serverInstallCmd = &cobra.Command{
 	Use:    "install",
-	Short:  "Install a new Tracetest server",
-	Long:   "Install a new Tracetest server",
+	Short:  "Install a new Qualitytrace server",
+	Long:   "Install a new Qualitytrace server",
 	PreRun: setupCommand(SkipConfigValidation(), SkipVersionMismatchCheck()),
 	Run: func(_ *cobra.Command, _ []string) {
 		installer.Force = installerParams.Force
@@ -32,11 +32,11 @@ var serverInstallCmd = &cobra.Command{
 
 func init() {
 	serverInstallCmd.Flags().BoolVarP(&installerParams.Force, "force", "f", false, "Overwrite existing files")
-	serverInstallCmd.Flags().StringVar(&installerParams.KubernetesContext, "kubernetes-context", "", "Kubernetes context used to install Tracetest. It will be only used if 'run-environment' is set as 'kubernetes'.")
+	serverInstallCmd.Flags().StringVar(&installerParams.KubernetesContext, "kubernetes-context", "", "Kubernetes context used to install Qualitytrace. It will be only used if 'run-environment' is set as 'kubernetes'.")
 
 	// these commands will not have shorthand parameters to avoid colision with existing ones in other commands
-	serverInstallCmd.Flags().Var(&installerParams.InstallationMode, "mode", "Indicate the type of demo environment to be installed with Tracetest. It can be 'with-demo' or 'just-qualityTrace'.")
-	serverInstallCmd.Flags().Var(&installerParams.RunEnvironment, "run-environment", "Type of environment were Tracetest will be installed. It can be 'docker' or 'kubernetes'.")
+	serverInstallCmd.Flags().Var(&installerParams.InstallationMode, "mode", "Indicate the type of demo environment to be installed with Qualitytrace. It can be 'with-demo' or 'just-qualitytrace'.")
+	serverInstallCmd.Flags().Var(&installerParams.RunEnvironment, "run-environment", "Type of environment were Qualitytrace will be installed. It can be 'docker' or 'kubernetes'.")
 
 	serverCmd.AddCommand(serverInstallCmd)
 }
@@ -74,7 +74,7 @@ func (p installerParameters) Validate(cmd *cobra.Command, args []string) []cmdut
 	if cmd.Flags().Lookup("mode").Changed && slices.Contains(AllowedInstallationMode, p.InstallationMode) {
 		errors = append(errors, cmdutil.ParamError{
 			Parameter: "mode",
-			Message:   "mode must be one of 'not-chosen', 'with-demo' or 'just-qualityTrace'",
+			Message:   "mode must be one of 'not-chosen', 'with-demo' or 'just-qualitytrace'",
 		})
 	}
 

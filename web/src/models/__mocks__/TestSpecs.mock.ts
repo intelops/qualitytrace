@@ -10,7 +10,7 @@ const TestSpecsMock: IMockFactory<TestSpecs, TRawTestSpecs> = () => ({
         selectorParsed: {query: `span[http.status_code] = "20${index}"]`},
         assertions: new Array(faker.datatype.number({min: 2, max: 10}))
           .fill(null)
-          .map(() => 'attr:qualityTrace.span.type = "http"'),
+          .map(() => 'attr:qualitytrace.span.type = "http"'),
       })),
       ...data,
     };

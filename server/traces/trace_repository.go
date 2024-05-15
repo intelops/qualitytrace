@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/intelops/qualityTrace/server/pkg/sqlutil"
+	"github.com/intelops/qualitytrace/server/pkg/sqlutil"
 	"go.opentelemetry.io/otel/trace"
 )
 

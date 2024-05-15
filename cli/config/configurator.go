@@ -8,11 +8,11 @@ import (
 	"strings"
 
 	"github.com/golang-jwt/jwt"
-	agentConfig "github.com/intelops/qualityTrace/agent/config"
-	"github.com/intelops/qualityTrace/cli/analytics"
-	"github.com/intelops/qualityTrace/cli/pkg/oauth"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
-	cliUI "github.com/intelops/qualityTrace/cli/ui"
+	agentConfig "github.com/intelops/qualitytrace/agent/config"
+	"github.com/intelops/qualitytrace/cli/analytics"
+	"github.com/intelops/qualitytrace/cli/pkg/oauth"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
+	cliUI "github.com/intelops/qualitytrace/cli/ui"
 	"go.uber.org/zap"
 )
 
@@ -36,7 +36,7 @@ func NewConfigurator(resources *resourcemanager.Registry) Configurator {
 		resources: resources,
 		ui:        ui,
 		onFinish: func(_ context.Context, _ Config) {
-			ui.Success("Successfully configured Tracetest CLI")
+			ui.Success("Successfully configured Qualitytrace CLI")
 			ui.Finish()
 		},
 		errorHandlerFn: func(ctx context.Context, err error) {
@@ -142,7 +142,7 @@ func (c Configurator) getServerURL(prev *Config) (string, error) {
 
 	// if flag was passed, don't show prompt
 	if c.flags.ServerURL == "" {
-		serverURL = c.ui.TextInput("What qualityTrace server do you want to use?", c.lastUsedURL(prev))
+		serverURL = c.ui.TextInput("What qualitytrace server do you want to use?", c.lastUsedURL(prev))
 	}
 
 	if err := validateServerURL(serverURL); err != nil {
@@ -219,7 +219,7 @@ func (c Configurator) populateConfigWithVersionInfo(ctx context.Context, cfg Con
 	if useDevVersion && Version == "dev" {
 		c.populateConfigWithDevConfig(ctx, &cfg)
 
-		c.ui.Success("Configured Tracetest CLI in development mode")
+		c.ui.Success("Configured Qualitytrace CLI in development mode")
 
 		return cfg, nil, false
 	}
@@ -238,7 +238,7 @@ func (c Configurator) populateConfigWithVersionInfo(ctx context.Context, cfg Con
 			return Config{}, fmt.Errorf("could not save configuration: %w", err), false
 		}
 
-		c.ui.Success("Successfully configured Tracetest CLI")
+		c.ui.Success("Successfully configured Qualitytrace CLI")
 		return cfg, nil, true
 	}
 

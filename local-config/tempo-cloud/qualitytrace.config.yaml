@@ -9,12 +9,12 @@ postgres:
 telemetry:
   exporters:
     collector:
-      serviceName: qualityTrace
+      serviceName: qualitytrace
       sampling: 100 # 100%
       exporter:
         type: collector
         collector:
-          endpoint: localhost:24317
+          endpoint: localhost:4317
 
 server:
   telemetry:

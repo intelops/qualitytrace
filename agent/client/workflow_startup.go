@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/intelops/qualityTrace/agent/proto"
+	"github.com/intelops/qualitytrace/agent/proto"
 	"go.uber.org/zap"
 )
 

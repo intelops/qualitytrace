@@ -15,11 +15,11 @@ spec:
   specs:
     - selector: span[name = "Tracetest trigger"]
       assertions:
-        - attr:qualityTrace.selected_spans.count = 1
-        - attr:qualityTrace.response.status = 204
-    - selector: span[qualityTrace.span.type="http" http.method = "DELETE"]
+        - attr:qualitytrace.selected_spans.count = 1
+        - attr:qualitytrace.response.status = 204
+    - selector: span[qualitytrace.span.type="http" http.method = "DELETE"]
       assertions:
-        - attr:qualityTrace.selected_spans.count = 1
+        - attr:qualitytrace.selected_spans.count = 1
     - selector: span[name = "exec DELETE"]
       assertions:
-        - attr:qualityTrace.selected_spans.count = 1
+        - attr:qualitytrace.selected_spans.count = 1

@@ -1,4 +1,4 @@
-# test suite based on https://github.com/open-telemetry/opentelemetry-demo/tree/main/test/qualityTraceing/frontend-service
+# test suite based on https://github.com/open-telemetry/opentelemetry-demo/tree/main/test/qualitytraceing/frontend-service
 
 type: Test
 spec:
@@ -23,12 +23,12 @@ spec:
         }
   specs:
   - name: It called the frontend with success and got a valid redirectUrl for each ads
-    selector: span[qualityTrace.span.type="general" name="Tracetest trigger"]
+    selector: span[qualitytrace.span.type="general" name="Tracetest trigger"]
     assertions:
-    - attr:qualityTrace.response.status = 200
-    - attr:qualityTrace.response.body | json_path '$[0].redirectUrl' contains "/product/"
-    - attr:qualityTrace.response.body | json_path '$[1].redirectUrl' contains "/product/"
+    - attr:qualitytrace.response.status = 200
+    - attr:qualitytrace.response.body | json_path '$[0].redirectUrl' contains "/product/"
+    - attr:qualitytrace.response.body | json_path '$[1].redirectUrl' contains "/product/"
   - name: It returns two ads
-    selector: span[qualityTrace.span.type="rpc" name="oteldemo.AdService/GetAds" rpc.system="grpc" rpc.method="GetAds" rpc.service="oteldemo.AdService"]
+    selector: span[qualitytrace.span.type="rpc" name="oteldemo.AdService/GetAds" rpc.system="grpc" rpc.method="GetAds" rpc.service="oteldemo.AdService"]
     assertions:
     - attr:app.ads.count = 2

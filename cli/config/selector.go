@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
-	cliUI "github.com/intelops/qualityTrace/cli/ui"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
+	cliUI "github.com/intelops/qualitytrace/cli/ui"
 )
 
 type Entry struct {

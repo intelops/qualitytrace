@@ -19,9 +19,9 @@ import (
 	"golang.org/x/exp/slices"
 
 	"github.com/gorilla/mux"
-	"github.com/intelops/qualityTrace/server/http/middleware"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/pkg/validation"
+	"github.com/intelops/qualitytrace/server/http/middleware"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/validation"
 )
 
 type ResourceSpec interface {
@@ -494,7 +494,7 @@ func (m *manager[T]) list(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-const HeaderAugmented = "X-Tracetest-Augmented"
+const HeaderAugmented = "X-Qualitytrace-Augmented"
 
 func isRequestForAugmented(r *http.Request) bool {
 	return r.Header.Get(HeaderAugmented) == "true"

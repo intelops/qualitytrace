@@ -4,7 +4,7 @@ title: Pokeshop API - Get Pokemon by ID
 description: As a testing ground, the Tracetest team has implemented a sample API instrumented with OpenTelemetry around the PokeAPI. This use case retrieves a specific Pokemon from the cache if it is cached or from the database (Postgres) also populating the cache.
 hide_table_of_contents: false
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -100,7 +100,7 @@ Now you can validate this entire use case.
 If you want to replicate those tests on Tracetest, you can replicate these steps on our Web UI or using our CLI, saving one of the test definitions as the file `test-definition.yml` and running:
 
 ```sh
-qualityTrace run test -f test-definition.yml
+qualitytrace run test -f test-definition.yml
 ```
 
 #### Cache Miss Scenario
@@ -118,21 +118,21 @@ spec:
       - key: Content-Type
         value: application/json
   specs:
-  - selector: span[qualityTrace.span.type="http" http.method="GET"]
+  - selector: span[qualitytrace.span.type="http" http.method="GET"]
     assertions:
     - attr:http.status_code  =  200
     - attr:http.response.body | json_path '$.id'  =  '${var:POKEMON_ID}'
-  - selector: span[qualityTrace.span.type="database" db.system="redis" db.operation="get"]
+  - selector: span[qualitytrace.span.type="database" db.system="redis" db.operation="get"]
     assertions:
     - attr:name  =  "get pokemon-${var:POKEMON_ID}"
-  - selector: span[qualityTrace.span.type="database" db.system="redis" db.operation="set"]
+  - selector: span[qualitytrace.span.type="database" db.system="redis" db.operation="set"]
     assertions:
     - attr:name = "set pokemon-${var:POKEMON_ID}"
   - selector: |-
-      span[qualityTrace.span.type="database" name="findOne pokeshop.pokemon"
+      span[qualitytrace.span.type="database" name="findOne pokeshop.pokemon"
             db.system="postgres" db.name="pokeshop" db.operation="findOne" db.sql.table="pokemon"]
     assertions:
-    - attr:qualityTrace.selected_spans.count > 0
+    - attr:qualitytrace.selected_spans.count > 0
 ```
 
 #### Cache Miss Scenario
@@ -150,17 +150,17 @@ spec:
       - key: Content-Type
         value: application/json
   specs:
-  - selector: span[qualityTrace.span.type="http" http.method="GET"]
+  - selector: span[qualitytrace.span.type="http" http.method="GET"]
     assertions:
     - attr:http.status_code  =  200
     - attr:http.response.body | json_path '$.id'  =  "${var:POKEMON_ID}"
-  - selector: span[qualityTrace.span.type="database" db.system="redis" db.operation="get"]
+  - selector: span[qualitytrace.span.type="database" db.system="redis" db.operation="get"]
     assertions:
     - attr:name = "get pokemon-${var:POKEMON_ID}"
     - attr:db.result | json_path '$.id' = "${var:POKEMON_ID}"
   - selector: |-
-      span[qualityTrace.span.type="database" name="findOne pokeshop.pokemon"
+      span[qualitytrace.span.type="database" name="findOne pokeshop.pokemon"
             db.system="postgres" db.name="pokeshop" db.operation="findOne" db.sql.table="pokemon"]
     assertions:
-    - attr:qualityTrace.selected_spans.count  =  0
+    - attr:qualitytrace.selected_spans.count  =  0
 ```

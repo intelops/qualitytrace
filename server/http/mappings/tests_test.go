@@ -3,10 +3,10 @@ package mappings_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/http/mappings"
-	"github.com/intelops/qualityTrace/server/openapi"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/http/mappings"
+	"github.com/intelops/qualitytrace/server/openapi"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/traces"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -19,7 +19,7 @@ func Test_OpenApiToModel_Outputs(t *testing.T) {
 				SelectorParsed: openapi.Selector{
 					Query: `span[name="root"]`,
 				},
-				Value: "attr:qualityTrace.selected_spans.count",
+				Value: "attr:qualitytrace.selected_spans.count",
 			},
 		},
 	}
@@ -28,7 +28,7 @@ func Test_OpenApiToModel_Outputs(t *testing.T) {
 		{
 			Name:     "OUTPUT",
 			Selector: `span[name="root"]`,
-			Value:    "attr:qualityTrace.selected_spans.count",
+			Value:    "attr:qualitytrace.selected_spans.count",
 		},
 	}
 

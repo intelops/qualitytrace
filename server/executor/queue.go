@@ -10,14 +10,14 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/executor/pollingprofile"
-	"github.com/intelops/qualityTrace/server/http/middleware"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/pkg/pipeline"
-	"github.com/intelops/qualityTrace/server/subscription"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/testsuite"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/executor/pollingprofile"
+	"github.com/intelops/qualitytrace/server/http/middleware"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/pipeline"
+	"github.com/intelops/qualitytrace/server/subscription"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/testsuite"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/propagation"
@@ -25,7 +25,7 @@ import (
 )
 
 const (
-	JobCountHeader string = "X-Tracetest-Job-Count"
+	JobCountHeader string = "X-Qualitytrace-Job-Count"
 )
 
 type headers map[string]string

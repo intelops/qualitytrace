@@ -11,15 +11,15 @@ spec:
       - key: Content-Type
         value: application/json
   specs:
-  - selector: span[qualityTrace.span.type="http" name="GET /pokemon"]
+  - selector: span[qualitytrace.span.type="http" name="GET /pokemon"]
     name: GET /pokemon endpoint was called and returned valid data
     assertions:
-    - attr:qualityTrace.selected_spans.count =  1
-  - selector: span[qualityTrace.span.type="database" name="count pokeshop.pokemon" db.system="postgres" db.name="pokeshop" db.user="ashketchum" db.operation="count" db.sql.table="pokemon"]
+    - attr:qualitytrace.selected_spans.count =  1
+  - selector: span[qualitytrace.span.type="database" name="count pokeshop.pokemon" db.system="postgres" db.name="pokeshop" db.user="ashketchum" db.operation="count" db.sql.table="pokemon"]
     name: A count operation was triggered on database
     assertions:
     - attr:db.operation = "count"
-  - selector: span[qualityTrace.span.type="database" name="findMany pokeshop.pokemon" db.system="postgres" db.name="pokeshop" db.user="ashketchum" db.operation="findMany" db.sql.table="pokemon"]
+  - selector: span[qualitytrace.span.type="database" name="findMany pokeshop.pokemon" db.system="postgres" db.name="pokeshop" db.user="ashketchum" db.operation="findMany" db.sql.table="pokemon"]
     name: A select operation was triggered on database
     assertions:
     - attr:db.operation = "findMany"

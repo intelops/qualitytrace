@@ -4,19 +4,19 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/cli/ui"
+	"github.com/intelops/qualitytrace/cli/ui"
 	"github.com/spf13/cobra"
 )
 
 var dashboardCmd = &cobra.Command{
 	GroupID: cmdGroupMisc.ID,
 	Use:     "dashboard",
-	Short:   "Opens the Tracetest Dashboard URL",
-	Long:    "Opens the Tracetest Dashboard URL",
+	Short:   "Opens the Qualitytrace Dashboard URL",
+	Long:    "Opens the Qualitytrace Dashboard URL",
 	PreRun:  setupCommand(),
 	Run: WithResultHandler(func(_ context.Context, _ *cobra.Command, _ []string) (string, error) {
 		if cliConfig.IsEmpty() {
-			return "", fmt.Errorf("missing Tracetest endpoint configuration")
+			return "", fmt.Errorf("missing Qualitytrace endpoint configuration")
 		}
 
 		ui := ui.DefaultUI

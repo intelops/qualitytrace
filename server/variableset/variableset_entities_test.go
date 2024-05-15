@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/variableset"
+	"github.com/intelops/qualitytrace/server/variableset"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/intelops/qualityTrace/agent/collector"
-	"github.com/intelops/qualityTrace/agent/collector/mocks"
-	"github.com/intelops/qualityTrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/agent/collector"
+	"github.com/intelops/qualitytrace/agent/collector/mocks"
+	"github.com/intelops/qualitytrace/server/pkg/id"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.opentelemetry.io/otel/trace"

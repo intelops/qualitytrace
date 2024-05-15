@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	agentConfig "github.com/intelops/qualityTrace/agent/config"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/sensors"
+	agentConfig "github.com/intelops/qualitytrace/agent/config"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/sensors"
 
-	consoleUI "github.com/intelops/qualityTrace/agent/ui"
+	consoleUI "github.com/intelops/qualitytrace/agent/ui"
 )
 
 func (s *Runner) RunDesktopStrategy(ctx context.Context, cfg agentConfig.Config, uiEndpoint string) error {

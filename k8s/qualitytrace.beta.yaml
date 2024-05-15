@@ -1,9 +1,9 @@
 postgres:
   host: ${NAME}-postgresql
-  user: qualityTrace
+  user: qualitytrace
   password: not-secure-database-password
   port: 5432
-  dbname: qualityTrace
+  dbname: qualitytrace
   params: sslmode=disable
 
 experimentalFeatures: []
@@ -11,12 +11,12 @@ experimentalFeatures: []
 telemetry:
   exporters:
     collector:
-      serviceName: qualityTrace
+      serviceName: qualitytrace
       sampling: 100 # 100%
       exporter:
         type: collector
         collector:
-          endpoint: otel-collector.qualityTrace:4317
+          endpoint: otel-collector.qualitytrace:4317
 
 server:
   telemetry:

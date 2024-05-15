@@ -3,7 +3,7 @@ package expression_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/expression"
+	"github.com/intelops/qualitytrace/server/expression"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

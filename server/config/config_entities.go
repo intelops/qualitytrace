@@ -3,7 +3,7 @@ package config
 import (
 	"os"
 
-	"github.com/intelops/qualityTrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/id"
 )
 
 type Config struct {

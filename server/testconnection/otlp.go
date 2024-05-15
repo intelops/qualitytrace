@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/http/middleware"
-	"github.com/intelops/qualityTrace/server/subscription"
+	"github.com/intelops/qualitytrace/server/http/middleware"
+	"github.com/intelops/qualitytrace/server/subscription"
 	"golang.org/x/sync/semaphore"
 )
 

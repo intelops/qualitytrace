@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -29,7 +29,7 @@ func TestApplyVariableSet(t *testing.T) {
 		// Then it should be applied with success
 		newEnvironmentPath := env.GetTestResourcePath(t, "new-varSet")
 
-		result := qualityTracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", newEnvironmentPath), qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", newEnvironmentPath), qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		environmentVars := helpers.UnmarshalYAML[types.VariableSetResource](t, result.StdOut)
@@ -45,7 +45,7 @@ func TestApplyVariableSet(t *testing.T) {
 
 		// When I try to get the variable set applied on the last step
 		// Then it should return it
-		result = qualityTracecli.Exec(t, "get variableset --id .env --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result = qualitytracecli.Exec(t, "get variableset --id .env --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		environmentVars = helpers.UnmarshalYAML[types.VariableSetResource](t, result.StdOut)
@@ -63,7 +63,7 @@ func TestApplyVariableSet(t *testing.T) {
 		// Then it should be applied with success
 		updatedNewEnvironmentPath := env.GetTestResourcePath(t, "updated-new-varSet")
 
-		result := qualityTracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", updatedNewEnvironmentPath), qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", updatedNewEnvironmentPath), qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		updatedEnvironmentVars := helpers.UnmarshalYAML[types.VariableSetResource](t, result.StdOut)
@@ -80,7 +80,7 @@ func TestApplyVariableSet(t *testing.T) {
 
 		// When I try to get the variable set applied on the last step
 		// Then it should return it
-		result = qualityTracecli.Exec(t, "get variableset --id .env --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result = qualitytracecli.Exec(t, "get variableset --id .env --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		updatedEnvironmentVars = helpers.UnmarshalYAML[types.VariableSetResource](t, result.StdOut)

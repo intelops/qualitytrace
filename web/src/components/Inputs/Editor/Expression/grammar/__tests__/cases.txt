@@ -1,6 +1,6 @@
 # Right side interpolation
 
-attr:qualityTrace.span.type
+attr:qualitytrace.span.type
 
 ==>
 
@@ -9,7 +9,7 @@ Program(Expression(ComposedValue(OutsideInput(Source,Identifier))))
 
 # Expression for both sides
 
-attr:qualityTrace.span.duration + 2
+attr:qualitytrace.span.duration + 2
 
 ==>
 

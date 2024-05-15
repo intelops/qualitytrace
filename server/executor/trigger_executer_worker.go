@@ -8,11 +8,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	triggerer "github.com/intelops/qualityTrace/server/executor/trigger"
-	"github.com/intelops/qualityTrace/server/model/events"
-	"github.com/intelops/qualityTrace/server/pkg/pipeline"
-	"github.com/intelops/qualityTrace/server/test"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	triggerer "github.com/intelops/qualitytrace/server/executor/trigger"
+	"github.com/intelops/qualitytrace/server/model/events"
+	"github.com/intelops/qualitytrace/server/pkg/pipeline"
+	"github.com/intelops/qualitytrace/server/test"
 	"go.opentelemetry.io/otel/trace"
 )
 

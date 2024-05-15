@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/traces"
 )
 
 type ensuresNoApiKeyLeakRule struct{}
@@ -30,7 +30,7 @@ func (r ensuresNoApiKeyLeakRule) Evaluate(ctx context.Context, trace traces.Trac
 
 	if config.ErrorLevel != analyzer.ErrorLevelDisabled {
 		for _, span := range trace.Flat {
-			if span.Attributes.Get("qualityTrace.span.type") == "http" {
+			if span.Attributes.Get("qualitytrace.span.type") == "http" {
 				result := r.validate(span)
 				if !result.Passed {
 					passed = false

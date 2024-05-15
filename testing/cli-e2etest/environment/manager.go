@@ -11,10 +11,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/command"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/config"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/command"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/config"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/exp/slices"
 )
@@ -108,7 +108,7 @@ func GetManager(environmentType string, options ...option) Manager {
 		dockerComposeNoApiFilePath:              dockerComposeNoApiFilepath,
 		dockerComposePokeshopFilePath:           dockerComposePokeshopFilepath,
 		dockerComposePokeshopWithStreamFilepath: dockerComposePokeshopWithStreamFilepath,
-		dockerProjectName:                       fmt.Sprintf("qualityTrace-env-%d", envCounter),
+		dockerProjectName:                       fmt.Sprintf("qualitytrace-env-%d", envCounter),
 	}
 
 	for _, option := range options {
@@ -150,7 +150,7 @@ func (m *internalManager) Start(t *testing.T) {
 	require.NoError(t, err)
 	helpers.RequireExitCodeEqual(t, result, 0)
 
-	// wait until qualityTrace port is ready
+	// wait until qualitytrace port is ready
 	waitForPort("11633")
 
 	if m.pokeshopEnabled {
@@ -169,7 +169,7 @@ func (m *internalManager) Start(t *testing.T) {
 		cliConfig := m.GetCLIConfigPath(t)
 		dataStorePath := m.GetEnvironmentResourcePath(t, "data-store")
 
-		result = qualityTracecli.Exec(t, fmt.Sprintf("apply datastore --file %s", dataStorePath), qualityTracecli.WithCLIConfig(cliConfig))
+		result = qualitytracecli.Exec(t, fmt.Sprintf("apply datastore --file %s", dataStorePath), qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 	}
 }

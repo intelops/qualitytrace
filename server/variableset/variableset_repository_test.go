@@ -7,10 +7,10 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/resourcemanager"
-	rmtests "github.com/intelops/qualityTrace/server/resourcemanager/testutil"
-	"github.com/intelops/qualityTrace/server/variableset"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
+	rmtests "github.com/intelops/qualitytrace/server/resourcemanager/testutil"
+	"github.com/intelops/qualitytrace/server/variableset"
 	"github.com/stretchr/testify/require"
 )
 

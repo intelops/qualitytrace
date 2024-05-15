@@ -13,7 +13,7 @@ func ClientID() string {
 }
 
 func Init() {
-	id, err := machineid.ProtectedID("qualityTrace")
+	id, err := machineid.ProtectedID("qualitytrace")
 	if err == nil {
 		// only use id if available.
 		mid = id

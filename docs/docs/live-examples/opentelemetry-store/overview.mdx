@@ -4,7 +4,7 @@ title: OpenTelemetry Astronomy Shop Demo
 description: The OpenTelemetry Demo is an example application published by the OpenTelemtry CNCF project. The Tracetest team has made several key contributions to this project, including providing a full suite of end to end tests.
 hide_table_of_contents: false
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -15,9 +15,9 @@ image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_T
 The OpenTelemetry Demo is an example application published by the OpenTelemtry CNCF project. It implements an Astronomy shop in a set of microservices in different languages with OpenTelemetry enabled, intended to be used as an example of OpenTelemetry instrumentation and observability. The Tracetest team has made several key contributions to this project, including providing a full suite of end to end tests.
 
 :::info
-Want to run tests against the OpenTelemetry Astronomy Shop without installing it? Click the link below and we will add you to our `qualityTrace-demo` organization and give you access to the `opentelemetry-demo` org as an engineer. You can run and create your own tests!
+Want to run tests against the OpenTelemetry Astronomy Shop without installing it? Click the link below and we will add you to our `qualitytrace-demo` organization and give you access to the `opentelemetry-demo` org as an engineer. You can run and create your own tests!
 
-[👉 **Access the shared demo, here.**](https://app.qualityTrace.io/organizations/ttorg_2179a9cd8ba8dfa5/invites/invite_646747b36e9ee487/accept)
+[👉 **Access the shared demo, here.**](https://app.qualitytrace.io/organizations/ttorg_2179a9cd8ba8dfa5/invites/invite_646747b36e9ee487/accept)
 :::
 
 We will provide a full recipe below for running the full demo as well as running the associated Tracetests via Docker. Here are other references you may find useful:
@@ -88,21 +88,21 @@ Once the images are built and containers are started you can access:
 The Tracetest tests for the OpenTelemetry Demo can be found in the official repo here:
 
 - **Instructions to run (also shown below in this recipe)**: [Running Tracetest Tests](https://github.com/open-telemetry/opentelemetry-demo/tree/main/test#testing-services-with-trace-based-tests)
-- **Full source of all tests**: [Source](https://github.com/open-telemetry/opentelemetry-demo/tree/main/test/qualityTraceing)
+- **Full source of all tests**: [Source](https://github.com/open-telemetry/opentelemetry-demo/tree/main/test/qualitytraceing)
 
 To run the entire Test Suite of trace-based tests, run the command:
 
 ```sh
-make run-qualityTraceing
+make run-qualitytraceing
 #or
 docker compose run traceBasedTests
 ```
 
 To run tests for specific services, pass the name of the service as a
-parameter (using the folder names located [here](https://github.com/open-telemetry/opentelemetry-demo/tree/main/test/qualityTraceing):
+parameter (using the folder names located [here](https://github.com/open-telemetry/opentelemetry-demo/tree/main/test/qualitytraceing):
 
 ```sh
-make run-qualityTraceing SERVICES_TO_TEST="service-1 service-2 ..."
+make run-qualitytraceing SERVICES_TO_TEST="service-1 service-2 ..."
 #or
 docker compose run traceBasedTests "service-1 service-2 ..."
 ```
@@ -111,7 +111,7 @@ For instance, if you need to run the tests for `ad-service` and
 `payment-service`, you can run them with:
 
 ```sh
-make run-qualityTraceing SERVICES_TO_TEST="ad-service payment-service"
+make run-qualitytraceing SERVICES_TO_TEST="ad-service payment-service"
 ```
 
 Tracetest will be started on [http://localhost:11633](http://localhost:11633) as part of running these tests and you can view any of the tests, Test Suites, prior runs, or create and run your own tests. It is a great testbed to explore Tracetest!

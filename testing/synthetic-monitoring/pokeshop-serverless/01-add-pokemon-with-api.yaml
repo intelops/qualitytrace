@@ -13,11 +13,11 @@ spec:
         - key: Content-Type
           value: application/json
   specs:
-    - selector: span[qualityTrace.span.type="http" name="POST /pokemon"]
+    - selector: span[qualitytrace.span.type="http" name="POST /pokemon"]
       name: The POST /pokemon was called correctly
       assertions:
-        - attr:qualityTrace.selected_spans.count =   1
-    - selector: span[qualityTrace.span.type="database" name="create pokeshop.pokemon" db.operation="create" db.sql.table="pokemon"]
+        - attr:qualitytrace.selected_spans.count =   1
+    - selector: span[qualitytrace.span.type="database" name="create pokeshop.pokemon" db.operation="create" db.sql.table="pokemon"]
       name: A Pokemon was inserted on database
       assertions:
         - attr:db.result | json_path '$.imageUrl'  =  "https://assets.pokemon.com/assets/cms2/img/pokedex/full/052.png"

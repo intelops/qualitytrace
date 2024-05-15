@@ -51,8 +51,8 @@ const CliCommandService = () => ({
     [CliCommandOption.useDocker]: ({enabled, command}) =>
       `${
         enabled
-          ? 'docker run --rm -it -v$(pwd):$(pwd) -w $(pwd) --network host --entrypoint qualityTrace intelops/qualityTrace:latest -s http://localhost:11633/'
-          : 'qualityTrace'
+          ? 'docker run --rm -it -v$(pwd):$(pwd) -w $(pwd) --network host --entrypoint qualitytrace intelops/qualitytrace:latest -s http://localhost:11633/'
+          : 'qualitytrace'
       } ${command}`,
   } as Record<CliCommandOption, TApplyOption>,
 

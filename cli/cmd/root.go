@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/intelops/qualityTrace/cli/formatters"
+	"github.com/intelops/qualitytrace/cli/formatters"
 	"github.com/spf13/cobra"
 )
 
@@ -23,9 +23,9 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:     "qualityTrace",
-	Short:   "CLI to configure, install and execute tests on a Tracetest server",
-	Long:    `CLI to configure, install and execute tests on a Tracetest server`,
+	Use:     "qualitytrace",
+	Short:   "CLI to configure, install and execute tests on a Qualitytrace server",
+	Long:    `CLI to configure, install and execute tests on a Qualitytrace server`,
 	PreRun:  setupCommand(),
 	PostRun: teardownCommand,
 }

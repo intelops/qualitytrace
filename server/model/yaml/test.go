@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	dc "github.com/fluidtruck/deepcopy"
-	"github.com/intelops/qualityTrace/server/test"
+	"github.com/intelops/qualitytrace/server/test"
 )
 
 type TestSpecs []TestSpec

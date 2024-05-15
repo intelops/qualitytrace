@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 const config = {
   title: 'Tracetest Docs',
   tagline: 'Trace-based testing',
-  url: 'https://docs.qualityTrace.io',
+  url: 'https://docs.qualitytrace.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -18,7 +18,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'kubeshop', // Usually your GitHub org/user name.
-  projectName: 'qualityTrace', // Usually your repo name.
+  projectName: 'qualitytrace', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -42,7 +42,7 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/intelops/qualityTrace/blob/main/docs/",
+          editUrl: "https://github.com/intelops/qualitytrace/blob/main/docs/",
           routeBasePath: "/",
         },
         theme: {
@@ -62,7 +62,7 @@ const config = {
         // Plugin Options for loading OpenAPI files
         specs: [
           {
-            spec: "https://raw.githubusercontent.com/intelops/qualityTrace/main/api/openapi.yaml",
+            spec: "https://raw.githubusercontent.com/intelops/qualitytrace/main/api/openapi.yaml",
             route: "/openapi/",
           },
         ],
@@ -119,9 +119,9 @@ const config = {
         // content:
         //   '<a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/live/2MSDy3XHjtE?si=VlK7cxJOsgKi5QTE&t=1132">Tracetest is the official testing harness for the OpenTelemetry Demo! 🚀</a>',
         // content:
-        //   '<a target="_blank" rel="noopener noreferrer" href="https://qualityTrace.io/pricing">Tracetest Open Beta is Live. Try it! Give us feedback! 🙌</a>',
+        //   '<a target="_blank" rel="noopener noreferrer" href="https://qualitytrace.io/pricing">Tracetest Open Beta is Live. Try it! Give us feedback! 🙌</a>',
         content:
-          '<a target="_blank" rel="noopener noreferrer" href="https://qualityTrace.io/blog/observability-at-kubecon-cloudnativecon-europe-2024-in-paris">👉 Check out the "Observability 🔭 at KubeCon CloudNativeCon EU 2024 Paris" recap! 👈</a>',
+          '<a target="_blank" rel="noopener noreferrer" href="https://qualitytrace.io/blog/observability-at-kubecon-cloudnativecon-europe-2024-in-paris">👉 Check out the "Observability 🔭 at KubeCon CloudNativeCon EU 2024 Paris" recap! 👈</a>',
         isCloseable: false,
       },  
       navbar: {
@@ -130,7 +130,7 @@ const config = {
           alt: 'Tracetest Logo',
           src: 'img/logo-landscape.svg',
           srcDark: 'img/logo-landscape-dark.svg',
-          href: 'https://qualityTrace.io/',
+          href: 'https://qualitytrace.io/',
           target: '_blank',
         },
         items: [
@@ -165,45 +165,45 @@ const config = {
             items: [
               {
                 label: 'Overview',
-                href: 'https://qualityTrace.io/support',
+                href: 'https://qualitytrace.io/support',
               },
               {
                 label: 'Community',
-                href: 'https://qualityTrace.io/community',
+                href: 'https://qualitytrace.io/community',
               },
               {
                 label: 'Pricing',
-                href: 'https://qualityTrace.io/pricing',
+                href: 'https://qualitytrace.io/pricing',
               },
               {
                 label: 'Talk to us in Slack',
-                href: 'https://dub.sh/qualityTrace-community',
+                href: 'https://dub.sh/qualitytrace-community',
               },
               {
                 label: 'Open an issue in GitHub',
-                href: 'https://github.com/intelops/qualityTrace/issues/new/choose',
+                href: 'https://github.com/intelops/qualitytrace/issues/new/choose',
               },
               {
                 label: 'Learn',
-                href: 'https://qualityTrace.io/learn',
+                href: 'https://qualitytrace.io/learn',
               },
               {
                 label: 'Contact Us',
-                href: 'https://qualityTrace.io/contact',
+                href: 'https://qualitytrace.io/contact',
               },
             ],
           },
           {
             type: "html",
             position: "left",
-            value: `<iframe src="https://ghbtns.com/github-btn.html?user=kubeshop&repo=qualityTrace&type=star&count=true&size=medium" style='margin-top: 8px' frameborder="0" scrolling="0" width="120" height="20" title="GitHub"></iframe>`,
+            value: `<iframe src="https://ghbtns.com/github-btn.html?user=kubeshop&repo=qualitytrace&type=star&count=true&size=medium" style='margin-top: 8px' frameborder="0" scrolling="0" width="120" height="20" title="GitHub"></iframe>`,
           },
           {
             type: "search",
             position: "right",
           },
           {
-            href: "https://app.qualityTrace.io",
+            href: "https://app.qualitytrace.io",
             label: "Sign In",
             position: "right",
             className: "sign-in-button",
@@ -227,11 +227,11 @@ const config = {
             items: [
               {
                 label: "Slack",
-                href: "https://dub.sh/qualityTrace-community",
+                href: "https://dub.sh/qualitytrace-community",
               },
               {
                 label: "Twitter",
-                href: "https://twitter.com/qualityTrace_io",
+                href: "https://twitter.com/qualitytrace_io",
               },
               {
                 label: "LinkedIn",
@@ -244,15 +244,15 @@ const config = {
             items: [
               {
                 label: "Home",
-                to: "https://qualityTrace.io",
+                to: "https://qualitytrace.io",
               },
               {
                 label: "Blog",
-                to: "https://qualityTrace.io/blog",
+                to: "https://qualitytrace.io/blog",
               },
               {
                 label: "GitHub",
-                href: "https://github.com/intelops/qualityTrace",
+                href: "https://github.com/intelops/qualitytrace",
               },
             ],
           },
@@ -270,7 +270,7 @@ const config = {
         // Public API key: it is safe to commit it
         apiKey: "663c91299e298ff34c5a7a18f4451d1a",
 
-        indexName: "qualityTrace",
+        indexName: "qualitytrace",
 
         contextualSearch: false,
 

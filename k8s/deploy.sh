@@ -35,7 +35,7 @@ fi
 
 helm repo add kubeshop https://kubeshop.github.io/helm-charts
 helm repo update
-helm upgrade --install $NAME intelops/qualityTrace \
+helm upgrade --install $NAME intelops/qualitytrace \
   --namespace $NAME --create-namespace \
   --set image.tag=$TAG \
   --set image.pullPolicy=Always \
@@ -47,10 +47,10 @@ kubectl --namespace $NAME create configmap $NAME --from-file=$CONFIG_FILE --from
   | sed 's#'$(basename $CONFIG_FILE)'#config.yaml#' \
   | kubectl --namespace $NAME replace -f -
 
-kubectl --namespace $NAME delete pods -l app.kubernetes.io/name=qualityTrace
+kubectl --namespace $NAME delete pods -l app.kubernetes.io/name=qualitytrace
 
 TIME_OUT=30m
-CONDITION='[[ $(kubectl get pods  --namespace '$NAME' -lapp.kubernetes.io/name=qualityTrace -o jsonpath="{.items[*].status.phase}") = "Running" ]]'
+CONDITION='[[ $(kubectl get pods  --namespace '$NAME' -lapp.kubernetes.io/name=qualitytrace -o jsonpath="{.items[*].status.phase}") = "Running" ]]'
 IF_TRUE='echo "pods ready"'
 IF_FALSE='echo "pods not ready. retrying"'
 

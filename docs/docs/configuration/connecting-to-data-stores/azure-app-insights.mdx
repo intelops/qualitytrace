@@ -3,7 +3,7 @@ id: azure-app-insights
 title: Azure App Insights
 description: Use Azure App Insights as the trace data store for Tracetest. You can use the native connection from Tracetest to pull telemetry data directly from any region.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -14,7 +14,7 @@ image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_T
 If you want to use [Azure App Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) as the trace data store, you can use the native connection from Tracetest to pull telemetry data.
 
 :::tip
-Examples of configuring Tracetest with Azure App Insights can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualityTrace/tree/main/examples).
+Examples of configuring Tracetest with Azure App Insights can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualitytrace/tree/main/examples).
 :::
 
 ## Direct Connection - Configure Tracetest to Use Azure App Insights as a Trace Data Store
@@ -53,11 +53,11 @@ spec:
 Run this command in the terminal and specify the file above.
 
 ```bash
-qualityTrace apply datastore -f my/data-store/file/location.yaml
+qualitytrace apply datastore -f my/data-store/file/location.yaml
 ```
 
 :::tip
-To learn more, [read the recipe on running a sample app with Azure App Insights and Tracetest](/examples-tutorials/recipes/running-qualityTrace-with-azure-app-insights).
+To learn more, [read the recipe on running a sample app with Azure App Insights and Tracetest](/examples-tutorials/recipes/running-qualitytrace-with-azure-app-insights).
 :::
 
 ## OpenTelemetry Collector
@@ -94,9 +94,9 @@ spec:
 Run this command in the terminal and specify the file above.
 
 ```bash
-qualityTrace apply datastore -f my/data-store/file/location.yaml
+qualitytrace apply datastore -f my/data-store/file/location.yaml
 ```
 
 :::tip
-To learn more, [read the recipe on running a sample app with Azure App Insights, The OpenTelemetry Collector and Tracetest](/examples-tutorials/recipes/running-qualityTrace-with-azure-app-insights-collector).
+To learn more, [read the recipe on running a sample app with Azure App Insights, The OpenTelemetry Collector and Tracetest](/examples-tutorials/recipes/running-qualitytrace-with-azure-app-insights-collector).
 :::

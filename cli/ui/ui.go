@@ -53,7 +53,7 @@ func (ui ptermUI) Banner(version string) {
 	pterm.Print("\n\n")
 
 	pterm.DefaultBigText.
-		WithLetters(putils.LettersFromString("TraceTest")).
+		WithLetters(putils.LettersFromString("Qualitytrace")).
 		Render()
 
 	pterm.Print(fmt.Sprintf("Version: %s", version))

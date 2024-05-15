@@ -7,13 +7,13 @@ import (
 	"os"
 
 	"github.com/golang-jwt/jwt"
-	agentConfig "github.com/intelops/qualityTrace/agent/config"
-	"github.com/intelops/qualityTrace/agent/event"
-	"github.com/intelops/qualityTrace/agent/ui"
+	agentConfig "github.com/intelops/qualitytrace/agent/config"
+	"github.com/intelops/qualitytrace/agent/event"
+	"github.com/intelops/qualitytrace/agent/ui"
 
-	"github.com/intelops/qualityTrace/cli/config"
-	"github.com/intelops/qualityTrace/cli/pkg/oauth"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/config"
+	"github.com/intelops/qualitytrace/cli/pkg/oauth"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -41,8 +41,8 @@ func NewRunner(configurator config.Configurator, resources *resourcemanager.Regi
 
 func (s *Runner) Run(ctx context.Context, cfg config.Config, flags agentConfig.Flags, verbose bool) error {
 	s.ui.Banner(config.Version)
-	s.ui.Println(`Tracetest start launches a lightweight agent. It enables you to run tests and collect traces with Tracetest.
-Once started, Tracetest Agent exposes OTLP ports 4317 and 4318 to ingest traces via gRCP and HTTP.`)
+	s.ui.Println(`Qualitytrace start launches a lightweight agent. It enables you to run tests and collect traces with Qualitytrace.
+Once started, Qualitytrace Agent exposes OTLP ports 4317 and 4318 to ingest traces via gRCP and HTTP.`)
 	s.ui.Println("") // print empty line
 
 	if flags.Token == "" || flags.AgentApiKey != "" {
@@ -160,7 +160,7 @@ func (s *Runner) authenticate(ctx context.Context, cfg agentConfig.Config, obser
 	for !isStarted {
 		session, err = StartSession(ctx, cfg, observer, s.logger)
 		if err != nil && errors.Is(err, ErrOtlpServerStart) {
-			s.ui.Error("Tracetest Agent binds to the OpenTelemetry ports 4317 and 4318 which are used to receive trace information from your system. The agent tried to bind to these ports, but failed.")
+			s.ui.Error("Qualitytrace Agent binds to the OpenTelemetry ports 4317 and 4318 which are used to receive trace information from your system. The agent tried to bind to these ports, but failed.")
 			shouldRetry := s.ui.Enter("Please stop the process currently listening on these ports and press enter to try again.")
 
 			if !shouldRetry {

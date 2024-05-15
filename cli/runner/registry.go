@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/intelops/qualityTrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
 	"go.uber.org/zap"
 )
 

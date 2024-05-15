@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/url"
 
-	agentConfig "github.com/intelops/qualityTrace/agent/config"
-	"github.com/intelops/qualityTrace/cli/cmdutil"
-	"github.com/intelops/qualityTrace/cli/config"
+	agentConfig "github.com/intelops/qualitytrace/agent/config"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/config"
 	"github.com/spf13/cobra"
 )
 
@@ -19,8 +19,8 @@ var (
 var configureCmd = &cobra.Command{
 	GroupID: cmdGroupConfig.ID,
 	Use:     "configure",
-	Short:   "Configure your qualityTrace CLI",
-	Long:    "Configure your qualityTrace CLI",
+	Short:   "Configure your qualitytrace CLI",
+	Long:    "Configure your qualitytrace CLI",
 	PreRun:  setupLogger,
 	Run: WithResultHandler(WithParamsHandler(configParams)(func(ctx context.Context, cmd *cobra.Command, _ []string) (string, error) {
 		flags := agentConfig.Flags{

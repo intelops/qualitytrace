@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/intelops/qualityTrace/agent/tracedb"
-	"github.com/intelops/qualityTrace/server/executor"
+	"github.com/intelops/qualitytrace/agent/tracedb"
+	"github.com/intelops/qualitytrace/server/executor"
 )
 
 type SpanCountPollingStopStrategy struct{}

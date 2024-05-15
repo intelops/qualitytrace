@@ -4,11 +4,11 @@ import (
 	"context"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/executor"
-	"github.com/intelops/qualityTrace/server/executor/pollingprofile"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/executor"
+	"github.com/intelops/qualitytrace/server/executor/pollingprofile"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/traces"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -68,7 +68,7 @@ func TestSelectorBasedPollerExecutor(t *testing.T) {
 		selectorBasedPoller := executor.NewSelectorBasedPoller(defaultPoller, eventEmitter)
 
 		specs := test.Specs{
-			{Selector: test.SpanQuery(`span[name = "Tracetest trigger"]`), Assertions: []test.Assertion{}},
+			{Selector: test.SpanQuery(`span[name = "Qualitytrace trigger"]`), Assertions: []test.Assertion{}},
 			{Selector: test.SpanQuery(`span[name = "GET /api/tests"]`), Assertions: []test.Assertion{}},
 		}
 		testObj := test.Test{Specs: specs}
@@ -90,7 +90,7 @@ func TestSelectorBasedPollerExecutor(t *testing.T) {
 		selectorBasedPoller := executor.NewSelectorBasedPoller(defaultPoller, eventEmitter)
 
 		specs := test.Specs{
-			{Selector: test.SpanQuery(`span[name = "Tracetest trigger"]`), Assertions: []test.Assertion{}},
+			{Selector: test.SpanQuery(`span[name = "Qualitytrace trigger"]`), Assertions: []test.Assertion{}},
 			{Selector: test.SpanQuery(`span[name = "GET /api/tests"]`), Assertions: []test.Assertion{}},
 		}
 		testObj := test.Test{Specs: specs}
@@ -128,18 +128,18 @@ func TestSelectorBasedPollerExecutor(t *testing.T) {
 		selectorBasedPoller := executor.NewSelectorBasedPoller(defaultPoller, eventEmitter)
 
 		specs := test.Specs{
-			{Selector: test.SpanQuery(`span[name = "Tracetest trigger"]`), Assertions: []test.Assertion{}},
+			{Selector: test.SpanQuery(`span[name = "Qualitytrace trigger"]`), Assertions: []test.Assertion{}},
 			{Selector: test.SpanQuery(`span[name = "GET /api/tests"]`), Assertions: []test.Assertion{}},
 		}
 		testObj := test.Test{Specs: specs}
 
-		rootSpan := traces.Span{ID: randomIDGenerator.SpanID(), Name: "Tracetest trigger", Attributes: traces.NewAttributes()}
+		rootSpan := traces.Span{ID: randomIDGenerator.SpanID(), Name: "Qualitytrace trigger", Attributes: traces.NewAttributes()}
 		trace := traces.NewTrace(randomIDGenerator.TraceID().String(), []traces.Span{
 			rootSpan,
 			{
 				ID:         randomIDGenerator.SpanID(),
 				Name:       "GET /api/tests",
-				Attributes: traces.NewAttributes(map[string]string{traces.TracetestMetadataFieldParentID: rootSpan.ID.String()}),
+				Attributes: traces.NewAttributes(map[string]string{traces.QualitytraceMetadataFieldParentID: rootSpan.ID.String()}),
 			},
 		})
 		run := test.Run{Trace: &trace}

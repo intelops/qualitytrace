@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -18,7 +18,7 @@ func addGetPollingProfilePreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	pollingProfilePath := env.GetTestResourcePath(t, "new-pollingprofile")
 
-	result := qualityTracecli.Exec(t, fmt.Sprintf("apply pollingprofile --file %s", pollingProfilePath), qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, fmt.Sprintf("apply pollingprofile --file %s", pollingProfilePath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -38,7 +38,7 @@ func TestGetPollingProfile(t *testing.T) {
 
 		// When I try to get a polling profile on yaml mode
 		// Then it should print a YAML with the default polling profile
-		result := qualityTracecli.Exec(t, "get pollingprofile --id current --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get pollingprofile --id current --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		require.Equal(0, result.ExitCode)
 
 		pollingProfile := helpers.UnmarshalYAML[types.PollingProfileResource](t, result.StdOut)
@@ -60,7 +60,7 @@ func TestGetPollingProfile(t *testing.T) {
 
 		// When I try to get a polling profile on yaml mode
 		// Then it should print a YAML
-		result := qualityTracecli.Exec(t, "get pollingprofile --id current --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get pollingprofile --id current --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		require.Equal(0, result.ExitCode)
 
 		pollingProfile := helpers.UnmarshalYAML[types.PollingProfileResource](t, result.StdOut)
@@ -80,7 +80,7 @@ func TestGetPollingProfile(t *testing.T) {
 
 		// When I try to get a polling profile on json mode
 		// Then it should print a json
-		result := qualityTracecli.Exec(t, "get pollingprofile --id current --output json", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get pollingprofile --id current --output json", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		pollingProfile := helpers.UnmarshalJSON[types.PollingProfileResource](t, result.StdOut)
@@ -100,7 +100,7 @@ func TestGetPollingProfile(t *testing.T) {
 
 		// When I try to get a polling profile on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, a polling profile item and empty line
-		result := qualityTracecli.Exec(t, "get pollingprofile --id current --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get pollingprofile --id current --output pretty", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

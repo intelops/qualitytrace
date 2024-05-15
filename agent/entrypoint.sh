@@ -6,5 +6,5 @@ if [ -z "$TRACETEST_API_KEY" ]; then
   exit 1
 fi
 
-# Execute qualityTrace with the API key and any additional arguments
-exec qualityTrace start --api-key "$TRACETEST_API_KEY" "$@"
+# Execute qualitytrace with the API key and any additional arguments
+exec qualitytrace start --api-key "$TRACETEST_API_KEY" "$@"

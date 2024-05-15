@@ -3,8 +3,8 @@ package testconnection
 import (
 	"context"
 
-	"github.com/intelops/qualityTrace/agent/tracedb"
-	"github.com/intelops/qualityTrace/server/pkg/pipeline"
+	"github.com/intelops/qualitytrace/agent/tracedb"
+	"github.com/intelops/qualitytrace/server/pkg/pipeline"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -44,7 +44,7 @@ func (w *dsTestConnectionRequest) ProcessItem(ctx context.Context, job Job) {
 
 	if err != nil {
 		pollingSpan.RecordError(err)
-		pollingSpan.SetAttributes(attribute.String("qualityTrace.run.trace_poller.error", err.Error()))
+		pollingSpan.SetAttributes(attribute.String("qualitytrace.run.trace_poller.error", err.Error()))
 		return
 	}
 

@@ -3,7 +3,7 @@ package comparator_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/assertions/comparator"
+	"github.com/intelops/qualitytrace/server/assertions/comparator"
 	"github.com/stretchr/testify/assert"
 )
 

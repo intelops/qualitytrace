@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/intelops/qualityTrace/cli/analytics"
-	"github.com/intelops/qualityTrace/cli/openapi"
+	"github.com/intelops/qualitytrace/cli/analytics"
+	"github.com/intelops/qualitytrace/cli/openapi"
 )
 
 type ListArgs struct {

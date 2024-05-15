@@ -10,8 +10,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"gotest.tools/v3/assert"
 
-	rm "github.com/intelops/qualityTrace/server/resourcemanager"
-	"github.com/intelops/qualityTrace/server/testmock"
+	rm "github.com/intelops/qualitytrace/server/resourcemanager"
+	"github.com/intelops/qualitytrace/server/testmock"
 )
 
 type ResourceTypeTest struct {

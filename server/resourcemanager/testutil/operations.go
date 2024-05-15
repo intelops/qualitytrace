@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/resourcemanager"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
 	"golang.org/x/exp/slices"
 )
 

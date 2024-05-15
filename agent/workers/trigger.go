@@ -4,16 +4,16 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/agent/telemetry"
+	"github.com/intelops/qualitytrace/agent/telemetry"
 
-	"github.com/intelops/qualityTrace/agent/client"
-	"github.com/intelops/qualityTrace/agent/collector"
-	"github.com/intelops/qualityTrace/agent/event"
-	"github.com/intelops/qualityTrace/agent/proto"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/sensors"
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/executor"
-	"github.com/intelops/qualityTrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/agent/client"
+	"github.com/intelops/qualitytrace/agent/collector"
+	"github.com/intelops/qualitytrace/agent/event"
+	"github.com/intelops/qualitytrace/agent/proto"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/sensors"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/executor"
+	"github.com/intelops/qualitytrace/server/pkg/id"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"
 	v1 "go.opentelemetry.io/proto/otlp/trace/v1"
@@ -105,10 +105,10 @@ func (w *TriggerWorker) Trigger(ctx context.Context, request *proto.TriggerReque
 	ctx, span := w.tracer.Start(ctx, "TriggerRequest Worker operation")
 	defer span.End()
 
-	runCounter, _ := w.meter.Int64Counter("qualityTrace.agent.triggerworker.runs")
+	runCounter, _ := w.meter.Int64Counter("qualitytrace.agent.triggerworker.runs")
 	runCounter.Add(ctx, 1)
 
-	errorCounter, _ := w.meter.Int64Counter("qualityTrace.agent.triggerworker.errors")
+	errorCounter, _ := w.meter.Int64Counter("qualitytrace.agent.triggerworker.errors")
 
 	w.logger.Debug("Trigger request received", zap.Any("triggerRequest", request))
 	w.observer.StartTriggerExecution(request)

@@ -9,12 +9,12 @@ export default {
     note: '',
     tags: ['id'],
   },
-  'qualityTrace.span.duration': {
+  'qualitytrace.span.duration': {
     description: 'Tracetest attribute that reflects the elapsed real time of the operation.',
     note: '',
     tags: ['ms', 'second', 'time'],
   },
-  'qualityTrace.span.type': {
+  'qualitytrace.span.type': {
     description:
       'Tracetest attribute based on the [OTel Trace Semantic Conventions](https://github.com/open-telemetry/semantic-conventions/blob/main/docs/README.md)',
     note: '',

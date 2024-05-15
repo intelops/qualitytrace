@@ -3,8 +3,8 @@ package expression
 import (
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/expression/filters"
-	"github.com/intelops/qualityTrace/server/expression/value"
+	"github.com/intelops/qualitytrace/server/expression/filters"
+	"github.com/intelops/qualitytrace/server/expression/value"
 )
 
 type filterFn func(input value.Value, args ...string) (value.Value, error)

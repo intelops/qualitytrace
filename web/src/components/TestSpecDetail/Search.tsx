@@ -54,7 +54,7 @@ const Search = () => {
       <Col flex="auto">
         <Editor
           type={SupportedEditors.Selector}
-          placeholder={'Try `span[qualityTrace.span.type="general" name="Tracetest trigger"]` or just "Tracetest trigger"'}
+          placeholder={'Try `span[qualitytrace.span.type="general" name="Tracetest trigger"]` or just "Tracetest trigger"'}
           onChange={query => {
             onSearch(query);
             setSearch(query);

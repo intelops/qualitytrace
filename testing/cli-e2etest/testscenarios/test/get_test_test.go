@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -22,7 +22,7 @@ func addGetTestPreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	newTestPath := env.GetTestResourcePath(t, "list")
 
-	result := qualityTracecli.Exec(t, fmt.Sprintf("apply test --file %s", newTestPath), qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, fmt.Sprintf("apply test --file %s", newTestPath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -42,7 +42,7 @@ func TestGetTest(t *testing.T) {
 
 		// When I try to get a test on yaml mode
 		// Then it should return a error message
-		result := qualityTracecli.Exec(t, "get test --id fH_8AulVR --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get test --id fH_8AulVR --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "Resource test with ID fH_8AulVR not found")
 	})
@@ -56,7 +56,7 @@ func TestGetTest(t *testing.T) {
 
 		// When I try to get an test on yaml mode
 		// Then it should print a YAML
-		result := qualityTracecli.Exec(t, "get test --id fH_8AulVR --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get test --id fH_8AulVR --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		listTest := helpers.UnmarshalYAML[types.TestResource](t, result.StdOut)
@@ -80,7 +80,7 @@ func TestGetTest(t *testing.T) {
 
 		// When I try to get an test on json mode
 		// Then it should print a json
-		result := qualityTracecli.Exec(t, "get test --id fH_8AulVR --output json", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get test --id fH_8AulVR --output json", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		listTest := helpers.UnmarshalJSON[types.TestResource](t, result.StdOut)
@@ -104,7 +104,7 @@ func TestGetTest(t *testing.T) {
 
 		// When I try to get an test on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, test item and empty line
-		result := qualityTracecli.Exec(t, "get test --id fH_8AulVR --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get test --id fH_8AulVR --output pretty", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

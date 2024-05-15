@@ -9,13 +9,13 @@ import (
 	"strings"
 
 	"github.com/golang/protobuf/proto"
-	tempopb "github.com/intelops/qualityTrace/agent/internal/proto-gen-go/tempo-idl"
-	"github.com/intelops/qualityTrace/agent/tracedb/connection"
-	"github.com/intelops/qualityTrace/agent/tracedb/datasource"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/traces"
+	tempopb "github.com/intelops/qualitytrace/agent/internal/proto-gen-go/tempo-idl"
+	"github.com/intelops/qualitytrace/agent/tracedb/connection"
+	"github.com/intelops/qualitytrace/agent/tracedb/datasource"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/traces"
 	"github.com/pkg/errors"
 	"go.opentelemetry.io/otel/trace"
 	v1 "go.opentelemetry.io/proto/otlp/trace/v1"
@@ -59,10 +59,10 @@ func (ttd *tempoTraceDB) TestConnection(ctx context.Context) model.ConnectionRes
 		connection.WithAuthenticationTest(connection.NewTestStep(func(ctx context.Context) (string, error) {
 			_, err := ttd.GetTraceByID(ctx, id.NewRandGenerator().TraceID().String())
 			if strings.Contains(err.Error(), "authentication handshake failed") {
-				return "Tracetest tried to execute a request but it failed due to authentication issues", err
+				return "Qualitytrace tried to execute a request but it failed due to authentication issues", err
 			}
 
-			return "Tracetest managed to authenticate with Tempo", nil
+			return "Qualitytrace managed to authenticate with Tempo", nil
 		})),
 	)
 

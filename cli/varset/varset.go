@@ -3,9 +3,9 @@ package varset
 import (
 	"fmt"
 
-	"github.com/intelops/qualityTrace/cli/openapi"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
-	"github.com/intelops/qualityTrace/cli/ui"
+	"github.com/intelops/qualitytrace/cli/openapi"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/ui"
 )
 
 var jsonFormat = resourcemanager.Formats.Get(resourcemanager.FormatJSON)

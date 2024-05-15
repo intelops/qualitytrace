@@ -1,10 +1,10 @@
 VERSION ?= "dev"
 TRACETEST_ENV ?= "dev"
 GO_LDFLAGS := $(shell echo \
-		-X "'github.com/intelops/qualityTrace/server/version.Version=$(VERSION)'" \
-		-X "'github.com/intelops/qualityTrace/server/version.Env=$(TRACETEST_ENV)'" \
-		-X "'github.com/intelops/qualityTrace/server/analytics.SecretKey=$(ANALYTICS_BE_KEY)'" \
-		-X "'github.com/intelops/qualityTrace/server/analytics.FrontendKey=$(ANALYTICS_FE_KEY)'" \
+		-X "'github.com/intelops/qualitytrace/server/version.Version=$(VERSION)'" \
+		-X "'github.com/intelops/qualitytrace/server/version.Env=$(TRACETEST_ENV)'" \
+		-X "'github.com/intelops/qualitytrace/server/analytics.SecretKey=$(ANALYTICS_BE_KEY)'" \
+		-X "'github.com/intelops/qualitytrace/server/analytics.FrontendKey=$(ANALYTICS_FE_KEY)'" \
 	| sed 's/ / /g')
 
 .PHONY: help

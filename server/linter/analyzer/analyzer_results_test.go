@@ -3,7 +3,7 @@ package analyzer_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
 	"github.com/stretchr/testify/assert"
 )
 

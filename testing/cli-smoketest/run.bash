@@ -10,7 +10,7 @@ if [ $TEST_ENV = "local" ]; then
   export TRACETEST_CLI_COMMAND=$TRACETEST_CLI
 else
   export TRACETEST_ENDPOINT="host.docker.internal:11633"
-  export TRACETEST_CLI_COMMAND="docker run --volume $PWD/tests:/app/tests --entrypoint qualityTrace --add-host=host.docker.internal:host-gateway intelops/qualityTrace:$TAG"
+  export TRACETEST_CLI_COMMAND="docker run --volume $PWD/tests:/app/tests --entrypoint qualitytrace --add-host=host.docker.internal:host-gateway intelops/qualitytrace:$TAG"
 fi
 
 echo "Preparing to run CLI tests..."
@@ -23,13 +23,13 @@ echo "TRACETEST_ENDPOINT:    $TRACETEST_ENDPOINT"
 echo "TRACETEST_CLI_COMMAND: $TRACETEST_CLI_COMMAND"
 echo ""
 
-echo "Setting up qualityTrace CLI configuration..."
+echo "Setting up qualitytrace CLI configuration..."
 cat << EOF > tests/config.yml
 scheme: http
 endpoint: $TRACETEST_ENDPOINT
 analyticsEnabled: false
 EOF
-echo "qualityTrace CLI set up."
+echo "qualitytrace CLI set up."
 echo ""
 
 echo "Setting up test helpers..."

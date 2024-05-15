@@ -7,11 +7,11 @@ import (
 
 	"fmt"
 
-	cliUI "github.com/intelops/qualityTrace/cli/ui"
+	cliUI "github.com/intelops/qualitytrace/cli/ui"
 )
 
 func configureDemoApp(conf configuration, ui cliUI.UI) configuration {
-	conf.set("demo.enable.pokeshop", !conf.Bool("installer.only_qualityTrace"))
+	conf.set("demo.enable.pokeshop", !conf.Bool("installer.only_qualitytrace"))
 	conf.set("demo.enable.otel", false)
 
 	switch conf.String("installer") {
@@ -36,37 +36,37 @@ func configureDemoApp(conf configuration, ui cliUI.UI) configuration {
 	return conf
 }
 
-func configureTracetest(conf configuration, ui cliUI.UI) configuration {
+func configureQualitytrace(conf configuration, ui cliUI.UI) configuration {
 	conf = configureBackend(conf, ui)
-	conf.set("qualityTrace.analytics", true)
+	conf.set("qualitytrace.analytics", true)
 
 	return conf
 }
 
 func configureBackend(conf configuration, ui cliUI.UI) configuration {
-	installBackend := !conf.Bool("installer.only_qualityTrace")
-	conf.set("qualityTrace.backend.install", installBackend)
+	installBackend := !conf.Bool("installer.only_qualitytrace")
+	conf.set("qualitytrace.backend.install", installBackend)
 
 	if !installBackend {
-		conf.set("qualityTrace.backend.type", "")
+		conf.set("qualitytrace.backend.type", "")
 		return conf
 	}
 
 	// default values
 	switch conf.String("installer") {
 	case "docker-compose":
-		conf.set("qualityTrace.backend.type", "otlp")
-		conf.set("qualityTrace.backend.tls.insecure", true)
-		conf.set("qualityTrace.backend.endpoint.collector", "http://otel-collector:4317")
-		conf.set("qualityTrace.backend.endpoint", "qualityTrace:4317")
+		conf.set("qualitytrace.backend.type", "otlp")
+		conf.set("qualitytrace.backend.tls.insecure", true)
+		conf.set("qualitytrace.backend.endpoint.collector", "http://otel-collector:4317")
+		conf.set("qualitytrace.backend.endpoint", "qualitytrace:4317")
 	case "kubernetes":
-		conf.set("qualityTrace.backend.type", "otlp")
-		conf.set("qualityTrace.backend.tls.insecure", true)
-		conf.set("qualityTrace.backend.endpoint.collector", "http://otel-collector.qualityTrace:4317")
-		conf.set("qualityTrace.backend.endpoint", "qualityTrace:4317")
+		conf.set("qualitytrace.backend.type", "otlp")
+		conf.set("qualitytrace.backend.tls.insecure", true)
+		conf.set("qualitytrace.backend.endpoint.collector", "http://otel-collector.qualitytrace:4317")
+		conf.set("qualitytrace.backend.endpoint", "qualitytrace:4317")
 
 	default:
-		conf.set("qualityTrace.backend.type", "")
+		conf.set("qualitytrace.backend.type", "")
 	}
 
 	return conf
@@ -75,7 +75,7 @@ func configureBackend(conf configuration, ui cliUI.UI) configuration {
 //go:embed templates/config.yaml.tpl
 var configTemplate string
 
-func getTracetestConfigFileContents(pHost, pUser, pPasswd string, ui cliUI.UI, config configuration) []byte {
+func getQualitytraceConfigFileContents(pHost, pUser, pPasswd string, ui cliUI.UI, config configuration) []byte {
 	vals := map[string]string{
 		"pHost":   pHost,
 		"pUser":   pUser,
@@ -96,18 +96,18 @@ func getTracetestConfigFileContents(pHost, pUser, pPasswd string, ui cliUI.UI, c
 //go:embed templates/provision.yaml.tpl
 var provisionTemplate string
 
-func getTracetestProvisionFileContents(ui cliUI.UI, config configuration) []byte {
+func getQualitytraceProvisionFileContents(ui cliUI.UI, config configuration) []byte {
 	vals := map[string]string{
-		"installBackend":   fmt.Sprintf("%t", config.Bool("qualityTrace.backend.install")),
-		"backendType":      config.String("qualityTrace.backend.type"),
-		"backendEndpoint":  config.String("qualityTrace.backend.endpoint.query"),
-		"backendInsecure":  config.String("qualityTrace.backend.tls.insecure"),
-		"backendAddresses": config.String("qualityTrace.backend.addresses"),
-		"backendIndex":     config.String("qualityTrace.backend.index"),
-		"backendToken":     config.String("qualityTrace.backend.token"),
-		"backendRealm":     config.String("qualityTrace.backend.realm"),
+		"installBackend":   fmt.Sprintf("%t", config.Bool("qualitytrace.backend.install")),
+		"backendType":      config.String("qualitytrace.backend.type"),
+		"backendEndpoint":  config.String("qualitytrace.backend.endpoint.query"),
+		"backendInsecure":  config.String("qualitytrace.backend.tls.insecure"),
+		"backendAddresses": config.String("qualitytrace.backend.addresses"),
+		"backendIndex":     config.String("qualitytrace.backend.index"),
+		"backendToken":     config.String("qualitytrace.backend.token"),
+		"backendRealm":     config.String("qualitytrace.backend.realm"),
 
-		"analyticsEnabled": fmt.Sprintf("%t", config.Bool("qualityTrace.analytics")),
+		"analyticsEnabled": fmt.Sprintf("%t", config.Bool("qualitytrace.analytics")),
 
 		"enablePokeshopDemo": fmt.Sprintf("%t", config.Bool("demo.enable.pokeshop")),
 		"enableOtelDemo":     fmt.Sprintf("%t", config.Bool("demo.enable.otel")),

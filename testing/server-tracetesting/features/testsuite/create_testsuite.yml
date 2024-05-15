@@ -24,17 +24,17 @@ spec:
   specs:
   - selector: span[name = "Tracetest trigger"]
     assertions:
-      - attr:qualityTrace.selected_spans.count = 1
-      - attr:qualityTrace.response.status = 201
-      - attr:qualityTrace.response.body | json_path '$.spec.id' = var:TRANSACTION_ID
-  - selector: span[name="POST /api/testsuites" qualityTrace.span.type="http"]
+      - attr:qualitytrace.selected_spans.count = 1
+      - attr:qualitytrace.response.status = 201
+      - attr:qualitytrace.response.body | json_path '$.spec.id' = var:TRANSACTION_ID
+  - selector: span[name="POST /api/testsuites" qualitytrace.span.type="http"]
     assertions:
-      - attr:qualityTrace.selected_spans.count = 1
+      - attr:qualitytrace.selected_spans.count = 1
   - selector: span[name = "exec INSERT"]
     assertions:
-      - attr:qualityTrace.selected_spans.count = 2
+      - attr:qualitytrace.selected_spans.count = 2
 
   outputs:
   - name: TRANSACTION_ID
     selector: span[name = "Tracetest trigger"]
-    value: attr:qualityTrace.response.body | json_path '$.spec.id'
+    value: attr:qualitytrace.response.body | json_path '$.spec.id'

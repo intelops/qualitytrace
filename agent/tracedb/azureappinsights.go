@@ -11,10 +11,10 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 	"github.com/Azure/azure-sdk-for-go/sdk/monitor/azquery"
-	"github.com/intelops/qualityTrace/agent/tracedb/connection"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/agent/tracedb/connection"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/traces"
 	"go.opentelemetry.io/otel/trace"
 )
 
@@ -87,10 +87,10 @@ func (db *azureAppInsightsDB) TestConnection(ctx context.Context) model.Connecti
 		connection.WithAuthenticationTest(connection.NewTestStep(func(ctx context.Context) (string, error) {
 			_, err := db.GetTraceByID(ctx, db.GetTraceID().String())
 			if err != nil && strings.Contains(strings.ToLower(err.Error()), "403") {
-				return `Tracetest tried to execute an Azure API request but it failed due to authentication issues`, err
+				return `Qualitytrace tried to execute an Azure API request but it failed due to authentication issues`, err
 			}
 
-			return "Tracetest managed to authenticate with the Azure Services", nil
+			return "Qualitytrace managed to authenticate with the Azure Services", nil
 		})),
 	)
 
@@ -333,9 +333,9 @@ func parseAttributes(span *traces.Span, value any) error {
 func parseParentID(span *traces.Span, value any) error {
 	rawParentID, ok := value.(string)
 	if ok {
-		span.Attributes.Set(traces.TracetestMetadataFieldParentID, rawParentID)
+		span.Attributes.Set(traces.QualitytraceMetadataFieldParentID, rawParentID)
 	} else {
-		span.Attributes.Set(traces.TracetestMetadataFieldParentID, "")
+		span.Attributes.Set(traces.QualitytraceMetadataFieldParentID, "")
 	}
 	return nil
 }

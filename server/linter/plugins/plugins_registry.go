@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/linter/rules"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/linter/rules"
+	"github.com/intelops/qualitytrace/server/traces"
 )
 
 type Plugin interface {

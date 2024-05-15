@@ -107,11 +107,11 @@ func (cfg *AppConfig) loadConfig() error {
 }
 
 func (cfg *AppConfig) configureConfigFile() {
-	cfg.vp.SetConfigName("qualityTrace")
+	cfg.vp.SetConfigName("qualitytrace")
 	// intentionally removed this line, because it allows to have config files without extensions
 	// cfg.vp.SetConfigType("yaml")
-	cfg.vp.AddConfigPath("/etc/qualityTrace")
-	cfg.vp.AddConfigPath("$HOME/.qualityTrace")
+	cfg.vp.AddConfigPath("/etc/qualitytrace")
+	cfg.vp.AddConfigPath("$HOME/.qualitytrace")
 	cfg.vp.AddConfigPath(".")
 }
 

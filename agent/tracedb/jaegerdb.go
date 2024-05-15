@@ -6,13 +6,13 @@ import (
 	"io"
 	"strings"
 
-	pb "github.com/intelops/qualityTrace/agent/internal/proto-gen-go/api_v3"
-	"github.com/intelops/qualityTrace/agent/tracedb/connection"
-	"github.com/intelops/qualityTrace/agent/tracedb/datasource"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/traces"
+	pb "github.com/intelops/qualitytrace/agent/internal/proto-gen-go/api_v3"
+	"github.com/intelops/qualitytrace/agent/tracedb/connection"
+	"github.com/intelops/qualitytrace/agent/tracedb/datasource"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/traces"
 	v1 "go.opentelemetry.io/proto/otlp/trace/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
@@ -58,10 +58,10 @@ func (jtd *jaegerTraceDB) TestConnection(ctx context.Context) model.ConnectionRe
 		connection.WithAuthenticationTest(connection.NewTestStep(func(ctx context.Context) (string, error) {
 			_, err := jtd.GetTraceByID(ctx, id.NewRandGenerator().TraceID().String())
 			if strings.Contains(err.Error(), "authentication handshake failed") {
-				return "Tracetest tried to execute a gRPC request but it failed due to authentication issues", err
+				return "Qualitytrace tried to execute a gRPC request but it failed due to authentication issues", err
 			}
 
-			return "Tracetest managed to authenticate with Jaeger", nil
+			return "Qualitytrace managed to authenticate with Jaeger", nil
 		})),
 	)
 

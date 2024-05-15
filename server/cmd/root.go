@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/intelops/qualityTrace/server/app"
-	"github.com/intelops/qualityTrace/server/config"
+	"github.com/intelops/qualitytrace/server/app"
+	"github.com/intelops/qualitytrace/server/config"
 	"github.com/spf13/cobra"
 )
 
@@ -15,8 +15,8 @@ var (
 	appInstance *app.App
 
 	rootCmd = &cobra.Command{
-		Use:   "qualityTrace-server",
-		Short: "qualityTrace server",
+		Use:   "qualitytrace-server",
+		Short: "qualitytrace server",
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 			var err error
 			appInstance, err = app.New(cfg)

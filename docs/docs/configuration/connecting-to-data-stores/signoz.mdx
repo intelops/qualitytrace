@@ -3,7 +3,7 @@ id: signoz
 title: SigNoz
 description: Use SigNoz as the trace data store for Tracetest. Configure the OpenTelemetry Collector to receive traces and forward them to both Tracetest and SigNoz.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -14,18 +14,18 @@ image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_T
 If you want to use [SigNoz](https://signoz.io/) as the trace data store, you'll configure the OpenTelemetry Collector to receive traces from your system and then send them to both Tracetest and Signoz. And, you don't have to change your existing pipelines to do so.
 
 :::tip
-Examples of configuring Tracetest with SigNoz can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualityTrace/tree/main/examples).
+Examples of configuring Tracetest with SigNoz can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualitytrace/tree/main/examples).
 :::
 
 ## Configuring OpenTelemetry Collector to Send Traces to both SigNoz and Tracetest
 
 In your OpenTelemetry Collector config file:
 
-- Set the `exporter` to `otlp/qualityTrace`
+- Set the `exporter` to `otlp/qualitytrace`
 - Set the `endpoint` to your Tracetest instance on port `4317`
 
 :::tip
-If you are running Tracetest with Docker, and Tracetest's service name is `qualityTrace`, then the endpoint might look like this `http://qualityTrace:4317`
+If you are running Tracetest with Docker, and Tracetest's service name is `qualitytrace`, then the endpoint might look like this `http://qualitytrace:4317`
 :::
 
 Additionally, add another config:
@@ -52,8 +52,8 @@ exporters:
   logging:
     logLevel: debug
   # OTLP for Tracetest
-  otlp/qualityTrace:
-    endpoint: qualityTrace:4317 # Send traces to Tracetest. Read more in docs here:  https://docs.qualityTrace.io/configuration/connecting-to-data-stores/opentelemetry-collector
+  otlp/qualitytrace:
+    endpoint: qualitytrace:4317 # Send traces to Tracetest. Read more in docs here:  https://docs.qualitytrace.io/configuration/connecting-to-data-stores/opentelemetry-collector
     tls:
       insecure: true
   # OTLP for SigNoz
@@ -63,10 +63,10 @@ exporters:
       insecure: true
 service:
   pipelines:
-    traces/qualityTrace: # Pipeline to send data to Tracetest
+    traces/qualitytrace: # Pipeline to send data to Tracetest
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging, otlp/qualityTrace]
+      exporters: [logging, otlp/qualitytrace]
     traces/signoz: # Pipeline to send data to SigNoz
       receivers: [otlp]
       processors: [batch]
@@ -98,9 +98,9 @@ spec:
 Proceed to run this command in the terminal and specify the file above.
 
 ```bash
-qualityTrace apply datastore -f my/data-store/file/location.yaml
+qualitytrace apply datastore -f my/data-store/file/location.yaml
 ```
 
 :::tip
-To learn more, [read the recipe on running a sample app with SigNoz and Tracetest](/examples-tutorials/recipes/running-qualityTrace-with-signoz-pokeshop).
+To learn more, [read the recipe on running a sample app with SigNoz and Tracetest](/examples-tutorials/recipes/running-qualitytrace-with-signoz-pokeshop).
 :::

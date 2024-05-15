@@ -13,7 +13,7 @@ exporters:
     loglevel: debug
 
   otlp/1:
-    endpoint: qualityTrace:4317
+    endpoint: qualitytrace:4317
     tls:
       insecure: true
 

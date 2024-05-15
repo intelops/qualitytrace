@@ -4,7 +4,7 @@ title: OpenTelemetry Store - User Purchasing Products
 description: The OpenTelemetry Demo is an example application published by the OpenTelemtry CNCF project. This use case covers viewing recommended products before adding them to the shopping cart.
 hide_table_of_contents: false
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -61,16 +61,16 @@ spec:
       - key: Content-Type
         value: application/json
   specs:
-  - selector: span[qualityTrace.span.type="rpc" name="grpc.hipstershop.ProductCatalogService/GetProduct" rpc.system="grpc" rpc.method="GetProduct" rpc.service="hipstershop.ProductCatalogService"]
+  - selector: span[qualitytrace.span.type="rpc" name="grpc.hipstershop.ProductCatalogService/GetProduct" rpc.system="grpc" rpc.method="GetProduct" rpc.service="hipstershop.ProductCatalogService"]
     assertions: # It should have 4 products on this list.
-    - attr:qualityTrace.selected_spans.count = 4
-  - selector: span[qualityTrace.span.type="rpc" name="/hipstershop.FeatureFlagService/GetFlag" rpc.system="grpc" rpc.method="GetFlag" rpc.service="hipstershop.FeatureFlagService"]
+    - attr:qualitytrace.selected_spans.count = 4
+  - selector: span[qualitytrace.span.type="rpc" name="/hipstershop.FeatureFlagService/GetFlag" rpc.system="grpc" rpc.method="GetFlag" rpc.service="hipstershop.FeatureFlagService"]
     assertions: # The feature flagger should be called for one product.
-    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualitytrace.selected_spans.count = 1
   outputs:
   - name: PRODUCT_ID
-    selector: span[qualityTrace.span.type="general" name="Tracetest trigger"]
-    value: attr:qualityTrace.response.body | json_path '$[0].id'
+    selector: span[qualitytrace.span.type="general" name="Tracetest trigger"]
+    value: attr:qualitytrace.response.body | json_path '$[0].id'
 ```
 
 Note that we have one important changes here: we are now using environment variables on the definition, like `${var:OTEL_API_URL}` and `${var:USER_ID}` on the trigger section and an output to fetch the first `${var:PRODUCT_ID}` that the user chose. This new environment variable will be used in the next tests.
@@ -92,14 +92,14 @@ spec:
         value: application/json
       body: '{"item":{"productId":"${var:PRODUCT_ID}","quantity":1},"userId":"${var:USER_ID}"}'
   specs:
-  - selector: span[qualityTrace.span.type="http" name="hipstershop.CartService/AddItem"]
+  - selector: span[qualitytrace.span.type="http" name="hipstershop.CartService/AddItem"]
     # The correct ProductID was sent to the Product Catalog API.
     assertions:
     - attr:app.product.id = "${var:PRODUCT_ID}"
-  - selector: span[qualityTrace.span.type="database" name="HMSET" db.system="redis" db.redis.database_index="0"]
+  - selector: span[qualitytrace.span.type="database" name="HMSET" db.system="redis" db.redis.database_index="0"]
     # The product persisted correctly on the shopping cart.
     assertions:
-    - attr:qualityTrace.selected_spans.count >= 1
+    - attr:qualitytrace.selected_spans.count >= 1
 ```
 
 After that, we will [Check Shopping Cart Contents](/live-examples/opentelemetry-store/use-cases/check-shopping-cart-contents) (on `check-shopping-cart-contents.yaml`), simulating a user validating the products selected before finishing the purchase:
@@ -117,14 +117,14 @@ spec:
       - key: Content-Type
         value: application/json
   specs:
-  - selector: span[qualityTrace.span.type="rpc" name="hipstershop.ProductCatalogService/GetProduct" rpc.system="grpc" rpc.method="GetProduct" rpc.service="hipstershop.ProductCatalogService"]
+  - selector: span[qualitytrace.span.type="rpc" name="hipstershop.ProductCatalogService/GetProduct" rpc.system="grpc" rpc.method="GetProduct" rpc.service="hipstershop.ProductCatalogService"]
     # The product previously added exists in the cart.
     assertions:
     - attr:app.product.id = "${var:PRODUCT_ID}"
-  - selector: span[qualityTrace.span.type="general" name="Tracetest trigger"]
+  - selector: span[qualitytrace.span.type="general" name="Tracetest trigger"]
     # The size of the shopping cart should be at least 1.
     assertions:
-    - attr:qualityTrace.response.body | json_path '$.items.length' >= 1
+    - attr:qualitytrace.response.body | json_path '$.items.length' >= 1
 ```
 
 And finally, we have the [Checkout](/live-examples/opentelemetry-store/use-cases/checkout) action (`checkout.yaml`), where the user inputs the billing and shipping info and finishes buying the item in the shopping cart:
@@ -144,28 +144,28 @@ spec:
         value: application/json
       body: '{"userId":"${var:USER_ID}","email":"someone@example.com","address":{"streetAddress":"1600 Amphitheatre Parkway","state":"CA","country":"United States","city":"Mountain View","zipCode":"94043"},"userCurrency":"USD","creditCard":{"creditCardCvv":672,"creditCardExpirationMonth":1,"creditCardExpirationYear":2030,"creditCardNumber":"4432-8015-6152-0454"}}'
   specs:
-  - selector: span[qualityTrace.span.type="rpc" name="hipstershop.CheckoutService/PlaceOrder"
+  - selector: span[qualitytrace.span.type="rpc" name="hipstershop.CheckoutService/PlaceOrder"
       rpc.system="grpc" rpc.method="PlaceOrder" rpc.service="hipstershop.CheckoutService"]
     assertions: 
     # An order was placed.
     - attr:app.user.id = "${var:USER_ID}"
     - attr:app.order.items.count = 1
-  - selector: span[qualityTrace.span.type="rpc" name="hipstershop.PaymentService/Charge" rpc.system="grpc" rpc.method="Charge" rpc.service="hipstershop.PaymentService"]
+  - selector: span[qualitytrace.span.type="rpc" name="hipstershop.PaymentService/Charge" rpc.system="grpc" rpc.method="Charge" rpc.service="hipstershop.PaymentService"]
     assertions: 
     # The user was charged.
     - attr:rpc.grpc.status_code  =  0
-    - attr:qualityTrace.selected_spans.count >= 1
-  - selector: span[qualityTrace.span.type="rpc" name="hipstershop.ShippingService/ShipOrder" rpc.system="grpc" rpc.method="ShipOrder" rpc.service="hipstershop.ShippingService"]
+    - attr:qualitytrace.selected_spans.count >= 1
+  - selector: span[qualitytrace.span.type="rpc" name="hipstershop.ShippingService/ShipOrder" rpc.system="grpc" rpc.method="ShipOrder" rpc.service="hipstershop.ShippingService"]
     assertions: 
     # The product was shipped.
     - attr:rpc.grpc.status_code = 0
-    - attr:qualityTrace.selected_spans.count >= 1
-  - selector: span[qualityTrace.span.type="rpc" name="hipstershop.CartService/EmptyCart"
+    - attr:qualitytrace.selected_spans.count >= 1
+  - selector: span[qualitytrace.span.type="rpc" name="hipstershop.CartService/EmptyCart"
       rpc.system="grpc" rpc.method="EmptyCart" rpc.service="hipstershop.CartService"]
     assertions: 
     # The shopping cart was emptied.
     - attr:rpc.grpc.status_code = 0
-    - attr:qualityTrace.selected_spans.count >= 1
+    - attr:qualitytrace.selected_spans.count >= 1
 ```
 
 ### Creating the Test Suite
@@ -187,7 +187,7 @@ spec:
 By having the test, Test Suite and environment files in the same directory, we can call the CLI and execute this Test Suite:
 
 ```sh
-qualityTrace run testsuite -f testsuite.yaml -e user-buying-products.env
+qualitytrace run testsuite -f testsuite.yaml -e user-buying-products.env
 ```
 
 The result should be an output like this:

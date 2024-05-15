@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/intelops/qualityTrace/cli/cmdutil"
-	"github.com/intelops/qualityTrace/cli/config"
-	"github.com/intelops/qualityTrace/cli/openapi"
-	"github.com/intelops/qualityTrace/cli/runner"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/config"
+	"github.com/intelops/qualitytrace/cli/openapi"
+	"github.com/intelops/qualitytrace/cli/runner"
 	"github.com/spf13/cobra"
 
-	cloudCmd "github.com/intelops/qualityTrace/cli/cloud/cmd"
+	cloudCmd "github.com/intelops/qualitytrace/cli/cloud/cmd"
 )
 
 var (

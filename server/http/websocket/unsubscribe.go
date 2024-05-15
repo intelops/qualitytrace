@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/gorilla/websocket"
-	"github.com/intelops/qualityTrace/server/subscription"
+	"github.com/intelops/qualitytrace/server/subscription"
 )
 
 type unsubscribeMessage struct {

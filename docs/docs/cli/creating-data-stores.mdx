@@ -3,7 +3,7 @@ id: creating-data-stores
 title: Defining Data Stores as Text Files
 description: Configure Trace Data Stores in Tracetest by using a configuration file that can be applied to your Tracetest instance.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -169,7 +169,7 @@ spec:
 To apply the configuration, you need a [configured CLI](/cli/configuring-your-cli) pointed to the instance you want to apply the data store. Then use the following command:
 
 ```
-qualityTrace apply datastore -f my/data-store/file/location.yaml
+qualitytrace apply datastore -f my/data-store/file/location.yaml
 ```
 
 ## Additional Information
@@ -179,5 +179,5 @@ In the current version, you can only have one active data store at any given tim
 After a configuration is applied, you can export it using the CLI by using the following command:
 
 ```
-qualityTrace export datastore -f my/file/location.yaml --id my-data-store-id
+qualitytrace export datastore -f my/file/location.yaml --id my-data-store-id
 ```

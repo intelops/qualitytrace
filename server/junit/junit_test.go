@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/assertions/comparator"
-	"github.com/intelops/qualityTrace/server/junit"
-	"github.com/intelops/qualityTrace/server/pkg/maps"
-	"github.com/intelops/qualityTrace/server/test"
+	"github.com/intelops/qualitytrace/server/assertions/comparator"
+	"github.com/intelops/qualitytrace/server/junit"
+	"github.com/intelops/qualitytrace/server/pkg/maps"
+	"github.com/intelops/qualitytrace/server/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -24,7 +24,7 @@ func TestConversion(t *testing.T) {
 
 	results := test.RunResults{
 		Results: (maps.Ordered[test.SpanQuery, []test.AssertionResult]{}).MustAdd(
-			test.SpanQuery(`span[qualityTrace.span.type = "database"]`), []test.AssertionResult{
+			test.SpanQuery(`span[qualitytrace.span.type = "database"]`), []test.AssertionResult{
 				{
 					Assertion: `attr:db.statement contains "INSERT"`,
 					Results: []test.SpanAssertionResult{
@@ -35,7 +35,7 @@ func TestConversion(t *testing.T) {
 					},
 				},
 				{
-					Assertion: `attr:qualityTrace.span.duration < 500`,
+					Assertion: `attr:qualitytrace.span.duration < 500`,
 					Results: []test.SpanAssertionResult{
 						{
 							ObservedValue: "notANumber",
@@ -44,7 +44,7 @@ func TestConversion(t *testing.T) {
 					},
 				},
 				{
-					Assertion: `attr:qualityTrace.span.type = "http"`,
+					Assertion: `attr:qualitytrace.span.type = "http"`,
 					Results: []test.SpanAssertionResult{
 						{
 							ObservedValue: "database",

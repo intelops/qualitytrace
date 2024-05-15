@@ -3,7 +3,7 @@ package config_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/config"
+	"github.com/intelops/qualitytrace/server/config"
 	"gotest.tools/v3/assert"
 )
 

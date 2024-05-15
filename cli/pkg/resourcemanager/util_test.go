@@ -3,7 +3,7 @@ package resourcemanager_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
 	"gotest.tools/v3/assert"
 )
 

@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/config"
+	"github.com/intelops/qualitytrace/server/config"
 	"go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
@@ -19,7 +19,7 @@ func NewMeter(ctx context.Context, cfg exporterConfig) (metric.Meter, error) {
 		return nil, fmt.Errorf("could not create meter provider: %w", err)
 	}
 
-	return provider.Meter("qualityTrace"), nil
+	return provider.Meter("qualitytrace"), nil
 }
 
 func newMeterProvider(ctx context.Context, cfg exporterConfig) (metric.MeterProvider, error) {

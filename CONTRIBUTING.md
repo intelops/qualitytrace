@@ -1,14 +1,14 @@
 # How to Contribute
 
-Thank you for looking at this. We, at Tracetest, are really excited to have you contribute on the project with us.
+Thank you for looking at this. We, at Qualitytrace, are really excited to have you contribute on the project with us.
 
-The main lines of communication with our team are through [Github issues](https://github.com/intelops/qualityTrace/issues/new/choose) or [Slack](https://dub.sh/qualityTrace-community). Feel free to ask any questions!
+The main lines of communication with our team are through [Github issues](https://github.com/intelops/qualitytrace/issues/new/choose) or [Slack](https://dub.sh/qualitytrace-community). Feel free to ask any questions!
 
 ## Developing 
 
 Development can be conducted using any GoLang and Typescript compatible IDE/editor (e.g., Jetbrains GoLand, VSCode).
 
-There are four places where you develop new things on Tracetest: on the CLI, on the API Server, on the Web UI and on the Documentation website.
+There are four places where you develop new things on Qualitytrace: on the CLI, on the API Server, on the Web UI and on the Documentation website.
 
 ### CLI 
 
@@ -16,11 +16,11 @@ Written in Golang, the CLI code is stored in the folder `./cli`. You can see wha
 
 To test its integration with our API, you can run a local API server on your machine by running one of our [examples](./examples/) with `docker compose`. For instance:
 ```sh
-cd ./examples/qualityTrace-jaeger
+cd ./examples/qualitytrace-jaeger
 docker compose up -d
 ```
 
-Remember that you need a file pointing to that server by configuring the CLI using the `qualityTrace configure` command or using the flag `-c` with a valid config file location, like `config.yaml` with the following content:
+Remember that you need a file pointing to that server by configuring the CLI using the `qualitytrace configure` command or using the flag `-c` with a valid config file location, like `config.yaml` with the following content:
 ```yaml
 scheme: http
 endpoint: localhost:11633
@@ -31,7 +31,7 @@ analyticsEnabled: false
 
 Written in Golang, the API Server code is stored in `./server`. You can see what options you have to test and build the application by typing `make help` inside the folder.
 
-To run the server along the database and the Open Telemetry collector, you can run `docker compose` at the root folder of Tracetest, by executing:
+To run the server along the database and the Open Telemetry collector, you can run `docker compose` at the root folder of Qualitytrace, by executing:
 ```sh
 docker compose up postgres otel-collector
 ```
@@ -42,7 +42,7 @@ Written in Typescript and using Node.js tools, the Web UI code is stored in the 
 
 Like the CLI, to connect to the API, you can run a local API server on your machine by running one of our [examples](./examples/) with `docker compose`. For instance:
 ```sh
-cd ./examples/qualityTrace-jaeger
+cd ./examples/qualitytrace-jaeger
 docker compose up -d
 ```
 
@@ -88,14 +88,14 @@ The server is responsible for serving both the API and the web UI. The easiest w
 
 We also use a few environment variables to configure the build.
 
-It becomes evident that it's not very practical during development to keep all this things in mind. We provide 2 main ways to build, run and test Tracetest:
+It becomes evident that it's not very practical during development to keep all this things in mind. We provide 2 main ways to build, run and test Qualitytrace:
 
 ### Makefile
 
 We provide a [Makefile](./Makefile) with a few targets that helps build all the parts in a development configuration without a lot of intervention. The more common used targets are:
 
 1. **make help**: shows a list of commands with a description.
-2. **make build-docker**: builds the current code (web, cli, server) and packages it all in a tagged docker image. The default image will be "intelops/qualityTrace:ev"
+2. **make build-docker**: builds the current code (web, cli, server) and packages it all in a tagged docker image. The default image will be "intelops/qualitytrace:ev"
 3. **make build-go**: build the cli and server only
 4. **make build-web**: build the web UI only
 5. **make run**: depends on the **build-docker** target. It build the image and starts a [docker compose stack](./docker-compose.yaml). The web UI will be available at `http://localhost:111633`
@@ -105,7 +105,7 @@ We provide a [Makefile](./Makefile) with a few targets that helps build all the 
 > **A note on go builds:**
 > When running **make build-docker**, the go binaries are built to be run inside a docker container.
 > Docker containers are always Linux, regardless of the host OS. 
-> This means that if you run **make build-docker** on a mac, the targets `dist/qualityTrace` and `dist/qualityTrace-server` won't run on the mac host.
+> This means that if you run **make build-docker** on a mac, the targets `dist/qualitytrace` and `dist/qualitytrace-server` won't run on the mac host.
 > You need to rebuild the go binaries (using **make build-go**)after building the docker image if you want to run them directly on the host MacOS.
 
 ### run.sh script
@@ -120,21 +120,21 @@ This script provides a few commands to help manage this test target deployment. 
 **Build everything, and start clean**
 
 ```sh
-./run.sh down build up qualityTrace-logs
+./run.sh down build up qualitytrace-logs
 ```
 
-This command firt resets the environment (`down` == `docker compose down`), build the docker image (`build` == `make docker-build`), starts the environment (`up` == `docker compose up -d`) and finally starts following the qualityTrace logs (`qualityTrace-logs` == `docker compose -f qualityTrace`)
+This command firt resets the environment (`down` == `docker compose down`), build the docker image (`build` == `make docker-build`), starts the environment (`up` == `docker compose up -d`) and finally starts following the qualitytrace logs (`qualitytrace-logs` == `docker compose -f qualitytrace`)
 
 **Run the server e2e trace based tests**
 ```sh
-./run.sh qualityTraces
+./run.sh qualitytraces
 ```
 
 THis will run the server e2e trace based testing suite, also known as [dogfooding](https://es.wikipedia.org/wiki/Dogfooding). This assumes the test environment is already started.
 
 **Clean, start, run tests, and reset**
 ```sh
-./run.sh down build up qualityTraces down
+./run.sh down build up qualitytraces down
 ```
 
 This resets the state, build, starts the test environment, runs the trace based test suit, and resets everything agian.

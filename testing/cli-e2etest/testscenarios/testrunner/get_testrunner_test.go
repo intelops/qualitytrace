@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -19,7 +19,7 @@ func addGetTestRunnerPreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	testRunnerPath := env.GetTestResourcePath(t, "new-testrunner")
 
-	result := qualityTracecli.Exec(t, fmt.Sprintf("apply testrunner --file %s", testRunnerPath), qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, fmt.Sprintf("apply testrunner --file %s", testRunnerPath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -40,7 +40,7 @@ func TestGetTestRunner(t *testing.T) {
 
 		// When I try to get a testrunner on yaml mode
 		// Then it should print a YAML with the default testrunner
-		result := qualityTracecli.Exec(t, "get testrunner --id current --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get testrunner --id current --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		require.Equal(0, result.ExitCode)
 
 		testRunner := helpers.UnmarshalYAML[types.TestRunnerResource](t, result.StdOut)
@@ -61,7 +61,7 @@ func TestGetTestRunner(t *testing.T) {
 
 		// When I try to get a testrunner on yaml mode
 		// Then it should print a YAML
-		result := qualityTracecli.Exec(t, "get testrunner --id current --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get testrunner --id current --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		require.Equal(0, result.ExitCode)
 
 		testRunner := helpers.UnmarshalYAML[types.TestRunnerResource](t, result.StdOut)
@@ -80,7 +80,7 @@ func TestGetTestRunner(t *testing.T) {
 
 		// When I try to get a testrunner on json mode
 		// Then it should print a json
-		result := qualityTracecli.Exec(t, "get testrunner --id current --output json", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get testrunner --id current --output json", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		testRunner := helpers.UnmarshalJSON[types.TestRunnerResource](t, result.StdOut)
@@ -99,7 +99,7 @@ func TestGetTestRunner(t *testing.T) {
 
 		// When I try to get a testrunner on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, a testrunner item and empty line
-		result := qualityTracecli.Exec(t, "get testrunner --id current --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get testrunner --id current --output pretty", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

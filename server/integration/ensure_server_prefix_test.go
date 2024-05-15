@@ -10,17 +10,17 @@ import (
 	"time"
 
 	"github.com/goccy/go-yaml"
-	"github.com/intelops/qualityTrace/server/app"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/resourcemanager"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/testmock"
+	"github.com/intelops/qualitytrace/server/app"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/testmock"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
-func getTracetestApp(options ...testmock.TestingAppOption) (*app.App, error) {
-	qualityTraceApp, err := testmock.GetTestingApp(options...)
+func getQualitytraceApp(options ...testmock.TestingAppOption) (*app.App, error) {
+	qualitytraceApp, err := testmock.GetTestingApp(options...)
 	if err != nil {
 		return nil, err
 	}
@@ -29,24 +29,24 @@ func getTracetestApp(options ...testmock.TestingAppOption) (*app.App, error) {
 	wg.Add(1)
 
 	go func() {
-		qualityTraceApp.Start()
+		qualitytraceApp.Start()
 		time.Sleep(1 * time.Second)
 		wg.Done()
 	}()
 
 	wg.Wait()
 
-	return qualityTraceApp, nil
+	return qualitytraceApp, nil
 }
 
 func TestServerPrefix(t *testing.T) {
-	_, err := getTracetestApp(
-		testmock.WithServerPrefix("/qualityTrace"),
+	_, err := getQualitytraceApp(
+		testmock.WithServerPrefix("/qualitytrace"),
 		testmock.WithHttpPort(8000),
 	)
 	require.NoError(t, err)
 
-	expectedEndpoint := "http://localhost:8000/qualityTrace"
+	expectedEndpoint := "http://localhost:8000/qualitytrace"
 	tests := getTests(t, expectedEndpoint)
 	assert.NotNil(t, tests)
 

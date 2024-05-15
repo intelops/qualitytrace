@@ -13,19 +13,19 @@ spec:
         - key: Content-Type
           value: application/json
   specs:
-    - selector: span[qualityTrace.span.type="http" name="POST /pokemon/import"]
+    - selector: span[qualitytrace.span.type="http" name="POST /pokemon/import"]
       name: POST /pokemon/import was called successfuly
       assertions:
         - attr:http.request.body   contains    "6"
-    - selector: span[qualityTrace.span.type="messaging" name="queue.synchronizePokemon publish" messaging.system="sqs" messaging.destination="queue.synchronizePokemon" messaging.operation="publish"]
+    - selector: span[qualitytrace.span.type="messaging" name="queue.synchronizePokemon publish" messaging.system="sqs" messaging.destination="queue.synchronizePokemon" messaging.operation="publish"]
       name: A message was enqueued to the worker
       assertions:
         - attr:messaging.payload | json_path '$.id'  =  "6"
-    - selector: span[qualityTrace.span.type="messaging" name="queue.synchronizePokemon process" messaging.system="sqs" messaging.destination="queue.synchronizePokemon" messaging.operation="process"]
+    - selector: span[qualitytrace.span.type="messaging" name="queue.synchronizePokemon process" messaging.system="sqs" messaging.destination="queue.synchronizePokemon" messaging.operation="process"]
       name: A message was read by the worker
       assertions:
         - attr:messaging.payload | json_path '$.attributes.MessageGroupId'   =   "queue.synchronizePokemon"
-    - selector: span[qualityTrace.span.type="general" name="import pokemon"]
+    - selector: span[qualitytrace.span.type="general" name="import pokemon"]
       name: A "import pokemon" action was triggered
       assertions:
-        - attr:qualityTrace.selected_spans.count >= 1
+        - attr:qualitytrace.selected_spans.count >= 1

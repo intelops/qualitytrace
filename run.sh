@@ -11,12 +11,12 @@ if [ "$NATS" == "true" ]; then
 fi
 
 help_message() {
-  echo "usage: ./run.sh [cypress|qualityTraces|up|stop|build|down|qualityTrace-logs|logs|ps|restart]"
+  echo "usage: ./run.sh [cypress|qualitytraces|up|stop|build|down|qualitytrace-logs|logs|ps|restart]"
 }
 
 restart() {
-  docker compose $opts kill qualityTrace
-  docker compose $opts up -d qualityTrace
+  docker compose $opts kill qualitytrace
+  docker compose $opts up -d qualitytrace
   docker compose $opts restart otel-collector
 }
 
@@ -24,8 +24,8 @@ logs() {
   docker compose $opts logs -f
 }
 
-qualityTrace-logs() {
-  docker compose $opts logs -f qualityTrace
+qualitytrace-logs() {
+  docker compose $opts logs -f qualitytrace
 }
 
 ps() {
@@ -41,7 +41,7 @@ build() {
   make build-docker
   # the previous commands builds the cli binary for linux (because its the os in docker)
   # if the script is run on another os, like macos, we need to rebuild for the binary to match the os
-  make dist/qualityTrace
+  make dist/qualitytrace
 }
 
 up() {
@@ -72,19 +72,19 @@ cypress() {
   npm run cy:run
 }
 
-qualityTraces() {
+qualitytraces() {
 
-  echo "Running qualityTraces"
+  echo "Running qualitytraces"
 
   SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-  export TRACETEST_CLI=${SCRIPT_DIR}/dist/qualityTrace
+  export TRACETEST_CLI=${SCRIPT_DIR}/dist/qualitytrace
   export TARGET_URL=http://localhost:11633
   export TRACETEST_ENDPOINT=localhost:11633
   export DEMO_APP_URL=http://demo-api:8081
   export DEMO_APP_GRPC_URL=demo-rpc:8082
 
-  cd testing/server-qualityTraceing
+  cd testing/server-qualitytraceing
   ./run.bash
 }
 
@@ -100,8 +100,8 @@ while [[ $# -gt 0 ]]; do
       CMD+=("cypress-ci")
       shift
       ;;
-    qualityTraces)
-      CMD+=("qualityTraces")
+    qualitytraces)
+      CMD+=("qualitytraces")
       shift
       ;;
     up)
@@ -120,8 +120,8 @@ while [[ $# -gt 0 ]]; do
       CMD+=("down")
       shift
       ;;
-    qualityTrace-logs)
-      CMD+=("qualityTrace-logs")
+    qualitytrace-logs)
+      CMD+=("qualitytrace-logs")
       shift
       ;;
     logs)

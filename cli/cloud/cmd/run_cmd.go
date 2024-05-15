@@ -4,19 +4,19 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/cli/cloud/runner"
-	"github.com/intelops/qualityTrace/cli/cmdutil"
-	"github.com/intelops/qualityTrace/cli/config"
-	"github.com/intelops/qualityTrace/cli/formatters"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
-	"github.com/intelops/qualityTrace/cli/preprocessor"
+	"github.com/intelops/qualitytrace/cli/cloud/runner"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/config"
+	"github.com/intelops/qualitytrace/cli/formatters"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/preprocessor"
 
-	cliRunner "github.com/intelops/qualityTrace/cli/runner"
+	cliRunner "github.com/intelops/qualitytrace/cli/runner"
 )
 
 func RunMultipleFiles(ctx context.Context, httpClient *resourcemanager.HTTPClient, runParams *cmdutil.RunParameters, cliConfig *config.Config, runnerRegistry cliRunner.Registry, format string) (int, error) {
 	if cliConfig.Jwt == "" {
-		return cliRunner.ExitCodeGeneralError, fmt.Errorf("you should be authenticated to run multiple files, please run 'qualityTrace configure'")
+		return cliRunner.ExitCodeGeneralError, fmt.Errorf("you should be authenticated to run multiple files, please run 'qualitytrace configure'")
 	}
 
 	variableSetPreprocessor := preprocessor.VariableSet(cmdutil.GetLogger())

@@ -3,7 +3,7 @@ package model
 import (
 	"context"
 
-	"github.com/intelops/qualityTrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/id"
 )
 
 type List[T any] struct {

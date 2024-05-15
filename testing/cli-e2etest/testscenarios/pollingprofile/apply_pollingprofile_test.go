@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -28,12 +28,12 @@ func TestApplyPollingProfile(t *testing.T) {
 	// Then it should be applied with success
 	pollingProfilePath := env.GetTestResourcePath(t, "new-pollingprofile")
 
-	result := qualityTracecli.Exec(t, fmt.Sprintf("apply pollingprofile --file %s", pollingProfilePath), qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, fmt.Sprintf("apply pollingprofile --file %s", pollingProfilePath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	// When I try to get a polling profile
 	// Then it should return the polling profile applied on the last step
-	result = qualityTracecli.Exec(t, "get pollingprofile --id current", qualityTracecli.WithCLIConfig(cliConfig))
+	result = qualitytracecli.Exec(t, "get pollingprofile --id current", qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	pollingProfile := helpers.UnmarshalYAML[types.PollingProfileResource](t, result.StdOut)

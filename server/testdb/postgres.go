@@ -8,7 +8,7 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
 	"github.com/golang-migrate/migrate/v4/source/iofs"
-	"github.com/intelops/qualityTrace/server/migrations"
+	"github.com/intelops/qualitytrace/server/migrations"
 )
 
 type postgresDB struct {
@@ -42,7 +42,7 @@ func (p *postgresDB) ensureLatestMigration() error {
 		log.Fatal(err)
 	}
 
-	migrateClient, err := migrate.NewWithInstance("iofs", sourceDriver, "qualityTrace", driver)
+	migrateClient, err := migrate.NewWithInstance("iofs", sourceDriver, "qualitytrace", driver)
 	if err != nil {
 		return fmt.Errorf("could not get migration client: %w", err)
 	}

@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
-	"github.com/intelops/qualityTrace/server/config"
-	"github.com/intelops/qualityTrace/server/resourcemanager"
-	rmtests "github.com/intelops/qualityTrace/server/resourcemanager/testutil"
+	"github.com/intelops/qualitytrace/server/config"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
+	rmtests "github.com/intelops/qualitytrace/server/resourcemanager/testutil"
 )
 
 func TestConfigResource(t *testing.T) {

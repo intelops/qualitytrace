@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/pkg/id"
 )
 
 func TriggerCreatedInfo(testID id.ID, runID int) model.TestRunEvent {
@@ -120,7 +120,7 @@ func TriggerHTTPUnreachableHostError(testID id.ID, runID int, err error) model.T
 		Stage:               model.StageTrigger,
 		Type:                "HTTP_UNREACHABLE_HOST_ERROR",
 		Title:               "Unreachable host in the trigger",
-		Description:         fmt.Sprintf("Tracetest could not reach the defined host in the trigger. Error: %s", err.Error()),
+		Description:         fmt.Sprintf("Qualitytrace could not reach the defined host in the trigger. Error: %s", err.Error()),
 		CreatedAt:           time.Now(),
 		DataStoreConnection: model.ConnectionResult{},
 		Polling:             model.PollingInfo{},
@@ -135,7 +135,7 @@ func TriggerDockerComposeHostMismatchError(testID id.ID, runID int) model.TestRu
 		Stage:               model.StageTrigger,
 		Type:                "DOCKER_COMPOSE_HOST_MISMATCH_ERROR",
 		Title:               "Docker compose mismatch error",
-		Description:         "We identified Tracetest is running inside a docker compose container, so if you are trying to access your local host machine please use the host.docker.internal hostname. For more information, see https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds",
+		Description:         "We identified Qualitytrace is running inside a docker compose container, so if you are trying to access your local host machine please use the host.docker.internal hostname. For more information, see https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds",
 		CreatedAt:           time.Now(),
 		DataStoreConnection: model.ConnectionResult{},
 		Polling:             model.PollingInfo{},
@@ -150,7 +150,7 @@ func TriggergRPCUnreachableHostError(testID id.ID, runID int, err error) model.T
 		Stage:               model.StageTrigger,
 		Type:                "GRPC_UNREACHABLE_HOST_ERROR",
 		Title:               "Unreachable host in the trigger",
-		Description:         fmt.Sprintf("Tracetest could not reach the defined host in the trigger. Error: %s", err.Error()),
+		Description:         fmt.Sprintf("Qualitytrace could not reach the defined host in the trigger. Error: %s", err.Error()),
 		CreatedAt:           time.Now(),
 		DataStoreConnection: model.ConnectionResult{},
 		Polling:             model.PollingInfo{},
@@ -423,7 +423,7 @@ func TraceOtlpServerReceivedSpans(testID id.ID, runID, spanCount int, requestTyp
 		Stage:               model.StageTrace,
 		Type:                "OTLP_SERVER_RECEIVED_SPANS",
 		Title:               fmt.Sprintf("%s OTLP server endpoint received spans", requestType),
-		Description:         fmt.Sprintf("The Tracetest %s OTLP endpoint server received %d spans", requestType, spanCount),
+		Description:         fmt.Sprintf("The Qualitytrace %s OTLP endpoint server received %d spans", requestType, spanCount),
 		CreatedAt:           time.Now(),
 		DataStoreConnection: model.ConnectionResult{},
 		Polling:             model.PollingInfo{},

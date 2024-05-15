@@ -25,7 +25,7 @@ func NewTracer(ctx context.Context, endpoint string) (trace.Tracer, error) {
 
 	otel.SetTracerProvider(tracerProvider)
 
-	tracer := tracerProvider.Tracer("qualityTrace")
+	tracer := tracerProvider.Tracer("qualitytrace")
 	return tracer, nil
 }
 

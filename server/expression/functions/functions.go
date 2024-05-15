@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/brianvoe/gofakeit/v6"
-	"github.com/intelops/qualityTrace/server/expression/types"
+	"github.com/intelops/qualitytrace/server/expression/types"
 	"gitlab.com/metakeule/fmtdate"
 )
 

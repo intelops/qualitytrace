@@ -12,7 +12,7 @@ func init() {
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Print version information of Tracetest server",
+	Short: "Print version information of Qualitytrace server",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(appInstance.Version())
 		fmt.Println("This is a temporary print")

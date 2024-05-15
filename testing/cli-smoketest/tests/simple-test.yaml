@@ -1,8 +1,8 @@
 type: Test
 spec:
   id: e9c6cff9-974d-4263-8a23-22f1e9f975aa
-  name: List all qualityTrace tests
-  description: List all existing tests from qualityTrace API
+  name: List all qualitytrace tests
+  description: List all existing tests from qualitytrace API
   trigger:
     type: http
     httpRequest:
@@ -14,4 +14,4 @@ spec:
   specs:
   - selector: span[name = "Tracetest trigger"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualitytrace.selected_spans.count = 1

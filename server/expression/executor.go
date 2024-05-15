@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/intelops/qualityTrace/server/expression/functions"
-	"github.com/intelops/qualityTrace/server/expression/types"
-	"github.com/intelops/qualityTrace/server/expression/value"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/expression/functions"
+	"github.com/intelops/qualitytrace/server/expression/types"
+	"github.com/intelops/qualitytrace/server/expression/value"
+	"github.com/intelops/qualitytrace/server/traces"
 )
 
 var ErrNoMatch error = errors.New("no match")
@@ -47,7 +47,7 @@ func (e Executor) Statement(statement string) (string, string, error) {
 		return "", "", err
 	}
 
-	// https://github.com/intelops/qualityTrace/issues/1203
+	// https://github.com/intelops/qualitytrace/issues/1203
 	if leftValue.Type() == types.TypeDuration || rightValue.Type() == types.TypeDuration {
 		leftValue = value.New(types.TypedValue{
 			Value: getRoundedDurationValue(leftValue.String()),

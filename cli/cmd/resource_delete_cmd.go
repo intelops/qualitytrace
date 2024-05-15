@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
 	"github.com/spf13/cobra"
 )
 
@@ -19,7 +19,7 @@ func init() {
 		GroupID: cmdGroupResources.ID,
 		Use:     "delete " + resourceList(),
 		Short:   "Delete resources",
-		Long:    "Delete resources from your Tracetest server",
+		Long:    "Delete resources from your Qualitytrace server",
 		PreRun:  setupCommand(),
 		Run: WithResourceMiddleware(func(ctx context.Context, _ *cobra.Command, args []string) (string, error) {
 			resourceType := resourceParams.ResourceName

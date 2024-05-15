@@ -91,7 +91,7 @@ func convertHttpOtelSpanIntoSpan(span *httpSpan) *Span {
 	}
 
 	spanID := createSpanID([]byte(span.SpanId))
-	attributes.Set(TracetestMetadataFieldParentID, createSpanID([]byte(span.ParentSpanId)).String())
+	attributes.Set(QualitytraceMetadataFieldParentID, createSpanID([]byte(span.ParentSpanId)).String())
 
 	return &Span{
 		ID:         spanID,

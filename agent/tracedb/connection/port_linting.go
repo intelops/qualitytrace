@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/intelops/qualityTrace/server/model"
+	"github.com/intelops/qualitytrace/server/model"
 )
 
 type portLinter struct {

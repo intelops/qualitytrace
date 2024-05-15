@@ -3,7 +3,7 @@ package analytics_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/analytics"
+	"github.com/intelops/qualitytrace/server/analytics"
 	"github.com/stretchr/testify/assert"
 )
 

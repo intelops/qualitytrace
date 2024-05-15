@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/traces"
 	"go.opentelemetry.io/contrib/propagators/aws/xray"
 	"go.opentelemetry.io/contrib/propagators/b3"
 	"go.opentelemetry.io/contrib/propagators/jaeger"
@@ -42,7 +42,7 @@ func (t *instrumentedTriggerer) Trigger(ctx context.Context, test test.Test, opt
 	_, span := t.tracer.Start(ctx, "Trigger test")
 	defer span.End()
 
-	tracestate, err := trace.ParseTraceState("qualityTrace=true")
+	tracestate, err := trace.ParseTraceState("qualitytrace=true")
 	if err != nil {
 		return Response{}, fmt.Errorf("could not create tracestate: %w", err)
 	}
@@ -62,7 +62,7 @@ func (t *instrumentedTriggerer) Trigger(ctx context.Context, test test.Test, opt
 	triggerSpanCtx, triggerSpan := t.triggerSpanTracer.Start(triggerCtx, traces.TriggerSpanName)
 	defer triggerSpan.End()
 
-	triggerSpan.SpanContext().TraceState().Insert("qualityTrace", "true")
+	triggerSpan.SpanContext().TraceState().Insert("qualitytrace", "true")
 
 	tid := triggerSpan.SpanContext().TraceID()
 	sid := triggerSpan.SpanContext().SpanID()
@@ -73,15 +73,15 @@ func (t *instrumentedTriggerer) Trigger(ctx context.Context, test test.Test, opt
 	resp.SpanID = sid
 
 	attrs := []attribute.KeyValue{
-		attribute.String("qualityTrace.run.trigger.trace_id", tid.String()),
-		attribute.String("qualityTrace.run.trigger.span_id", sid.String()),
-		attribute.String("qualityTrace.run.trigger.test_id", string(test.ID)),
-		attribute.String("qualityTrace.run.trigger.type", string(t.triggerer.Type())),
+		attribute.String("qualitytrace.run.trigger.trace_id", tid.String()),
+		attribute.String("qualitytrace.run.trigger.span_id", sid.String()),
+		attribute.String("qualitytrace.run.trigger.test_id", string(test.ID)),
+		attribute.String("qualitytrace.run.trigger.type", string(t.triggerer.Type())),
 	}
 
 	if err != nil {
 		span.RecordError(err)
-		attrs = append(attrs, attribute.String("qualityTrace.run.trigger.error", err.Error()))
+		attrs = append(attrs, attribute.String("qualitytrace.run.trigger.error", err.Error()))
 	}
 
 	for k, v := range resp.SpanAttributes {

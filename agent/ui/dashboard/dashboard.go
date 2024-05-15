@@ -6,12 +6,12 @@ import (
 	"time"
 
 	"github.com/gdamore/tcell/v2"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/components"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/events"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/models"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/pages"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/sensors"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/styles"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/components"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/events"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/models"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/pages"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/sensors"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/styles"
 	"github.com/rivo/tview"
 )
 

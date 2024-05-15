@@ -3,8 +3,8 @@ package rules
 import (
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/traces"
 )
 
 var (
@@ -20,7 +20,7 @@ var (
 )
 
 func (r requiredAttributesRule) validateSpan(span *traces.Span) analyzer.Result {
-	switch span.Attributes.Get("qualityTrace.span.type") {
+	switch span.Attributes.Get("qualitytrace.span.type") {
 	case "http":
 		return r.validateHttpSpan(span)
 	case "database":

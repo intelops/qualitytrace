@@ -3,7 +3,7 @@ package preprocessor
 import (
 	"context"
 
-	"github.com/intelops/qualityTrace/cli/pkg/fileutil"
+	"github.com/intelops/qualitytrace/cli/pkg/fileutil"
 )
 
 type Preprocessor interface {

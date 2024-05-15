@@ -63,7 +63,7 @@ func ConvertOtelSpanIntoSpan(span *v1.Span) *Span {
 	}
 
 	spanID := createSpanID(span.SpanId)
-	attributes.Set(TracetestMetadataFieldParentID, createSpanID(span.ParentSpanId).String())
+	attributes.Set(QualitytraceMetadataFieldParentID, createSpanID(span.ParentSpanId).String())
 	return &Span{
 		ID:         spanID,
 		Name:       span.Name,

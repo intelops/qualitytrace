@@ -5,20 +5,20 @@ import (
 	"testing"
 	"time"
 
-	"github.com/intelops/qualityTrace/agent/tracedb"
-	"github.com/intelops/qualityTrace/agent/tracedb/connection"
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/config"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/executor"
-	"github.com/intelops/qualityTrace/server/executor/pollingprofile"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/subscription"
-	"github.com/intelops/qualityTrace/server/telemetry"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/testdb"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/agent/tracedb"
+	"github.com/intelops/qualitytrace/agent/tracedb/connection"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/config"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/executor"
+	"github.com/intelops/qualitytrace/server/executor/pollingprofile"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/subscription"
+	"github.com/intelops/qualitytrace/server/telemetry"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/testdb"
+	"github.com/intelops/qualitytrace/server/traces"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 
@@ -35,7 +35,7 @@ func Test_PollerExecutor_ExecuteRequest_NoRootSpan_NoSpanCase(t *testing.T) {
 
 	// Scenario: Trace without any spans, even root span
 	// Given the trigger execution returns 0 spans
-	// And qualityTrace does not send the root span
+	// And qualitytrace does not send the root span
 	// When the server do the polling process
 	// Then it will not send a finished flag
 	// And it will return a connection error on every call
@@ -71,7 +71,7 @@ func Test_PollerExecutor_ExecuteRequest_NoRootSpan_OneSpanCase(t *testing.T) {
 	// Scenario: Trace with only 1 span, without root span
 	// Given the trigger execution returns 1 span on the second iteration
 	// And find no trace on the first iteration
-	// And qualityTrace does not send the root span
+	// And qualitytrace does not send the root span
 	// When the server do the polling process
 	// Then it should stop at the third iteration
 	// And it should handle the trace error on first iteration
@@ -121,7 +121,7 @@ func Test_PollerExecutor_ExecuteRequest_NoRootSpan_TwoSpansCase(t *testing.T) {
 	// Scenario: Trace with 2 span, without root span
 	// Given the trigger execution returns 1 span on second iteration and another one on third iteration
 	// And find no trace on the first iteration
-	// And qualityTrace does not send the root span
+	// And qualitytrace does not send the root span
 	// When the server do the polling process
 	// Then it should stop at the fourth iteration
 	// And it should handle the trace error on first iteration
@@ -153,7 +153,7 @@ func Test_PollerExecutor_ExecuteRequest_NoRootSpan_TwoSpansCase(t *testing.T) {
 		EndTime:   firstSpan.EndTime.Add(retryDelay),
 		Attributes: traces.NewAttributes(map[string]string{
 			"testSpan":                            "true",
-			traces.TracetestMetadataFieldParentID: firstSpan.ID.String(),
+			traces.QualitytraceMetadataFieldParentID: firstSpan.ID.String(),
 		}),
 		Children: []*traces.Span{},
 	}
@@ -187,7 +187,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_NoSpanCase(t *testing.T) {
 
 	// Scenario: Trace without any spans, only root span
 	// Given the trigger execution returns 0 spans
-	// And qualityTrace sent the root span
+	// And qualitytrace sent the root span
 	// When the server do the polling process
 	// Then it should stop on third iteration
 	// And it should handle the trace error on first iteration
@@ -237,7 +237,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_OneSpanCase(t *testing.T) {
 	// Scenario: Trace with only 1 span, plus a root span
 	// Given the trigger execution returns 1 span on second iteration
 	// And find no trace on the first iteration
-	// And qualityTrace sent the root span
+	// And qualitytrace sent the root span
 	// When the server do the polling process
 	// Then it should stop at the second iteration
 	// And it should handle the trace error on first iteration
@@ -269,7 +269,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_OneSpanCase(t *testing.T) {
 			EndTime:   time.Now().Add(retryDelay),
 			Attributes: traces.NewAttributes(map[string]string{
 				"testSpan":                            "true",
-				traces.TracetestMetadataFieldParentID: rootSpanID.String(),
+				traces.QualitytraceMetadataFieldParentID: rootSpanID.String(),
 			}),
 			Children: []*traces.Span{},
 		},
@@ -300,7 +300,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_OneDelayedSpanCase(t *testi
 	// Scenario: Trace with only 1 delayed span, plus a root span
 	// Given the trigger execution returns 1 span on fourth iteration
 	// And find no trace on the first iteration
-	// And qualityTrace sent the root span
+	// And qualitytrace sent the root span
 	// When the server do the polling process
 	// Then it should stop at the fifth iteration
 	// And it should handle the trace error on first iteration
@@ -330,7 +330,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_OneDelayedSpanCase(t *testi
 		EndTime:   time.Now().Add(retryDelay),
 		Attributes: traces.NewAttributes(map[string]string{
 			"testSpan":                            "true",
-			traces.TracetestMetadataFieldParentID: rootSpan.ID.String(),
+			traces.QualitytraceMetadataFieldParentID: rootSpan.ID.String(),
 		}),
 		Children: []*traces.Span{},
 	}
@@ -367,7 +367,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_TwoSpansCase(t *testing.T) 
 	// Scenario: Trace with 2 span, plus a root span
 	// Given the trigger execution returns 1 span on second iteration and another one on third iteration
 	// And find no trace on the first iteration
-	// And qualityTrace sent the root span
+	// And qualitytrace sent the root span
 	// When the server do the polling process
 	// Then it should stop at the third iteration
 	// And it should handle the trace error on first iteration
@@ -399,7 +399,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_TwoSpansCase(t *testing.T) 
 		EndTime:   time.Now().Add(retryDelay),
 		Attributes: traces.NewAttributes(map[string]string{
 			"testSpan":                            "true",
-			traces.TracetestMetadataFieldParentID: rootSpan.ID.String(),
+			traces.QualitytraceMetadataFieldParentID: rootSpan.ID.String(),
 		}),
 		Children: []*traces.Span{},
 	}
@@ -411,7 +411,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_TwoSpansCase(t *testing.T) 
 		EndTime:   firstSpan.EndTime.Add(retryDelay),
 		Attributes: traces.NewAttributes(map[string]string{
 			"testSpan":                            "true",
-			traces.TracetestMetadataFieldParentID: firstSpan.ID.String(),
+			traces.QualitytraceMetadataFieldParentID: firstSpan.ID.String(),
 		}),
 		Children: []*traces.Span{},
 	}

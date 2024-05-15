@@ -9,9 +9,9 @@ var environmentApplyFile string
 var environmentCmd = &cobra.Command{
 	GroupID:    cmdGroupConfig.ID,
 	Use:        "environment",
-	Short:      "Manage your qualityTrace environments",
-	Long:       "Manage your qualityTrace environments",
-	Deprecated: "Please use `qualityTrace (apply|delete|export|get|list) environment` commands instead.",
+	Short:      "Manage your qualitytrace environments",
+	Long:       "Manage your qualitytrace environments",
+	Deprecated: "Please use `qualitytrace (apply|delete|export|get|list) environment` commands instead.",
 	PreRun:     setupCommand(),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
@@ -21,9 +21,9 @@ var environmentCmd = &cobra.Command{
 
 var environmentApplyCmd = &cobra.Command{
 	Use:        "apply",
-	Short:      "Create or update an environment to Tracetest",
-	Long:       "Create or update an environment to Tracetest",
-	Deprecated: "Please use `qualityTrace apply environment --file [path]` command instead.",
+	Short:      "Create or update an environment to Qualitytrace",
+	Long:       "Create or update an environment to Qualitytrace",
+	Deprecated: "Please use `qualitytrace apply environment --file [path]` command instead.",
 	PreRun:     setupCommand(),
 	Run: func(cmd *cobra.Command, args []string) {
 		// call new apply command

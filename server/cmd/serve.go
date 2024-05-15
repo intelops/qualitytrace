@@ -6,9 +6,9 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com/intelops/qualityTrace/server/app"
-	"github.com/intelops/qualityTrace/server/config"
-	"github.com/intelops/qualityTrace/server/telemetry"
+	"github.com/intelops/qualitytrace/server/app"
+	"github.com/intelops/qualitytrace/server/config"
+	"github.com/intelops/qualitytrace/server/telemetry"
 	"github.com/spf13/cobra"
 )
 
@@ -21,7 +21,7 @@ var provisioningFile string
 
 var serveCmd = &cobra.Command{
 	Use:   "serve",
-	Short: "Start Tracetest server",
+	Short: "Start Qualitytrace server",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		cfg.Watch(func(updated *config.AppConfig) {
 			appInstance.HotReload()

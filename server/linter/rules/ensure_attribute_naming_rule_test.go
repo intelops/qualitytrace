@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/linter/rules"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/linter/rules"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -52,7 +52,7 @@ func TestEnsureAttributeNamingRule(t *testing.T) {
 
 	t.Run("attribute named after namespace", func(t *testing.T) {
 		trace := traceWithSpans(
-			spanWithAttributes("http", map[string]string{"qualityTrace.span": "POST"}),
+			spanWithAttributes("http", map[string]string{"qualitytrace.span": "POST"}),
 		)
 
 		rule := rules.NewEnsureAttributeNamingRule()
@@ -60,6 +60,6 @@ func TestEnsureAttributeNamingRule(t *testing.T) {
 
 		assert.False(t, result.Passed)
 		assert.Len(t, result.Results, 1)
-		assert.Equal(t, `Attribute "qualityTrace.span" uses the same name as an existing namespace in the same span`, result.Results[0].Errors[0].Description)
+		assert.Equal(t, `Attribute "qualitytrace.span" uses the same name as an existing namespace in the same span`, result.Results[0].Errors[0].Description)
 	})
 }

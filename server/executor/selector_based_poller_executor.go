@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/model/events"
+	"github.com/intelops/qualitytrace/server/model/events"
 )
 
 const (

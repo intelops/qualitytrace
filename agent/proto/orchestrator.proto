@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package proto;
-option go_package = "github.com/intelops/qualityTrace/agent/proto";
+option go_package = "github.com/intelops/qualitytrace/agent/proto";
 
 // Orchestrator is the piece of software that will orchestrate the work and send
 // requests to the agent

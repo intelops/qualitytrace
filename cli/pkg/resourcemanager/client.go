@@ -9,7 +9,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/intelops/qualityTrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
 	"go.uber.org/zap"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"

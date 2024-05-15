@@ -7,7 +7,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/pkg/sqlutil"
+	"github.com/intelops/qualitytrace/server/pkg/sqlutil"
 )
 
 type Repository interface {

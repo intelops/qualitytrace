@@ -4,98 +4,98 @@ const pages = [
     
     {
         type: "doc",
-		label: "qualityTrace",
-		id: "cli/reference/qualityTrace"
+		label: "qualitytrace",
+		id: "cli/reference/qualitytrace"
 	},
     {
         type: "doc",
-		label: "qualityTrace apply",
-		id: "cli/reference/qualityTrace_apply"
+		label: "qualitytrace apply",
+		id: "cli/reference/qualitytrace_apply"
 	},
     {
         type: "doc",
-		label: "qualityTrace completion",
-		id: "cli/reference/qualityTrace_completion"
+		label: "qualitytrace completion",
+		id: "cli/reference/qualitytrace_completion"
 	},
     {
         type: "doc",
-		label: "qualityTrace completion bash",
-		id: "cli/reference/qualityTrace_completion_bash"
+		label: "qualitytrace completion bash",
+		id: "cli/reference/qualitytrace_completion_bash"
 	},
     {
         type: "doc",
-		label: "qualityTrace completion fish",
-		id: "cli/reference/qualityTrace_completion_fish"
+		label: "qualitytrace completion fish",
+		id: "cli/reference/qualitytrace_completion_fish"
 	},
     {
         type: "doc",
-		label: "qualityTrace completion powershell",
-		id: "cli/reference/qualityTrace_completion_powershell"
+		label: "qualitytrace completion powershell",
+		id: "cli/reference/qualitytrace_completion_powershell"
 	},
     {
         type: "doc",
-		label: "qualityTrace completion zsh",
-		id: "cli/reference/qualityTrace_completion_zsh"
+		label: "qualitytrace completion zsh",
+		id: "cli/reference/qualitytrace_completion_zsh"
 	},
     {
         type: "doc",
-		label: "qualityTrace configure",
-		id: "cli/reference/qualityTrace_configure"
+		label: "qualitytrace configure",
+		id: "cli/reference/qualitytrace_configure"
 	},
     {
         type: "doc",
-		label: "qualityTrace dashboard",
-		id: "cli/reference/qualityTrace_dashboard"
+		label: "qualitytrace dashboard",
+		id: "cli/reference/qualitytrace_dashboard"
 	},
     {
         type: "doc",
-		label: "qualityTrace delete",
-		id: "cli/reference/qualityTrace_delete"
+		label: "qualitytrace delete",
+		id: "cli/reference/qualitytrace_delete"
 	},
     {
         type: "doc",
-		label: "qualityTrace export",
-		id: "cli/reference/qualityTrace_export"
+		label: "qualitytrace export",
+		id: "cli/reference/qualitytrace_export"
 	},
     {
         type: "doc",
-		label: "qualityTrace get",
-		id: "cli/reference/qualityTrace_get"
+		label: "qualitytrace get",
+		id: "cli/reference/qualitytrace_get"
 	},
     {
         type: "doc",
-		label: "qualityTrace list",
-		id: "cli/reference/qualityTrace_list"
+		label: "qualitytrace list",
+		id: "cli/reference/qualitytrace_list"
 	},
     {
         type: "doc",
-		label: "qualityTrace run",
-		id: "cli/reference/qualityTrace_run"
+		label: "qualitytrace run",
+		id: "cli/reference/qualitytrace_run"
 	},
     {
         type: "doc",
-		label: "qualityTrace server",
-		id: "cli/reference/qualityTrace_server"
+		label: "qualitytrace server",
+		id: "cli/reference/qualitytrace_server"
 	},
     {
         type: "doc",
-		label: "qualityTrace server install",
-		id: "cli/reference/qualityTrace_server_install"
+		label: "qualitytrace server install",
+		id: "cli/reference/qualitytrace_server_install"
 	},
     {
         type: "doc",
-		label: "qualityTrace start",
-		id: "cli/reference/qualityTrace_start"
+		label: "qualitytrace start",
+		id: "cli/reference/qualitytrace_start"
 	},
     {
         type: "doc",
-		label: "qualityTrace version",
-		id: "cli/reference/qualityTrace_version"
+		label: "qualitytrace version",
+		id: "cli/reference/qualitytrace_version"
 	},
     {
         type: "doc",
-		label: "qualityTrace wait",
-		id: "cli/reference/qualityTrace_wait"
+		label: "qualitytrace wait",
+		id: "cli/reference/qualitytrace_wait"
 	},
 ]
 

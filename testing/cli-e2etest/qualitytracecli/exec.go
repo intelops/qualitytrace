@@ -1,4 +1,4 @@
-package qualityTracecli
+package qualitytracecli
 
 import (
 	"bytes"
@@ -8,11 +8,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/command"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/config"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/command"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/config"
 	"golang.org/x/exp/slices"
 
-	"github.com/intelops/qualityTrace/cli/cmd"
+	"github.com/intelops/qualitytrace/cli/cmd"
 	"github.com/stretchr/testify/require"
 )
 
@@ -22,7 +22,7 @@ type executionState struct {
 	cliConfigFile string
 }
 
-func Exec(t *testing.T, qualityTraceSubCommand string, options ...ExecOption) *command.ExecResult {
+func Exec(t *testing.T, qualitytraceSubCommand string, options ...ExecOption) *command.ExecResult {
 	state := &executionState{}
 	for _, option := range options {
 		option(state)
@@ -30,17 +30,17 @@ func Exec(t *testing.T, qualityTraceSubCommand string, options ...ExecOption) *c
 
 	if state.cliConfigFile != "" {
 		// append config at the start of the command
-		qualityTraceSubCommand = fmt.Sprintf("--config %s %s", state.cliConfigFile, qualityTraceSubCommand)
+		qualitytraceSubCommand = fmt.Sprintf("--config %s %s", state.cliConfigFile, qualitytraceSubCommand)
 	}
 
-	qualityTraceCommand := config.GetConfigAsEnvVars().TracetestCommand
-	qualityTraceSubCommands := strings.Split(qualityTraceSubCommand, " ")
+	qualitytraceCommand := config.GetConfigAsEnvVars().TracetestCommand
+	qualitytraceSubCommands := strings.Split(qualitytraceSubCommand, " ")
 
 	if config.GetConfigAsEnvVars().EnableCLIDebug {
-		return runTracetestAsInternalCommand(t, qualityTraceCommand, qualityTraceSubCommands)
+		return runTracetestAsInternalCommand(t, qualitytraceCommand, qualitytraceSubCommands)
 	}
 
-	result, err := command.Exec(qualityTraceCommand, qualityTraceSubCommands...)
+	result, err := command.Exec(qualitytraceCommand, qualitytraceSubCommands...)
 	require.NoError(t, err)
 
 	return result
@@ -52,7 +52,7 @@ func WithCLIConfig(cliConfig string) ExecOption {
 	}
 }
 
-func runTracetestAsInternalCommand(t *testing.T, qualityTraceCommand string, qualityTraceSubCommands []string) *command.ExecResult {
+func runTracetestAsInternalCommand(t *testing.T, qualitytraceCommand string, qualitytraceSubCommands []string) *command.ExecResult {
 	// This code calls the CLI as a library to enable Go debugger to step into CLI statements and help a dev to debug CLI problems found on CLI tests
 	//, but emulates this call as an executable call intercepting data sent to stdout, stderr and part of the os.Exit commands
 
@@ -67,7 +67,7 @@ func runTracetestAsInternalCommand(t *testing.T, qualityTraceCommand string, qua
 	os.Stderr = stderrWriter
 
 	argsBackup := os.Args
-	os.Args = slices.Insert(qualityTraceSubCommands, 0, qualityTraceCommand)
+	os.Args = slices.Insert(qualitytraceSubCommands, 0, qualitytraceCommand)
 
 	exitCode := 0
 	cmd.RegisterCLIExitInterceptor(func(i int) {
@@ -103,7 +103,7 @@ func runTracetestAsInternalCommand(t *testing.T, qualityTraceCommand string, qua
 	os.Stderr = stderrBackup // restoring the real stderr
 
 	return &command.ExecResult{
-		CommandExecuted: fmt.Sprintf("%s %s", qualityTraceCommand, strings.Join(qualityTraceSubCommands, " ")),
+		CommandExecuted: fmt.Sprintf("%s %s", qualitytraceCommand, strings.Join(qualitytraceSubCommands, " ")),
 		StdOut:          <-stdoutChannel,
 		StdErr:          <-stderrChannel,
 		ExitCode:        exitCode,

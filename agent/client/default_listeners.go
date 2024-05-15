@@ -3,7 +3,7 @@ package client
 import (
 	"context"
 
-	"github.com/intelops/qualityTrace/agent/proto"
+	"github.com/intelops/qualitytrace/agent/proto"
 )
 
 func triggerListener(_ context.Context, _ *proto.TriggerRequest) error {

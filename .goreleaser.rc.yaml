@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://goreleaser.com/static/schema-pro.json
-project_name: qualityTrace
+project_name: qualitytrace
 changelog:
   sort: asc
   filters:
@@ -21,13 +21,13 @@ env:
   - TRACETEST_DEFAULT_CLOUD_ENDPOINT={{ if index .Env "TRACETEST_DEFAULT_CLOUD_ENDPOINT"  }}{{ .Env.TRACETEST_DEFAULT_CLOUD_ENDPOINT }}{{ else }}{{ end }}
 builds:
   - id: server
-    binary: qualityTrace-server
+    binary: qualitytrace-server
     main: ./server/main.go
     ldflags:
-    - -X github.com/intelops/qualityTrace/server/version.Version={{ .Env.VERSION }}
-    - -X github.com/intelops/qualityTrace/server/version.Env={{ .Env.TRACETEST_ENV }}
-    - -X github.com/intelops/qualityTrace/server/analytics.SecretKey={{ .Env.ANALYTICS_BE_KEY }}
-    - -X github.com/intelops/qualityTrace/server/analytics.FrontendKey={{ .Env.ANALYTICS_FE_KEY }}
+    - -X github.com/intelops/qualitytrace/server/version.Version={{ .Env.VERSION }}
+    - -X github.com/intelops/qualitytrace/server/version.Env={{ .Env.TRACETEST_ENV }}
+    - -X github.com/intelops/qualitytrace/server/analytics.SecretKey={{ .Env.ANALYTICS_BE_KEY }}
+    - -X github.com/intelops/qualitytrace/server/analytics.FrontendKey={{ .Env.ANALYTICS_FE_KEY }}
     env:
       - CGO_ENABLED=0
     goos:
@@ -43,13 +43,13 @@ builds:
     - "7"
 
   - id: cli
-    binary: qualityTrace
+    binary: qualitytrace
     main: ./cli/main.go
     ldflags:
-    - -X github.com/intelops/qualityTrace/cli/config.Version={{ .Env.VERSION }}
-    - -X github.com/intelops/qualityTrace/cli/config.DefaultCloudEndpoint={{ .Env.TRACETEST_DEFAULT_CLOUD_ENDPOINT }}
-    - -X github.com/intelops/qualityTrace/cli/config.Env={{ .Env.TRACETEST_ENV }}
-    - -X github.com/intelops/qualityTrace/cli/analytics.SecretKey={{ .Env.ANALYTICS_BE_KEY }}
+    - -X github.com/intelops/qualitytrace/cli/config.Version={{ .Env.VERSION }}
+    - -X github.com/intelops/qualitytrace/cli/config.DefaultCloudEndpoint={{ .Env.TRACETEST_DEFAULT_CLOUD_ENDPOINT }}
+    - -X github.com/intelops/qualitytrace/cli/config.Env={{ .Env.TRACETEST_ENV }}
+    - -X github.com/intelops/qualitytrace/cli/analytics.SecretKey={{ .Env.ANALYTICS_BE_KEY }}
     env:
       - CGO_ENABLED=0
     goos:
@@ -66,7 +66,7 @@ builds:
 
 dockers:
 - image_templates:
-  - 'intelops/qualityTrace:{{ .Env.VERSION }}-amd64'
+  - 'intelops/qualitytrace:{{ .Env.VERSION }}-amd64'
   extra_files:
     - web/build
     - server/migrations
@@ -83,7 +83,7 @@ dockers:
   use: buildx
 
 - image_templates:
-  - 'intelops/qualityTrace:{{ .Env.VERSION }}-arm64'
+  - 'intelops/qualitytrace:{{ .Env.VERSION }}-arm64'
   extra_files:
     - web/build
     - server/migrations
@@ -101,7 +101,7 @@ dockers:
 
 # agent
 - image_templates:
-  - 'intelops/qualityTrace-agent:{{ .Env.VERSION }}-amd64'
+  - 'intelops/qualitytrace-agent:{{ .Env.VERSION }}-amd64'
   dockerfile: "Dockerfile.agent"
   extra_files:
     - agent/
@@ -118,7 +118,7 @@ dockers:
   use: buildx
 
 - image_templates:
-  - 'intelops/qualityTrace-agent:{{ .Env.VERSION }}-arm64'
+  - 'intelops/qualitytrace-agent:{{ .Env.VERSION }}-arm64'
   dockerfile: "Dockerfile.agent"
   extra_files:
     - agent/
@@ -135,16 +135,16 @@ dockers:
   use: buildx
 
 docker_manifests:
-- name_template: 'intelops/qualityTrace:{{ .Env.VERSION }}'
+- name_template: 'intelops/qualitytrace:{{ .Env.VERSION }}'
   image_templates:
-  - 'intelops/qualityTrace:{{ .Env.VERSION }}-amd64'
-  - 'intelops/qualityTrace:{{ .Env.VERSION }}-arm64'
+  - 'intelops/qualitytrace:{{ .Env.VERSION }}-amd64'
+  - 'intelops/qualitytrace:{{ .Env.VERSION }}-arm64'
 
 # agent
-- name_template: 'intelops/qualityTrace-agent:{{ .Env.VERSION }}'
+- name_template: 'intelops/qualitytrace-agent:{{ .Env.VERSION }}'
   image_templates:
-  - 'intelops/qualityTrace-agent:{{ .Env.VERSION }}-amd64'
-  - 'intelops/qualityTrace-agent:{{ .Env.VERSION }}-arm64'
+  - 'intelops/qualitytrace-agent:{{ .Env.VERSION }}-amd64'
+  - 'intelops/qualitytrace-agent:{{ .Env.VERSION }}-arm64'
 
 archives:
 - name_template: >-
@@ -164,7 +164,7 @@ universal_binaries:
 
 nfpms:
 - vendor: Kubeshop
-  homepage: https://qualityTrace.kubeshop.io/
+  homepage: https://qualitytrace.kubeshop.io/
   maintainer: Sebastian Choren <sebastian@kubeshop.io>
   license: MIT
   formats:

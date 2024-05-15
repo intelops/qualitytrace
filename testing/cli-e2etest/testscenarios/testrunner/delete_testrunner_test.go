@@ -3,9 +3,9 @@ package testrunner
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -24,7 +24,7 @@ func TestDeleteTestRunner(t *testing.T) {
 
 	// When I try to delete the testrunner
 	// Then it should return a error message, showing that we cannot delete a testrunner
-	result := qualityTracecli.Exec(t, "delete testrunner --id current", qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, "delete testrunner --id current", qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 1)
 	require.Contains(result.StdErr, "resource TestRunner does not support the action")
 }

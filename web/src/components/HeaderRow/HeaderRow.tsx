@@ -20,7 +20,7 @@ const HeaderRow = ({header: {key = '', value = ''}, onCreateTestOutput, onCreate
         </S.HeaderValue>
       </S.Header>
       <AttributeActions
-        attribute={{key: `qualityTrace.response.headers | json_path '$[?(@.Key=="${key}")].Value'`, value}}
+        attribute={{key: `qualitytrace.response.headers | json_path '$[?(@.Key=="${key}")].Value'`, value}}
         onCreateTestOutput={onCreateTestOutput}
         onCreateTestSpec={onCreateTestSpec}
       />

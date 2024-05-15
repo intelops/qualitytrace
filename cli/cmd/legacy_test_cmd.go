@@ -4,16 +4,16 @@ import (
 	"os"
 	"strings"
 
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
 	"github.com/spf13/cobra"
 )
 
 var testCmd = &cobra.Command{
 	GroupID:    cmdGroupResources.ID,
 	Use:        "test",
-	Short:      "Manage your qualityTrace tests",
-	Long:       "Manage your qualityTrace tests",
-	Deprecated: "Please use `qualityTrace (apply|delete|export|get|list) test` commands instead.",
+	Short:      "Manage your qualitytrace tests",
+	Long:       "Manage your qualitytrace tests",
+	Deprecated: "Please use `qualitytrace (apply|delete|export|get|list) test` commands instead.",
 	PreRun:     setupCommand(),
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
@@ -25,7 +25,7 @@ var testListCmd = &cobra.Command{
 	Use:        "list",
 	Short:      "List all tests",
 	Long:       "List all tests",
-	Deprecated: "Please use `qualityTrace list test` command instead.",
+	Deprecated: "Please use `qualitytrace list test` command instead.",
 	PreRun:     setupCommand(),
 	Run: func(_ *cobra.Command, _ []string) {
 		listCmd.Run(listCmd, []string{"test"})
@@ -37,7 +37,7 @@ var testExportCmd = &cobra.Command{
 	Use:        "export",
 	Short:      "Exports a test into a file",
 	Long:       "Exports a test into a file",
-	Deprecated: "Please use `qualityTrace export test` command instead.",
+	Deprecated: "Please use `qualitytrace export test` command instead.",
 	PreRun:     setupCommand(),
 	Run: func(_ *cobra.Command, _ []string) {
 		exportCmd.Run(exportCmd, []string{"test"})
@@ -54,9 +54,9 @@ var (
 
 var testRunCmd = &cobra.Command{
 	Use:        "run",
-	Short:      "Run a test on your Tracetest server",
-	Long:       "Run a test on your Tracetest server",
-	Deprecated: "Please use `qualityTrace run test` command instead.",
+	Short:      "Run a test on your Qualitytrace server",
+	Long:       "Run a test on your Qualitytrace server",
+	Deprecated: "Please use `qualitytrace run test` command instead.",
 	PreRun:     setupCommand(),
 	Run: func(_ *cobra.Command, _ []string) {
 		// map old flags to new ones

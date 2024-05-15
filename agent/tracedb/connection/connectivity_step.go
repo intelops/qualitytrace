@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/intelops/qualityTrace/server/model"
+	"github.com/intelops/qualitytrace/server/model"
 )
 
 type connectivityTestStep struct {

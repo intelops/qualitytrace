@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/pkg/timing"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/timing"
 	"go.opentelemetry.io/otel/trace"
 )
 
@@ -73,7 +73,7 @@ func NewTrace(traceID string, spans []Span) Trace {
 	for _, span := range spanMap {
 		span.injectEventsIntoAttributes()
 
-		parentID := span.Attributes.Get(TracetestMetadataFieldParentID)
+		parentID := span.Attributes.Get(QualitytraceMetadataFieldParentID)
 		parentSpan, found := spanMap[parentID]
 		if !found {
 			rootSpans = append(rootSpans, span)
@@ -132,7 +132,7 @@ func getRootSpan(allRoots []*Span) *Span {
 
 // TODO: this is temp while we decide what to do with browser spans and how to handle them
 func isBrowserSpan(attrs Attributes) bool {
-	return attrs.Get("event_type") != "" || attrs.Get(TracetestMetadataFieldName) == "documentLoad"
+	return attrs.Get("event_type") != "" || attrs.Get(QualitytraceMetadataFieldName) == "documentLoad"
 }
 
 func spanType(attrs Attributes) string {
@@ -181,8 +181,8 @@ func (t *Trace) Sort() Trace {
 	return trace
 }
 
-const TriggerSpanName = "Tracetest trigger"
-const TemporaryRootSpanName = "Temporary Tracetest root span"
+const TriggerSpanName = "Qualitytrace trigger"
+const TemporaryRootSpanName = "Temporary Qualitytrace root span"
 
 func (t *Trace) HasRootSpan() bool {
 	return t.RootSpan.Name == TriggerSpanName
@@ -217,7 +217,7 @@ func replaceRoot(oldRoot, newRoot Span) Span {
 		oldRoot.Attributes = NewAttributes()
 	}
 	oldRoot.Parent = &newRoot
-	oldRoot.Attributes.Set(TracetestMetadataFieldParentID, newRoot.ID.String())
+	oldRoot.Attributes.Set(QualitytraceMetadataFieldParentID, newRoot.ID.String())
 
 	newRoot.Children = append(newRoot.Children, &oldRoot)
 

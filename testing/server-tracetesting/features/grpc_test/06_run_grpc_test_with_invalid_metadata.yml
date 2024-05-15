@@ -15,26 +15,26 @@ spec:
   specs:
   - selector: span[name = "Tracetest trigger"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
-    - attr:qualityTrace.response.status = 200
-  - selector: span[name = "POST /api/tests/{testId}/run" qualityTrace.span.type = "http"]
+    - attr:qualitytrace.selected_spans.count = 1
+    - attr:qualitytrace.response.status = 200
+  - selector: span[name = "POST /api/tests/{testId}/run" qualitytrace.span.type = "http"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualitytrace.selected_spans.count = 1
   - selector: span[name = "Trigger test"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
-    - attr:qualityTrace.run.trigger.test_id = "${var:GRPC_TEST_INVALID_METADATA_ID}"
-    - attr:qualityTrace.run.trigger.type = "grpc"
-    - attr:qualityTrace.run.trigger.grpc.response_status_code = 0
-    - attr:qualityTrace.run.trigger.grpc.response_status = "OK"
+    - attr:qualitytrace.selected_spans.count = 1
+    - attr:qualitytrace.run.trigger.test_id = "${var:GRPC_TEST_INVALID_METADATA_ID}"
+    - attr:qualitytrace.run.trigger.type = "grpc"
+    - attr:qualitytrace.run.trigger.grpc.response_status_code = 0
+    - attr:qualitytrace.run.trigger.grpc.response_status = "OK"
   - selector: span[name = "Fetching trace"]
     assertions:
-    - attr:qualityTrace.selected_spans.count > 0
-    - attr:qualityTrace.run.trace_poller.test_id = "${var:GRPC_TEST_INVALID_METADATA_ID}"
+    - attr:qualitytrace.selected_spans.count > 0
+    - attr:qualitytrace.run.trace_poller.test_id = "${var:GRPC_TEST_INVALID_METADATA_ID}"
   - selector: span[name = "Evaluating trace"]:last
     assertions:
-    - attr:qualityTrace.run.trace_poller.succesful = "true"
+    - attr:qualitytrace.run.trace_poller.succesful = "true"
   - selector: span[name = "Execute assertions"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
-    - attr:qualityTrace.run.assertion_runner.all_assertions_passed = "true"
+    - attr:qualitytrace.selected_spans.count = 1
+    - attr:qualitytrace.run.assertion_runner.all_assertions_passed = "true"

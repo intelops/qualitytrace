@@ -28,12 +28,12 @@ spec:
             },
             "specs": [
               {
-                "selector":"span[qualityTrace.span.type=\"messaging\" name=\"pokemon process\" messaging.system=\"kafka\" messaging.destination=\"pokemon\" messaging.destination_kind=\"topic\" messaging.operation=\"process\"]",
+                "selector":"span[qualitytrace.span.type=\"messaging\" name=\"pokemon process\" messaging.system=\"kafka\" messaging.destination=\"pokemon\" messaging.destination_kind=\"topic\" messaging.operation=\"process\"]",
                 "assertions": ["attr:messaging.system = \"kafka\""],
                 "name": "A message was received from Kafka stream"
               },
               {
-                "selector":"span[qualityTrace.span.type=\"general\" name=\"import pokemon\"]",
+                "selector":"span[qualitytrace.span.type=\"general\" name=\"import pokemon\"]",
                 "assertions": ["attr:name = \"import pokemon\""],
                 "name": "Import Pokemon use case was triggered"
               }
@@ -44,16 +44,16 @@ spec:
     - name: Tracetest API returned a valid HTTP code for test creation
       selector: span[name = "Tracetest trigger"]
       assertions:
-        - attr:qualityTrace.selected_spans.count = 1
-        - attr:qualityTrace.response.status = 201
+        - attr:qualitytrace.selected_spans.count = 1
+        - attr:qualitytrace.response.status = 201
     - name: Tracetest API endpoint 'POST /api/tests' was called once
-      selector: span[name="POST /api/tests" qualityTrace.span.type="http"]
+      selector: span[name="POST /api/tests" qualitytrace.span.type="http"]
       assertions:
-        - attr:qualityTrace.selected_spans.count = 1
+        - attr:qualitytrace.selected_spans.count = 1
     - name: Just one test was added into the database
       selector: span[name = "exec INSERT"]
       assertions:
-        - attr:qualityTrace.selected_spans.count = 1
+        - attr:qualitytrace.selected_spans.count = 1
     - name: The test was added on the correct database table
       selector: span[name = "exec INSERT"]:first
       assertions:
@@ -61,4 +61,4 @@ spec:
   outputs:
     - name: KAFKA_TEST_ID
       selector: span[name = "Tracetest trigger"]
-      value: attr:qualityTrace.response.body | json_path '$.spec.id'
+      value: attr:qualitytrace.response.body | json_path '$.spec.id'

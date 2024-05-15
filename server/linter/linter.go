@@ -3,10 +3,10 @@ package linter
 import (
 	"context"
 
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/linter/plugins"
-	"github.com/intelops/qualityTrace/server/linter/rules"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/linter/plugins"
+	"github.com/intelops/qualitytrace/server/linter/rules"
+	"github.com/intelops/qualitytrace/server/traces"
 )
 
 var (

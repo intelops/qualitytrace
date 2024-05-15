@@ -1,5 +1,5 @@
 results/
 config.yml
 .env
-qualityTraceing-env.yaml
-qualityTraceing-vars.yaml
+qualitytraceing-env.yaml
+qualitytraceing-vars.yaml

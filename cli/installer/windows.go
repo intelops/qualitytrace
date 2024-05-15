@@ -3,7 +3,7 @@ package installer
 import (
 	"runtime"
 
-	cliUI "github.com/intelops/qualityTrace/cli/ui"
+	cliUI "github.com/intelops/qualitytrace/cli/ui"
 )
 
 func isWindows() bool {
@@ -37,5 +37,5 @@ func wslChecker(ui cliUI.UI) {
 	}
 
 	ui.Warning("I didn't find WSL installed in your system")
-	ui.Exit("WSL is a requirement for running Tracetest on Windows. Install it before proceeding: https://learn.microsoft.com/en-us/windows/wsl/install")
+	ui.Exit("WSL is a requirement for running Qualitytrace on Windows. Install it before proceeding: https://learn.microsoft.com/en-us/windows/wsl/install")
 }

@@ -3,7 +3,7 @@ package comparator_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/assertions/comparator"
+	"github.com/intelops/qualitytrace/server/assertions/comparator"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -135,7 +135,7 @@ func TestComparators(t *testing.T) {
 				{"hello", "ll"},
 				{"hello", "lo"},
 
-				// https://github.com/intelops/qualityTrace/issues/617
+				// https://github.com/intelops/qualitytrace/issues/617
 				{`{"id":52}`, "52"},
 			},
 			expectNoMatch: []compInput{

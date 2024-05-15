@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/intelops/qualityTrace/cli/cmdutil"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
 	"github.com/spf13/cobra"
 )
 
@@ -19,7 +19,7 @@ func init() {
 		GroupID: cmdGroupResources.ID,
 		Use:     "get " + resourceList(),
 		Short:   "Get resource",
-		Long:    "Get a resource from your Tracetest server",
+		Long:    "Get a resource from your Qualitytrace server",
 		PreRun:  setupCommand(),
 		Run: WithResourceMiddleware(func(ctx context.Context, _ *cobra.Command, args []string) (string, error) {
 			resourceType := resourceParams.ResourceName

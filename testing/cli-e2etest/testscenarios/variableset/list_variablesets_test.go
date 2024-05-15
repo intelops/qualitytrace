@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -21,21 +21,21 @@ func addListVariableSetPreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	newEnvironmentPath := env.GetTestResourcePath(t, "new-varSet")
 
-	result := qualityTracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", newEnvironmentPath), qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", newEnvironmentPath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	// When I try to set up a another environment
 	// Then it should be applied with success
 	anotherEnvironmentPath := env.GetTestResourcePath(t, "another-varSet")
 
-	result = qualityTracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", anotherEnvironmentPath), qualityTracecli.WithCLIConfig(cliConfig))
+	result = qualitytracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", anotherEnvironmentPath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	// When I try to set up a third environment
 	// Then it should be applied with success
 	oneMoreEnvironmentPath := env.GetTestResourcePath(t, "one-more-varSet")
 
-	result = qualityTracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", oneMoreEnvironmentPath), qualityTracecli.WithCLIConfig(cliConfig))
+	result = qualitytracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", oneMoreEnvironmentPath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -53,7 +53,7 @@ func TestListVariableSets(t *testing.T) {
 		// Given I am a Tracetest CLI user
 		// And I have my server recently created
 		// And there is no variable sets
-		result := qualityTracecli.Exec(t, "list variableset --sortBy name --sortDirection asc --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list variableset --sortBy name --sortDirection asc --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		environmentVarsList := helpers.UnmarshalYAMLSequence[types.VariableSetResource](t, result.StdOut)
@@ -68,7 +68,7 @@ func TestListVariableSets(t *testing.T) {
 
 		// When I try to list these variable set by an invalid field
 		// Then I should receive an error
-		result := qualityTracecli.Exec(t, "list variableset --sortBy id --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list variableset --sortBy id --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 1)
 		require.Contains(result.StdErr, "invalid sort field: id") // TODO: think on how to improve this error handling
 	})
@@ -79,7 +79,7 @@ func TestListVariableSets(t *testing.T) {
 
 		// When I try to list these variable sets by a valid field and in YAML format
 		// Then I should receive three variable sets
-		result := qualityTracecli.Exec(t, "list variableset --sortBy name --sortDirection asc --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list variableset --sortBy name --sortDirection asc --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		environmentVarsList := helpers.UnmarshalYAMLSequence[types.VariableSetResource](t, result.StdOut)
@@ -124,7 +124,7 @@ func TestListVariableSets(t *testing.T) {
 
 		// When I try to list these environments by a valid field and in JSON format
 		// Then I should receive three environments
-		result := qualityTracecli.Exec(t, "list variableset --sortBy name --sortDirection asc --output json", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list variableset --sortBy name --sortDirection asc --output json", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		environmentVarsList := helpers.UnmarshalJSON[types.ResourceList[types.VariableSetResource]](t, result.StdOut)
@@ -170,7 +170,7 @@ func TestListVariableSets(t *testing.T) {
 
 		// When I try to list these environments by a valid field and in pretty format
 		// Then it should print a table with 6 lines printed: header, separator, three envs and empty line
-		result := qualityTracecli.Exec(t, "list variableset --sortBy name --sortDirection asc --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list variableset --sortBy name --sortDirection asc --output pretty", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		// due our database sorting algorithm, "another-env" comes in the front of ".env"
@@ -203,7 +203,7 @@ func TestListVariableSets(t *testing.T) {
 
 		// When I try to list these environments by a valid field, paging options and in YAML format
 		// Then I should receive two environments
-		result := qualityTracecli.Exec(t, "list variableset --sortBy name --sortDirection asc --skip 1 --take 2 --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list variableset --sortBy name --sortDirection asc --skip 1 --take 2 --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		environmentVarsList := helpers.UnmarshalYAMLSequence[types.VariableSetResource](t, result.StdOut)

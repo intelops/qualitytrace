@@ -1,6 +1,6 @@
 #/bin/bash
 
-export TRACETEST_CLI=${TRACETEST_CLI:-"qualityTrace"}
+export TRACETEST_CLI=${TRACETEST_CLI:-"qualitytrace"}
 cmdExitCode=$("$TRACETEST_CLI" &> /dev/null; echo $?)
 if [ $cmdExitCode -ne 0 ]; then
   echo "\$TRACETEST_CLI not set to executable. set to $TRACETEST_CLI";
@@ -32,11 +32,11 @@ echo "DEMO_APP_URL:           $DEMO_APP_URL"
 echo "DEMO_APP_GRPC_URL:      $DEMO_APP_GRPC_URL"
 echo "DEMO_APP_KAFKA_BROKER:  $DEMO_APP_KAFKA_BROKER"
 
-cat << EOF > qualityTraceing-vars.yaml
+cat << EOF > qualitytraceing-vars.yaml
 type: VariableSet
 spec:
-  id: qualityTraceing-vars
-  name: qualityTraceing-vars
+  id: qualitytraceing-vars
+  name: qualitytraceing-vars
   values:
     - key: TARGET_URL
       value: $TARGET_URL
@@ -51,15 +51,15 @@ spec:
 EOF
 
 echo "variables set created:"
-cat qualityTraceing-vars.yaml
+cat qualitytraceing-vars.yaml
 
-echo "Setting up qualityTrace CLI configuration..."
+echo "Setting up qualitytrace CLI configuration..."
 cat << EOF > config.yml
 scheme: http
 endpoint: $TRACETEST_ENDPOINT
 analyticsEnabled: false
 EOF
-echo "qualityTrace CLI set up."
+echo "qualitytrace CLI set up."
 echo ""
 
 echo "Setting up test helpers..."
@@ -71,7 +71,7 @@ run_test_suite_for_feature() {
 
   definition='./features/'$feature'/_test_suite.yml'
 
-  testCMD="$TRACETEST_CLI  --config ./config.yml run testsuite --file $definition --vars ./qualityTraceing-vars.yaml"
+  testCMD="$TRACETEST_CLI  --config ./config.yml run testsuite --file $definition --vars ./qualitytraceing-vars.yaml"
   echo $testCMD
   $testCMD
   return $?
@@ -94,7 +94,7 @@ run_test_suite_for_feature 'testsuite' || (EXIT_STATUS=$? && echo "TestSuite Tes
 echo ""
 echo "Tests done! Exit code: $EXIT_STATUS"
 
-rm qualityTraceing-vars.yaml
+rm qualitytraceing-vars.yaml
 
 exit $EXIT_STATUS
 

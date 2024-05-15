@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/intelops/qualityTrace/server/expression/types"
+	"github.com/intelops/qualitytrace/server/expression/types"
 )
 
 type valueType int

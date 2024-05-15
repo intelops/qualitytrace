@@ -3,7 +3,7 @@ package traces_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/traces"
 	"github.com/stretchr/testify/assert"
 )
 

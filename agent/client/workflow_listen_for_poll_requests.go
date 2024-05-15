@@ -6,8 +6,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/intelops/qualityTrace/agent/proto"
-	"github.com/intelops/qualityTrace/agent/telemetry"
+	"github.com/intelops/qualitytrace/agent/proto"
+	"github.com/intelops/qualitytrace/agent/telemetry"
 	"go.uber.org/zap"
 )
 

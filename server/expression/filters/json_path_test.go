@@ -3,8 +3,8 @@ package filters_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/expression/filters"
-	"github.com/intelops/qualityTrace/server/expression/value"
+	"github.com/intelops/qualitytrace/server/expression/filters"
+	"github.com/intelops/qualitytrace/server/expression/value"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -18,27 +18,27 @@ func TestJSONPath(t *testing.T) {
 	}{
 		{
 			Name:           "should_extract_unique_field_from_object",
-			JSON:           `{ "id": 38, "name": "Tracetest" }`,
+			JSON:           `{ "id": 38, "name": "Qualitytrace" }`,
 			Query:          `.id`,
 			ExpectedOutput: `38`,
 		},
 		{
 			Name:           "should_extract_unique_field_from_array",
-			JSON:           `{ "array": [ { "id": 38, "name": "Tracetest" } ] }`,
+			JSON:           `{ "array": [ { "id": 38, "name": "Qualitytrace" } ] }`,
 			Query:          `$.array[0].id`,
 			ExpectedOutput: `38`,
 		},
 		{
 			Name:           "should_extract_multiple_values_from_array",
-			JSON:           `{ "array": [ { "id": 38, "name": "Tracetest" }, {"id": 39, "name": "Kusk"} ] }`,
+			JSON:           `{ "array": [ { "id": 38, "name": "Qualitytrace" }, {"id": 39, "name": "Kusk"} ] }`,
 			Query:          `$.array[*].id`,
 			ExpectedOutput: `[38, 39]`,
 		},
 		{
 			Name:           "should_extract_multiple_fields_from_array",
-			JSON:           `{ "array": [ { "id": 38, "name": "Tracetest" }, {"id": 39, "name": "Kusk"} ] }`,
+			JSON:           `{ "array": [ { "id": 38, "name": "Qualitytrace" }, {"id": 39, "name": "Kusk"} ] }`,
 			Query:          `$.array[*]..['id', 'name']`,
-			ExpectedOutput: `[38, "Tracetest", 39, "Kusk"]`,
+			ExpectedOutput: `[38, "Qualitytrace", 39, "Kusk"]`,
 		},
 	}
 

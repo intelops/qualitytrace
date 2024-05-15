@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites name="Example test" tests="3" failures="1" errors="1" skipped="0" time="11">
-  <testsuite name="span[qualityTrace.span.type = &quot;database&quot;]" tests="3" failures="1" errors="1" skipped="0">
+  <testsuite name="span[qualitytrace.span.type = &quot;database&quot;]" tests="3" failures="1" errors="1" skipped="0">
     <testcase name="attr:db.statement contains &quot;INSERT&quot;"></testcase>
-    <testcase name="attr:qualityTrace.span.duration &lt; 500">
+    <testcase name="attr:qualitytrace.span.duration &lt; 500">
       <error type="error" message="cannot parse &quot;notANumber&quot; as integer" />
     </testcase>
-    <testcase name="attr:qualityTrace.span.type = &quot;http&quot;">
-      <failure type="attr:qualityTrace.span.type = &quot;http&quot;" message="database" />
+    <testcase name="attr:qualitytrace.span.type = &quot;http&quot;">
+      <failure type="attr:qualitytrace.span.type = &quot;http&quot;" message="database" />
     </testcase>
   </testsuite>
 </testsuites>

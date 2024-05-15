@@ -36,11 +36,11 @@ func LoadConfig() (Config, error) {
 		viper.EnvKeyReplacer(strings.NewReplacer(".", "_")),
 	)
 
-	qualityTraceFolder := getTracetestFolder()
+	qualitytraceFolder := getQualitytraceFolder()
 
-	vp.SetEnvPrefix("qualityTrace")
-	vp.AddConfigPath(qualityTraceFolder)
-	vp.AddConfigPath("qualityTrace-agent.yaml")
+	vp.SetEnvPrefix("qualitytrace")
+	vp.AddConfigPath(qualitytraceFolder)
+	vp.AddConfigPath("qualitytrace-agent.yaml")
 	vp.SetConfigName("agent")
 	vp.SetConfigType("env")
 	vp.AutomaticEnv()
@@ -48,7 +48,7 @@ func LoadConfig() (Config, error) {
 	vp.SetDefault("AGENT_NAME", getHostname())
 	vp.SetDefault("API_KEY", "")
 	vp.SetDefault("ENVIRONMENT_ID", "")
-	vp.SetDefault("SERVER_URL", "https://app.qualityTrace.io")
+	vp.SetDefault("SERVER_URL", "https://app.qualitytrace.io")
 	vp.SetDefault("COLLECTOR_ENDPOINT", "")
 	vp.SetDefault("MODE", "")
 	vp.SetDefault("OTLP_SERVER.GRPC_PORT", 4317)
@@ -70,14 +70,14 @@ func LoadConfig() (Config, error) {
 	return config, nil
 }
 
-func getTracetestFolder() string {
+func getQualitytraceFolder() string {
 	homeFolder, err := os.UserHomeDir()
 	if err != nil {
 		// as a fallback, just return the current folder
 		return "."
 	}
 
-	return path.Join(homeFolder, ".qualityTrace")
+	return path.Join(homeFolder, ".qualitytrace")
 }
 
 func getHostname() string {
