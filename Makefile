@@ -16,7 +16,7 @@ PROJECT_ROOT=${PWD}
 
 CLI_SRC_FILES := $(shell find cli -type f)
 dist/qualitytrace: generate-cli $(CLI_SRC_FILES)
-	env GOOS=linux CGO_ENABLED=0 GO111MODULE=on go build -o quality-trace cli/main.go
+	env GOOS=linux CGO_ENABLED=0 GO111MODULE=on go build -o qualitytrace cli/main.go
 
 SERVER_SRC_FILES := $(shell find server -type f)
 dist/qualitytrace-server: generate-server $(SERVER_SRC_FILES)
