@@ -1,4 +1,4 @@
-name: Build and publish quality-trace CLI
+name: Build and publish qualitytrace CLI
 on:
   push:
     tags:
@@ -14,16 +14,16 @@ jobs:
       - name: Set up Go environment
         uses: actions/setup-go@v4
         with:
-          go-version: '1.20'
+          go-version: '1.23.0'
 
       - name: Build my CLI for Linux
-        run: go mod download && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o quality-trace-linux cli/main.go
+        run: go mod download && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o qualitytrace-linux cli/main.go
 
       - name: Build my CLI for macOS
-        run: go mod download && GOOS=darwin GOARCH=amd64 go build -o quality-trace-macos cli/main.go
+        run: go mod download && GOOS=darwin GOARCH=amd64 go build -o qualitytrace-macos cli/main.go
 
       - name: Build my CLI for Windows
-        run: go mod download && GOOS=windows GOARCH=amd64 go build -o quality-trace-windows.exe cli/main.go
+        run: go mod download && GOOS=windows GOARCH=amd64 go build -o qualitytrace-windows.exe cli/main.go
 
       - name: Get release name from tag
         id: release
@@ -35,9 +35,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            quality-trace-linux
-            quality-trace-macos
-            quality-trace-windows.exe
+            qualitytrace-linux
+            qualitytrace-macos
+            qualitytrace-windows.exe
           tag_name: ${{ github.ref }}
           name: ${{ steps.release.outputs.name }} - Linux
           draft: false
