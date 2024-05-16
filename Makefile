@@ -1,23 +1,22 @@
 export VERSION?=dev
 export TRACETEST_DEFAULT_CLOUD_ENDPOINT=https://app.qualitytrace.io
 export TAG?=$(VERSION)
-GORELEASER_VERSION=1.23.0
+# GORELEASER_VERSION=1.23.0
 
 PROJECT_ROOT=${PWD}
 
-CURRENT_GORELEASER_VERSION := $(shell goreleaser --version | head -n 9 | tail -n 1 |  tr -s ' ' | cut -d' ' -f2-)
-goreleaser-version:
-ifneq "$(CURRENT_GORELEASER_VERSION)" "$(GORELEASER_VERSION)"
-	@printf "\033[0;31m Bad goreleaser version $(CURRENT_GORELEASER_VERSION), please install $(GORELEASER_VERSION)\033[0m\n\n"
-	@printf "\033[0;31m Tracetest requires goreleaser pro installed (licence not necessary for local builds)\033[0m\n\n"
-	@printf "\033[0;33m See https://goreleaser.com/install/ \033[0m\n\n"
-endif
+# CURRENT_GORELEASER_VERSION := $(shell goreleaser --version | head -n 9 | tail -n 1 |  tr -s ' ' | cut -d' ' -f2-)
+# goreleaser-version:
+# ifneq "$(CURRENT_GORELEASER_VERSION)" "$(GORELEASER_VERSION)"
+# 	@printf "\033[0;31m Bad goreleaser version $(CURRENT_GORELEASER_VERSION), please install $(GORELEASER_VERSION)\033[0m\n\n"
+# 	@printf "\033[0;31m Tracetest requires goreleaser pro installed (licence not necessary for local builds)\033[0m\n\n"
+# 	@printf "\033[0;33m See https://goreleaser.com/install/ \033[0m\n\n"
+# endif
 
 
 CLI_SRC_FILES := $(shell find cli -type f)
-dist/qualitytrace: goreleaser-version generate-cli $(CLI_SRC_FILES)
-	goreleaser build --single-target --clean --snapshot --id cli
-	find ./dist -name 'qualitytrace' -exec cp {} ./dist \;
+dist/qualitytrace: generate-cli $(CLI_SRC_FILES)
+	env GOOS=linux CGO_ENABLED=0 GO111MODULE=on go build -o quality-trace cli/main.go
 
 SERVER_SRC_FILES := $(shell find server -type f)
 dist/qualitytrace-server: generate-server $(SERVER_SRC_FILES)
