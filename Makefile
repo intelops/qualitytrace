@@ -1,7 +1,7 @@
 export VERSION?=dev
 export TRACETEST_DEFAULT_CLOUD_ENDPOINT=https://app.qualitytrace.io
-TAG?=$(VERSION)
-GORELEASER_VERSION=1.23.0-pro
+export TAG?=$(VERSION)
+GORELEASER_VERSION=1.23.0
 
 PROJECT_ROOT=${PWD}
 
@@ -20,9 +20,9 @@ dist/qualitytrace: goreleaser-version generate-cli $(CLI_SRC_FILES)
 	find ./dist -name 'qualitytrace' -exec cp {} ./dist \;
 
 SERVER_SRC_FILES := $(shell find server -type f)
-dist/qualitytrace-server: goreleaser-version generate-server $(SERVER_SRC_FILES)
-	goreleaser build --single-target --clean --snapshot --id server
-	find ./dist -name 'qualitytrace-server' -exec cp {} ./dist \;
+dist/qualitytrace-server: generate-server $(SERVER_SRC_FILES)
+	@echo "Choose a command run:"
+	env GOOS=linux CGO_ENABLED=0 GO111MODULE=on go build -o qualitytrace-server server/main.go
 
 web/node_modules: web/package.json web/package-lock.json
 	cd web; npm install
@@ -32,6 +32,7 @@ web/build: web/node_modules $(WEB_SRC_FILES)
 	cd web; npm run build
 
 dist/qualitytrace-docker-$(TAG).tar dist/qualitytrace-agent-docker-$(TAG).tar: $(CLI_SRC_FILES) $(SERVER_SRC_FILES) $(WEB_SRC_FILES) Dockerfile Dockerfile.agent agent/entrypoint.sh
+	chmod +x agent/entrypoint.sh
 	goreleaser release --clean --skip=announce --snapshot -f .goreleaser.dev.yaml
 	docker save --output dist/qualitytrace-docker-$(TAG).tar "intelops/qualitytrace:$(TAG)"
 	docker save --output dist/qualitytrace-agent-docker-$(TAG).tar "intelops/qualitytrace-agent:$(TAG)"
@@ -51,22 +52,22 @@ view-open-api: ## Run SwaggerUI locally to see OpenAPI documentation
 run: build-docker ## build and run qualitytrace using docker compose
 	docker compose up
 build-go: dist/qualitytrace dist/qualitytrace-server ## build all go code
-build-web: web/build ## build web
-build-docker: goreleaser-version web/build .goreleaser.dev.yaml dist/qualitytrace-docker-$(TAG).tar dist/qualitytrace-agent-docker-$(TAG).tar ## build and tag docker image as defined in .goreleaser.dev.yaml
+build-web: web/build # build web
+build-docker: goreleaser-version .goreleaser.dev.yaml dist/qualitytrace-docker-$(TAG).tar dist/qualitytrace-agent-docker-$(TAG).tar ## build and tag docker image as defined in .goreleaser.dev.yaml
 
 .PHONY: generate generate-server generate-cli generate-web
-generate: generate-server generate-cli generate-web ## generate code entities from openapi definitions for all parts of the code
+generate: generate-server generate-cli #generate-web ## generate code entities from openapi definitions for all parts of the code
 generate-server: server/openapi ## generate code entities from openapi definitions for server
 generate-cli: cli/openapi ## generate code entities from openapi definitions for cli
-generate-web: web/src/types/Generated.types.ts ## generate code entities from openapi definitions for web
+# generate-web: web/src/types/Generated.types.ts ## generate code entities from openapi definitions for web
 
 OPENAPI_SRC_FILES := $(shell find api -type f)
 OPENAPI_GENERATOR_VER=v6.3.0
 OPENAPI_GENERATOR_IMAGE=openapitools/openapi-generator-cli:$(OPENAPI_GENERATOR_VER)
 OPENAPI_GENERATOR_CLI=docker run --rm -u ${shell id -u}  -v "$(PROJECT_ROOT):/local" -w "/local" ${OPENAPI_GENERATOR_IMAGE}
 OPENAPI_TARGET_DIR=openapi/
-web/src/types/Generated.types.ts: $(OPENAPI_SRC_FILES)
-	cd web; npm run types:generate
+# web/src/types/Generated.types.ts: $(OPENAPI_SRC_FILES)
+	# cd web; npm run types:generate
 
 cli/openapi: $(OPENAPI_SRC_FILES)
 	$(eval BASE := ./cli)
