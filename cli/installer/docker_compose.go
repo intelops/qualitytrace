@@ -263,8 +263,8 @@ func fixQualitytraceContainer(config configuration, project *types.Project, vers
 	tts.Image = "intelops/qualitytrace:" + version
 	tts.Build = nil
 	tts.Volumes[0].Source = qualitytraceConfigFilename
-	qualitytraceDevEnv := "${TRACETEST_DEV}"
-	tts.Environment["TRACETEST_DEV"] = &qualitytraceDevEnv
+	tracetestDevEnv := "${TRACETEST_DEV}"
+	tts.Environment["TRACETEST_DEV"] = &tracetestDevEnv
 
 	replaceService(project, serviceName, tts)
 

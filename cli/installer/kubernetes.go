@@ -169,7 +169,7 @@ func installQualitytraceChart(conf configuration, ui cliUI.UI) {
 	}
 
 	if os.Getenv("TRACETEST_DEV") != "" {
-		cmd = append(cmd, "--set env.qualitytraceDev=true")
+		cmd = append(cmd, "--set env.tracetestDev=true")
 	}
 
 	execCmd(helmCmd(conf, cmd...), ui)
