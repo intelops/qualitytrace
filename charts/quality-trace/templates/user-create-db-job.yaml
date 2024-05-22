@@ -1,0 +1,45 @@
+{{- if not .Values.postgresql.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-users-databases
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "2"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    metadata:
+      name: create-users-databases
+    spec:
+      containers:
+      - name: postgresql-client
+        image: {{ .Values.postgresql.image.registry }}/{{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}
+        command:
+          - "/bin/bash"
+          - "-c"
+          - |
+            psql -h {{ .Values.externalPostgresql.host }} -p 5432 -U postgres -f /scripts/create-database.sql
+
+        env:
+          - name: PGPASSWORD
+            {{- if not .Values.externalPostgresql.existingSecret }}
+            value: "{{ .Values.externalPostgresql.postgresqlPassword }}"
+            {{- else }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.externalPostgresql.existingSecret.name }}
+                key: {{ .Values.externalPostgresql.existingSecret.passwordKey }}
+            {{- end }}
+        volumeMounts:
+          - name: script-volume
+            mountPath: /scripts
+            readOnly: true
+      restartPolicy: Never
+      volumes:
+        - name: script-volume
+          configMap:
+            name: postgresql-query
+{{- end }}
+
+
