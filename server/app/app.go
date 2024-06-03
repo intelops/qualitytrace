@@ -75,7 +75,6 @@ func (app *App) Version() string {
 }
 
 func (app *App) Stop() {
-	log.Println("Stopping application")
 	for _, fn := range app.stopFns {
 		fn()
 	}
@@ -86,7 +85,6 @@ func (app *App) registerStopFn(fn func()) {
 }
 
 func (app *App) HotReload() {
-	log.Println("Hot reloading application")
 	app.Stop()
 	app.Start()
 }
@@ -124,7 +122,6 @@ func provision(provisioner *provisioning.Provisioner, file string) {
 }
 
 func (app *App) subscribeToConfigChanges(sm subscription.Manager) {
-	log.Println("Subscribing to config changes")
 	sm.Subscribe(config.ResourceID, subscription.NewSubscriberFunction(
 		func(m subscription.Message) error {
 			configFromDB := config.Config{}
@@ -139,7 +136,6 @@ func (app *App) subscribeToConfigChanges(sm subscription.Manager) {
 }
 
 func (app *App) initAnalytics(configFromDB config.Config) error {
-	log.Println("Initializing analytics")
 	return analytics.Init(configFromDB.IsAnalyticsEnabled(), app.serverID, version.Version, version.Env, app.cfg.AnalyticsServerKey(), app.cfg.AnalyticsFrontendKey())
 }
 
@@ -153,7 +149,6 @@ func (app *App) Start(opts ...appOption) error {
 	}
 	fmt.Println(app.Version())
 	fmt.Println("Starting")
-	log.Println("Starting application")
 	ctx := context.Background()
 
 	poolcfg, err := pgxpool.ParseConfig(app.cfg.PostgresConnString())
@@ -266,9 +261,7 @@ func (app *App) Start(opts ...appOption) error {
 	)
 
 	dsTestPipeline.Start()
-	fmt.Println("dsTestPipeline started")
 	app.registerStopFn(func() {
-		fmt.Println("dsTestPipeline stopping")
 		dsTestPipeline.Stop()
 	})
 
@@ -292,9 +285,7 @@ func (app *App) Start(opts ...appOption) error {
 		meter,
 	)
 	testPipeline.Start()
-	fmt.Println("TestPipeline started")
 	app.registerStopFn(func() {
-		fmt.Println("TestPipeline stopping")
 		testPipeline.Stop()
 	})
 
@@ -307,9 +298,7 @@ func (app *App) Start(opts ...appOption) error {
 	)
 
 	testSuitePipeline.Start()
-	fmt.Println("testsuitepipeline started")
 	app.registerStopFn(func() {
-		fmt.Println("testsuitepipeline stopping")
 		testSuitePipeline.Stop()
 	})
 
@@ -367,8 +356,8 @@ func (app *App) Start(opts ...appOption) error {
 	registerTestRunner(testRunnerRepo, apiRouter, provisioner, tracer)
 	registerTestResource(testRepo, apiRouter, provisioner, tracer)
 
-	isTracetestDev := os.Getenv("TRACETEST_DEV") != ""
-	registerSPAHandler(router, app.cfg, configFromDB.IsAnalyticsEnabled(), serverID, isTracetestDev)
+	isQualitytraceDev := os.Getenv("QUALITYTRACE_DEV") != ""
+	registerSPAHandler(router, app.cfg, configFromDB.IsAnalyticsEnabled(), serverID, isQualitytraceDev)
 
 	if isNewInstall {
 		provision(provisioner, app.provisioningFile)
@@ -390,7 +379,7 @@ func (app *App) Start(opts ...appOption) error {
 	return nil
 }
 
-func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabled bool, serverID string, isTracetestDev bool) {
+func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabled bool, serverID string, isQualitytraceDev bool) {
 	router.
 		PathPrefix(cfg.ServerPathPrefix()).
 		Handler(
@@ -400,7 +389,7 @@ func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabl
 				serverID,
 				version.Version,
 				version.Env,
-				isTracetestDev,
+				isQualitytraceDev,
 			),
 		)
 }
@@ -414,33 +403,15 @@ func registerOtlpServer(
 	subManager subscription.Manager,
 	tracer trace.Tracer,
 ) {
-	log.Println("[registerOtlpServer] Initializing OTLP Ingester")
 	ingester := otlp.NewIngester(tracesRepo, runRepository, eventEmitter, dsRepo, subManager, tracer)
-	log.Println("[registerOtlpServer] Creating gRPC OTLP Server on :4317")
 	grpcOtlpServer := otlp.NewGrpcServer(":4317", ingester, tracer)
-	log.Println("[registerOtlpServer] Creating HTTP OTLP Server on :4318")
 	httpOtlpServer := otlp.NewHttpServer(":4318", ingester)
-	// go grpcOtlpServer.Start()
-	// go httpOtlpServer.Start()
-
-	go func() {
-		log.Println("[registerOtlpServer] Starting gRPC OTLP Server")
-		if err := grpcOtlpServer.Start(); err != nil {
-			log.Fatalf("[registerOtlpServer] Failed to start gRPC OTLP Server: %s", err)
-		}
-	}()
-
-	go func() {
-		log.Println("[registerOtlpServer] Starting HTTP OTLP Server")
-		if err := httpOtlpServer.Start(); err != nil {
-			log.Fatalf("[registerOtlpServer] Failed to start HTTP OTLP Server: %s", err)
-		}
-	}()
+	go grpcOtlpServer.Start()
+	go httpOtlpServer.Start()
 	
 	fmt.Println("OTLP server started on :4317 (grpc) and :4318 (http)")
 
 	app.registerStopFn(func() {
-		log.Println("[registerOtlpServer] Stopping OTLP servers")
 		fmt.Println("stopping otlp server")
 		grpcOtlpServer.Stop()
 		httpOtlpServer.Stop()
