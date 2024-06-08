@@ -409,7 +409,7 @@ func (td *RunRepository) readRunRow(row scanner) (TestSuiteRun, error) {
 	)
 
 	if err != nil {
-		return TestSuiteRun{}, fmt.Errorf("testsuite run repo - cannot read row: %w", err)
+		return TestSuiteRun{}, fmt.Errorf("cannot read row: %w", err)
 	}
 
 	if lastErr != nil {

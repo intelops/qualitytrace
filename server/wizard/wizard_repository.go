@@ -120,7 +120,7 @@ func readRow(row scanner) (Wizard, error) {
 			return Wizard{}, err
 		}
 
-		return Wizard{}, fmt.Errorf("wizard repo -cannot read row: %w", err)
+		return Wizard{}, fmt.Errorf("cannot read row: %w", err)
 	}
 
 	err = json.Unmarshal(jsonSteps, &wizard.Steps)
