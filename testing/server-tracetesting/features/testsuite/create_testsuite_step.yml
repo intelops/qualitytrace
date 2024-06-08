@@ -32,14 +32,14 @@ spec:
             "specs": [
               {
                 "selector": "span[name = \"pg.query:SELECT pokeshop\"]",
-                "assertions": ["attr:qualityTrace.selected_spans.count > 0"]
+                "assertions": ["attr:qualitytrace.selected_spans.count > 0"]
               }
             ],
             "outputs": [
               {
                 "name": "TRIGGER_COUNT",
                 "selector": "span[name = \"Tracetest trigger\"]",
-                "value": "attr:qualityTrace.selected_spans.count"
+                "value": "attr:qualitytrace.selected_spans.count"
               }
             ]
           }
@@ -47,16 +47,16 @@ spec:
   specs:
   - selector: span[name = "Tracetest trigger"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
-    - attr:qualityTrace.response.status = 201
+    - attr:qualitytrace.selected_spans.count = 1
+    - attr:qualitytrace.response.status = 201
     # ensure we can reference outputs declared in the same test
-    - attr:qualityTrace.response.body | json_path '$.spec.id' = var:TRANSACTION_STEP_ID
-  - selector: span[name="POST /api/tests" qualityTrace.span.type="http"]
+    - attr:qualitytrace.response.body | json_path '$.spec.id' = var:TRANSACTION_STEP_ID
+  - selector: span[name="POST /api/tests" qualitytrace.span.type="http"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualitytrace.selected_spans.count = 1
   - selector: span[name = "exec INSERT"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualitytrace.selected_spans.count = 1
   - selector: span[name = "exec INSERT"]:first
     assertions:
     - attr:sql.query contains "INSERT INTO tests"
@@ -64,4 +64,4 @@ spec:
   outputs:
   - name: TRANSACTION_STEP_ID
     selector: span[name = "Tracetest trigger"]
-    value: attr:qualityTrace.response.body | json_path '$.spec.id'
+    value: attr:qualitytrace.response.body | json_path '$.spec.id'

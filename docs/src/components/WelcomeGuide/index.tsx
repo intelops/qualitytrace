@@ -17,7 +17,7 @@ const WelcomeGuides = [
   },
   {
     name: '🤩 Open Source',
-    url: 'https://github.com/intelops/qualityTrace',
+    url: 'https://github.com/intelops/qualitytrace',
     description: (
       <Translate>
         Check out the Tracetest GitHub repo! Please consider giving us a star! ⭐️

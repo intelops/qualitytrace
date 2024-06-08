@@ -21,7 +21,7 @@ get_latest_version() {
 
   ensure_dependency_exist "curl"
 
-  curl --silent "https://api.github.com/repos/intelops/qualityTrace/releases/latest" |
+  curl --silent "https://api.github.com/repos/intelops/qualitytrace/releases/latest" |
   grep '"tag_name":' |
   sed -E 's/.*"([^"]+)".*/\1/'
 }
@@ -60,7 +60,7 @@ get_download_link() {
   pkg=$1
 
 
-  echo "https://github.com/intelops/qualityTrace/releases/download/${version}/qualityTrace_${raw_version}_${os}_${arch}.${pkg}"
+  echo "https://github.com/intelops/qualitytrace/releases/download/${version}/qualitytrace_${raw_version}_${os}_${arch}.${pkg}"
 }
 
 download_file() {
@@ -83,8 +83,8 @@ install_tar() {
 
   echo "Extracting file"
   tar -xf $file_path -C /tmp
-  echo "Installing to /usr/local/bin/qualityTrace"
-  $SUDO mv /tmp/qualityTrace /usr/local/bin/qualityTrace
+  echo "Installing to /usr/local/bin/qualitytrace"
+  $SUDO mv /tmp/qualitytrace /usr/local/bin/qualitytrace
   rm -f $file_path
 }
 
@@ -109,24 +109,24 @@ install_rpm() {
 install_apt() {
   $SUDO apt-get update
   $SUDO apt-get install -y apt-transport-https ca-certificates
-  echo "deb [trusted=yes] https://apt.fury.io/qualityTrace/ /" | $SUDO tee /etc/apt/sources.list.d/fury.list
+  echo "deb [trusted=yes] https://apt.fury.io/qualitytrace/ /" | $SUDO tee /etc/apt/sources.list.d/fury.list
   $SUDO apt-get update
-  $SUDO apt-get install -y qualityTrace
+  $SUDO apt-get install -y qualitytrace
 }
 
 install_yum() {
-  cat <<EOF | $SUDO tee /etc/yum.repos.d/qualityTrace.repo
-[qualityTrace]
+  cat <<EOF | $SUDO tee /etc/yum.repos.d/qualitytrace.repo
+[qualitytrace]
 name=Tracetest
-baseurl=https://yum.fury.io/qualityTrace/
+baseurl=https://yum.fury.io/qualitytrace/
 enabled=1
 gpgcheck=0
 EOF
-  $SUDO yum install -y qualityTrace --refresh
+  $SUDO yum install -y qualitytrace --refresh
 }
 
 install_brew() {
-  brew install intelops/qualityTrace/qualityTrace
+  brew install intelops/qualitytrace/qualitytrace
 }
 
 run() {
@@ -145,21 +145,21 @@ run() {
   elif cmd_exists rpm; then
     install_rpm
   elif [ "$(get_arch)" == "unknown" ]; then
-    echo "unknown system architecture. Try manual install. See https://kubeshop.github.io/qualityTrace/installing/#cli-installation"
+    echo "unknown system architecture. Try manual install. See https://kubeshop.github.io/qualitytrace/installing/#cli-installation"
     exit 1;
   elif [[ "$(get_os)" =~ ^(darwin|linux)$ ]]; then
     install_tar
   else
-    echo 'OS not supported by this script. See https://kubeshop.github.io/qualityTrace/installing/#cli-installation'
+    echo 'OS not supported by this script. See https://kubeshop.github.io/qualitytrace/installing/#cli-installation'
     exit 1
   fi
 
   echo
   echo "Succesfull install!"
   echo
-  echo "run 'qualityTrace --help' to see what you can do"
+  echo "run 'qualitytrace --help' to see what you can do"
   echo
-  echo "To setup a new server, run 'qualityTrace server install'"
+  echo "To setup a new server, run 'qualitytrace server install'"
 }
 
 SUDO=""

@@ -29,7 +29,7 @@ spec:
             "specs":  [
               {
                 "selector": "span[name = \"queue.synchronizePokemon publish\"]",
-                "assertions": ["attr:qualityTrace.selected_spans.count > 0"]
+                "assertions": ["attr:qualitytrace.selected_spans.count > 0"]
               }
             ]
           }
@@ -37,18 +37,18 @@ spec:
   specs:
     - selector: span[name = "Tracetest trigger"]
       assertions:
-        - attr:qualityTrace.selected_spans.count = 1
-        - attr:qualityTrace.response.status = 201
-    - selector: span[name="POST /api/tests" qualityTrace.span.type="http"]
+        - attr:qualitytrace.selected_spans.count = 1
+        - attr:qualitytrace.response.status = 201
+    - selector: span[name="POST /api/tests" qualitytrace.span.type="http"]
       assertions:
-        - attr:qualityTrace.selected_spans.count = 1
+        - attr:qualitytrace.selected_spans.count = 1
     - selector: span[name = "exec INSERT"]
       assertions:
-        - attr:qualityTrace.selected_spans.count = 1
+        - attr:qualitytrace.selected_spans.count = 1
     - selector: span[name = "exec INSERT"]:first
       assertions:
         - attr:sql.query contains "INSERT INTO tests"
   outputs:
     - name: GRPC_TEST_INVALID_METADATA_ID
       selector: span[name = "Tracetest trigger"]
-      value: attr:qualityTrace.response.body | json_path '$.spec.id'
+      value: attr:qualitytrace.response.body | json_path '$.spec.id'

@@ -35,7 +35,7 @@ describe('SpanService', () => {
     it('should return the spanList', () => {
       const span = SpanMock.model();
 
-      const selectorInfo = SpanService.searchSpanList([span], 'qualityTrace');
+      const selectorInfo = SpanService.searchSpanList([span], 'qualitytrace');
 
       expect(selectorInfo).toHaveLength(1);
     });

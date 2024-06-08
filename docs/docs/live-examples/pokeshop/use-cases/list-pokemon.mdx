@@ -4,7 +4,7 @@ title: Pokeshop API - List Pokemon
 description: As a testing ground, the Tracetest team has implemented a sample API instrumented with OpenTelemetry around the PokeAPI. This use case retrieves the list of Pokemon directly from the database (Postgres) based on the provided query through the API.
 hide_table_of_contents: false
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -81,7 +81,7 @@ Now you can validate this entire use case.
 If you want to replicate this entire test on Tracetest, you can replicate these steps on our Web UI or using our CLI, saving the following test definition as the file `test-definition.yml` and later running:
 
 ```sh
-qualityTrace run test -f test-definition.yml
+qualitytrace run test -f test-definition.yml
 ```
 
 ```yaml
@@ -98,13 +98,13 @@ spec:
       - key: Content-Type
         value: application/json
   specs:
-  - selector: span[qualityTrace.span.type="http" name="GET /pokemon?take=20&skip=0" http.method="GET"]
+  - selector: span[qualitytrace.span.type="http" name="GET /pokemon?take=20&skip=0" http.method="GET"]
     assertions:
     - attr:http.status_code = 200
-  - selector: span[qualityTrace.span.type="database"]
+  - selector: span[qualitytrace.span.type="database"]
     assertions:
-    - attr:qualityTrace.span.duration   <=   200ms
-  - selector: span[qualityTrace.span.type="database" name="pg.query:SELECT pokeshop"
+    - attr:qualitytrace.span.duration   <=   200ms
+  - selector: span[qualitytrace.span.type="database" name="pg.query:SELECT pokeshop"
       db.system="postgresql" db.name="pokeshop" db.user="ashketchum" db.statement
       contains "SELECT \"id\""]
     assertions:

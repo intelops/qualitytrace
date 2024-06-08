@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/traces"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.opentelemetry.io/otel/trace"
@@ -55,11 +55,11 @@ func TestTraceWithMultipleRoots(t *testing.T) {
 }
 
 func TestTraceWithMultipleTemporaryRoots(t *testing.T) {
-	root1 := newSpan("Temporary Tracetest root span")
+	root1 := newSpan("Temporary Qualitytrace root span")
 	root1Child := newSpan("Child from root 1", withParent(&root1))
-	root2 := newSpan("Temporary Tracetest root span")
+	root2 := newSpan("Temporary Qualitytrace root span")
 	root2Child := newSpan("Child from root 2", withParent(&root2))
-	root3 := newSpan("Temporary Tracetest root span")
+	root3 := newSpan("Temporary Qualitytrace root span")
 	root3Child := newSpan("Child from root 3", withParent(&root3))
 
 	spans := []traces.Span{root1, root1Child, root2, root2Child, root3, root3Child}
@@ -82,7 +82,7 @@ func TestTraceAssemble(t *testing.T) {
 	trace := traces.NewTrace("trace", spans)
 
 	assert.Len(t, trace.Flat, 4)
-	assert.Equal(t, "Temporary Tracetest root span", trace.RootSpan.Name)
+	assert.Equal(t, "Temporary Qualitytrace root span", trace.RootSpan.Name)
 	assert.Equal(t, "Root", child(t, &trace.RootSpan, 0).Name)
 	assert.Equal(t, "child 1", grandchild(t, &trace.RootSpan, 0, 0).Name)
 	assert.Equal(t, "grandchild", child(t, &trace.RootSpan, 1).Name)
@@ -177,7 +177,7 @@ func TestInjectingNewRootWhenMultipleRoots(t *testing.T) {
 	}
 }
 
-func TestNoTemporaryRootIfTracetestRootExists(t *testing.T) {
+func TestNoTemporaryRootIfQualitytraceRootExists(t *testing.T) {
 	root1 := newSpan("Root 1")
 	root1Child := newSpan("Child from root 1", withParent(&root1))
 	root2 := newSpan(traces.TriggerSpanName)
@@ -294,7 +294,7 @@ func newSpan(name string, options ...option) traces.Span {
 	}
 
 	if span.Parent != nil {
-		span.Attributes.Set(traces.TracetestMetadataFieldParentID, span.Parent.ID.String())
+		span.Attributes.Set(traces.QualitytraceMetadataFieldParentID, span.Parent.ID.String())
 	}
 
 	return span
@@ -566,7 +566,7 @@ func TestBrowserSpan(t *testing.T) {
 
 	trace := traces.NewTrace("trace", []traces.Span{span})
 
-	assert.Equal(t, trace.Spans()[0].Attributes.Get(traces.TracetestMetadataFieldType), "general")
+	assert.Equal(t, trace.Spans()[0].Attributes.Get(traces.QualitytraceMetadataFieldType), "general")
 
 	span2 := newSpan("documentLoad")
 	span2.Attributes = attributesFromMap(map[string]string{
@@ -575,7 +575,7 @@ func TestBrowserSpan(t *testing.T) {
 
 	trace2 := traces.NewTrace("trace", []traces.Span{span2})
 
-	assert.Equal(t, trace2.Spans()[0].Attributes.Get(traces.TracetestMetadataFieldType), "general")
+	assert.Equal(t, trace2.Spans()[0].Attributes.Get(traces.QualitytraceMetadataFieldType), "general")
 
 	span3 := newSpan("GET /api/v1/trace")
 	span3.Attributes = attributesFromMap(map[string]string{
@@ -584,7 +584,7 @@ func TestBrowserSpan(t *testing.T) {
 
 	trace3 := traces.NewTrace("trace", []traces.Span{span3})
 
-	assert.Equal(t, trace3.Spans()[0].Attributes.Get(traces.TracetestMetadataFieldType), "http")
+	assert.Equal(t, trace3.Spans()[0].Attributes.Get(traces.QualitytraceMetadataFieldType), "http")
 }
 
 func attributesFromMap(input map[string]string) traces.Attributes {

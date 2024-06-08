@@ -1,7 +1,7 @@
 type: VariableSet
 spec:
-  id: qualityTraceing-vars-serverless
-  name: qualityTraceing-vars-serverless
+  id: qualitytraceing-vars-serverless
+  name: qualitytraceing-vars-serverless
   values:
     - key: POKESHOP_API_URL
       value: https://75yj353nn7.execute-api.us-east-1.amazonaws.com

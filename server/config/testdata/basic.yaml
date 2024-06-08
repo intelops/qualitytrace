@@ -3,8 +3,8 @@ postgres:
   user: postgres
   password: postgres
   port: 5432
-  dbname: qualityTrace
+  dbname: qualitytrace
   params: sslmode=disable
 server:
-  pathPrefix: /qualityTrace
+  pathPrefix: /qualitytrace
   httpPort: 9999

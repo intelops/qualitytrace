@@ -8,9 +8,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/intelops/qualityTrace/agent/event"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/sensors"
-	"github.com/intelops/qualityTrace/server/otlp"
+	"github.com/intelops/qualitytrace/agent/event"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/sensors"
+	"github.com/intelops/qualitytrace/server/otlp"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
 )

@@ -5,12 +5,12 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/intelops/qualityTrace/server/expression/linting"
-	"github.com/intelops/qualityTrace/server/openapi"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/testsuite"
-	"github.com/intelops/qualityTrace/server/variableset"
+	"github.com/intelops/qualitytrace/server/expression/linting"
+	"github.com/intelops/qualitytrace/server/openapi"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/testsuite"
+	"github.com/intelops/qualitytrace/server/variableset"
 )
 
 var ErrMissingVariables = errors.New("variables are missing")

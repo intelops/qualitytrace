@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/intelops/qualityTrace/server/version"
+	"github.com/intelops/qualitytrace/server/version"
 	"go.opentelemetry.io/otel/sdk/resource"
 	semconv "go.opentelemetry.io/otel/semconv/v1.21.0"
 )
 
 func getAgentServiceName(serviceName string) string {
-	return fmt.Sprintf("qualityTrace.agent-%s", serviceName)
+	return fmt.Sprintf("qualitytrace.agent-%s", serviceName)
 }
 
 func getResource(serviceName string) (*resource.Resource, error) {

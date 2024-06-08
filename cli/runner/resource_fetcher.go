@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/cli/pkg/fileutil"
-	"github.com/intelops/qualityTrace/cli/variable"
+	"github.com/intelops/qualitytrace/cli/pkg/fileutil"
+	"github.com/intelops/qualitytrace/cli/variable"
 	"go.uber.org/zap"
 )
 

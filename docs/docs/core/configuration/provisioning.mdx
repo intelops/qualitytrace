@@ -3,7 +3,7 @@ id: provisioning
 title: Provisioning a Tracetest Server
 description: Tracetest Core enables the Tracetest Server to be provisioned the first time a new Tracetest Server is installed and launched. 
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -22,9 +22,9 @@ Currently, the following resources can be provisioned:
 - Config
 - Demo
 
-For Docker-based installs, the provisioning file is placed in the `./qualityTrace/qualityTrace-provisioning.yaml` file by default when you run the `qualityTrace server install` command and select the `Using Docker Compose` option. The first time you start Tracetest with a `docker compose -f qualityTrace/docker-compose.yaml  up -d` command, the server will use the contents of this file to provision the server. To provision differently, you would alter the contents of the `qualityTrace-provisioning.yaml` file before launching Tracetest in Docker.
+For Docker-based installs, the provisioning file is placed in the `./qualitytrace/qualitytrace-provisioning.yaml` file by default when you run the `qualitytrace server install` command and select the `Using Docker Compose` option. The first time you start Tracetest with a `docker compose -f qualitytrace/docker-compose.yaml  up -d` command, the server will use the contents of this file to provision the server. To provision differently, you would alter the contents of the `qualitytrace-provisioning.yaml` file before launching Tracetest in Docker.
 
-This is an example of a `qualityTrace-provisioning.yaml` file:
+This is an example of a `qualitytrace-provisioning.yaml` file:
 
 ```yaml
 ---

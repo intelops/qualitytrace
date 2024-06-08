@@ -1,8 +1,8 @@
 package components
 
 import (
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/events"
-	"github.com/intelops/qualityTrace/agent/ui/dashboard/styles"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/events"
+	"github.com/intelops/qualitytrace/agent/ui/dashboard/styles"
 	"github.com/rivo/tview"
 )
 

@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'; # stop on all errors
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$url64      = "https://github.com/intelops/qualityTrace/releases/download/v${env:chocolateyPackageVersion}/qualityTrace_${env:chocolateyPackageVersion}_windows_amd64.tar.gz" # 64bit URL here (HTTPS preferred) or remove - if installer contains both (very rare), use $url
+$url64      = "https://github.com/intelops/qualitytrace/releases/download/v${env:chocolateyPackageVersion}/qualitytrace_${env:chocolateyPackageVersion}_windows_amd64.tar.gz" # 64bit URL here (HTTPS preferred) or remove - if installer contains both (very rare), use $url
 
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
@@ -12,4 +12,4 @@ $packageArgs = @{
 }
 
 Install-ChocolateyZipPackage @packageArgs
-Get-ChocolateyUnzip -FileFullPath "$toolsDir/qualityTrace_${env:chocolateyPackageVersion}_windows_amd64.tar" -Destination $toolsDir
+Get-ChocolateyUnzip -FileFullPath "$toolsDir/qualitytrace_${env:chocolateyPackageVersion}_windows_amd64.tar" -Destination $toolsDir

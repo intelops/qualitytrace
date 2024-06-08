@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/model"
+	"github.com/intelops/qualitytrace/server/model"
 )
 
 const reachabilityTimeout = 5 * time.Second

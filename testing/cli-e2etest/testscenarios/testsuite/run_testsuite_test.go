@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -27,7 +27,7 @@ func TestRunTestSuite(t *testing.T) {
 		testsuiteFile := env.GetTestResourcePath(t, "testsuite-to-run")
 
 		command := fmt.Sprintf("run test -f %s", testsuiteFile)
-		result := qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, command, qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 2)
 	})
 
@@ -50,7 +50,7 @@ func TestRunTestSuite(t *testing.T) {
 		testsuiteFile := env.GetTestResourcePath(t, "testsuite-to-run")
 
 		command := fmt.Sprintf("run testsuite -f %s", testsuiteFile)
-		result := qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, command, qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "TestSuite To Run") // testsuite name
 		require.Contains(result.StdOut, "Pokeshop - Add")   // first test
@@ -72,7 +72,7 @@ func TestRunTestSuite(t *testing.T) {
 		testsuiteFile := env.GetTestResourcePath(t, "legacy-transaction")
 
 		command := fmt.Sprintf("run transaction -f %s", testsuiteFile)
-		result := qualityTracecli.Exec(t, command, qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, command, qualitytracecli.WithCLIConfig(cliConfig))
 
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "New Transaction") // testsuite name

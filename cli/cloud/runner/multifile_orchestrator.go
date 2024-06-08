@@ -9,14 +9,14 @@ import (
 	"os"
 	"sync"
 
-	"github.com/intelops/qualityTrace/cli/formatters"
-	"github.com/intelops/qualityTrace/cli/metadata"
-	"github.com/intelops/qualityTrace/cli/openapi"
-	"github.com/intelops/qualityTrace/cli/pkg/fileutil"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
-	"github.com/intelops/qualityTrace/cli/runner"
-	"github.com/intelops/qualityTrace/cli/varset"
-	"github.com/intelops/qualityTrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/cli/formatters"
+	"github.com/intelops/qualitytrace/cli/metadata"
+	"github.com/intelops/qualitytrace/cli/openapi"
+	"github.com/intelops/qualitytrace/cli/pkg/fileutil"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/runner"
+	"github.com/intelops/qualitytrace/cli/varset"
+	"github.com/intelops/qualitytrace/server/pkg/id"
 	"go.uber.org/zap"
 )
 

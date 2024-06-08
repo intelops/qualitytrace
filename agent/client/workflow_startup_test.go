@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/intelops/qualityTrace/agent/client"
-	"github.com/intelops/qualityTrace/agent/client/mocks"
+	"github.com/intelops/qualitytrace/agent/client"
+	"github.com/intelops/qualitytrace/agent/client/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

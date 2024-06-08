@@ -3,7 +3,7 @@ id: creating-tests
 title: Defining Tests as Text Files
 description: Tracetest enables developers to define tests as text files and run them using a CLI. Integrate the execution of tests in your existing CI pipeline.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -46,7 +46,7 @@ spec:
   specs:
     - selector: span[name = "POST /pokemon/import"]
       assertions:
-        - attr:qualityTrace.span.duration <= 500ms
+        - attr:qualitytrace.span.duration <= 500ms
         - attr:http.status_code = 200
     - selector: span[name = "send message to queue"]
       assertions:
@@ -62,7 +62,7 @@ spec:
         on database"]
       assertions:
         - attr:db.repository.operation = "create"
-        - attr:qualityTrace.span.duration <= 500ms
+        - attr:qualitytrace.span.duration <= 500ms
   outputs:
     - name: POKEMON_ID
       selector: span[name = "POST /pokemon/import"]
@@ -109,14 +109,14 @@ This section defines test specifications. You can use the [selector language](/c
 
 ```yaml
 specs:
-  - selector: span[qualityTrace.span.type="http"]
+  - selector: span[qualitytrace.span.type="http"]
     name: "All HTTP Spans: Status  code is 200"
     assertions:
     - attr:http.status_code   =   200
-  - selector: span[qualityTrace.span.type="database"]
+  - selector: span[qualitytrace.span.type="database"]
     name: "All Database Spans: Processing time is less than 100ms"
     assertions:
-    - attr:qualityTrace.span.duration < 2s
+    - attr:qualitytrace.span.duration < 2s
 ```
 
 ## Outputs 
@@ -126,7 +126,7 @@ This section defines test outputs. You can define an output value from a test to
 ```yaml
 outputs:
   - name: MY_OUTPUT
-    selector: span[qualityTrace.span.type="general" name="Tracetest trigger"]
+    selector: span[qualitytrace.span.type="general" name="Tracetest trigger"]
     value: attr:name
 ```
 

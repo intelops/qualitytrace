@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/intelops/qualityTrace/server/expression/types"
-	"github.com/intelops/qualityTrace/server/expression/value"
+	"github.com/intelops/qualitytrace/server/expression/types"
+	"github.com/intelops/qualitytrace/server/expression/value"
 )
 
 func RegexGroup(input value.Value, args ...string) (value.Value, error) {

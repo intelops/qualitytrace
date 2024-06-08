@@ -3,7 +3,7 @@ id: upgrade
 title: Upgrade Tracetest Version
 description: This page explains how to upgrade the version of your Tracetest Core Server and CLI if their version are incompatible.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -18,14 +18,14 @@ If you've ever seen this error, you've come to the right page:
 ```text
 ✖️ Error: Version Mismatch
 The CLI version and the server version are not compatible. To fix this, you'll need to make sure that both your CLI and server are using compatible versions.
-We recommend upgrading both of them to the latest available version. Check out our documentation https://docs.qualityTrace.io/configuration/upgrade for simple instructions on how to upgrade.
+We recommend upgrading both of them to the latest available version. Check out our documentation https://docs.qualitytrace.io/configuration/upgrade for simple instructions on how to upgrade.
 Thank you for using Tracetest! We apologize for any inconvenience caused.
 ```
 
 This means your Tracetest CLI and Server versions must be the same.
 
 ```sh
-qualityTrace version
+qualitytrace version
 ```
 
 ```text title="Expected output"
@@ -41,7 +41,7 @@ Server: v0.11.9
 Run the Tracetest CLI install script to upgrade to the latest version of the CLI:
 
 ```sh
-curl -L https://raw.githubusercontent.com/intelops/qualityTrace/main/install-cli.sh | bash
+curl -L https://raw.githubusercontent.com/intelops/qualitytrace/main/install-cli.sh | bash
 ```
 
 ### Homebrew
@@ -49,27 +49,27 @@ curl -L https://raw.githubusercontent.com/intelops/qualityTrace/main/install-cli
 ```sh
 brew upgrade
 brew update
-brew install intelops/qualityTrace/qualityTrace
+brew install intelops/qualitytrace/qualitytrace
 ```
 
 ### APT
 
 ```sh
 sudo apt-get update
-sudo apt-get install qualityTrace
+sudo apt-get install qualitytrace
 ```
 
 ### YUM
 
 ```sh
 sudo yum update
-sudo yum install qualityTrace --refresh
+sudo yum install qualitytrace --refresh
 ```
 
 ### Windows
 
 ```sh
-choco source add --name=kubeshop_repo --source=https://chocolatey.kubeshop.io/chocolatey ; choco upgrade qualityTrace
+choco source add --name=kubeshop_repo --source=https://chocolatey.kubeshop.io/chocolatey ; choco upgrade qualitytrace
 ```
 
 ## Upgrade Tracetest Server Version
@@ -77,11 +77,11 @@ choco source add --name=kubeshop_repo --source=https://chocolatey.kubeshop.io/ch
 Make sure to match the CLI version you have installed to the Server version.
 
 ```sh
-intelops/qualityTrace:vX.X.X
+intelops/qualitytrace:vX.X.X
 ```
 
 If you are using version `v0.11.9` of the CLI, make sure to use the same version of the server.
 
 ```yaml
-image: intelops/qualityTrace:v0.11.9
+image: intelops/qualitytrace:v0.11.9
 ```

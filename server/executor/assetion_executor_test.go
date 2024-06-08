@@ -4,13 +4,13 @@ import (
 	"context"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/assertions/comparator"
-	"github.com/intelops/qualityTrace/server/executor"
-	"github.com/intelops/qualityTrace/server/expression"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/pkg/maps"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/assertions/comparator"
+	"github.com/intelops/qualitytrace/server/executor"
+	"github.com/intelops/qualitytrace/server/expression"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/maps"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/traces"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.opentelemetry.io/otel/trace"
@@ -32,7 +32,7 @@ func TestAssertion(t *testing.T) {
 				{
 					Selector: test.SpanQuery(`span[service.name="Pokeshop"]`),
 					Assertions: []test.Assertion{
-						`attr:qualityTrace.span.duration = 2000ns`,
+						`attr:qualitytrace.span.duration = 2000ns`,
 					},
 				},
 			},
@@ -41,14 +41,14 @@ func TestAssertion(t *testing.T) {
 					ID: spanID,
 					Attributes: traces.NewAttributes(map[string]string{
 						"service.name":               "Pokeshop",
-						"qualityTrace.span.duration": "2000",
+						"qualitytrace.span.duration": "2000",
 					}),
 				},
 			},
 			expectedAllPassed: true,
 			expectedResult: (maps.Ordered[test.SpanQuery, []test.AssertionResult]{}).MustAdd(`span[service.name="Pokeshop"]`, []test.AssertionResult{
 				{
-					Assertion: `attr:qualityTrace.span.duration = 2000ns`,
+					Assertion: `attr:qualitytrace.span.duration = 2000ns`,
 					Results: []test.SpanAssertionResult{
 						{
 							SpanID:        &spanID,
@@ -65,13 +65,13 @@ func TestAssertion(t *testing.T) {
 				{
 					Selector: test.SpanQuery(`span[service.name="Pokeshop"]`),
 					Assertions: []test.Assertion{
-						`attr:qualityTrace.selected_spans.count = 1`,
+						`attr:qualitytrace.selected_spans.count = 1`,
 					},
 				},
 				{
 					Selector: test.SpanQuery(`span[service.name="NotExists"]`),
 					Assertions: []test.Assertion{
-						`attr:qualityTrace.selected_spans.count = 0`,
+						`attr:qualitytrace.selected_spans.count = 0`,
 					},
 				},
 			},
@@ -80,14 +80,14 @@ func TestAssertion(t *testing.T) {
 					ID: spanID,
 					Attributes: traces.NewAttributes(map[string]string{
 						"service.name":               "Pokeshop",
-						"qualityTrace.span.duration": "2000",
+						"qualitytrace.span.duration": "2000",
 					}),
 				},
 			},
 			expectedAllPassed: true,
 			expectedResult: (maps.Ordered[test.SpanQuery, []test.AssertionResult]{}).MustAdd(`span[service.name="Pokeshop"]`, []test.AssertionResult{
 				{
-					Assertion: `attr:qualityTrace.selected_spans.count = 1`,
+					Assertion: `attr:qualitytrace.selected_spans.count = 1`,
 					Results: []test.SpanAssertionResult{
 						{
 							SpanID:        &spanID,
@@ -98,7 +98,7 @@ func TestAssertion(t *testing.T) {
 				},
 			}).MustAdd(`span[service.name="NotExists"]`, []test.AssertionResult{
 				{
-					Assertion: `attr:qualityTrace.selected_spans.count = 0`,
+					Assertion: `attr:qualitytrace.selected_spans.count = 0`,
 					Results: []test.SpanAssertionResult{
 						{
 							SpanID:        nil,
@@ -109,7 +109,7 @@ func TestAssertion(t *testing.T) {
 				},
 			}),
 		},
-		// https://github.com/intelops/qualityTrace/issues/617
+		// https://github.com/intelops/qualitytrace/issues/617
 		{
 			name: "ContainsWithJSON",
 			testDef: test.Specs{
@@ -117,7 +117,7 @@ func TestAssertion(t *testing.T) {
 					Selector: test.SpanQuery(`span[service.name="Pokeshop"]`),
 					Assertions: []test.Assertion{
 						`attr:http.response.body contains 52`,
-						`attr:qualityTrace.span.duration <= 21ms`,
+						`attr:qualitytrace.span.duration <= 21ms`,
 					},
 				},
 			},
@@ -127,7 +127,7 @@ func TestAssertion(t *testing.T) {
 					Attributes: traces.NewAttributes(map[string]string{
 						"service.name":               "Pokeshop",
 						"http.response.body":         `{"id":52}`,
-						"qualityTrace.span.duration": "21000000",
+						"qualitytrace.span.duration": "21000000",
 					}),
 				},
 			},
@@ -144,7 +144,7 @@ func TestAssertion(t *testing.T) {
 					},
 				},
 				{
-					Assertion: `attr:qualityTrace.span.duration <= 21ms`,
+					Assertion: `attr:qualitytrace.span.duration <= 21ms`,
 					Results: []test.SpanAssertionResult{
 						{
 							SpanID:        &spanID,
@@ -155,14 +155,14 @@ func TestAssertion(t *testing.T) {
 				},
 			}),
 		},
-		// https://github.com/intelops/qualityTrace/issues/1203
+		// https://github.com/intelops/qualitytrace/issues/1203
 		{
 			name: "DurationComparison",
 			testDef: test.Specs{
 				{
 					Selector: test.SpanQuery(`span[service.name="Pokeshop"]`),
 					Assertions: []test.Assertion{
-						`attr:qualityTrace.span.duration <= 25ms`,
+						`attr:qualitytrace.span.duration <= 25ms`,
 					},
 				},
 			},
@@ -172,14 +172,14 @@ func TestAssertion(t *testing.T) {
 					Attributes: traces.NewAttributes(map[string]string{
 						"service.name":               "Pokeshop",
 						"http.response.body":         `{"id":52}`,
-						"qualityTrace.span.duration": "25187564", // 25ms
+						"qualitytrace.span.duration": "25187564", // 25ms
 					}),
 				},
 			},
 			expectedAllPassed: true,
 			expectedResult: (maps.Ordered[test.SpanQuery, []test.AssertionResult]{}).MustAdd(`span[service.name="Pokeshop"]`, []test.AssertionResult{
 				{
-					Assertion: `attr:qualityTrace.span.duration <= 25ms`,
+					Assertion: `attr:qualitytrace.span.duration <= 25ms`,
 					Results: []test.SpanAssertionResult{
 						{
 							SpanID:        &spanID,
@@ -190,14 +190,14 @@ func TestAssertion(t *testing.T) {
 				},
 			}),
 		},
-		// https://github.com/intelops/qualityTrace/issues/1421
+		// https://github.com/intelops/qualitytrace/issues/1421
 		{
 			name: "FailedAssertionsConvertDurationFieldsIntoDurationFormat",
 			testDef: test.Specs{
 				{
 					Selector: test.SpanQuery(`span[service.name="Pokeshop"]`),
 					Assertions: []test.Assertion{
-						`attr:qualityTrace.span.duration <= 25ms`,
+						`attr:qualitytrace.span.duration <= 25ms`,
 					},
 				},
 			},
@@ -207,14 +207,14 @@ func TestAssertion(t *testing.T) {
 					Attributes: traces.NewAttributes(map[string]string{
 						"service.name":               "Pokeshop",
 						"http.response.body":         `{"id":52}`,
-						"qualityTrace.span.duration": "35000000", // 35ms
+						"qualitytrace.span.duration": "35000000", // 35ms
 					}),
 				},
 			},
 			expectedAllPassed: false,
 			expectedResult: (maps.Ordered[test.SpanQuery, []test.AssertionResult]{}).MustAdd(`span[service.name="Pokeshop"]`, []test.AssertionResult{
 				{
-					Assertion: `attr:qualityTrace.span.duration <= 25ms`,
+					Assertion: `attr:qualitytrace.span.duration <= 25ms`,
 					Results: []test.SpanAssertionResult{
 						{
 							SpanID:        &spanID,

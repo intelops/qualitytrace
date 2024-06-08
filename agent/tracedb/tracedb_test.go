@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/agent/tracedb"
-	"github.com/intelops/qualityTrace/server/datastore"
+	"github.com/intelops/qualitytrace/agent/tracedb"
+	"github.com/intelops/qualitytrace/server/datastore"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

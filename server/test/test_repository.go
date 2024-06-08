@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/pkg/sqlutil"
-	"github.com/intelops/qualityTrace/server/pkg/validation"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/sqlutil"
+	"github.com/intelops/qualitytrace/server/pkg/validation"
 )
 
 type Repository interface {

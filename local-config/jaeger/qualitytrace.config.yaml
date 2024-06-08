@@ -1,23 +1,20 @@
 postgres:
-  host: postgres
+  host: localhost
   user: postgres
   password: postgres
   port: 5432
   dbname: postgres
   params: sslmode=disable
 
-nats:
-  endpoint: nats:4222
-
 telemetry:
   exporters:
     collector:
-      serviceName: qualityTrace
+      serviceName: qualitytrace
       sampling: 100 # 100%
       exporter:
         type: collector
         collector:
-          endpoint: otel-collector:4317
+          endpoint: localhost:4317
 
 server:
   telemetry:

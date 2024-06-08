@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/intelops/qualityTrace/server/traces"
-	"github.com/intelops/qualityTrace/server/variableset"
+	"github.com/intelops/qualitytrace/server/traces"
+	"github.com/intelops/qualitytrace/server/variableset"
 )
 
 type DataStore interface {
@@ -14,7 +14,7 @@ type DataStore interface {
 }
 
 var attributeAlias = map[string]string{
-	"name": "qualityTrace.span.name",
+	"name": "qualitytrace.span.name",
 }
 
 type AttributeDataStore struct {

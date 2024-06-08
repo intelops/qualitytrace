@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/intelops/qualityTrace/cli/openapi"
+	"github.com/intelops/qualitytrace/cli/openapi"
 	"github.com/pterm/pterm"
 )
 

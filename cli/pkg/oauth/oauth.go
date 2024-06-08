@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/intelops/qualityTrace/cli/ui"
+	"github.com/intelops/qualitytrace/cli/ui"
 	"go.uber.org/zap"
 )
 

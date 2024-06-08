@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	dc "github.com/fluidtruck/deepcopy"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/testsuite"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/testsuite"
 )
 
 type TestSuite struct {

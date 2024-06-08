@@ -7,10 +7,10 @@ import (
 	"os/signal"
 	"syscall"
 
-	agentConfig "github.com/intelops/qualityTrace/agent/config"
-	"github.com/intelops/qualityTrace/agent/event"
-	"github.com/intelops/qualityTrace/agent/proto"
-	consoleUI "github.com/intelops/qualityTrace/agent/ui"
+	agentConfig "github.com/intelops/qualitytrace/agent/config"
+	"github.com/intelops/qualitytrace/agent/event"
+	"github.com/intelops/qualitytrace/agent/proto"
+	consoleUI "github.com/intelops/qualitytrace/agent/ui"
 	v1 "go.opentelemetry.io/proto/otlp/trace/v1"
 )
 

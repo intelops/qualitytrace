@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/intelops/qualityTrace/cli/analytics"
-	"github.com/intelops/qualityTrace/cli/cmdutil"
-	"github.com/intelops/qualityTrace/cli/config"
-	"github.com/intelops/qualityTrace/cli/formatters"
-	"github.com/intelops/qualityTrace/cli/openapi"
+	"github.com/intelops/qualitytrace/cli/analytics"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/config"
+	"github.com/intelops/qualitytrace/cli/formatters"
+	"github.com/intelops/qualitytrace/cli/openapi"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
@@ -125,7 +125,7 @@ func loadConfig(cmd *cobra.Command, args []string) {
 func validateConfig(cmd *cobra.Command, args []string) {
 	if cliConfig.IsEmpty() {
 		cliLogger.Warn("You haven't configured your CLI, some commands might fail!")
-		cliLogger.Warn("Run 'qualityTrace configure' to configure your CLI")
+		cliLogger.Warn("Run 'qualitytrace configure' to configure your CLI")
 	}
 }
 
@@ -146,7 +146,7 @@ func validateVersionMismatch() {
 		fmt.Fprintf(os.Stderr, versionText+`
 ✖️ Error: Version Mismatch
 The CLI version and the server version are not compatible. To fix this, you'll need to make sure that both your CLI and server are using compatible versions.
-We recommend upgrading both of them to the latest available version. Check out our documentation https://docs.qualityTrace.io/configuration/upgrade for simple instructions on how to upgrade.
+We recommend upgrading both of them to the latest available version. Check out our documentation https://docs.qualitytrace.io/configuration/upgrade for simple instructions on how to upgrade.
 Thank you for using Tracetest! We apologize for any inconvenience caused.
 `)
 		ExitCLI(1)

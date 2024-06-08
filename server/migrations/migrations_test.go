@@ -9,9 +9,9 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
 	"github.com/golang-migrate/migrate/v4/source/iofs"
-	"github.com/intelops/qualityTrace/server/migrations"
-	"github.com/intelops/qualityTrace/server/testdb"
-	"github.com/intelops/qualityTrace/server/testmock"
+	"github.com/intelops/qualitytrace/server/migrations"
+	"github.com/intelops/qualitytrace/server/testdb"
+	"github.com/intelops/qualitytrace/server/testmock"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -40,7 +40,7 @@ func rollback(db *sql.DB) error {
 		log.Fatal(err)
 	}
 
-	migrateClient, err := migrate.NewWithInstance("iofs", sourceDriver, "qualityTrace", driver)
+	migrateClient, err := migrate.NewWithInstance("iofs", sourceDriver, "qualitytrace", driver)
 	if err != nil {
 		return fmt.Errorf("could not get migration client: %w", err)
 	}

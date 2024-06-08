@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/Jeffail/gabs/v2"
-	"github.com/intelops/qualityTrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/id"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

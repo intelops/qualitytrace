@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -25,7 +25,7 @@ func TestDeleteTestSuite(t *testing.T) {
 
 	// When I try to delete a TestSuite that don't exist
 	// Then it should return an error and say that this resource does not exist
-	result := qualityTracecli.Exec(t, "delete testsuite --id dont-exist", qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, "delete testsuite --id dont-exist", qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 1)
 	require.Contains(result.StdErr, "Resource testsuite with ID dont-exist not found")
 
@@ -33,18 +33,18 @@ func TestDeleteTestSuite(t *testing.T) {
 	// Then it should be applied with success
 	newTestSuitePath := env.GetTestResourcePath(t, "new-testsuite")
 
-	result = qualityTracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", newTestSuitePath), qualityTracecli.WithCLIConfig(cliConfig))
+	result = qualitytracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", newTestSuitePath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	// When I try to delete the testsuite
 	// Then it should delete with success
-	result = qualityTracecli.Exec(t, "delete testsuite --id Qti5R3_VR", qualityTracecli.WithCLIConfig(cliConfig))
+	result = qualitytracecli.Exec(t, "delete testsuite --id Qti5R3_VR", qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 	require.Contains(result.StdOut, "✔ Testsuite successfully deleted")
 
 	// When I try to get a TestSuite again
 	// Then it should return a message saying that the testsuite was not found
-	result = qualityTracecli.Exec(t, "delete testsuite --id Qti5R3_VR", qualityTracecli.WithCLIConfig(cliConfig))
+	result = qualitytracecli.Exec(t, "delete testsuite --id Qti5R3_VR", qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 1)
 	require.Contains(result.StdErr, "Resource testsuite with ID Qti5R3_VR not found")
 }

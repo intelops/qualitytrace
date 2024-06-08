@@ -4,7 +4,7 @@ import (
 	"os"
 	"runtime"
 
-	cliUI "github.com/intelops/qualityTrace/cli/ui"
+	cliUI "github.com/intelops/qualitytrace/cli/ui"
 )
 
 func exitOption(msg string) func(ui cliUI.UI) {

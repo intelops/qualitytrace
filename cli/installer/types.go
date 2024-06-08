@@ -40,7 +40,7 @@ var _ pflag.Value = (*InstallationModeType)(nil)
 
 const (
 	WithDemoInstallationModeType    InstallationModeType = "with-demo"
-	WithoutDemoInstallationModeType InstallationModeType = "just-qualityTrace"
+	WithoutDemoInstallationModeType InstallationModeType = "just-qualitytrace"
 	NotChosenInstallationModeType   InstallationModeType = "none" // stands for "no option chosen"
 )
 
@@ -50,14 +50,14 @@ func (e *InstallationModeType) String() string {
 
 func (e *InstallationModeType) Set(v string) error {
 	switch v {
-	case "with-demo", "just-qualityTrace":
+	case "with-demo", "just-qualitytrace":
 		*e = InstallationModeType(v)
 		return nil
 	default:
-		return errors.New(`must be "with-demo" or "just-qualityTrace"`)
+		return errors.New(`must be "with-demo" or "just-qualitytrace"`)
 	}
 }
 
 func (e *InstallationModeType) Type() string {
-	return "(with-demo|just-qualityTrace)"
+	return "(with-demo|just-qualitytrace)"
 }

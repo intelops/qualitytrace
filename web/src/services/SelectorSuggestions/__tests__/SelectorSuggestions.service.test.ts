@@ -29,11 +29,11 @@ describe('SelectorSuggestionsService', () => {
 
   it('should get TRACETEST_SPAN_TYPE suggestion', () => {
     const selector: TSelector = {
-      query: 'span[qualityTrace.span.type="general" attribute="value"]',
+      query: 'span[qualitytrace.span.type="general" attribute="value"]',
       structure: [
         {
           filters: [
-            {operator: '=', property: 'qualityTrace.span.type', value: 'general'},
+            {operator: '=', property: 'qualitytrace.span.type', value: 'general'},
             {operator: '=', property: 'attribute', value: 'value'},
           ],
         },
@@ -47,7 +47,7 @@ describe('SelectorSuggestionsService', () => {
       selectedParentSpanSelector
     );
 
-    expect(suggestions).toContainEqual({query: 'span[qualityTrace.span.type="general"]', title: 'All general spans'});
+    expect(suggestions).toContainEqual({query: 'span[qualitytrace.span.type="general"]', title: 'All general spans'});
   });
 
   it('should get SERVICE_NAME suggestion', () => {
@@ -75,11 +75,11 @@ describe('SelectorSuggestionsService', () => {
 
   it('should get structural pseudo class suggestion', () => {
     const selector: TSelector = {
-      query: 'span[qualityTrace.span.type="general" attribute="value"]',
+      query: 'span[qualitytrace.span.type="general" attribute="value"]',
       structure: [
         {
           filters: [
-            {operator: '=', property: 'qualityTrace.span.type', value: 'general'},
+            {operator: '=', property: 'qualitytrace.span.type', value: 'general'},
             {operator: '=', property: 'attribute', value: 'value'},
           ],
         },
@@ -98,11 +98,11 @@ describe('SelectorSuggestionsService', () => {
 
   it('should get descendant suggestion', () => {
     const selector: TSelector = {
-      query: 'span[qualityTrace.span.type="general" attribute="value"]',
+      query: 'span[qualitytrace.span.type="general" attribute="value"]',
       structure: [
         {
           filters: [
-            {operator: '=', property: 'qualityTrace.span.type', value: 'general'},
+            {operator: '=', property: 'qualitytrace.span.type', value: 'general'},
             {operator: '=', property: 'attribute', value: 'value'},
           ],
         },
@@ -117,18 +117,18 @@ describe('SelectorSuggestionsService', () => {
     );
 
     expect(suggestions).toContainEqual({
-      query: `span[parent="parent"] span[qualityTrace.span.type="general"]`,
+      query: `span[parent="parent"] span[qualitytrace.span.type="general"]`,
       title: 'general descendants',
     });
   });
 
   it('should get selected span suggestion', () => {
     const selector: TSelector = {
-      query: 'span[qualityTrace.span.type="general" attribute="value"]',
+      query: 'span[qualitytrace.span.type="general" attribute="value"]',
       structure: [
         {
           filters: [
-            {operator: '=', property: 'qualityTrace.span.type', value: 'general'},
+            {operator: '=', property: 'qualitytrace.span.type', value: 'general'},
             {operator: '=', property: 'attribute', value: 'value'},
           ],
         },

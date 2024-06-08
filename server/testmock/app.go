@@ -1,8 +1,8 @@
 package testmock
 
 import (
-	"github.com/intelops/qualityTrace/server/app"
-	"github.com/intelops/qualityTrace/server/config"
+	"github.com/intelops/qualitytrace/server/app"
+	"github.com/intelops/qualitytrace/server/config"
 )
 
 type TestingAppOption func(*config.AppConfig)
@@ -34,8 +34,8 @@ func ConfigureDB(cfg *config.AppConfig) {
 	db := getTestDatabaseEnvironment()
 
 	cfg.Set("postgres.host", db.container.Host)
-	cfg.Set("postgres.user", "qualityTrace")
-	cfg.Set("postgres.password", "qualityTrace")
+	cfg.Set("postgres.user", "qualitytrace")
+	cfg.Set("postgres.password", "qualitytrace")
 	cfg.Set("postgres.dbname", "postgres")
 	cfg.Set("postgres.port", db.container.DefaultPort())
 }

@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/cli/config"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/config"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
 )
 
 type environment struct {

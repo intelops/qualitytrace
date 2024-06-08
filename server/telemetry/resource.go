@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/intelops/qualityTrace/server/config"
-	"github.com/intelops/qualityTrace/server/version"
+	"github.com/intelops/qualitytrace/server/config"
+	"github.com/intelops/qualitytrace/server/version"
 	"go.opentelemetry.io/otel/sdk/resource"
 	semconv "go.opentelemetry.io/otel/semconv/v1.21.0"
 )
@@ -16,7 +16,7 @@ func getResource(cfg *config.TelemetryExporterOption) (*resource.Resource, error
 		return nil, fmt.Errorf("could not get OS hostname: %w", err)
 	}
 
-	serviceName := "qualityTrace"
+	serviceName := "qualitytrace"
 	if cfg != nil && cfg.ServiceName != "" {
 		serviceName = cfg.ServiceName
 	}

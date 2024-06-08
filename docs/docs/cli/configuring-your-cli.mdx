@@ -3,7 +3,7 @@ id: configuring-your-cli
 title: Configuring your CLI
 description: Configure the Tracetest CLI. The CLI is used for creating tests and executing them each time a change is made in the system.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -24,13 +24,13 @@ Configure your CLI to connect to your Tracetest server.
 **How to Use**:
 
 ```sh
-qualityTrace configure
+qualitytrace configure
 ```
 
 If you want to set values without having to answer questions from a prompt, you can provide the flag `--server-url` to define the server endpoint.
 
 ```sh
-qualityTrace configure --server-url http://my-qualityTrace-server:11633
+qualitytrace configure --server-url http://my-qualitytrace-server:11633
 ```
 
 ### Test List
@@ -40,7 +40,7 @@ Allows you to list all tests.
 **How to Use**:
 
 ```sh
-qualityTrace list test
+qualitytrace list test
 ```
 
 ### Run a Test
@@ -54,7 +54,7 @@ Every time the test is run, changes are detected and, if any change is introduce
 **How to Use**:
 
 ```sh
-qualityTrace run test --file <file-path>
+qualitytrace run test --file <file-path>
 ```
 
 ### Running Tracetest CLI from Docker
@@ -65,9 +65,9 @@ There are times when it is easier to directly execute the Tracetest CLI from a D
 
 Use the command below, substituting the following placeholders:
 
-- `your-qualityTrace-server-url` - The URL to the running Tracetest server you wish to execute the test on. Example: `http://localhost:11633/`
+- `your-qualitytrace-server-url` - The URL to the running Tracetest server you wish to execute the test on. Example: `http://localhost:11633/`
 - `file-path` - The path to the saved Tracetest test. Example: `./mytest.yaml`
 
 ```bash wordWrap=true
-docker run --rm -it -v$(pwd):$(pwd) -w $(pwd) --network host --entrypoint qualityTrace intelops/qualityTrace:latest -s <your-qualityTrace-server-url> run test --file <file-path>
+docker run --rm -it -v$(pwd):$(pwd) -w $(pwd) --network host --entrypoint qualitytrace intelops/qualitytrace:latest -s <your-qualitytrace-server-url> run test --file <file-path>
 ```

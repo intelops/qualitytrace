@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/expression"
+	"github.com/intelops/qualitytrace/server/expression"
 	"github.com/stretchr/testify/assert"
 )
 

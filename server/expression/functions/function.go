@@ -3,7 +3,7 @@ package functions
 import (
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/expression/types"
+	"github.com/intelops/qualitytrace/server/expression/types"
 )
 
 type Invoker func(args ...types.TypedValue) string

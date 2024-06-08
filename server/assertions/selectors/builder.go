@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/alecthomas/participle/v2"
-	"github.com/intelops/qualityTrace/server/assertions/comparator"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/assertions/comparator"
+	"github.com/intelops/qualitytrace/server/traces"
 )
 
 var defaultParser *SelectorParser

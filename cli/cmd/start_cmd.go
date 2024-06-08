@@ -4,10 +4,10 @@ import (
 	"context"
 	"os"
 
-	agentConfig "github.com/intelops/qualityTrace/agent/config"
-	"github.com/intelops/qualityTrace/agent/runner"
-	"github.com/intelops/qualityTrace/agent/ui"
-	"github.com/intelops/qualityTrace/cli/config"
+	agentConfig "github.com/intelops/qualitytrace/agent/config"
+	"github.com/intelops/qualitytrace/agent/runner"
+	"github.com/intelops/qualitytrace/agent/ui"
+	"github.com/intelops/qualitytrace/cli/config"
 	"github.com/spf13/cobra"
 )
 
@@ -22,8 +22,8 @@ var (
 var startCmd = &cobra.Command{
 	GroupID: cmdGroupConfig.ID,
 	Use:     "start",
-	Short:   "Start Tracetest",
-	Long:    "Start using Tracetest",
+	Short:   "Start Qualitytrace",
+	Long:    "Start using Qualitytrace",
 	PreRun:  setupCommand(SkipConfigValidation(), SkipVersionMismatchCheck()),
 	Run: WithResultHandler((func(ctx context.Context, _ *cobra.Command, _ []string) (string, error) {
 		flags := agentConfig.Flags{

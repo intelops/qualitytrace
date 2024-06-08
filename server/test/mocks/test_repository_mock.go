@@ -3,8 +3,8 @@ package mocks
 import (
 	"context"
 
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/test"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/test"
 	"github.com/stretchr/testify/mock"
 )
 

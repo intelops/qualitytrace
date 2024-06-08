@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
-	"github.com/intelops/qualityTrace/server/resourcemanager"
-	"github.com/intelops/qualityTrace/server/testmock"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
+	"github.com/intelops/qualitytrace/server/testmock"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/yaml.v2"
 )

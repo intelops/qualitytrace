@@ -5,7 +5,7 @@ spec:
   trigger:
     type: http
     httpRequest:
-      url: http://pokemon-demo.qualityTrace.io/pokemon/import
+      url: http://pokemon-demo.qualitytrace.io/pokemon/import
       method: POST
       headers:
       - key: Content-Type
@@ -19,7 +19,7 @@ spec:
   specs:
   - selector: span[name = "POST /pokemon/import"]
     assertions:
-    - qualityTrace.span.duration <= 100ms
+    - qualitytrace.span.duration <= 100ms
     - http.status_code = 200
   - selector: span[name = "send message to queue"]
     assertions:
@@ -35,5 +35,5 @@ spec:
       on database"]
     assertions:
     - db.repository.operation = "create"
-    - qualityTrace.span.duration <= 100ms
-    - 'qualityTrace.response.body contains "\"id\": 52"'
+    - qualitytrace.span.duration <= 100ms
+    - 'qualitytrace.response.body contains "\"id\": 52"'

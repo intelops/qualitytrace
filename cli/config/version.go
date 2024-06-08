@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/Masterminds/semver/v3"
-	"github.com/intelops/qualityTrace/cli/openapi"
+	"github.com/intelops/qualitytrace/cli/openapi"
 	"github.com/pterm/pterm"
 )
 

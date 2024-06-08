@@ -3,9 +3,9 @@ package expression
 import (
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/assertions/comparator"
-	"github.com/intelops/qualityTrace/server/expression/types"
-	"github.com/intelops/qualityTrace/server/expression/value"
+	"github.com/intelops/qualitytrace/server/assertions/comparator"
+	"github.com/intelops/qualitytrace/server/expression/types"
+	"github.com/intelops/qualitytrace/server/expression/value"
 )
 
 func compare(comparatorName string, leftValue, rightValue value.Value) error {

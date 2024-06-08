@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	rm "github.com/intelops/qualityTrace/server/resourcemanager"
+	rm "github.com/intelops/qualitytrace/server/resourcemanager"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/exp/slices"

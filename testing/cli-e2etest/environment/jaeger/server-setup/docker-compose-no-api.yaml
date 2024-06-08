@@ -1,13 +1,13 @@
 version: '3'
 services:
-  qualityTrace:
-    image: intelops/qualityTrace:${TAG:-latest}
+  qualitytrace:
+    image: intelops/qualitytrace:${TAG:-latest}
     volumes:
       - type: bind
-        source: ./qualityTrace-config.yaml
-        target: /app/qualityTrace.yaml
+        source: ./qualitytrace-config.yaml
+        target: /app/qualitytrace.yaml
       - type: bind
-        source: ./qualityTrace-provision.yaml
+        source: ./qualitytrace-provision.yaml
         target: /app/provision.yaml
     command: --provisioning-file /app/provision.yaml
     ports:

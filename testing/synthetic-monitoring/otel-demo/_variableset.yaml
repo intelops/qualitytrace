@@ -1,7 +1,7 @@
 type: VariableSet
 spec:
-  id: qualityTraceing-vars
-  name: qualityTraceing-vars
+  id: qualitytraceing-vars
+  name: qualitytraceing-vars
   values:
     - key: FRONTEND_ADDR
       value: demo-otel-frontend:8080

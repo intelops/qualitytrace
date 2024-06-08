@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/intelops/qualityTrace/cli/pkg/fileutil"
+	"github.com/intelops/qualitytrace/cli/pkg/fileutil"
 )
 
 func GetResourceTypeFromFile(filePath string) (string, error) {

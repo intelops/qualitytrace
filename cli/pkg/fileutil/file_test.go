@@ -3,7 +3,7 @@ package fileutil_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/cli/pkg/fileutil"
+	"github.com/intelops/qualitytrace/cli/pkg/fileutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -3,7 +3,7 @@ id: open
 title: Opening Tracetest Core
 description: Get started with opening Tracetest Core. Tracetest Core allows you to quickly build integration and end-to-end tests, powered by your OpenTelemetry traces. Learn how to get started with creating tests once you open Tracetest.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -126,9 +126,9 @@ spec:
       body: '{"id":52}'
   specs:
   - name: 'All Database Spans: Processing time is less than 100ms'
-    selector: span[qualityTrace.span.type="database"]
+    selector: span[qualitytrace.span.type="database"]
     assertions:
-    - attr:qualityTrace.span.duration < 100ms
+    - attr:qualitytrace.span.duration < 100ms
 ```
 
 ### Trigger
@@ -136,7 +136,7 @@ spec:
 Using the CLI, trigger a test run.
 
 ```bash title="Terminal"
-qualityTrace run test -f pokeshop_import.yaml -o pretty
+qualitytrace run test -f pokeshop_import.yaml -o pretty
 ```
 
 ### Output

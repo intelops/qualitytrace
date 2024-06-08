@@ -6,7 +6,7 @@
 ## What is a Resource?
 
 A `Resource` is, conceptually, any entity that can be created, read, updated and/or deleted.
-Some examples in Tracetest includes `Test`, `Transaction`, `PollingProfile`, etc.
+Some examples in Qualitytrace includes `Test`, `Transaction`, `PollingProfile`, etc.
 
 ## How this works
 

@@ -3,7 +3,7 @@ package selectors_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/assertions/selectors"
+	"github.com/intelops/qualitytrace/server/assertions/selectors"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -16,17 +16,17 @@ func TestSimpleSelectorBuilder(t *testing.T) {
 	}{
 		{
 			Name:          "Selector with single attribute",
-			Expression:    "span[qualityTrace.span.type=\"http\"]",
+			Expression:    "span[qualitytrace.span.type=\"http\"]",
 			ShouldSucceed: true,
 		},
 		{
 			Name:          "Selector with multiple attributes",
-			Expression:    "span[service.name=\"Pokeshop\" qualityTrace.error=true]",
+			Expression:    "span[service.name=\"Pokeshop\" qualitytrace.error=true]",
 			ShouldSucceed: true,
 		},
 		{
 			Name:          "Selector with child selector",
-			Expression:    "span[qualityTrace.span.duration=0.5] span[qualityTrace.span.type contains \"http\"]",
+			Expression:    "span[qualitytrace.span.duration=0.5] span[qualitytrace.span.type contains \"http\"]",
 			ShouldSucceed: true,
 		},
 		{
@@ -36,7 +36,7 @@ func TestSimpleSelectorBuilder(t *testing.T) {
 		},
 		{
 			Name:          "Selector with invalid syntax",
-			Expression:    "span.qualityTrace.span.type=\"http\"",
+			Expression:    "span.qualitytrace.span.type=\"http\"",
 			ShouldSucceed: false,
 		},
 	}

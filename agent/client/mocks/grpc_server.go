@@ -8,8 +8,8 @@ import (
 	"sync"
 
 	"github.com/avast/retry-go"
-	"github.com/intelops/qualityTrace/agent/client"
-	"github.com/intelops/qualityTrace/agent/proto"
+	"github.com/intelops/qualitytrace/agent/client"
+	"github.com/intelops/qualitytrace/agent/proto"
 	"google.golang.org/grpc"
 )
 

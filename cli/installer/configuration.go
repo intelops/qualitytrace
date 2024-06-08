@@ -3,7 +3,7 @@ package installer
 import (
 	"fmt"
 
-	cliUI "github.com/intelops/qualityTrace/cli/ui"
+	cliUI "github.com/intelops/qualitytrace/cli/ui"
 )
 
 type configuration struct {

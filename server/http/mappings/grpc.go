@@ -1,8 +1,8 @@
 package mappings
 
 import (
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/openapi"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/openapi"
 )
 
 // out

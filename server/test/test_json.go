@@ -6,8 +6,8 @@ import (
 	"fmt"
 
 	"github.com/fluidtruck/deepcopy"
-	"github.com/intelops/qualityTrace/server/assertions/comparator"
-	"github.com/intelops/qualityTrace/server/pkg/maps"
+	"github.com/intelops/qualitytrace/server/assertions/comparator"
+	"github.com/intelops/qualitytrace/server/pkg/maps"
 	"go.opentelemetry.io/otel/trace"
 )
 

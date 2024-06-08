@@ -14,7 +14,7 @@ var (
 	TenantIDKey key = "tenantID"
 )
 
-const HeaderTenantID = "X-Tracetest-TenantID"
+const HeaderTenantID = "X-Qualitytrace-TenantID"
 
 func TenantMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

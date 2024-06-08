@@ -18,11 +18,11 @@ Run Groups track the status of all test suites and test runs to yield a single r
 
 Users are allowed to attach more runs to a run group by adding them in the run information that’s available in the CLI.
 
-[Integrations](https://docs.qualityTrace.io/tools-and-integrations/overview) support this feature by creating a single run group for every execution.
-- [k6](https://docs.qualityTrace.io/tools-and-integrations/k6)
-- [Playwright](https://docs.qualityTrace.io/tools-and-integrations/playwright)
-- [Cypress](https://docs.qualityTrace.io/tools-and-integrations/cypress)
-- [Artillery](https://docs.qualityTrace.io/tools-and-integrations/artillery-plugin)
+[Integrations](https://docs.qualitytrace.io/tools-and-integrations/overview) support this feature by creating a single run group for every execution.
+- [k6](https://docs.qualitytrace.io/tools-and-integrations/k6)
+- [Playwright](https://docs.qualitytrace.io/tools-and-integrations/playwright)
+- [Cypress](https://docs.qualitytrace.io/tools-and-integrations/cypress)
+- [Artillery](https://docs.qualitytrace.io/tools-and-integrations/artillery-plugin)
 
 Run groups are essential for integrations! Without it, a k6 test could potentially generate thousands of test runs that would pollute the environment and make it almost impossible to search for test runs not associated with that k6 test run.
 
@@ -40,23 +40,23 @@ The way to use run groups from the CLI is by running multiple folders at once:
 
 Users can also manually wait for a run group to be done from the CLI.
 
-The above screenshots show that now you can run multiple tests at once by providing multiple `-f <file.yaml` parameters to the `qualityTrace run test` command. All those tests will be placed under the same run group.
+The above screenshots show that now you can run multiple tests at once by providing multiple `-f <file.yaml` parameters to the `qualitytrace run test` command. All those tests will be placed under the same run group.
 
 Normally, if you run two tests separately, both test runs would be part of different run groups:
 
 ```
-qualityTrace run test -f test1.yaml
+qualitytrace run test -f test1.yaml
 ```
 
 ```
-qualityTrace run test -f test2.yaml
+qualitytrace run test -f test2.yaml
 ```
 
 Now you also can specify the run group id when running a test. This would make the test part of the run group.
 
 ```
-qualityTrace run test -f test1.yaml --group my-pipeline
-qualityTrace run test -f test2.yaml --group my-pipeline
+qualitytrace run test -f test1.yaml --group my-pipeline
+qualitytrace run test -f test2.yaml --group my-pipeline
 ```
 
 With the `--group` argument, both tests would be run in parallel but would be seen inside the same run group.
@@ -75,7 +75,7 @@ spec:
 	specs:
 	- selector: span[name = "Tracetest Trigger"]
 	  assertions:
-	  - attr:qualityTrace.response.body | json_path '$.count' > 0
+	  - attr:qualitytrace.response.body | json_path '$.count' > 0
 ```
 
 ```
@@ -91,13 +91,13 @@ spec:
 	specs:
 	- selector: span[name = "Tracetest Trigger"]
 	  assertions:
-	  - attr:qualityTrace.response.body | json_path '$.count' > 0
+	  - attr:qualitytrace.response.body | json_path '$.count' > 0
 ```
 
 ### Running multiple tests inside the same group
 
 ```
-qualityTrace run test -f test1.yaml -f test2.yaml
+qualitytrace run test -f test1.yaml -f test2.yaml
 ```
 
 Both test runs will be shown on the same run group (with a random id).
@@ -105,7 +105,7 @@ Both test runs will be shown on the same run group (with a random id).
 ### Running multiple tests inside the same group and choosing the group id
 
 ```
-qualityTrace run test -f test1.yaml -f test2.yaml --group my-group-id
+qualitytrace run test -f test1.yaml -f test2.yaml --group my-group-id
 ```
 
 Both tests will be shown on the same run group (id = my-group-id). If this run group already exists, the two new runs will be placed there with any other test run from that group.
@@ -113,14 +113,14 @@ Both tests will be shown on the same run group (id = my-group-id). If this run g
 ### Adding a new run to an existing group
 
 ```
-qualityTrace run test -f test3.yaml --group my-group-id
+qualitytrace run test -f test3.yaml --group my-group-id
 ```
 This new run will be part of the `my-group-id` group along with the `test1` and `test2` runs.
 
 ### Running a suite and some tests inside the same group
 
 ```
-qualityTrace run test -f suite.yaml -f test1.yaml -f test2.yaml
+qualitytrace run test -f suite.yaml -f test1.yaml -f test2.yaml
 ```
 
 Test suites can also be part of a run group along with other suites or tests.

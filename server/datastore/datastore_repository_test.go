@@ -6,10 +6,10 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
-	datastore "github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/resourcemanager"
-	rmtests "github.com/intelops/qualityTrace/server/resourcemanager/testutil"
+	datastore "github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
+	rmtests "github.com/intelops/qualitytrace/server/resourcemanager/testutil"
 	"github.com/stretchr/testify/require"
 )
 

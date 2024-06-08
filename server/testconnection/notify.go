@@ -3,7 +3,7 @@ package testconnection
 import (
 	"context"
 
-	"github.com/intelops/qualityTrace/server/pkg/pipeline"
+	"github.com/intelops/qualitytrace/server/pkg/pipeline"
 	"go.opentelemetry.io/otel/trace"
 )
 

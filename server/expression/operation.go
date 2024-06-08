@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/intelops/qualityTrace/server/expression/types"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/expression/types"
+	"github.com/intelops/qualitytrace/server/traces"
 )
 
 type ExpressionOperation func(types.TypedValue, types.TypedValue) (types.TypedValue, error)

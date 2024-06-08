@@ -6,7 +6,7 @@ import (
 	"regexp"
 
 	"github.com/gorilla/mux"
-	"github.com/intelops/qualityTrace/server/analytics"
+	"github.com/intelops/qualitytrace/server/analytics"
 )
 
 var (

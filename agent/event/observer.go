@@ -1,7 +1,7 @@
 package event
 
 import (
-	"github.com/intelops/qualityTrace/agent/proto"
+	"github.com/intelops/qualitytrace/agent/proto"
 	v1 "go.opentelemetry.io/proto/otlp/trace/v1"
 )
 

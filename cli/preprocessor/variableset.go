@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/goccy/go-yaml"
-	"github.com/intelops/qualityTrace/cli/cmdutil"
-	"github.com/intelops/qualityTrace/cli/pkg/fileutil"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/pkg/fileutil"
 	"go.uber.org/zap"
 )
 

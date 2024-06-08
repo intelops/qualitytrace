@@ -4,15 +4,15 @@ import (
 	"context"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/assertions/comparator"
-	"github.com/intelops/qualityTrace/server/http"
-	"github.com/intelops/qualityTrace/server/http/mappings"
-	"github.com/intelops/qualityTrace/server/openapi"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/test/mocks"
-	"github.com/intelops/qualityTrace/server/testdb"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/assertions/comparator"
+	"github.com/intelops/qualitytrace/server/http"
+	"github.com/intelops/qualitytrace/server/http/mappings"
+	"github.com/intelops/qualitytrace/server/openapi"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/test/mocks"
+	"github.com/intelops/qualitytrace/server/testdb"
+	"github.com/intelops/qualitytrace/server/traces"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
@@ -30,7 +30,7 @@ var (
 				ID:   id.NewRandGenerator().SpanID(),
 				Name: "POST /pokemon/import",
 				Attributes: traces.NewAttributes(map[string]string{
-					"qualityTrace.span.type": "http",
+					"qualitytrace.span.type": "http",
 					"service.name":           "pokeshop",
 					"http.response.body":     `{"id":52}`,
 				}),
@@ -39,14 +39,14 @@ var (
 	}
 )
 
-// https://github.com/intelops/qualityTrace/issues/617
+// https://github.com/intelops/qualitytrace/issues/617
 func TestContains_Issue617(t *testing.T) {
 
 	spec := openapi.TestSpecs{
 		Specs: []openapi.TestSpec{
 			{
 				SelectorParsed: openapi.Selector{
-					Query: `span[qualityTrace.span.type = "http" service.name = "pokeshop"  name = "POST /pokemon/import"]`,
+					Query: `span[qualitytrace.span.type = "http" service.name = "pokeshop"  name = "POST /pokemon/import"]`,
 				},
 				Assertions: []string{
 					`attr:http.response.body contains 52`,
@@ -60,12 +60,12 @@ func TestContains_Issue617(t *testing.T) {
 		Results: []openapi.AssertionResultsResultsInner{
 			{
 				Selector: openapi.Selector{
-					Query: `span[qualityTrace.span.type = "http" service.name = "pokeshop"  name = "POST /pokemon/import"]`,
+					Query: `span[qualitytrace.span.type = "http" service.name = "pokeshop"  name = "POST /pokemon/import"]`,
 					Structure: []openapi.SpanSelector{
 						{
 							Filters: []openapi.SelectorFilter{
 								{
-									Property: "qualityTrace.span.type",
+									Property: "qualitytrace.span.type",
 									Operator: "=",
 									Value:    "http",
 								},

@@ -1,8 +1,8 @@
 package mappings
 
 import (
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/openapi"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/openapi"
 )
 
 func (m OpenAPI) TestRunEvents(in []model.TestRunEvent) []openapi.TestRunEvent {

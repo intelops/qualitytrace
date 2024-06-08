@@ -3,8 +3,8 @@ FROM alpine
 RUN apk --update add bash jq curl
 
 WORKDIR /app
-COPY ./dist/qualityTrace /app/qualityTrace
-COPY ./testing/server-qualityTraceing ./qualityTraceing
+COPY ./dist/qualitytrace /app/qualitytrace
+COPY ./testing/server-qualitytraceing ./qualitytraceing
 
-WORKDIR /app/qualityTraceing
-CMD ["/bin/sh", "/app/qualityTraceing/run.bash"]
+WORKDIR /app/qualitytraceing
+CMD ["/bin/sh", "/app/qualitytraceing/run.bash"]

@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/agent/tracedb"
-	"github.com/intelops/qualityTrace/server/datastore"
-	triggerer "github.com/intelops/qualityTrace/server/executor/trigger"
-	"github.com/intelops/qualityTrace/server/expression"
-	"github.com/intelops/qualityTrace/server/model/events"
-	"github.com/intelops/qualityTrace/server/pkg/pipeline"
-	"github.com/intelops/qualityTrace/server/test"
+	"github.com/intelops/qualitytrace/agent/tracedb"
+	"github.com/intelops/qualitytrace/server/datastore"
+	triggerer "github.com/intelops/qualitytrace/server/executor/trigger"
+	"github.com/intelops/qualitytrace/server/expression"
+	"github.com/intelops/qualitytrace/server/model/events"
+	"github.com/intelops/qualitytrace/server/pkg/pipeline"
+	"github.com/intelops/qualitytrace/server/test"
 	"go.opentelemetry.io/otel/trace"
 )
 

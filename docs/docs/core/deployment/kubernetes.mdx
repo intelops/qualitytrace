@@ -3,7 +3,7 @@ id: kubernetes
 title:  Kubernetes Deployment
 description: Guides for deploying Tracetest Core in Kubernetes. Tracetest Core allows you to quickly build integration and end-to-end tests, powered by your OpenTelemetry traces.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -24,17 +24,17 @@ This setup is ideal for CI/CD environments and QA teams working in shared enviro
 You have two options to install Tracetest Core in Kubernetes:
 
 - Using the [Tracetest CLI](/core/getting-started/installation) to guide your installation
-- Using the official [Helm chart](https://github.com/kubeshop/helm-charts/tree/main/charts/qualityTrace)
+- Using the official [Helm chart](https://github.com/kubeshop/helm-charts/tree/main/charts/qualitytrace)
 
 <Tabs groupId="kubernetes-installation">
   <TabItem value="cli" label="Tracetest CLI" default>
 
-First, install Tracetest CLI following the instructions on [Getting Started](/core/getting-started/installation#install-the-qualityTrace-cli).
+First, install Tracetest CLI following the instructions on [Getting Started](/core/getting-started/installation#install-the-qualitytrace-cli).
 
 After installing the CLI, run:
 
 ```bash
-qualityTrace server install
+qualitytrace server install
 ```
 
 ```bash title="Expected output"
@@ -54,8 +54,8 @@ Select `Using Kubernetes` and follow the instructions.
 - [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/). A trace collector, that receives telemetry of other applications and sent it to Tracetest.
 
 **Result**:
-- `qualityTrace` Helm chart deployed in the `qualityTrace` (configurable) namespace.
-- [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) deployed in the `qualityTrace` (configurable) namespace, if selected.
+- `qualitytrace` Helm chart deployed in the `qualitytrace` (configurable) namespace.
+- [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) deployed in the `qualitytrace` (configurable) namespace, if selected.
 - [PokeShop demo app](https://github.com/kubeshop/pokeshop/) deployed in the `demo` namespace, if selected.
 
 **How to start**:
@@ -63,7 +63,7 @@ Select `Using Kubernetes` and follow the instructions.
 Once installed, you can get started by launching Tracetest:
 
 ```sh
-kubectl port-forward svc/qualityTrace 11633
+kubectl port-forward svc/qualitytrace 11633
 ```
 
 Then launch a browser to [http://localhost:11633/](http://localhost:11633/).
@@ -73,7 +73,7 @@ Then launch a browser to [http://localhost:11633/](http://localhost:11633/).
 
 First, be sure that you have [Helm](https://helm.sh/) installed in your machine.
 
-The Tracetest Helm charts are located [here](https://github.com/kubeshop/helm-charts/tree/main/charts/qualityTrace).
+The Tracetest Helm charts are located [here](https://github.com/kubeshop/helm-charts/tree/main/charts/qualitytrace).
 
 You can install them locally on your machine with the command:
 ```sh
@@ -83,13 +83,13 @@ helm repo update
 
 After that, you can install Tracetest with `helm install`:
 ```sh
-helm install qualityTrace intelops/qualityTrace --namespace=qualityTrace --create-namespace
+helm install qualitytrace intelops/qualitytrace --namespace=qualitytrace --create-namespace
 ```
 
 Or, generate a manifest file and apply it manually in your Kubernetes cluster:
 ```sh
-helm template qualityTrace intelops/qualityTrace > qualityTrace-kubernetes-manifests.yaml
-kubectl apply -f ./qualityTrace-kubernetes-manifests.yaml
+helm template qualitytrace intelops/qualitytrace > qualitytrace-kubernetes-manifests.yaml
+kubectl apply -f ./qualitytrace-kubernetes-manifests.yaml
 ```
   </TabItem>
 </Tabs>

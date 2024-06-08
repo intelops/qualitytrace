@@ -6,14 +6,14 @@ import (
 	"math"
 	"time"
 
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/executor/testrunner"
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/pkg/maps"
-	"github.com/intelops/qualityTrace/server/pkg/timing"
-	"github.com/intelops/qualityTrace/server/traces"
-	"github.com/intelops/qualityTrace/server/variableset"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/executor/testrunner"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/maps"
+	"github.com/intelops/qualitytrace/server/pkg/timing"
+	"github.com/intelops/qualitytrace/server/traces"
+	"github.com/intelops/qualitytrace/server/variableset"
 )
 
 var (
@@ -203,7 +203,7 @@ func (r Run) GenerateRequiredGateResult(gates []testrunner.RequiredGate) testrun
 	return requiredGatesResult
 }
 
-func NewTracetestRootSpan(run Run) traces.Span {
+func NewQualitytraceRootSpan(run Run) traces.Span {
 	return traces.AugmentRootSpan(traces.Span{
 		ID:         id.NewRandGenerator().SpanID(),
 		Name:       traces.TriggerSpanName,

@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/cli/openapi"
-	"github.com/intelops/qualityTrace/cli/pkg/fileutil"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/openapi"
+	"github.com/intelops/qualitytrace/cli/pkg/fileutil"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
 	"go.uber.org/zap"
 	"gopkg.in/yaml.v2"
 )

@@ -36,10 +36,10 @@ spec:
   specs:
   - selector: span[name = "Tracetest trigger"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
-    - attr:qualityTrace.response.status = 400
-  - selector: span[name="POST /api/tests" qualityTrace.span.type="http"]
+    - attr:qualitytrace.selected_spans.count = 1
+    - attr:qualitytrace.response.status = 400
+  - selector: span[name="POST /api/tests" qualitytrace.span.type="http"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
-    - attr:qualityTrace.span.status_code = "STATUS_CODE_ERROR"
-    - attr:qualityTrace.span.status_description contains "test with same ID already exists"
+    - attr:qualitytrace.selected_spans.count = 1
+    - attr:qualitytrace.span.status_code = "STATUS_CODE_ERROR"
+    - attr:qualitytrace.span.status_description contains "test with same ID already exists"

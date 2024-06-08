@@ -7,7 +7,7 @@ const AssertionResultMock: IMockFactory<AssertionResult, TRawAssertionResult> = 
   raw(data = {}) {
     return {
       allPassed: faker.datatype.boolean(),
-      assertion: 'attr:qualityTrace.span.type = "http',
+      assertion: 'attr:qualitytrace.span.type = "http',
       spanResults: new Array(4).fill(null).map(() => AssertionSpanResultMock.raw()),
       ...data,
     };

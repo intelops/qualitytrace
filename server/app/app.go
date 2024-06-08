@@ -10,38 +10,38 @@ import (
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	"github.com/intelops/qualityTrace/agent/tracedb"
-	"github.com/intelops/qualityTrace/server/analytics"
-	"github.com/intelops/qualityTrace/server/assertions/comparator"
-	"github.com/intelops/qualityTrace/server/config"
-	"github.com/intelops/qualityTrace/server/config/demo"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/executor"
-	"github.com/intelops/qualityTrace/server/executor/pollingprofile"
-	"github.com/intelops/qualityTrace/server/executor/testrunner"
-	"github.com/intelops/qualityTrace/server/executor/trigger"
-	httpServer "github.com/intelops/qualityTrace/server/http"
-	"github.com/intelops/qualityTrace/server/http/mappings"
-	"github.com/intelops/qualityTrace/server/http/middleware"
-	"github.com/intelops/qualityTrace/server/http/websocket"
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/openapi"
-	"github.com/intelops/qualityTrace/server/otlp"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/pkg/pipeline"
-	"github.com/intelops/qualityTrace/server/provisioning"
-	"github.com/intelops/qualityTrace/server/resourcemanager"
-	"github.com/intelops/qualityTrace/server/subscription"
-	"github.com/intelops/qualityTrace/server/telemetry"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/testconnection"
-	"github.com/intelops/qualityTrace/server/testdb"
-	"github.com/intelops/qualityTrace/server/testsuite"
-	"github.com/intelops/qualityTrace/server/traces"
-	"github.com/intelops/qualityTrace/server/variableset"
-	"github.com/intelops/qualityTrace/server/version"
-	"github.com/intelops/qualityTrace/server/wizard"
+	"github.com/intelops/qualitytrace/agent/tracedb"
+	"github.com/intelops/qualitytrace/server/analytics"
+	"github.com/intelops/qualitytrace/server/assertions/comparator"
+	"github.com/intelops/qualitytrace/server/config"
+	"github.com/intelops/qualitytrace/server/config/demo"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/executor"
+	"github.com/intelops/qualitytrace/server/executor/pollingprofile"
+	"github.com/intelops/qualitytrace/server/executor/testrunner"
+	"github.com/intelops/qualitytrace/server/executor/trigger"
+	httpServer "github.com/intelops/qualitytrace/server/http"
+	"github.com/intelops/qualitytrace/server/http/mappings"
+	"github.com/intelops/qualitytrace/server/http/middleware"
+	"github.com/intelops/qualitytrace/server/http/websocket"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/openapi"
+	"github.com/intelops/qualitytrace/server/otlp"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/pipeline"
+	"github.com/intelops/qualitytrace/server/provisioning"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
+	"github.com/intelops/qualitytrace/server/subscription"
+	"github.com/intelops/qualitytrace/server/telemetry"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/testconnection"
+	"github.com/intelops/qualitytrace/server/testdb"
+	"github.com/intelops/qualitytrace/server/testsuite"
+	"github.com/intelops/qualitytrace/server/traces"
+	"github.com/intelops/qualitytrace/server/variableset"
+	"github.com/intelops/qualitytrace/server/version"
+	"github.com/intelops/qualitytrace/server/wizard"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/nats-io/nats.go"
 	"go.opentelemetry.io/otel/metric"
@@ -49,7 +49,7 @@ import (
 )
 
 var (
-	pgChannelName = "qualityTrace_queue"
+	pgChannelName = "qualitytrace_queue"
 )
 
 var EmptyDemoEnabled []string
@@ -71,7 +71,7 @@ func New(config *config.AppConfig) (*App, error) {
 }
 
 func (app *App) Version() string {
-	return fmt.Sprintf("qualityTrace-server %s (%s)", version.Version, version.Env)
+	return fmt.Sprintf("qualitytrace-server %s (%s)", version.Version, version.Env)
 }
 
 func (app *App) Stop() {
@@ -356,8 +356,8 @@ func (app *App) Start(opts ...appOption) error {
 	registerTestRunner(testRunnerRepo, apiRouter, provisioner, tracer)
 	registerTestResource(testRepo, apiRouter, provisioner, tracer)
 
-	isTracetestDev := os.Getenv("TRACETEST_DEV") != ""
-	registerSPAHandler(router, app.cfg, configFromDB.IsAnalyticsEnabled(), serverID, isTracetestDev)
+	isQualitytraceDev := os.Getenv("QUALITYTRACE_DEV") != ""
+	registerSPAHandler(router, app.cfg, configFromDB.IsAnalyticsEnabled(), serverID, isQualitytraceDev)
 
 	if isNewInstall {
 		provision(provisioner, app.provisioningFile)
@@ -379,7 +379,7 @@ func (app *App) Start(opts ...appOption) error {
 	return nil
 }
 
-func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabled bool, serverID string, isTracetestDev bool) {
+func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabled bool, serverID string, isQualitytraceDev bool) {
 	router.
 		PathPrefix(cfg.ServerPathPrefix()).
 		Handler(
@@ -389,7 +389,7 @@ func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabl
 				serverID,
 				version.Version,
 				version.Env,
-				isTracetestDev,
+				isQualitytraceDev,
 			),
 		)
 }
@@ -408,7 +408,7 @@ func registerOtlpServer(
 	httpOtlpServer := otlp.NewHttpServer(":4318", ingester)
 	go grpcOtlpServer.Start()
 	go httpOtlpServer.Start()
-
+	
 	fmt.Println("OTLP server started on :4317 (grpc) and :4318 (http)")
 
 	app.registerStopFn(func() {
@@ -657,7 +657,7 @@ func tracesConversionConfig() traces.ConversionConfig {
 	tcc := traces.NewConversionConfig()
 	// hardcoded for now. In the future we will get those values from the database
 	tcc.AddTimeFields(
-		"qualityTrace.span.duration",
+		"qualitytrace.span.duration",
 	)
 
 	return tcc

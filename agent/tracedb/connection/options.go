@@ -3,7 +3,7 @@ package connection
 import (
 	"context"
 
-	"github.com/intelops/qualityTrace/server/model"
+	"github.com/intelops/qualitytrace/server/model"
 )
 
 func WithPortLintingTest(step TestStep) TesterOption {

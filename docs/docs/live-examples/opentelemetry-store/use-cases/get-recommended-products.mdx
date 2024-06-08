@@ -4,7 +4,7 @@ title: OpenTelemetry Store - Get recommended products
 description: The OpenTelemetry Demo is an example application published by the OpenTelemtry CNCF project. This use case covers viewing recommended products before adding them to the shopping cart.
 hide_table_of_contents: false
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -70,7 +70,7 @@ Now you can validate this entire use case.
 To replicate this entire test on Tracetest, you can replicate these steps on our Web UI or using our CLI by saving the following test definition as the file `test-definition.yml` and later running:
 
 ```sh
-qualityTrace run test -f test-definition.yml
+qualitytrace run test -f test-definition.yml
 ```
 
 We are assuming that the Frontend service is exposed on `http://otel-demo-frontend:8080`:
@@ -88,12 +88,12 @@ spec:
       - key: Content-Type
         value: application/json
   specs:
-  - selector: span[qualityTrace.span.type="rpc" name="grpc.hipstershop.ProductCatalogService/GetProduct"
+  - selector: span[qualitytrace.span.type="rpc" name="grpc.hipstershop.ProductCatalogService/GetProduct"
       rpc.system="grpc" rpc.method="GetProduct" rpc.service="hipstershop.ProductCatalogService"]
     assertions:
-    - attr:qualityTrace.selected_spans.count  =  4
-  - selector: span[qualityTrace.span.type="rpc" name="/hipstershop.FeatureFlagService/GetFlag"
+    - attr:qualitytrace.selected_spans.count  =  4
+  - selector: span[qualitytrace.span.type="rpc" name="/hipstershop.FeatureFlagService/GetFlag"
       rpc.system="grpc" rpc.method="GetFlag" rpc.service="hipstershop.FeatureFlagService"]
     assertions:
-    - attr:qualityTrace.selected_spans.count  =  1
+    - attr:qualitytrace.selected_spans.count  =  1
 ```

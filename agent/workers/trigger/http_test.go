@@ -7,9 +7,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	triggerer "github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	triggerer "github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/pkg/id"
 	"github.com/stretchr/testify/assert"
 	"go.opentelemetry.io/otel/trace"
 )

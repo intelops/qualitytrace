@@ -3,9 +3,9 @@ package mappings
 import (
 	"strconv"
 
-	"github.com/intelops/qualityTrace/server/openapi"
-	"github.com/intelops/qualityTrace/server/pkg/timing"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/openapi"
+	"github.com/intelops/qualitytrace/server/pkg/timing"
+	"github.com/intelops/qualitytrace/server/traces"
 	"go.opentelemetry.io/otel/trace"
 )
 

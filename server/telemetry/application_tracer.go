@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/config"
+	"github.com/intelops/qualitytrace/server/config"
 	"go.opentelemetry.io/otel/trace"
 )
 

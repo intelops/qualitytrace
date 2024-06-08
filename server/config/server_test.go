@@ -3,7 +3,7 @@ package config_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/config"
+	"github.com/intelops/qualitytrace/server/config"
 	"gotest.tools/v3/assert"
 )
 
@@ -11,7 +11,7 @@ func TestServerConfig(t *testing.T) {
 	t.Run("DefaultValues", func(t *testing.T) {
 		cfg, _ := config.New()
 
-		assert.Equal(t, "postgres://postgres:postgres@postgres:5432/qualityTrace?sslmode=disable", cfg.PostgresConnString())
+		assert.Equal(t, "postgres://postgres:postgres@postgres:5432/qualitytrace?sslmode=disable", cfg.PostgresConnString())
 
 		assert.Equal(t, 11633, cfg.ServerPort())
 		assert.Equal(t, "", cfg.ServerPathPrefix())
@@ -38,7 +38,7 @@ func TestServerConfig(t *testing.T) {
 			"--experimentalFeatures", "a",
 			"--experimentalFeatures", "b",
 			"--internalTelemetry.enabled", "true",
-			"--internalTelemetry.otelCollectorEndpoint", "otel-collector.qualityTrace",
+			"--internalTelemetry.otelCollectorEndpoint", "otel-collector.qualitytrace",
 			"--testPipelines.triggerExecute.enabled", "false",
 			"--testPipelines.traceFetch.enabled", "false",
 		}
@@ -53,7 +53,7 @@ func TestServerConfig(t *testing.T) {
 		assert.DeepEqual(t, []string{"a", "b"}, cfg.ExperimentalFeatures())
 
 		assert.Equal(t, true, cfg.InternalTelemetryEnabled())
-		assert.Equal(t, "otel-collector.qualityTrace", cfg.InternalTelemetryOtelCollectorAddress())
+		assert.Equal(t, "otel-collector.qualitytrace", cfg.InternalTelemetryOtelCollectorAddress())
 
 		assert.Equal(t, false, cfg.TestPipelineTriggerExecutionEnabled())
 		assert.Equal(t, false, cfg.TestPipelineTraceFetchingEnabled())
@@ -71,7 +71,7 @@ func TestServerConfig(t *testing.T) {
 			"TRACETEST_SERVER_PATHPREFIX":                       "/prefix",
 			"TRACETEST_EXPERIMENTALFEATURES":                    "a b",
 			"TRACETEST_INTERNALTELEMETRY_ENABLED":               "true",
-			"TRACETEST_INTERNALTELEMETRY_OTELCOLLECTORENDPOINT": "otel-collector.qualityTrace",
+			"TRACETEST_INTERNALTELEMETRY_OTELCOLLECTORENDPOINT": "otel-collector.qualitytrace",
 			"TRACETEST_TESTPIPELINES_TRIGGEREXECUTE_ENABLED":    "false",
 			"TRACETEST_TESTPIPELINES_TRACEFETCH_ENABLED":        "false",
 		}
@@ -86,7 +86,7 @@ func TestServerConfig(t *testing.T) {
 		assert.DeepEqual(t, []string{"a", "b"}, cfg.ExperimentalFeatures())
 
 		assert.Equal(t, true, cfg.InternalTelemetryEnabled())
-		assert.Equal(t, "otel-collector.qualityTrace", cfg.InternalTelemetryOtelCollectorAddress())
+		assert.Equal(t, "otel-collector.qualitytrace", cfg.InternalTelemetryOtelCollectorAddress())
 
 		assert.Equal(t, false, cfg.TestPipelineTriggerExecutionEnabled())
 		assert.Equal(t, false, cfg.TestPipelineTraceFetchingEnabled())

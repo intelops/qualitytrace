@@ -6,14 +6,14 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/intelops/qualityTrace/agent/tracedb"
-	"github.com/intelops/qualityTrace/agent/tracedb/connection"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/executor"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/pkg/pipeline"
-	"github.com/intelops/qualityTrace/server/resourcemanager"
-	"github.com/intelops/qualityTrace/server/subscription"
+	"github.com/intelops/qualitytrace/agent/tracedb"
+	"github.com/intelops/qualitytrace/agent/tracedb/connection"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/executor"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/pkg/pipeline"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
+	"github.com/intelops/qualitytrace/server/subscription"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
@@ -54,7 +54,7 @@ func handleError(ctx context.Context, job executor.Job, err error, state *worker
 	log.Printf("[TracePoller] Test %s Run %d, Error: %s", job.Test.ID, job.Run.ID, err.Error())
 
 	span.RecordError(err)
-	span.SetAttributes(attribute.String("qualityTrace.run.trace_poller.error", err.Error()))
+	span.SetAttributes(attribute.String("qualitytrace.run.trace_poller.error", err.Error()))
 }
 
 func handleDBError(err error) {
@@ -72,18 +72,18 @@ func populateSpan(span trace.Span, job executor.Job, reason string, done *bool) 
 	}
 
 	attrs := []attribute.KeyValue{
-		attribute.String("qualityTrace.run.trace_poller.trace_id", job.Run.TraceID.String()),
-		attribute.String("qualityTrace.run.trace_poller.span_id", job.Run.SpanID.String()),
-		attribute.String("qualityTrace.run.trace_poller.test_id", string(job.Test.ID)),
-		attribute.Int("qualityTrace.run.trace_poller.amount_retrieved_spans", spanCount),
+		attribute.String("qualitytrace.run.trace_poller.trace_id", job.Run.TraceID.String()),
+		attribute.String("qualitytrace.run.trace_poller.span_id", job.Run.SpanID.String()),
+		attribute.String("qualitytrace.run.trace_poller.test_id", string(job.Test.ID)),
+		attribute.Int("qualitytrace.run.trace_poller.amount_retrieved_spans", spanCount),
 	}
 
 	if done != nil {
-		attrs = append(attrs, attribute.Bool("qualityTrace.run.trace_poller.succesful", *done))
+		attrs = append(attrs, attribute.Bool("qualitytrace.run.trace_poller.succesful", *done))
 	}
 
 	if reason != "" {
-		attrs = append(attrs, attribute.String("qualityTrace.run.trace_poller.finish_reason", reason))
+		attrs = append(attrs, attribute.String("qualitytrace.run.trace_poller.finish_reason", reason))
 	}
 
 	span.SetAttributes(attrs...)

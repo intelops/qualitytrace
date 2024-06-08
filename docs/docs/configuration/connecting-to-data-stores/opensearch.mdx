@@ -3,7 +3,7 @@ id: opensearch
 title: OpenSearch
 description: Use OpenSearch as the trace data store for Tracetest. You can use the native connection from Tracetest to pull telemetry data directly from OpenSearch.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -14,7 +14,7 @@ image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_T
 Tracetest fetches traces from [OpenSearch's default port](https://logz.io/blog/opensearch-tutorial-installation-configuration/#:~:text=This%20is%20because%20OpenSearch%20runs,use%20port%205601%20by%20default.) `9200`.
 
 :::tip
-Examples of configuring Tracetest can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualityTrace/tree/main/examples).
+Examples of configuring Tracetest can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualitytrace/tree/main/examples).
 :::
 
 ## Configure Tracetest to Use OpenSearch as a Trace Data Store
@@ -63,9 +63,9 @@ spec:
 Proceed to run this command in the terminal, and specify the file above.
 
 ```bash
-qualityTrace apply datastore -f my/data-store/file/location.yaml
+qualitytrace apply datastore -f my/data-store/file/location.yaml
 ```
 
 :::tip
-To learn more, [read the recipe on running a sample app with OpenSearch and Tracetest](/examples-tutorials/recipes/running-qualityTrace-with-opensearch).
+To learn more, [read the recipe on running a sample app with OpenSearch and Tracetest](/examples-tutorials/recipes/running-qualitytrace-with-opensearch).
 :::

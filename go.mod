@@ -1,4 +1,4 @@
-module github.com/intelops/qualityTrace
+module github.com/intelops/qualitytrace
 
 go 1.21
 

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

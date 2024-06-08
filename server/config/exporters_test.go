@@ -3,14 +3,14 @@ package config_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/config"
+	"github.com/intelops/qualitytrace/server/config"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestExporter(t *testing.T) {
 	t.Run("OK", func(t *testing.T) {
 		expectedExporter := &config.TelemetryExporterOption{
-			ServiceName: "qualityTrace",
+			ServiceName: "qualitytrace",
 			Sampling:    100,
 			Exporter: config.ExporterConfig{
 				Type: "collector",

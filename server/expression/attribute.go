@@ -3,7 +3,7 @@ package expression
 import "strings"
 
 const (
-	metaPrefix    = "qualityTrace.selected_spans."
+	metaPrefix    = "qualitytrace.selected_spans."
 	metaPrefixLen = len(metaPrefix)
 )
 

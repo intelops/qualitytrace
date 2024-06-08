@@ -2,12 +2,12 @@ package metadata
 
 import (
 	cienvironment "github.com/cucumber/ci-environment/go"
-	"github.com/intelops/qualityTrace/cli/config"
+	"github.com/intelops/qualitytrace/cli/config"
 )
 
 var (
-	qualityTraceSource     = "qualityTrace.source"
-	qualityTraceCliVersion = "qualityTrace.cli.version"
+	qualitytraceSource     = "qualitytrace.source"
+	qualitytraceCliVersion = "qualitytrace.cli.version"
 	gitRemote              = "git.GitRemote"
 	gitBranch              = "git.branch"
 	gitTag                 = "git.tag"
@@ -31,8 +31,8 @@ func GetMetadata() Metadata {
 	// TODO: add more metadata after getting the response from the k6 team
 	// https://github.com/grafana/k6/issues/1320#issuecomment-2032734378
 	metadata := Metadata{}
-	metadata[qualityTraceSource] = "cli"
-	metadata[qualityTraceCliVersion] = config.Version
+	metadata[qualitytraceSource] = "cli"
+	metadata[qualitytraceCliVersion] = config.Version
 
 	ci := cienvironment.DetectCIEnvironment()
 	if ci == nil {

@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/agent/tracedb"
-	"github.com/intelops/qualityTrace/server/assertions/selectors"
-	"github.com/intelops/qualityTrace/server/executor"
-	"github.com/intelops/qualityTrace/server/model/events"
-	"github.com/intelops/qualityTrace/server/test"
+	"github.com/intelops/qualitytrace/agent/tracedb"
+	"github.com/intelops/qualitytrace/server/assertions/selectors"
+	"github.com/intelops/qualitytrace/server/executor"
+	"github.com/intelops/qualitytrace/server/model/events"
+	"github.com/intelops/qualitytrace/server/test"
 )
 
 type SelectorBasedPollingStopStrategy struct {

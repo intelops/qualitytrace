@@ -5,10 +5,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -32,12 +32,12 @@ func TestApplyTest(t *testing.T) {
 		// Then it should be applied with success
 		testPath := env.GetTestResourcePath(t, "list")
 
-		result := qualityTracecli.Exec(t, fmt.Sprintf("apply test --file %s", testPath), qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, fmt.Sprintf("apply test --file %s", testPath), qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		// When I try to get a test
 		// Then it should return the test applied on the last step
-		result = qualityTracecli.Exec(t, "get test --id fH_8AulVR", qualityTracecli.WithCLIConfig(cliConfig))
+		result = qualitytracecli.Exec(t, "get test --id fH_8AulVR", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		listTest := helpers.UnmarshalYAML[types.TestResource](t, result.StdOut)
@@ -75,12 +75,12 @@ func TestApplyTest(t *testing.T) {
 		// Then it should be applied with success
 		testPath := env.GetTestResourcePath(t, "grpc-trigger-reference-protobuf")
 
-		result := qualityTracecli.Exec(t, fmt.Sprintf("apply test --file %s", testPath), qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, fmt.Sprintf("apply test --file %s", testPath), qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		// When I try to get a test
 		// Then it should return the test applied on the last step
-		result = qualityTracecli.Exec(t, "get test --id create-pokemon", qualityTracecli.WithCLIConfig(cliConfig))
+		result = qualitytracecli.Exec(t, "get test --id create-pokemon", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		listTest := helpers.UnmarshalYAML[types.TestResource](t, result.StdOut)
@@ -113,12 +113,12 @@ func TestApplyTest(t *testing.T) {
 		// Then it should be applied with success
 		testPath := env.GetTestResourcePath(t, "grpc-trigger-embedded-protobuf-with-comment")
 
-		result := qualityTracecli.Exec(t, fmt.Sprintf("apply test --file %s", testPath), qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, fmt.Sprintf("apply test --file %s", testPath), qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		// When I try to get a test
 		// Then it should return the test applied on the last step
-		result = qualityTracecli.Exec(t, "get test --id create-pokemon-embedded", qualityTracecli.WithCLIConfig(cliConfig))
+		result = qualitytracecli.Exec(t, "get test --id create-pokemon-embedded", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		listTest := helpers.UnmarshalYAML[types.TestResource](t, result.StdOut)

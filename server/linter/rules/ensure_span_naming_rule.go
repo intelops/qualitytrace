@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/traces"
 )
 
 type ensureSpanNamingRule struct{}
@@ -36,7 +36,7 @@ func (r ensureSpanNamingRule) Evaluate(ctx context.Context, trace traces.Trace, 
 }
 
 func (r ensureSpanNamingRule) validateSpanName(ctx context.Context, span *traces.Span) analyzer.Result {
-	switch span.Attributes.Get("qualityTrace.span.type") {
+	switch span.Attributes.Get("qualitytrace.span.type") {
 	case "http":
 		return r.validateHTTPSpanName(ctx, span)
 	case "database":
@@ -67,7 +67,7 @@ func (r ensureSpanNamingRule) validateHTTPSpanName(ctx context.Context, span *tr
 			Passed: false,
 			Errors: []analyzer.Error{
 				{
-					Value:       "qualityTrace.span.name",
+					Value:       "qualitytrace.span.name",
 					Expected:    expectedName,
 					Description: fmt.Sprintf(`The Span name %s is not matching the naming convention`, span.Name),
 				},
@@ -103,7 +103,7 @@ func (r ensureSpanNamingRule) validateDatabaseSpanName(ctx context.Context, span
 			Passed: false,
 			Errors: []analyzer.Error{
 				{
-					Value:       "qualityTrace.span.name",
+					Value:       "qualitytrace.span.name",
 					Expected:    expectedName,
 					Description: fmt.Sprintf(`The Span name %s is not matching the naming convention`, span.Name),
 				},
@@ -129,7 +129,7 @@ func (r ensureSpanNamingRule) validateRPCSpanName(ctx context.Context, span *tra
 			Passed: false,
 			Errors: []analyzer.Error{
 				{
-					Value:       "qualityTrace.span.name",
+					Value:       "qualitytrace.span.name",
 					Expected:    expectedName,
 					Description: fmt.Sprintf(`The Span name %s is not matching the naming convention`, span.Name),
 				},
@@ -155,7 +155,7 @@ func (r ensureSpanNamingRule) validateMessagingSpanName(ctx context.Context, spa
 			Passed: false,
 			Errors: []analyzer.Error{
 				{
-					Value:       "qualityTrace.span.name",
+					Value:       "qualitytrace.span.name",
 					Expected:    expectedName,
 					Description: fmt.Sprintf(`The Span name %s is not matching the naming convention`, span.Name),
 				},

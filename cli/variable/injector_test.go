@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/cli/variable"
-	"github.com/intelops/qualityTrace/server/model/yaml"
+	"github.com/intelops/qualitytrace/cli/variable"
+	"github.com/intelops/qualitytrace/server/model/yaml"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -52,8 +52,8 @@ func TestInjectorWithStruct(t *testing.T) {
 				{
 					Selector: "http.url = \"${POKEMON_API_URL}\"",
 					Assertions: []string{
-						"qualityTrace.span.duration < 100",
-						`qualityTrace.response.body contains '"id": ${EXPECTED_POKEMON_ID}'`,
+						"qualitytrace.span.duration < 100",
+						`qualitytrace.response.body contains '"id": ${EXPECTED_POKEMON_ID}'`,
 					},
 				},
 			},
@@ -75,8 +75,8 @@ func TestInjectorWithStruct(t *testing.T) {
 				{
 					Selector: "http.url = \"http://pokemon.api:11633\"",
 					Assertions: []string{
-						"qualityTrace.span.duration < 100",
-						`qualityTrace.response.body contains '"id": 521'`,
+						"qualitytrace.span.duration < 100",
+						`qualitytrace.response.body contains '"id": 521'`,
 					},
 				},
 			},

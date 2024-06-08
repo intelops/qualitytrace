@@ -3,8 +3,8 @@ package filters_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/expression/filters"
-	"github.com/intelops/qualityTrace/server/expression/value"
+	"github.com/intelops/qualitytrace/server/expression/filters"
+	"github.com/intelops/qualitytrace/server/expression/value"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -18,21 +18,21 @@ func TestRegexGroup(t *testing.T) {
 	}{
 		{
 			Name:           "should_be_able_to_extract_one_group",
-			Input:          `{ "id": 38, "name": "Tracetest" }`,
+			Input:          `{ "id": 38, "name": "Qualitytrace" }`,
 			Regex:          `"id": (\d+)`,
 			ExpectedOutput: `38`,
 		},
 		{
 			Name:           "should_be_able_to_extract_one_group_multiple_times",
-			Input:          `[{ "id": 38, "name": "Tracetest" }, { "id": 39, "name": "Kusk" }]`,
+			Input:          `[{ "id": 38, "name": "Qualitytrace" }, { "id": 39, "name": "Kusk" }]`,
 			Regex:          `"id": (\d+)`,
 			ExpectedOutput: `[38, 39]`,
 		},
 		{
 			Name:           "should_be_able_to_extract_multiple_groups_multiple_times",
-			Input:          `[{ "id": 38, "name": "Tracetest" }, { "id": 39, "name": "Kusk" }]`,
+			Input:          `[{ "id": 38, "name": "Qualitytrace" }, { "id": 39, "name": "Kusk" }]`,
 			Regex:          `"id": (\d+), "name": "(\w+)"`,
-			ExpectedOutput: `[38, "Tracetest", 39, "Kusk"]`,
+			ExpectedOutput: `[38, "Qualitytrace", 39, "Kusk"]`,
 		},
 	}
 

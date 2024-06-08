@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/pkg/sqlutil"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/sqlutil"
 )
 
 const insertTestRunEventQuery = `

@@ -10,11 +10,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/intelops/qualityTrace/agent/tracedb/connection"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/agent/tracedb/connection"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/traces"
 	"go.opentelemetry.io/otel/trace"
 )
 
@@ -74,10 +74,10 @@ func (db *sumologicDB) TestConnection(ctx context.Context) model.ConnectionResul
 		connection.WithAuthenticationTest(connection.NewTestStep(func(ctx context.Context) (string, error) {
 			_, err := db.GetTraceByID(ctx, id.NewRandGenerator().TraceID().String())
 			if strings.Contains(err.Error(), "Expected 200, got 401") {
-				return "Tracetest tried to execute a request but it failed due to authentication issues", err
+				return "Qualitytrace tried to execute a request but it failed due to authentication issues", err
 			}
 
-			return "Tracetest managed to authenticate with Sumo Logic", nil
+			return "Qualitytrace managed to authenticate with Sumo Logic", nil
 		})),
 	)
 
@@ -178,7 +178,7 @@ func (db *sumologicDB) convertSumoLogicSpanSummariesIntoSpans(summaries []sumolo
 			ID:   spanID,
 			Name: summary.Name,
 			Attributes: traces.NewAttributes(map[string]string{
-				traces.TracetestMetadataFieldParentID: summary.ParentID,
+				traces.QualitytraceMetadataFieldParentID: summary.ParentID,
 			}),
 			StartTime: startTime,
 			EndTime:   endTime,
@@ -282,7 +282,7 @@ func (db *sumologicDB) getAugmentedSpan(ctx context.Context, traceID string, spa
 	endTime := startTime.Add(time.Duration(span.Duration) * time.Nanosecond)
 
 	attributes := map[string]string{
-		traces.TracetestMetadataFieldParentID: span.ParentID,
+		traces.QualitytraceMetadataFieldParentID: span.ParentID,
 	}
 	for name, typedValue := range span.Attributes {
 		attributes[name] = typedValue.Value

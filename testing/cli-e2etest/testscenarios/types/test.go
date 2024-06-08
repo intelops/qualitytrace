@@ -3,7 +3,7 @@ package types
 import (
 	"time"
 
-	"github.com/intelops/qualityTrace/server/pkg/maps"
+	"github.com/intelops/qualitytrace/server/pkg/maps"
 )
 
 type TestResource struct {

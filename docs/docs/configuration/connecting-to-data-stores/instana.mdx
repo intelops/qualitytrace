@@ -3,7 +3,7 @@ id: instana
 title: Instana
 description: Use Instana as the trace data store for Tracetest. Configure the OpenTelemetry Collector to receive traces and forward them to both Tracetest and Instana.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -14,18 +14,18 @@ image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_T
 If you want to use [Instana](https://www.ibm.com/products/instana) as the trace data store, you'll configure the OpenTelemetry Collector to receive traces from your system and then send them to both Tracetest and Instana. And, you don't have to change your existing pipelines to do so.
 
 :::tip
-Examples of configuring Tracetest with Instana can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualityTrace/tree/main/examples).
+Examples of configuring Tracetest with Instana can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualitytrace/tree/main/examples).
 :::
 
 ## Configuring OpenTelemetry Collector to Send Traces to Both Instana and Tracetest
 
 In your OpenTelemetry Collector config file:
 
-- Set the `exporter` to `otlp/qualityTrace`.
+- Set the `exporter` to `otlp/qualitytrace`.
 - Set the `endpoint` to your Tracetest instance on port `4317`.
 
 :::tip
-If you are running Tracetest with Docker, and Tracetest's service name is `qualityTrace`, then the endpoint might look like this `http://qualityTrace:4317`
+If you are running Tracetest with Docker, and Tracetest's service name is `qualitytrace`, then the endpoint might look like this `http://qualitytrace:4317`
 :::
 
 Additionally, add another config:
@@ -55,9 +55,9 @@ processors:
 exporters:
   # OTLP for Tracetest
   # Send traces to Tracetest.
-  # Read more in docs here: https://docs.qualityTrace.io/configuration/connecting-to-data-stores/opentelemetry-collector
-  otlp/qualityTrace:
-    endpoint: qualityTrace:4317
+  # Read more in docs here: https://docs.qualitytrace.io/configuration/connecting-to-data-stores/opentelemetry-collector
+  otlp/qualitytrace:
+    endpoint: qualitytrace:4317
     tls:
       insecure: true
 
@@ -73,10 +73,10 @@ exporters:
 
 service:
   pipelines:
-    traces/qualityTrace:
+    traces/qualitytrace:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp/qualityTrace] # exporter sending traces to your Tracetest instance
+      exporters: [otlp/qualitytrace] # exporter sending traces to your Tracetest instance
     traces/instana:
       receivers: [otlp]
       processors: [batch]
@@ -108,7 +108,7 @@ spec:
 Proceed to run this command in the terminal and specify the file above.
 
 ```bash
-qualityTrace apply datastore -f my/data-store/file/location.yaml
+qualitytrace apply datastore -f my/data-store/file/location.yaml
 ```
 
 {/*

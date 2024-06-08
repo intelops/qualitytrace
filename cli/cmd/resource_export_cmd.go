@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/intelops/qualityTrace/cli/cmdutil"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
 	"github.com/spf13/cobra"
 )
 
@@ -19,7 +19,7 @@ func init() {
 	exportCmd = &cobra.Command{
 		GroupID: cmdGroupResources.ID,
 		Use:     "export " + resourceList(),
-		Long:    "Export a resource from your Tracetest server",
+		Long:    "Export a resource from your Qualitytrace server",
 		Short:   "Export resource",
 		PreRun:  setupCommand(),
 		Run: WithResourceMiddleware(func(ctx context.Context, _ *cobra.Command, args []string) (string, error) {

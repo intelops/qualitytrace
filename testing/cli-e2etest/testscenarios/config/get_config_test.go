@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -18,7 +18,7 @@ func addGetConfigPreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	configPath := env.GetTestResourcePath(t, "new-config")
 
-	result := qualityTracecli.Exec(t, fmt.Sprintf("apply config --file %s", configPath), qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, fmt.Sprintf("apply config --file %s", configPath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -38,7 +38,7 @@ func TestGetConfig(t *testing.T) {
 
 		// When I try to get a config on yaml mode
 		// Then it should print a YAML with the default config
-		result := qualityTracecli.Exec(t, "get config --id current --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get config --id current --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		require.Equal(0, result.ExitCode)
 
 		config := helpers.UnmarshalYAML[types.ConfigResource](t, result.StdOut)
@@ -57,7 +57,7 @@ func TestGetConfig(t *testing.T) {
 
 		// When I try to get a config on yaml mode
 		// Then it should print a YAML
-		result := qualityTracecli.Exec(t, "get config --id current --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get config --id current --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		require.Equal(0, result.ExitCode)
 
 		config := helpers.UnmarshalYAML[types.ConfigResource](t, result.StdOut)
@@ -74,7 +74,7 @@ func TestGetConfig(t *testing.T) {
 
 		// When I try to get a config on json mode
 		// Then it should print a json
-		result := qualityTracecli.Exec(t, "get config --id current --output json", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get config --id current --output json", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		config := helpers.UnmarshalJSON[types.ConfigResource](t, result.StdOut)
@@ -91,7 +91,7 @@ func TestGetConfig(t *testing.T) {
 
 		// When I try to get a config on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, a config item and empty line
-		result := qualityTracecli.Exec(t, "get config --id current --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get config --id current --output pretty", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

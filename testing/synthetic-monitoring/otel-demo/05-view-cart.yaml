@@ -1,4 +1,4 @@
-# test suite based on https://github.com/open-telemetry/opentelemetry-demo/tree/main/test/qualityTraceing/frontend-service
+# test suite based on https://github.com/open-telemetry/opentelemetry-demo/tree/main/test/qualitytraceing/frontend-service
 
 type: Test
 spec:
@@ -15,9 +15,9 @@ spec:
         value: application/json
   specs:
   - name: It called the frontend with success
-    selector: span[qualityTrace.span.type="general" name="Tracetest trigger"]
+    selector: span[qualitytrace.span.type="general" name="Tracetest trigger"]
     assertions:
-    - attr:qualityTrace.response.status = 200
+    - attr:qualitytrace.response.status = 200
   - name: It retrieved the cart items correctly
     selector: span[name="oteldemo.CartService/GetCart"]
     assertions:

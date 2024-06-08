@@ -9,7 +9,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/intelops/qualityTrace/server/analytics"
+	"github.com/intelops/qualitytrace/server/analytics"
 )
 
 func jsonEscape(text any) string {

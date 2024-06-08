@@ -14,10 +14,10 @@ import (
 
 	"github.com/elastic/go-elasticsearch/v8"
 	"github.com/elastic/go-elasticsearch/v8/esapi"
-	"github.com/intelops/qualityTrace/agent/tracedb/connection"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/agent/tracedb/connection"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/traces"
 	"go.opentelemetry.io/otel/trace"
 )
 
@@ -52,10 +52,10 @@ func (db *elasticsearchDB) TestConnection(ctx context.Context) model.ConnectionR
 		connection.WithAuthenticationTest(connection.NewTestStep(func(ctx context.Context) (string, error) {
 			_, err := getClusterInfo(db.client)
 			if err != nil {
-				return "Tracetest tried to execute an ElasticSearch API request but it failed due to authentication issues", err
+				return "Qualitytrace tried to execute an ElasticSearch API request but it failed due to authentication issues", err
 			}
 
-			return "Tracetest managed to authenticate with ElasticSearch", nil
+			return "Qualitytrace managed to authenticate with ElasticSearch", nil
 		})),
 	)
 
@@ -222,7 +222,7 @@ func convertElasticSearchSpanIntoSpan(input map[string]interface{}) traces.Span 
 	// ParentId
 	parentId := flatInput["parent.id"]
 	if parentId != nil {
-		attributes.Set(traces.TracetestMetadataFieldParentID, flatInput["parent.id"].(string))
+		attributes.Set(traces.QualitytraceMetadataFieldParentID, flatInput["parent.id"].(string))
 	}
 
 	return traces.Span{

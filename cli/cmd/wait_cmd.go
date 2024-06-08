@@ -3,8 +3,8 @@ package cmd
 import (
 	"context"
 
-	"github.com/intelops/qualityTrace/cli/cloud/cmd"
-	"github.com/intelops/qualityTrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/cloud/cmd"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
 	"github.com/spf13/cobra"
 )
 

@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/resourcemanager"
-	rmtests "github.com/intelops/qualityTrace/server/resourcemanager/testutil"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
+	rmtests "github.com/intelops/qualitytrace/server/resourcemanager/testutil"
 )
 
 func TestLinterResource(t *testing.T) {

@@ -3,7 +3,7 @@ id: running-test-suites
 title: Running Test Suites From the Command Line Interface (CLI)
 description: Run Tracetest Test Suites from the Command Line Interface (CLI) to integrate it into your CI/CD process or your local development workflow.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -17,14 +17,14 @@ The command to run a Test Suite is the same as running a test from the CLI.
 
 The documentation for running a test via the CLI can be found here:
 
-- [qualityTrace run](/cli/reference/qualityTrace_run): This page provides examples of using this command.
+- [qualitytrace run](/cli/reference/qualitytrace_run): This page provides examples of using this command.
 
 ## Running Your First Test Suite
 
 To run a Test Suite, give the path to the Test Suite definition file with the `'-f'` option. This will launch a Test Suite, providing us with a link to the created Test Suite run.
 
 ```sh
-qualityTrace run testsuite -f path/to/testsuite.yaml
+qualitytrace run testsuite -f path/to/testsuite.yaml
 ```
 ```text title="Output:"
 ✔ Pokemon Test Suite (http://localhost:11633/testsuite/xcGqfHl4g/run/3)
@@ -43,7 +43,7 @@ You can reference an existing variable set using its id. For example, given this
 We can run a Test Suite and specify that variable set with this command:
 
 ```sh
-qualityTrace run testsuite -f path/to/testsuite.yaml --vars testenv
+qualitytrace run testsuite -f path/to/testsuite.yaml --vars testenv
 ```
 
 You can also reference a variable set resource file which will be used to create a new variable set or update an existing one. For example, if you have a file named `local.env` with this content:
@@ -61,7 +61,7 @@ spec:
 ```
 
 ```sh
-qualityTrace run test -f path/to/testsuite.yaml --vars path/to/local.env
+qualitytrace run test -f path/to/testsuite.yaml --vars path/to/local.env
 ```
 
 If you use the variable set resource approach, a new variable set will be created in Tracetest.

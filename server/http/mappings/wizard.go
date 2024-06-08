@@ -1,8 +1,8 @@
 package mappings
 
 import (
-	"github.com/intelops/qualityTrace/server/openapi"
-	"github.com/intelops/qualityTrace/server/wizard"
+	"github.com/intelops/qualitytrace/server/openapi"
+	"github.com/intelops/qualitytrace/server/wizard"
 )
 
 func (m OpenAPI) Wizard(in *wizard.Wizard) openapi.Wizard {

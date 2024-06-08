@@ -14,17 +14,17 @@ spec:
   specs:
   - selector: span[name = "Tracetest trigger"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
-    - attr:qualityTrace.response.status = 200
-  - selector: span[name="POST /api/tests/{testId}/run/{runId}/rerun" qualityTrace.span.type="http"]
+    - attr:qualitytrace.selected_spans.count = 1
+    - attr:qualitytrace.response.status = 200
+  - selector: span[name="POST /api/tests/{testId}/run/{runId}/rerun" qualitytrace.span.type="http"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualitytrace.selected_spans.count = 1
   - selector: span[name = "query INSERT"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualitytrace.selected_spans.count = 1
   - selector: span[name = "exec UPDATE"]
     assertions:
-    - attr:qualityTrace.selected_spans.count = 1
+    - attr:qualitytrace.selected_spans.count = 1
   - selector: span[name = "Execute assertions"]
     assertions:
-    - attr:qualityTrace.run.assertion_runner.all_assertions_passed = "true"
+    - attr:qualitytrace.run.assertion_runner.all_assertions_passed = "true"

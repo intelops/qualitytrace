@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/model/yaml"
+	"github.com/intelops/qualitytrace/server/model/yaml"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -42,9 +42,9 @@ func TestDecode(t *testing.T) {
 					},
 					Specs: []yaml.TestSpec{
 						{
-							Selector: `span[name = "Tracetest trigger"]`,
+							Selector: `span[name = "Qualitytrace trigger"]`,
 							Assertions: []string{
-								"qualityTrace.response.status = 200",
+								"qualitytrace.response.status = 200",
 							},
 						},
 					},

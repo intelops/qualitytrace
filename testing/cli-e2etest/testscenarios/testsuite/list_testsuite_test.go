@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -21,21 +21,21 @@ func addListTestSuitePreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	newTestSuitePath := env.GetTestResourcePath(t, "new-testsuite")
 
-	result := qualityTracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", newTestSuitePath), qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", newTestSuitePath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	// When I try to set up a another environment
 	// Then it should be applied with success
 	anotherTestSuitePath := env.GetTestResourcePath(t, "another-testsuite")
 
-	result = qualityTracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", anotherTestSuitePath), qualityTracecli.WithCLIConfig(cliConfig))
+	result = qualitytracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", anotherTestSuitePath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	// When I try to set up a third environment
 	// Then it should be applied with success
 	oneMoreTestSuitePath := env.GetTestResourcePath(t, "one-more-testsuite")
 
-	result = qualityTracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", oneMoreTestSuitePath), qualityTracecli.WithCLIConfig(cliConfig))
+	result = qualitytracecli.Exec(t, fmt.Sprintf("apply testsuite --file %s", oneMoreTestSuitePath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -53,7 +53,7 @@ func TestListTestSuites(t *testing.T) {
 		// Given I am a Tracetest CLI user
 		// And I have my server recently created
 		// And there is no envs
-		result := qualityTracecli.Exec(t, "list testsuite --sortBy name --sortDirection asc --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list testsuite --sortBy name --sortDirection asc --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		testsuites := helpers.UnmarshalYAMLSequence[types.AugmentedTestSuiteResource](t, result.StdOut)
@@ -68,7 +68,7 @@ func TestListTestSuites(t *testing.T) {
 
 		// When I try to list these testsuites by an invalid field
 		// Then I should receive an error
-		result := qualityTracecli.Exec(t, "list testsuite --sortBy id --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list testsuite --sortBy id --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 1)
 		require.Contains(result.StdErr, "invalid sort field: id") // TODO: think on how to improve this error handling
 	})
@@ -79,7 +79,7 @@ func TestListTestSuites(t *testing.T) {
 
 		// When I try to list these testsuites by a valid field and in YAML format
 		// Then I should receive three testsuites
-		result := qualityTracecli.Exec(t, "list testsuite --sortBy name --sortDirection asc --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list testsuite --sortBy name --sortDirection asc --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		testsuites := helpers.UnmarshalYAMLSequence[types.AugmentedTestSuiteResource](t, result.StdOut)
@@ -131,7 +131,7 @@ func TestListTestSuites(t *testing.T) {
 
 		// When I try to list these testsuites by a valid field and in JSON format
 		// Then I should receive three testsuites
-		result := qualityTracecli.Exec(t, "list testsuite --sortBy name --sortDirection asc --output json", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list testsuite --sortBy name --sortDirection asc --output json", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		testsuites := helpers.UnmarshalJSON[types.ResourceList[types.AugmentedTestSuiteResource]](t, result.StdOut)
@@ -184,7 +184,7 @@ func TestListTestSuites(t *testing.T) {
 
 		// When I try to list these testsuites by a valid field and in pretty format
 		// Then it should print a table with 6 lines printed: header, separator, three testsuites and empty line
-		result := qualityTracecli.Exec(t, "list testsuite --sortBy name --sortDirection asc --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list testsuite --sortBy name --sortDirection asc --output pretty", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)
@@ -227,7 +227,7 @@ func TestListTestSuites(t *testing.T) {
 
 		// When I try to list these testsuites by a valid field, paging options and in YAML format
 		// Then I should receive two testsuites
-		result := qualityTracecli.Exec(t, "list testsuite --sortBy name --sortDirection asc --skip 1 --take 2 --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "list testsuite --sortBy name --sortDirection asc --skip 1 --take 2 --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		testsuites := helpers.UnmarshalYAMLSequence[types.AugmentedTestSuiteResource](t, result.StdOut)

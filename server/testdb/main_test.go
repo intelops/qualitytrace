@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/testmock"
+	"github.com/intelops/qualitytrace/server/testmock"
 )
 
 func TestMain(m *testing.M) {

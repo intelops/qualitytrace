@@ -4,7 +4,7 @@ title: What if I don't have OpenTelemetry installed?
 hide_table_of_contents: true
 description: Don't have OpenTelemetry instrumentation added in your codebase? Here's how to get started!
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -78,8 +78,8 @@ config: |
     batch:
         timeout: 100ms
   exporters:
-    otlp/qualityTrace:
-      endpoint: qualityTrace:4317
+    otlp/qualitytrace:
+      endpoint: qualitytrace:4317
       tls:
         insecure: true
   service:
@@ -87,7 +87,7 @@ config: |
         traces:
             receivers: [otlp]
             processors: [batch]
-            exporters: [otlp/qualityTrace]
+            exporters: [otlp/qualitytrace]
 ```
 
 You configure 2 separate things:

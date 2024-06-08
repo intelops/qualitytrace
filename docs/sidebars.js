@@ -127,7 +127,7 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/testing-kafka-go-api-with-opentelemetry-qualityTrace",
+              id: "examples-tutorials/recipes/testing-kafka-go-api-with-opentelemetry-qualitytrace",
               label: "Testing Kafka",
             },
           ],
@@ -138,17 +138,17 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/testing-vercel-functions-with-opentelemetry-qualityTrace",
+              id: "examples-tutorials/recipes/testing-vercel-functions-with-opentelemetry-qualitytrace",
               label: "Testing Vercel Functions",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/testing-lambda-functions-with-opentelemetry-qualityTrace",
+              id: "examples-tutorials/recipes/testing-lambda-functions-with-opentelemetry-qualitytrace",
               label: "Testing AWS Lambda Functions",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/testing-cloudflare-workers-with-opentelemetry-qualityTrace",
+              id: "examples-tutorials/recipes/testing-cloudflare-workers-with-opentelemetry-qualitytrace",
               label: "Testing Cloudflare Workers",
             },
           ],
@@ -159,7 +159,7 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-playwright-performance-tests-with-artillery-and-qualityTrace",
+              id: "examples-tutorials/recipes/running-playwright-performance-tests-with-artillery-and-qualitytrace",
               label: "Performance Testing with Distributed Tracing using Artillery, Playwright and Tracetest",
             },
           ],
@@ -170,7 +170,7 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/testing-distributed-services-with-tyk-opentelemetry-qualityTrace",
+              id: "examples-tutorials/recipes/testing-distributed-services-with-tyk-opentelemetry-qualitytrace",
               label: "Testing Distributed Services with Tyk, OpenTelemetry, and Tracetest",
             },
           ],
@@ -181,17 +181,17 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-without-a-trace-data-store",
+              id: "examples-tutorials/recipes/running-qualitytrace-without-a-trace-data-store",
               label: "Node.js and OpenTelemetry",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-without-a-trace-data-store-with-manual-instrumentation",
+              id: "examples-tutorials/recipes/running-qualitytrace-without-a-trace-data-store-with-manual-instrumentation",
               label: "Node.js and OpenTelemetry Manual Instrumentation",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-python-app-with-opentelemetry-collector-and-qualityTrace",
+              id: "examples-tutorials/recipes/running-python-app-with-opentelemetry-collector-and-qualitytrace",
               label: "Python and OpenTelemetry Manual Instrumentation",
             },
           ],
@@ -202,32 +202,32 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-lightstep",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-lightstep",
               label: "OpenTelemetry Demo and Lightstep",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-new-relic",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-new-relic",
               label: "OpenTelemetry Demo and New Relic",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-datadog",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-datadog",
               label: "OpenTelemetry Demo and Datadog",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-dynatrace",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-dynatrace",
               label: "OpenTelemetry Demo and Dynatrace",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-honeycomb",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-honeycomb",
               label: "Node.js and Honeycomb",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-signoz-pokeshop",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-signoz-pokeshop",
               label: "Pokeshop API and SigNoz",
             },
           ],
@@ -238,23 +238,23 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-aws-x-ray",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-aws-x-ray",
               label: "Node.js and AWS X-Ray (Node.js SDK)",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-aws-x-ray-adot",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-aws-x-ray-adot",
               label: "Node.js with AWS X-Ray (Node.js SDK) and AWS Distro for OpenTelemetry",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-aws-x-ray-pokeshop",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-aws-x-ray-pokeshop",
               label: "Pokeshop API with AWS X-Ray (Node.js SDK) and AWS Distro for OpenTelemetry",
             },
 
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-step-functions-terraform",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-step-functions-terraform",
               label: ".NET Step Functions with AWS X-Ray, AWS Distro for OpenTelemetry, and Terraform",
             },
           ],
@@ -265,17 +265,17 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-azure-app-insights",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-azure-app-insights",
               label: "Node.js and Azure Application Insights (Node.js SDK)",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-azure-app-insights-collector",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-azure-app-insights-collector",
               label: "Node.js and Azure Application Insights with OpenTelemetry Collector",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-azure-app-insights-pokeshop",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-azure-app-insights-pokeshop",
               label: "Pokeshop API and Azure Application Insights with OpenTelemetry Collector",
             },
           ],
@@ -286,7 +286,7 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-elasticapm",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-elasticapm",
               label: "Node.js and Elastic APM",
             },
           ],
@@ -297,7 +297,7 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-tempo",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-tempo",
               label: "Node.js and Grafana Tempo",
             },
           ],
@@ -308,12 +308,12 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-jaeger",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-jaeger",
               label: "Node.js and Jaeger",
             },
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-aws-terraform",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-aws-terraform",
               label: "Serverless Node.js and Jaeger with Terraform",
             },
           ],
@@ -324,7 +324,7 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-opensearch",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-opensearch",
               label: "Node.js and OpenSearch",
             },
           ],
@@ -335,7 +335,7 @@ const sidebars = {
           items: [
             {
               type: "doc",
-              id: "examples-tutorials/recipes/running-qualityTrace-with-sumologic",
+              id: "examples-tutorials/recipes/running-qualitytrace-with-sumologic",
               label: "Node.js and Sumo Logic",
             },
           ],
@@ -668,7 +668,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          id: "configuration/qualityTrace-analyzer",
+          id: "configuration/qualitytrace-analyzer",
           label: "Tracetest Analyzer",
         },
         {
@@ -688,7 +688,7 @@ const sidebars = {
         },
         {
           type: "doc",
-          id: "configuration/sampling-qualityTrace-spans",
+          id: "configuration/sampling-qualitytrace-spans",
           label: "Sampling Tracetest Spans",
         },
       ],

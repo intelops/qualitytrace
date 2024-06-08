@@ -13,9 +13,9 @@ import (
 	"time"
 
 	"github.com/goware/urlx"
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/expression"
-	"github.com/intelops/qualityTrace/server/test"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/expression"
+	"github.com/intelops/qualitytrace/server/test"
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -51,7 +51,7 @@ func newSpanContext(ctx context.Context) trace.SpanContext {
 		sid = spanCtx.SpanID()
 	}
 
-	tracestate, _ := trace.ParseTraceState("qualityTrace=true")
+	tracestate, _ := trace.ParseTraceState("qualitytrace=true")
 	var tf trace.TraceFlags
 	return trace.NewSpanContext(trace.SpanContextConfig{
 		TraceID:    tid,
@@ -110,7 +110,7 @@ func (te *httpTriggerer) Trigger(ctx context.Context, test test.Test, opts *Trig
 	mapped := mapResp(resp)
 	response.Result.HTTP = &mapped
 	response.SpanAttributes = map[string]string{
-		"qualityTrace.run.trigger.http.response_code": strconv.Itoa(resp.StatusCode),
+		"qualitytrace.run.trigger.http.response_code": strconv.Itoa(resp.StatusCode),
 	}
 
 	return response, nil

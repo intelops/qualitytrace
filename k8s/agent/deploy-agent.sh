@@ -1,12 +1,12 @@
 NAMESPACE=$1
 API_KEY=$2
 AGENT_VERSION="${3:-latest}"
-FILE_PATH="https://raw.githubusercontent.com/intelops/qualityTrace/main/k8s/agent/deploy-agent.yaml"
+FILE_PATH="https://raw.githubusercontent.com/intelops/qualitytrace/main/k8s/agent/deploy-agent.yaml"
 
 showUsageAndExit() {
     echo "Usage: ./script <namespace> <api-key> (<version>)?"
     echo "Examples:"
-    echo "./script qualityTrace my-api-key"
+    echo "./script qualitytrace my-api-key"
     echo "./script my-namespace my-api-key v0.13.9"
 
     exit 1
@@ -22,5 +22,5 @@ if [ -z "${API_KEY}" ]; then
     showUsageAndExit
 fi
 
-kubectl create -n $NAMESPACE secret generic qualityTrace-agent-secret --from-literal=api-key=$API_KEY
+kubectl create -n $NAMESPACE secret generic qualitytrace-agent-secret --from-literal=api-key=$API_KEY
 curl $FILE_PATH | sed "s/:TAG/:$AGENT_VERSION/g" | kubectl apply -n $NAMESPACE -f -

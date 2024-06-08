@@ -1,6 +1,6 @@
 package selectors
 
-import "github.com/intelops/qualityTrace/server/traces"
+import "github.com/intelops/qualitytrace/server/traces"
 
 type PseudoClass interface {
 	Name() string

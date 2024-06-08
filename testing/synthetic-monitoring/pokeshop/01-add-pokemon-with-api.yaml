@@ -19,15 +19,15 @@ spec:
       - key: Content-Type
         value: application/json
   specs:
-  - selector: span[qualityTrace.span.type="http" name="POST /pokemon" http.method="POST"]
+  - selector: span[qualitytrace.span.type="http" name="POST /pokemon" http.method="POST"]
     name: The POST /pokemon was called correctly
     assertions:
     - attr:http.status_code = 201
-  - selector: span[qualityTrace.span.type="general" name="validate request"]
+  - selector: span[qualitytrace.span.type="general" name="validate request"]
     name: The request sent to API is valid
     assertions:
     - attr:validation.is_valid = "true"
-  - selector: span[qualityTrace.span.type="database" name="create pokeshop.pokemon" db.operation="create" db.sql.table="pokemon"]
+  - selector: span[qualitytrace.span.type="database" name="create pokeshop.pokemon" db.operation="create" db.sql.table="pokemon"]
     name: A Pokemon was inserted on database
     assertions:
     - attr:db.result | json_path '$.imageUrl'  =  "https://assets.pokemon.com/assets/cms2/img/pokedex/full/052.png"

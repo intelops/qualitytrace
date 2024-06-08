@@ -1,7 +1,7 @@
 
 import { check } from "k6";
 import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.2/index.js";
-import { Http, Tracetest } from "k6/x/qualityTrace";
+import { Http, Tracetest } from "k6/x/qualitytrace";
 import { sleep } from "k6";
 
 export const options = {
@@ -13,7 +13,7 @@ export const options = {
   },
 };
 
-const qualityTrace = Tracetest({
+const qualitytrace = Tracetest({
   serverUrl: "http://localhost:11633",
 });
 const testId = "kc_MgKoVR";
@@ -22,7 +22,7 @@ const url = "http://localhost:8081/pokemon?take=5";
 
 export default function () {
   const params = {
-    qualityTrace: {
+    qualitytrace: {
       testId,
     },
     headers: {
@@ -39,22 +39,22 @@ export default function () {
   sleep(1);
 }
 
-// enable this to return a non-zero status code if a qualityTrace test fails
+// enable this to return a non-zero status code if a qualitytrace test fails
 export function teardown() {
-  qualityTrace.validateResult();
+  qualitytrace.validateResult();
 }
 
 export function handleSummary(data) {
-  // combine the default summary with the qualityTrace summary
-  const qualityTraceSummary = qualityTrace.summary();
+  // combine the default summary with the qualitytrace summary
+  const qualitytraceSummary = qualitytrace.summary();
   const defaultSummary = textSummary(data);
   const summary = `
     ${defaultSummary}
-    ${qualityTraceSummary}
+    ${qualitytraceSummary}
   `;
 
   return {
     stdout: summary,
-    "qualityTrace.json": qualityTrace.json(),
+    "qualitytrace.json": qualitytrace.json(),
   };
 }

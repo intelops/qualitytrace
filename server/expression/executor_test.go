@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/expression"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/traces"
-	"github.com/intelops/qualityTrace/server/variableset"
+	"github.com/intelops/qualitytrace/server/expression"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/traces"
+	"github.com/intelops/qualitytrace/server/variableset"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -187,18 +187,18 @@ func TestFilterExecution(t *testing.T) {
 		Attributes: traces.NewAttributes(),
 	}
 
-	jsonResponseSpan.Attributes.Set("qualityTrace.response.body", `{"results":[{"count(*)":{"result":3}}]}`)
+	jsonResponseSpan.Attributes.Set("qualitytrace.response.body", `{"results":[{"count(*)":{"result":3}}]}`)
 
 	testCases := []executorTestCase{
 		{
 			Name:       "should_extract_id_from_json",
-			Query:      `attr:qualityTrace.response.body | json_path '.id' = 8`,
+			Query:      `attr:qualitytrace.response.body | json_path '.id' = 8`,
 			ShouldPass: true,
 			AttributeDataStore: expression.AttributeDataStore{
 				Span: traces.Span{
 					ID: id.NewRandGenerator().SpanID(),
 					Attributes: traces.NewAttributes(map[string]string{
-						"qualityTrace.response.body": `{"id": 8, "name": "john doe"}`,
+						"qualitytrace.response.body": `{"id": 8, "name": "john doe"}`,
 					}),
 				},
 			},
@@ -225,7 +225,7 @@ func TestFilterExecution(t *testing.T) {
 		},
 		{
 			Name:       "should_unescape_filter_arg",
-			Query:      `attr:qualityTrace.response.body | json_path '$.results[0][\'count(*)\'].result' = 3`,
+			Query:      `attr:qualitytrace.response.body | json_path '$.results[0][\'count(*)\'].result' = 3`,
 			ShouldPass: true,
 			AttributeDataStore: expression.AttributeDataStore{
 				Span: jsonResponseSpan,
@@ -240,7 +240,7 @@ func TestMetaAttributesExecution(t *testing.T) {
 	testCases := []executorTestCase{
 		{
 			Name:               "should_support_count_meta_attribute",
-			Query:              `attr:qualityTrace.selected_spans.count = 3`,
+			Query:              `attr:qualitytrace.selected_spans.count = 3`,
 			ShouldPass:         true,
 			AttributeDataStore: expression.AttributeDataStore{},
 			MetaAttributesDataStore: expression.MetaAttributesDataStore{
@@ -254,7 +254,7 @@ func TestMetaAttributesExecution(t *testing.T) {
 		},
 		{
 			Name:               "should_support_count_meta_attribute",
-			Query:              `"Selected matched ${attr:qualityTrace.selected_spans.count} spans" = "Selected matched 2 spans"`,
+			Query:              `"Selected matched ${attr:qualitytrace.selected_spans.count} spans" = "Selected matched 2 spans"`,
 			ShouldPass:         true,
 			AttributeDataStore: expression.AttributeDataStore{},
 			MetaAttributesDataStore: expression.MetaAttributesDataStore{
@@ -432,12 +432,12 @@ func TestJSONExecution(t *testing.T) {
 		},
 		{
 			Name:       "should_identify_json_input_from_attribute",
-			Query:      `attr:qualityTrace.response.body contains '{"name": "john"}'`,
+			Query:      `attr:qualitytrace.response.body contains '{"name": "john"}'`,
 			ShouldPass: true,
 			AttributeDataStore: expression.AttributeDataStore{
 				Span: traces.Span{
 					ID:         id.NewRandGenerator().SpanID(),
-					Attributes: traces.NewAttributes().Set("qualityTrace.response.body", `{"name": "john", "age": 32, "email": "john@company.com"}`),
+					Attributes: traces.NewAttributes().Set("qualitytrace.response.body", `{"name": "john", "age": 32, "email": "john@company.com"}`),
 				},
 			},
 		},
@@ -534,13 +534,13 @@ func TestResolveStatementFilterExecution(t *testing.T) {
 	testCases := []executorTestCase{
 		{
 			Name:       "should_extract_id_from_json",
-			Query:      `attr:qualityTrace.response.body`,
+			Query:      `attr:qualitytrace.response.body`,
 			ShouldPass: true,
 			AttributeDataStore: expression.AttributeDataStore{
 				Span: traces.Span{
 					ID: id.NewRandGenerator().SpanID(),
 					Attributes: traces.NewAttributes(map[string]string{
-						"qualityTrace.response.body": `{"id": 8, "name": "john doe"}`,
+						"qualitytrace.response.body": `{"id": 8, "name": "john doe"}`,
 					}),
 				},
 			},

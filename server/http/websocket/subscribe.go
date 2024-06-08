@@ -5,11 +5,11 @@ import (
 	"fmt"
 
 	"github.com/gorilla/websocket"
-	"github.com/intelops/qualityTrace/server/http/mappings"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/subscription"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/testsuite"
+	"github.com/intelops/qualitytrace/server/http/mappings"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/subscription"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/testsuite"
 )
 
 type subscriptionMessage struct {

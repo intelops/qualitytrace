@@ -1,10 +1,10 @@
 package app
 
 import (
-	"github.com/intelops/qualityTrace/server/executor"
-	"github.com/intelops/qualityTrace/server/pkg/pipeline"
-	"github.com/intelops/qualityTrace/server/subscription"
-	"github.com/intelops/qualityTrace/server/testsuite"
+	"github.com/intelops/qualitytrace/server/executor"
+	"github.com/intelops/qualitytrace/server/pkg/pipeline"
+	"github.com/intelops/qualitytrace/server/subscription"
+	"github.com/intelops/qualitytrace/server/testsuite"
 	"go.opentelemetry.io/otel/metric"
 )
 

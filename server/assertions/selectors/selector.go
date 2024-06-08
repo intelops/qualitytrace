@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/traces"
 )
 
 func FromSpanQuery(sq test.SpanQuery) Selector {

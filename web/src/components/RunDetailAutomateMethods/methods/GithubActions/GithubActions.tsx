@@ -6,7 +6,7 @@ import {FramedCodeBlock} from 'components/CodeBlock';
 import * as S from './GithubActions.styled';
 
 const actionConfig = `- name: Configure Tracetest CLI
-  uses: intelops/qualityTrace-github-action@v1
+  uses: intelops/qualitytrace-github-action@v1
   with:
     endpoint: ${getServerBaseUrl()}
 `;
@@ -29,7 +29,7 @@ const GithubActions = () => {
         The endpoint parameter is the base address where your Tracetest Core Server is installed. <br /> Here&apos;s a
         full example of how to use it:{' '}
         <a href={GITHUB_ACTION_URL} target="__blank">
-          qualityTrace-cli-with-qualityTrace-core.yml
+          qualitytrace-cli-with-qualitytrace-core.yml
         </a>
       </S.Subtitle>
     </S.Container>

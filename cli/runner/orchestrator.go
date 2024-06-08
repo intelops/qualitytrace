@@ -11,12 +11,12 @@ import (
 	"time"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/intelops/qualityTrace/cli/metadata"
-	"github.com/intelops/qualityTrace/cli/openapi"
-	"github.com/intelops/qualityTrace/cli/pkg/fileutil"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
-	"github.com/intelops/qualityTrace/cli/variable"
-	"github.com/intelops/qualityTrace/cli/varset"
+	"github.com/intelops/qualitytrace/cli/metadata"
+	"github.com/intelops/qualitytrace/cli/openapi"
+	"github.com/intelops/qualitytrace/cli/pkg/fileutil"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/variable"
+	"github.com/intelops/qualitytrace/cli/varset"
 	"go.uber.org/zap"
 )
 
@@ -46,7 +46,7 @@ type RunOptions struct {
 
 	// ResourceType defines what is the type of resource that is being run. It's value
 	// is filled automatically when the user define the type of resource that will be run
-	// when they enter: qualityTrace run <resource-name> --id <id>
+	// when they enter: qualitytrace run <resource-name> --id <id>
 	ResourceType string
 }
 

@@ -1,8 +1,8 @@
 package mappings
 
 import (
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/openapi"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/openapi"
 )
 
 func (m OpenAPI) LinterResult(in analyzer.LinterResult) openapi.LinterResult {

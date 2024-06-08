@@ -3,9 +3,9 @@ package config
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
 	"github.com/stretchr/testify/require"
 )
 
@@ -24,7 +24,7 @@ func TestDeleteConfig(t *testing.T) {
 
 	// When I try to delete the config
 	// Then it should return a error message, showing that we cannot delete a config
-	result := qualityTracecli.Exec(t, "delete config --id current", qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, "delete config --id current", qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 1)
 	require.Contains(result.StdErr, "resource Config does not support the action")
 }

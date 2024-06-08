@@ -5,7 +5,7 @@ spec:
   trigger:
     type: http
     httpRequest:
-      url: http://pokemon-demo.qualityTrace.io/pokemon/import
+      url: http://pokemon-demo.qualitytrace.io/pokemon/import
       method: POST
       headers:
       - key: Content-Type

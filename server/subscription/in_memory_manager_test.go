@@ -3,7 +3,7 @@ package subscription_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/subscription"
+	"github.com/intelops/qualitytrace/server/subscription"
 	"github.com/stretchr/testify/assert"
 )
 

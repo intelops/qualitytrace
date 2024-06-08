@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -26,7 +26,7 @@ func TestDeleteTest(t *testing.T) {
 
 	// When I try to delete an test that don't exist
 	// Then it should return an error and say that this resource does not exist
-	result := qualityTracecli.Exec(t, "delete test --id .env", qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, "delete test --id .env", qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 1)
 	require.Contains(result.StdErr, "Resource test with ID .env not found")
 
@@ -34,7 +34,7 @@ func TestDeleteTest(t *testing.T) {
 	// Then it should be applied with success
 	newTestPath := env.GetTestResourcePath(t, "list")
 
-	result = qualityTracecli.Exec(t, fmt.Sprintf("apply test --file %s", newTestPath), qualityTracecli.WithCLIConfig(cliConfig))
+	result = qualitytracecli.Exec(t, fmt.Sprintf("apply test --file %s", newTestPath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 
 	testVars := helpers.UnmarshalYAML[types.TestResource](t, result.StdOut)
@@ -43,13 +43,13 @@ func TestDeleteTest(t *testing.T) {
 
 	// When I try to delete the test
 	// Then it should delete with success
-	result = qualityTracecli.Exec(t, "delete test --id fH_8AulVR", qualityTracecli.WithCLIConfig(cliConfig))
+	result = qualitytracecli.Exec(t, "delete test --id fH_8AulVR", qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 	require.Contains(result.StdOut, "✔ Test successfully deleted")
 
 	// When I try to get an test again
 	// Then it should return a message saying that the test was not found
-	result = qualityTracecli.Exec(t, "get test --id fH_8AulVR", qualityTracecli.WithCLIConfig(cliConfig))
+	result = qualitytracecli.Exec(t, "get test --id fH_8AulVR", qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 	require.Contains(result.StdOut, "Resource test with ID fH_8AulVR not found")
 }

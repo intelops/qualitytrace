@@ -17,8 +17,8 @@ import (
 var (
 	Version              = "dev"
 	Env                  = "dev"
-	DefaultCloudEndpoint = "http://app.qualityTrace.io"
-	DefaultCloudDomain   = "qualityTrace.io"
+	DefaultCloudEndpoint = "http://app.qualitytrace.io"
+	DefaultCloudDomain   = "qualitytrace.io"
 	DefaultCloudPath     = "/"
 )
 
@@ -103,14 +103,14 @@ func LoadConfig(configFile string) (Config, error) {
 		return Config{}, fmt.Errorf("could not get user home path")
 	}
 
-	globalConfigPath := filepath.Join(homePath, ".qualityTrace/config.yml")
+	globalConfigPath := filepath.Join(homePath, ".qualitytrace/config.yml")
 	return loadConfig(globalConfigPath)
 }
 
 func loadConfig(configFile string) (Config, error) {
 	viper.SetConfigFile(configFile)
 	viper.SetConfigType("yaml")
-	viper.SetEnvPrefix("qualityTrace")
+	viper.SetEnvPrefix("qualitytrace")
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	viper.AutomaticEnv()
 
@@ -222,7 +222,7 @@ func GetConfigurationPath() (string, error) {
 			return "", fmt.Errorf("could not get user home dir: %w", err)
 		}
 
-		configPath = path.Join(homePath, ".qualityTrace/config.yml")
+		configPath = path.Join(homePath, ".qualitytrace/config.yml")
 	}
 
 	return configPath, nil

@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/expression"
-	"github.com/intelops/qualityTrace/server/test"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/expression"
+	"github.com/intelops/qualitytrace/server/test"
 	"go.opentelemetry.io/otel/trace"
 )
 

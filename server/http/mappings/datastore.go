@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/fluidtruck/deepcopy"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/model"
-	"github.com/intelops/qualityTrace/server/openapi"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/model"
+	"github.com/intelops/qualitytrace/server/openapi"
 )
 
 func (m *OpenAPI) ConnectionTestResult(in model.ConnectionResult) openapi.ConnectionResult {

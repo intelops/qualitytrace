@@ -1,10 +1,10 @@
 package app
 
 import (
-	"github.com/intelops/qualityTrace/agent/tracedb"
-	"github.com/intelops/qualityTrace/server/config"
-	"github.com/intelops/qualityTrace/server/pkg/pipeline"
-	"github.com/intelops/qualityTrace/server/testconnection"
+	"github.com/intelops/qualitytrace/agent/tracedb"
+	"github.com/intelops/qualitytrace/server/config"
+	"github.com/intelops/qualitytrace/server/pkg/pipeline"
+	"github.com/intelops/qualitytrace/server/testconnection"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"
 )

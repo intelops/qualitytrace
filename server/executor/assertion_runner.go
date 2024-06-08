@@ -6,14 +6,14 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/intelops/qualityTrace/server/expression"
-	"github.com/intelops/qualityTrace/server/http/middleware"
-	"github.com/intelops/qualityTrace/server/model/events"
-	"github.com/intelops/qualityTrace/server/pkg/maps"
-	"github.com/intelops/qualityTrace/server/pkg/pipeline"
-	"github.com/intelops/qualityTrace/server/subscription"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/variableset"
+	"github.com/intelops/qualitytrace/server/expression"
+	"github.com/intelops/qualitytrace/server/http/middleware"
+	"github.com/intelops/qualitytrace/server/model/events"
+	"github.com/intelops/qualitytrace/server/pkg/maps"
+	"github.com/intelops/qualitytrace/server/pkg/pipeline"
+	"github.com/intelops/qualitytrace/server/subscription"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/variableset"
 )
 
 type defaultAssertionRunner struct {

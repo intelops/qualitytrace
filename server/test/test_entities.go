@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/executor/testrunner"
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	"github.com/intelops/qualityTrace/server/pkg/maps"
-	"github.com/intelops/qualityTrace/server/traces"
-	"github.com/intelops/qualityTrace/server/variableset"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/executor/testrunner"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/maps"
+	"github.com/intelops/qualitytrace/server/traces"
+	"github.com/intelops/qualitytrace/server/variableset"
 	"go.opentelemetry.io/otel/trace"
 )
 

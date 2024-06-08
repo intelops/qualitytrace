@@ -4,8 +4,8 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/expression/functions"
-	"github.com/intelops/qualityTrace/server/expression/types"
+	"github.com/intelops/qualitytrace/server/expression/functions"
+	"github.com/intelops/qualitytrace/server/expression/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

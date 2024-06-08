@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/cli/cloud/runner"
-	"github.com/intelops/qualityTrace/cli/config"
-	"github.com/intelops/qualityTrace/cli/formatters"
-	cliRunner "github.com/intelops/qualityTrace/cli/runner"
+	"github.com/intelops/qualitytrace/cli/cloud/runner"
+	"github.com/intelops/qualitytrace/cli/config"
+	"github.com/intelops/qualitytrace/cli/formatters"
+	cliRunner "github.com/intelops/qualitytrace/cli/runner"
 )
 
 func Wait(ctx context.Context, cliConfig *config.Config, runGroupID, format string) (int, error) {

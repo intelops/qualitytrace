@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/config"
-	"github.com/intelops/qualityTrace/server/testmock"
+	"github.com/intelops/qualitytrace/server/config"
+	"github.com/intelops/qualitytrace/server/testmock"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"

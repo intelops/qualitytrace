@@ -1,18 +1,18 @@
 version: '3.2'
 services:
-  qualityTrace:
+  qualitytrace:
     restart: unless-stopped
-    image: intelops/qualityTrace:${TAG:-latest}
+    image: intelops/qualitytrace:${TAG:-latest}
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     build:
       context: .
     volumes:
       - type: bind
-        source: ../local-config/qualityTrace.config.yaml
-        target: /app/qualityTrace.yaml
+        source: ../local-config/qualitytrace.config.yaml
+        target: /app/qualitytrace.yaml
       - type: bind
-        source: ../local-config/qualityTrace.provision.yaml
+        source: ../local-config/qualitytrace.provision.yaml
         target: /app/provisioning.yaml
     ports:
       - 11633:11633
@@ -56,7 +56,7 @@ services:
     volumes:
       - ../local-config/collector.config.yaml:/otel-local-config.yaml
     depends_on:
-      - qualityTrace
+      - qualitytrace
 
   cache:
     image: redis:6

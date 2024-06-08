@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/resourcemanager"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

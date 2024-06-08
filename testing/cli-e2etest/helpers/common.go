@@ -9,8 +9,8 @@ import (
 	"testing"
 
 	"github.com/goccy/go-yaml"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/command"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/command"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -63,7 +63,7 @@ func RequireExitCodeEqual(t *testing.T, result *command.ExecResult, expectedExit
 
 func InjectIdIntoDemoFile(t *testing.T, filePath, id string) {
 	// This is a workaround method used to deal with the upsert restriction for demo resources
-	// for more details look into: https://github.com/intelops/qualityTrace/issues/2719
+	// for more details look into: https://github.com/intelops/qualitytrace/issues/2719
 
 	fileContent, err := os.ReadFile(filePath)
 	require.NoError(t, err)

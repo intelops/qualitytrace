@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/intelops/qualityTrace/agent/tracedb/connection"
-	"github.com/intelops/qualityTrace/server/model"
+	"github.com/intelops/qualitytrace/agent/tracedb/connection"
+	"github.com/intelops/qualitytrace/server/model"
 	"github.com/stretchr/testify/assert"
 )
 

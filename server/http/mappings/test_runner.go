@@ -1,8 +1,8 @@
 package mappings
 
 import (
-	"github.com/intelops/qualityTrace/server/executor/testrunner"
-	"github.com/intelops/qualityTrace/server/openapi"
+	"github.com/intelops/qualitytrace/server/executor/testrunner"
+	"github.com/intelops/qualitytrace/server/openapi"
 )
 
 func (m OpenAPI) RequiredGatesResult(in testrunner.RequiredGatesResult) openapi.RequiredGatesResult {

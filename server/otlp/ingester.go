@@ -10,13 +10,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/executor"
-	"github.com/intelops/qualityTrace/server/model/events"
-	"github.com/intelops/qualityTrace/server/subscription"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/testconnection"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/executor"
+	"github.com/intelops/qualitytrace/server/model/events"
+	"github.com/intelops/qualitytrace/server/subscription"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/testconnection"
+	"github.com/intelops/qualitytrace/server/traces"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 	pb "go.opentelemetry.io/proto/otlp/collector/trace/v1"
@@ -128,7 +128,7 @@ func (i *ingester) Ingest(ctx context.Context, request *pb.ExportTraceServiceReq
 		i.log("processing trace %d/%d traceID %s", ix+1, len(receivedTraces), modelTrace.ID.String())
 		err = i.processTrace(ctx, modelTrace, ix, requestType)
 		if err != nil {
-			span.RecordError(err, trace.WithAttributes(attribute.String("qualityTrace.ingestor.trace_id", modelTrace.ID.String())))
+			span.RecordError(err, trace.WithAttributes(attribute.String("qualitytrace.ingestor.trace_id", modelTrace.ID.String())))
 			return nil, err
 		}
 	}
@@ -162,7 +162,7 @@ func countSpans(resourceSpans []*v1.ResourceSpans) int {
 func (i *ingester) processTrace(ctx context.Context, modelTrace traces.Trace, ix int, requestType RequestType) error {
 	ctx, span := i.tracer.Start(ctx, "process otlp trace")
 	span.SetAttributes(
-		attribute.String("qualityTrace.ingestor.trace_id", modelTrace.ID.String()),
+		attribute.String("qualitytrace.ingestor.trace_id", modelTrace.ID.String()),
 	)
 	defer span.End()
 

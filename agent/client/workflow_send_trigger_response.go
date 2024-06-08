@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/agent/proto"
-	"github.com/intelops/qualityTrace/agent/telemetry"
+	"github.com/intelops/qualitytrace/agent/proto"
+	"github.com/intelops/qualitytrace/agent/telemetry"
 )
 
 func (c *Client) SendTriggerResponse(ctx context.Context, response *proto.TriggerResponse) error {

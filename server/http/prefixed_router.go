@@ -3,7 +3,7 @@ package http
 import (
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/openapi"
+	"github.com/intelops/qualitytrace/server/openapi"
 )
 
 type PrefixedRouter struct {

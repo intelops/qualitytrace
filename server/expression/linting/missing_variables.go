@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/expression"
+	"github.com/intelops/qualitytrace/server/expression"
 )
 
 func DetectMissingVariables(target interface{}, availableVariables []string) []string {

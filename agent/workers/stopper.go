@@ -5,10 +5,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/agent/telemetry"
+	"github.com/intelops/qualitytrace/agent/telemetry"
 
-	"github.com/intelops/qualityTrace/agent/event"
-	"github.com/intelops/qualityTrace/agent/proto"
+	"github.com/intelops/qualitytrace/agent/event"
+	"github.com/intelops/qualitytrace/agent/proto"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
@@ -73,10 +73,10 @@ func (w *StopperWorker) Stop(ctx context.Context, request *proto.StopRequest) er
 	ctx, span := w.tracer.Start(ctx, "StopRequest Worker operation")
 	defer span.End()
 
-	runCounter, _ := w.meter.Int64Counter("qualityTrace.agent.stopworker.runs")
+	runCounter, _ := w.meter.Int64Counter("qualitytrace.agent.stopworker.runs")
 	runCounter.Add(ctx, 1)
 
-	errorCounter, _ := w.meter.Int64Counter("qualityTrace.agent.stopworker.errors")
+	errorCounter, _ := w.meter.Int64Counter("qualitytrace.agent.stopworker.errors")
 
 	w.logger.Debug("Stop request received", zap.Any("stopRequest", request))
 	w.observer.StartStopRequest(request)

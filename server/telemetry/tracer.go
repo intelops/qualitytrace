@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/intelops/qualityTrace/server/config"
+	"github.com/intelops/qualitytrace/server/config"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/propagation"
@@ -47,7 +47,7 @@ func NewTracer(ctx context.Context, cfg exporterConfig) (trace.Tracer, error) {
 
 	otel.SetTracerProvider(tracerProvider)
 
-	tracer := tracerProvider.Tracer("qualityTrace")
+	tracer := tracerProvider.Tracer("qualitytrace")
 	return tracer, nil
 }
 

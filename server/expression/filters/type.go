@@ -3,8 +3,8 @@ package filters
 import (
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/expression/types"
-	"github.com/intelops/qualityTrace/server/expression/value"
+	"github.com/intelops/qualitytrace/server/expression/types"
+	"github.com/intelops/qualitytrace/server/expression/value"
 )
 
 func Type(input value.Value, args ...string) (value.Value, error) {

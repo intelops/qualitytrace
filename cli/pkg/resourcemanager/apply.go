@@ -9,7 +9,7 @@ import (
 	"net/http/httputil"
 
 	"github.com/Jeffail/gabs/v2"
-	"github.com/intelops/qualityTrace/cli/pkg/fileutil"
+	"github.com/intelops/qualitytrace/cli/pkg/fileutil"
 	"go.uber.org/zap"
 )
 

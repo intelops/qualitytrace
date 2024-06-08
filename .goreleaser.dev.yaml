@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://goreleaser.com/static/schema-pro.json
-project_name: qualityTrace
+project_name: qualitytrace
 changelog:
   sort: asc
   filters:
@@ -22,13 +22,13 @@ env:
 
 builds:
   - id: server
-    binary: qualityTrace-server
+    binary: qualitytrace-server
     main: ./server/main.go
     ldflags:
-    - -X github.com/intelops/qualityTrace/server/version.Version={{ .Env.VERSION }}
-    - -X github.com/intelops/qualityTrace/server/version.Env={{ .Env.TRACETEST_ENV }}
-    - -X github.com/intelops/qualityTrace/server/analytics.SecretKey={{ .Env.ANALYTICS_BE_KEY }}
-    - -X github.com/intelops/qualityTrace/server/analytics.FrontendKey={{ .Env.ANALYTICS_FE_KEY }}
+    - -X github.com/intelops/qualitytrace/server/version.Version={{ .Env.VERSION }}
+    - -X github.com/intelops/qualitytrace/server/version.Env={{ .Env.TRACETEST_ENV }}
+    - -X github.com/intelops/qualitytrace/server/analytics.SecretKey={{ .Env.ANALYTICS_BE_KEY }}
+    - -X github.com/intelops/qualitytrace/server/analytics.FrontendKey={{ .Env.ANALYTICS_FE_KEY }}
     env:
       - CGO_ENABLED=0
     goos:
@@ -36,13 +36,13 @@ builds:
     goarch:
     - amd64
   - id: cli
-    binary: qualityTrace
+    binary: qualitytrace
     main: ./cli/main.go
     ldflags:
-    - -X github.com/intelops/qualityTrace/cli/config.Version={{ .Env.VERSION }}
-    - -X github.com/intelops/qualityTrace/cli/config.DefaultCloudEndpoint={{ .Env.TRACETEST_DEFAULT_CLOUD_ENDPOINT }}
-    - -X github.com/intelops/qualityTrace/cli/config.Env={{ .Env.TRACETEST_ENV }}
-    - -X github.com/intelops/qualityTrace/cli/analytics.SecretKey={{ .Env.ANALYTICS_BE_KEY }}
+    - -X github.com/intelops/qualitytrace/cli/config.Version={{ .Env.VERSION }}
+    - -X github.com/intelops/qualitytrace/cli/config.DefaultCloudEndpoint={{ .Env.TRACETEST_DEFAULT_CLOUD_ENDPOINT }}
+    - -X github.com/intelops/qualitytrace/cli/config.Env={{ .Env.TRACETEST_ENV }}
+    - -X github.com/intelops/qualitytrace/cli/analytics.SecretKey={{ .Env.ANALYTICS_BE_KEY }}
     env:
       - CGO_ENABLED=0
     goos:
@@ -53,9 +53,9 @@ builds:
 dockers:
 - skip_push: true
   image_templates:
-  - 'intelops/qualityTrace:{{ .Env.TAG }}'
-  extra_files:
-    - web/build
+  - 'intelops/qualitytrace:{{ .Env.TAG }}'
+  # extra_files:
+  #   - web/build
   build_flag_templates:
   - "--pull"
   - "--label=org.opencontainers.image.created={{.Date}}"
@@ -69,7 +69,7 @@ dockers:
 
 - skip_push: true
   image_templates:
-  - 'intelops/qualityTrace-agent:{{ .Env.VERSION }}'
+  - 'intelops/qualitytrace-agent:{{ .Env.VERSION }}'
   dockerfile: "Dockerfile.agent"
   extra_files:
     - agent/

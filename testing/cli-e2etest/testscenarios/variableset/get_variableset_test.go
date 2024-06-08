@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/environment"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/helpers"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/qualityTracecli"
-	"github.com/intelops/qualityTrace/testing/cli-e2etest/testscenarios/types"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/environment"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/helpers"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/qualitytracecli"
+	"github.com/intelops/qualitytrace/testing/cli-e2etest/testscenarios/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -21,7 +21,7 @@ func addGetVariableSetPreReqs(t *testing.T, env environment.Manager) {
 	// Then it should be applied with success
 	newEnvironmentPath := env.GetTestResourcePath(t, "new-varSet")
 
-	result := qualityTracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", newEnvironmentPath), qualityTracecli.WithCLIConfig(cliConfig))
+	result := qualitytracecli.Exec(t, fmt.Sprintf("apply variableset --file %s", newEnvironmentPath), qualitytracecli.WithCLIConfig(cliConfig))
 	helpers.RequireExitCodeEqual(t, result, 0)
 }
 
@@ -41,7 +41,7 @@ func TestGetVariableSet(t *testing.T) {
 
 		// When I try to get a environment on yaml mode
 		// Then it should return a error message
-		result := qualityTracecli.Exec(t, "get variableset --id .env --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get variableset --id .env --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 		require.Contains(result.StdOut, "Resource variableset with ID .env not found")
 	})
@@ -55,7 +55,7 @@ func TestGetVariableSet(t *testing.T) {
 
 		// When I try to get a variable set on yaml mode
 		// Then it should print a YAML
-		result := qualityTracecli.Exec(t, "get variableset --id .env --output yaml", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get variableset --id .env --output yaml", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		environmentVars := helpers.UnmarshalYAML[types.VariableSetResource](t, result.StdOut)
@@ -77,7 +77,7 @@ func TestGetVariableSet(t *testing.T) {
 
 		// When I try to get a variable set on json mode
 		// Then it should print a json
-		result := qualityTracecli.Exec(t, "get variableset --id .env --output json", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get variableset --id .env --output json", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		environmentVars := helpers.UnmarshalJSON[types.VariableSetResource](t, result.StdOut)
@@ -99,7 +99,7 @@ func TestGetVariableSet(t *testing.T) {
 
 		// When I try to get a variable set on pretty mode
 		// Then it should print a table with 4 lines printed: header, separator, variable set item and empty line
-		result := qualityTracecli.Exec(t, "get variableset --id .env --output pretty", qualityTracecli.WithCLIConfig(cliConfig))
+		result := qualitytracecli.Exec(t, "get variableset --id .env --output pretty", qualitytracecli.WithCLIConfig(cliConfig))
 		helpers.RequireExitCodeEqual(t, result, 0)
 
 		parsedTable := helpers.UnmarshalTable(t, result.StdOut)

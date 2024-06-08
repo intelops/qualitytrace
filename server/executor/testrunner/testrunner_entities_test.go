@@ -3,7 +3,7 @@ package testrunner_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/executor/testrunner"
+	"github.com/intelops/qualitytrace/server/executor/testrunner"
 	"github.com/stretchr/testify/assert"
 )
 

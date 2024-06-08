@@ -8,13 +8,13 @@ import (
 	"time"
 
 	"github.com/Jeffail/gabs/v2"
-	"github.com/intelops/qualityTrace/cli/analytics"
-	"github.com/intelops/qualityTrace/cli/cmdutil"
-	"github.com/intelops/qualityTrace/cli/formatters"
-	"github.com/intelops/qualityTrace/cli/pkg/fileutil"
-	"github.com/intelops/qualityTrace/cli/pkg/resourcemanager"
-	"github.com/intelops/qualityTrace/cli/preprocessor"
-	"github.com/intelops/qualityTrace/cli/runner"
+	"github.com/intelops/qualitytrace/cli/analytics"
+	"github.com/intelops/qualitytrace/cli/cmdutil"
+	"github.com/intelops/qualitytrace/cli/formatters"
+	"github.com/intelops/qualitytrace/cli/pkg/fileutil"
+	"github.com/intelops/qualitytrace/cli/pkg/resourcemanager"
+	"github.com/intelops/qualitytrace/cli/preprocessor"
+	"github.com/intelops/qualitytrace/cli/runner"
 )
 
 var resourceParams = &resourceParameters{}
@@ -339,7 +339,7 @@ func setupResources() {
 	// When each command is run, this function is run in the PreRun stage, before any of the actual `Run` code is executed
 	// We take this chance to configure the HTTPClient with the correct URL and headers.
 	// To make this configuration propagate to all the resources, we need to replace the pointer to the HTTPClient.
-	// For more details, see https://github.com/intelops/qualityTrace/pull/2832#discussion_r1245616804
+	// For more details, see https://github.com/intelops/qualitytrace/pull/2832#discussion_r1245616804
 	hc := resourcemanager.NewHTTPClient(fmt.Sprintf("%s%s", cliConfig.URL(), cliConfig.Path()), extraHeaders)
 	*httpClient = *hc
 }

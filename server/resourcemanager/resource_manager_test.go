@@ -11,9 +11,9 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
-	"github.com/intelops/qualityTrace/server/pkg/id"
-	rm "github.com/intelops/qualityTrace/server/resourcemanager"
-	rmtests "github.com/intelops/qualityTrace/server/resourcemanager/testutil"
+	"github.com/intelops/qualitytrace/server/pkg/id"
+	rm "github.com/intelops/qualitytrace/server/resourcemanager"
+	rmtests "github.com/intelops/qualitytrace/server/resourcemanager/testutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"

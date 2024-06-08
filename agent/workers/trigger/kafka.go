@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/agent/workers/trigger/kafka"
+	"github.com/intelops/qualitytrace/agent/workers/trigger/kafka"
 	"go.opentelemetry.io/otel/propagation"
 )
 
@@ -44,8 +44,8 @@ func (te *kafkaTriggerer) Trigger(ctx context.Context, triggerConfig Trigger, op
 	}
 
 	response.SpanAttributes = map[string]string{
-		"qualityTrace.run.trigger.kafka.partition": result.Partition,
-		"qualityTrace.run.trigger.kafka.offset":    result.Offset,
+		"qualitytrace.run.trigger.kafka.partition": result.Partition,
+		"qualitytrace.run.trigger.kafka.offset":    result.Offset,
 	}
 
 	return response, nil

@@ -11,7 +11,7 @@ import (
 	"os"
 
 	"github.com/goccy/go-yaml"
-	"github.com/intelops/qualityTrace/server/resourcemanager"
+	"github.com/intelops/qualitytrace/server/resourcemanager"
 )
 
 func WithResourceProvisioners(provs ...resourcemanager.Provisioner) option {

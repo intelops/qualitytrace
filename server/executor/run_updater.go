@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/subscription"
-	"github.com/intelops/qualityTrace/server/test"
+	"github.com/intelops/qualitytrace/server/subscription"
+	"github.com/intelops/qualitytrace/server/test"
 )
 
 type RunUpdater interface {

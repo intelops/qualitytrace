@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/assertions/comparator"
-	"github.com/intelops/qualityTrace/server/test"
+	"github.com/intelops/qualitytrace/server/assertions/comparator"
+	"github.com/intelops/qualitytrace/server/test"
 )
 
 func FromRunResult(t test.Test, run test.Run) ([]byte, error) {

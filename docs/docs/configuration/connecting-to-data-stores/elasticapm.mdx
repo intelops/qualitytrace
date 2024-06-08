@@ -3,7 +3,7 @@ id: elasticapm
 title: Elastic APM
 description: Use Elasticsearch as the trace data store for Tracetest. You can use the native connection from Tracetest to pull telemetry data directly from Elasticsearch.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -14,7 +14,7 @@ image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_T
 Tracetest fetches traces from [Elasticsearch's default port](https://discuss.elastic.co/t/what-are-ports-9200-and-9300-used-for/238578) `9200`.
 
 :::tip
-Examples of configuring Tracetest can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualityTrace/tree/main/examples).
+Examples of configuring Tracetest can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualitytrace/tree/main/examples).
 :::
 
 ## Configure Tracetest to Use Elastic APM as a Trace Data Store
@@ -35,7 +35,7 @@ The defaults can be:
 To configure Elastic APM you will need to download the CA certificate from the Docker image and upload it to the config under "Upload CA file".
 
 - The command to download the `ca.crt` file is:
-  `docker cp qualityTrace-elasticapm-with-elastic-agent-es01-1:/usr/share/elasticsearch/config/certs/ca/ca.crt .`
+  `docker cp qualitytrace-elasticapm-with-elastic-agent-es01-1:/usr/share/elasticsearch/config/certs/ca/ca.crt .`
 - Alternatively, you can skip CA certificate validation by setting the `Enable TLS but don't verify the certificate` option.
 
 :::tip
@@ -74,9 +74,9 @@ spec:
 Proceed to run this command in the terminal and specify the file above.
 
 ```bash
-qualityTrace apply datastore -f my/data-store/file/location.yaml
+qualitytrace apply datastore -f my/data-store/file/location.yaml
 ```
 
 :::tip
-To learn more, [read the recipe on running a sample app with Elastic APM and Tracetest](/examples-tutorials/recipes/running-qualityTrace-with-elasticapm).
+To learn more, [read the recipe on running a sample app with Elastic APM and Tracetest](/examples-tutorials/recipes/running-qualitytrace-with-elasticapm).
 :::

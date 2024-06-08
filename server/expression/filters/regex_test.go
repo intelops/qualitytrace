@@ -3,8 +3,8 @@ package filters_test
 import (
 	"testing"
 
-	"github.com/intelops/qualityTrace/server/expression/filters"
-	"github.com/intelops/qualityTrace/server/expression/value"
+	"github.com/intelops/qualitytrace/server/expression/filters"
+	"github.com/intelops/qualitytrace/server/expression/value"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -18,13 +18,13 @@ func TestRegex(t *testing.T) {
 	}{
 		{
 			Name:           "should_extract_unique_field_from_JSON",
-			Input:          `{ "id": 38, "name": "Tracetest" }`,
+			Input:          `{ "id": 38, "name": "Qualitytrace" }`,
 			Regex:          `"id": \d+`,
 			ExpectedOutput: `"id": 38`,
 		},
 		{
 			Name:           "should_extract_unique_field_from_JSON",
-			Input:          `[{ "id": 38, "name": "Tracetest" }, { "id": 39, "name": "Kusk" }]`,
+			Input:          `[{ "id": 38, "name": "Qualitytrace" }, { "id": 39, "name": "Kusk" }]`,
 			Regex:          `"id": \d+`,
 			ExpectedOutput: `[""id": 38", ""id": 39"]`,
 		},

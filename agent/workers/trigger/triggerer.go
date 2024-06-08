@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/intelops/qualityTrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/id"
 	"go.opentelemetry.io/otel/trace"
 )
 

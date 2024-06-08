@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/intelops/qualityTrace/server/model"
+	"github.com/intelops/qualitytrace/server/model"
 )
 
 type EventEmitter interface {

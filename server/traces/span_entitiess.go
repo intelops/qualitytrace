@@ -7,21 +7,21 @@ import (
 	"sync"
 	"time"
 
-	"github.com/intelops/qualityTrace/agent/workers/trigger"
-	"github.com/intelops/qualityTrace/server/pkg/timing"
+	"github.com/intelops/qualitytrace/agent/workers/trigger"
+	"github.com/intelops/qualitytrace/server/pkg/timing"
 	"go.opentelemetry.io/otel/trace"
 )
 
 const (
-	TracetestMetadataFieldStartTime         string = "qualityTrace.span.start_time"
-	TracetestMetadataFieldEndTime           string = "qualityTrace.span.end_time"
-	TracetestMetadataFieldDuration          string = "qualityTrace.span.duration"
-	TracetestMetadataFieldType              string = "qualityTrace.span.type"
-	TracetestMetadataFieldName              string = "qualityTrace.span.name"
-	TracetestMetadataFieldParentID          string = "qualityTrace.span.parent_id"
-	TracetestMetadataFieldKind              string = "qualityTrace.span.kind"
-	TracetestMetadataFieldStatusCode        string = "qualityTrace.span.status_code"
-	TracetestMetadataFieldStatusDescription string = "qualityTrace.span.status_description"
+	QualitytraceMetadataFieldStartTime         string = "qualitytrace.span.start_time"
+	QualitytraceMetadataFieldEndTime           string = "qualitytrace.span.end_time"
+	QualitytraceMetadataFieldDuration          string = "qualitytrace.span.duration"
+	QualitytraceMetadataFieldType              string = "qualitytrace.span.type"
+	QualitytraceMetadataFieldName              string = "qualitytrace.span.name"
+	QualitytraceMetadataFieldParentID          string = "qualitytrace.span.parent_id"
+	QualitytraceMetadataFieldKind              string = "qualitytrace.span.kind"
+	QualitytraceMetadataFieldStatusCode        string = "qualitytrace.span.status_code"
+	QualitytraceMetadataFieldStatusDescription string = "qualitytrace.span.status_description"
 )
 
 func NewAttributes(inputs ...map[string]string) Attributes {
@@ -337,17 +337,17 @@ func (span Span) setMetadataAttributes() Span {
 		span.Attributes = NewAttributes()
 	}
 
-	span.Attributes.Set(TracetestMetadataFieldName, span.Name)
-	span.Attributes.Set(TracetestMetadataFieldType, spanType(span.Attributes))
-	span.Attributes.Set(TracetestMetadataFieldDuration, spanDuration(span))
-	span.Attributes.Set(TracetestMetadataFieldStartTime, strconv.FormatInt(span.StartTime.UTC().UnixNano(), 10))
-	span.Attributes.Set(TracetestMetadataFieldEndTime, strconv.FormatInt(span.EndTime.UTC().UnixNano(), 10))
+	span.Attributes.Set(QualitytraceMetadataFieldName, span.Name)
+	span.Attributes.Set(QualitytraceMetadataFieldType, spanType(span.Attributes))
+	span.Attributes.Set(QualitytraceMetadataFieldDuration, spanDuration(span))
+	span.Attributes.Set(QualitytraceMetadataFieldStartTime, strconv.FormatInt(span.StartTime.UTC().UnixNano(), 10))
+	span.Attributes.Set(QualitytraceMetadataFieldEndTime, strconv.FormatInt(span.EndTime.UTC().UnixNano(), 10))
 
 	if span.Status != nil {
-		span.Attributes.Set(TracetestMetadataFieldStatusCode, span.Status.Code)
+		span.Attributes.Set(QualitytraceMetadataFieldStatusCode, span.Status.Code)
 
 		if span.Status.Description != "" {
-			span.Attributes.Set(TracetestMetadataFieldStatusDescription, span.Status.Description)
+			span.Attributes.Set(QualitytraceMetadataFieldStatusDescription, span.Status.Description)
 		}
 	}
 
@@ -359,15 +359,15 @@ func (span Span) setTriggerResultAttributes(result trigger.TriggerResult) Span {
 	case trigger.TriggerTypeHTTP:
 		resp := result.HTTP
 		jsonheaders, _ := json.Marshal(resp.Headers)
-		span.Attributes.Set("qualityTrace.response.status", strconv.Itoa(resp.StatusCode))
-		span.Attributes.Set("qualityTrace.response.body", resp.Body)
-		span.Attributes.Set("qualityTrace.response.headers", string(jsonheaders))
+		span.Attributes.Set("qualitytrace.response.status", strconv.Itoa(resp.StatusCode))
+		span.Attributes.Set("qualitytrace.response.body", resp.Body)
+		span.Attributes.Set("qualitytrace.response.headers", string(jsonheaders))
 	case trigger.TriggerTypeGRPC:
 		resp := result.GRPC
 		jsonheaders, _ := json.Marshal(resp.Metadata)
-		span.Attributes.Set("qualityTrace.response.status", strconv.Itoa(resp.StatusCode))
-		span.Attributes.Set("qualityTrace.response.body", resp.Body)
-		span.Attributes.Set("qualityTrace.response.headers", string(jsonheaders))
+		span.Attributes.Set("qualitytrace.response.status", strconv.Itoa(resp.StatusCode))
+		span.Attributes.Set("qualitytrace.response.body", resp.Body)
+		span.Attributes.Set("qualitytrace.response.headers", string(jsonheaders))
 	}
 
 	return span

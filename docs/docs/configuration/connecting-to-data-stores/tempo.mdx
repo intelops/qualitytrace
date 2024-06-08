@@ -3,7 +3,7 @@ id: tempo
 title: Grafana Tempo
 description: Use Grafana Tempo as the trace data store for Tracetest. You can use the native connection from Tracetest to pull telemetry data directly from Tempo.
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -14,7 +14,7 @@ image: https://res.cloudinary.com/djwdcmwdz/image/upload/v1698686403/docs/Blog_T
 Tracetest fetches traces from [Tempo on the default gRPC port](https://grafana.com/docs/tempo/latest/configuration/#server) `9095`, or [default HTTP port](https://grafana.com/docs/tempo/latest/configuration/#server) `80`.
 
 :::tip
-Examples of configuring Tracetest can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualityTrace/tree/main/examples).
+Examples of configuring Tracetest can be found in the [`examples` folder of the Tracetest GitHub repo](https://github.com/intelops/qualitytrace/tree/main/examples).
 :::
 
 ## Configure Tempo
@@ -87,7 +87,7 @@ If you are using Docker and the `gRPC` endpoint like in the screenshot below, us
 tempo:9095
 ```
 
-![tempo grpc](https://res.cloudinary.com/djwdcmwdz/image/upload/v1710422510/docs/app.qualityTrace.io_organizations_ttorg_e66318ba6544b856_environments_ttenv_ad034a744607c050_settings_tab_agent_1_fc2ccz.png)
+![tempo grpc](https://res.cloudinary.com/djwdcmwdz/image/upload/v1710422510/docs/app.qualitytrace.io_organizations_ttorg_e66318ba6544b856_environments_ttenv_ad034a744607c050_settings_tab_agent_1_fc2ccz.png)
 
 If you are using Docker and the `HTTP` URL like in the screenshot below, use the service name as the hostname with port `80` or no specified port like this:
 
@@ -95,7 +95,7 @@ If you are using Docker and the `HTTP` URL like in the screenshot below, use the
 http://tempo
 ```
 
-![Tempo http](https://res.cloudinary.com/djwdcmwdz/image/upload/v1710422502/docs/app.qualityTrace.io_organizations_ttorg_e66318ba6544b856_environments_ttenv_ad034a744607c050_settings_tab_agent_gqqnjy.png)
+![Tempo http](https://res.cloudinary.com/djwdcmwdz/image/upload/v1710422502/docs/app.qualitytrace.io_organizations_ttorg_e66318ba6544b856_environments_ttenv_ad034a744607c050_settings_tab_agent_gqqnjy.png)
 
 ## Connect Tracetest to Tempo with the CLI
 
@@ -136,9 +136,9 @@ spec:
 Proceed to run this command in the terminal, and specify the file above.
 
 ```bash
-qualityTrace apply datastore -f my/data-store/file/location.yaml
+qualitytrace apply datastore -f my/data-store/file/location.yaml
 ```
 
 :::tip
-To learn more, [read the recipe on running a sample app with Tempo and Tracetest](/examples-tutorials/recipes/running-qualityTrace-with-tempo).
+To learn more, [read the recipe on running a sample app with Tempo and Tracetest](/examples-tutorials/recipes/running-qualitytrace-with-tempo).
 :::

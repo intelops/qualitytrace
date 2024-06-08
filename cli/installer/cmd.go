@@ -7,7 +7,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/intelops/qualityTrace/cli/ui"
+	"github.com/intelops/qualitytrace/cli/ui"
 )
 
 type cmd struct {

@@ -33,7 +33,7 @@ func (t *instrumentedTriggerer) Trigger(ctx context.Context, triggerConfig Trigg
 	_, span := t.tracer.Start(ctx, "Trigger test")
 	defer span.End()
 
-	tracestate, err := trace.ParseTraceState("qualityTrace=true")
+	tracestate, err := trace.ParseTraceState("qualitytrace=true")
 	if err != nil {
 		return Response{}, fmt.Errorf("could not create tracestate: %w", err)
 	}
@@ -61,14 +61,14 @@ func (t *instrumentedTriggerer) Trigger(ctx context.Context, triggerConfig Trigg
 	resp.TraceID = tid
 
 	attrs := []attribute.KeyValue{
-		attribute.String("qualityTrace.run.trace_id", tid.String()),
-		attribute.String("qualityTrace.run.test_id", string(opts.TestID)),
-		attribute.String("qualityTrace.run.type", string(t.triggerer.Type())),
+		attribute.String("qualitytrace.run.trace_id", tid.String()),
+		attribute.String("qualitytrace.run.test_id", string(opts.TestID)),
+		attribute.String("qualitytrace.run.type", string(t.triggerer.Type())),
 	}
 
 	if err != nil {
 		span.RecordError(err)
-		attrs = append(attrs, attribute.String("qualityTrace.run.error", err.Error()))
+		attrs = append(attrs, attribute.String("qualitytrace.run.error", err.Error()))
 	}
 
 	for k, v := range resp.SpanAttributes {

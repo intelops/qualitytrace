@@ -1,7 +1,7 @@
 {
-  "index_name": "docs_qualityTrace",
+  "index_name": "docs_qualitytrace",
   "sitemap_urls": [
-    "https://docs.qualityTrace.io/sitemap.xml"
+    "https://docs.qualitytrace.io/sitemap.xml"
   ],
   "sitemap_alternate_links": true,
   "stop_urls": [

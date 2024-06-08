@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/intelops/qualityTrace/server/linter/analyzer"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/linter/analyzer"
+	"github.com/intelops/qualitytrace/server/traces"
 )
 
 type enforceHttpsProtocolRule struct{}
@@ -29,7 +29,7 @@ func (r enforceHttpsProtocolRule) Evaluate(ctx context.Context, trace traces.Tra
 
 	if config.ErrorLevel != analyzer.ErrorLevelDisabled {
 		for _, span := range trace.Flat {
-			if span.Attributes.Get("qualityTrace.span.type") == "http" {
+			if span.Attributes.Get("qualitytrace.span.type") == "http" {
 				result := r.validate(span)
 				if !result.Passed {
 					passed = false

@@ -4,7 +4,7 @@ title: Pokeshop API - Import Pokemon
 description: As a testing ground, the Tracetest team has implemented a sample API instrumented with OpenTelemetry around the PokeAPI. This use case showcases a more complex scenario involving an async process.
 hide_table_of_contents: false
 keywords:
-  - qualityTrace
+  - qualitytrace
   - trace-based testing
   - observability
   - distributed tracing
@@ -110,7 +110,7 @@ Now you can validate this entire use case.
 If you want to replicate this entire test on Tracetest, you can replicate these steps on our Web UI or using our CLI, saving the following test definition as the file `test-definition.yml` and later running:
 
 ```sh
-qualityTrace run test -f test-definition.yml
+qualitytrace run test -f test-definition.yml
 ```
 
 ```yaml
@@ -128,24 +128,24 @@ spec:
         value: application/json
       body: '{"id":52}'
   specs:
-  - selector: span[qualityTrace.span.type="messaging" name="queue.synchronizePokemon
+  - selector: span[qualitytrace.span.type="messaging" name="queue.synchronizePokemon
       send" messaging.system="rabbitmq" messaging.destination="queue.synchronizePokemon"]
     assertions:
     - attr:messaging.payload = '{"id":52}'
-  - selector: span[qualityTrace.span.type="http" name="POST /pokemon/import" http.method="POST"]
+  - selector: span[qualitytrace.span.type="http" name="POST /pokemon/import" http.method="POST"]
     assertions:
     - attr:http.status_code = 200
     - attr:http.response.body = '{"id":52}'
-  - selector: span[qualityTrace.span.type="messaging" name="queue.synchronizePokemon
+  - selector: span[qualitytrace.span.type="messaging" name="queue.synchronizePokemon
       receive" messaging.system="rabbitmq" messaging.destination="queue.synchronizePokemon"]
     assertions:
     - attr:name = "queue.synchronizePokemon receive"
-  - selector: span[qualityTrace.span.type="http" name="HTTP GET pokeapi.pokemon" http.method="GET"]
+  - selector: span[qualitytrace.span.type="http" name="HTTP GET pokeapi.pokemon" http.method="GET"]
     assertions:
     - attr:http.response.body  =  '{"name":"meowth"}'
     - attr:http.status_code  =  200
-  - selector: span[qualityTrace.span.type="database"]
+  - selector: span[qualitytrace.span.type="database"]
     assertions:
-    - attr:qualityTrace.span.duration <= 200ms
+    - attr:qualitytrace.span.duration <= 200ms
 
 ```

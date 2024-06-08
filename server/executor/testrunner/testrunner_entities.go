@@ -1,7 +1,7 @@
 package testrunner
 
 import (
-	"github.com/intelops/qualityTrace/server/pkg/id"
+	"github.com/intelops/qualitytrace/server/pkg/id"
 	"golang.org/x/exp/slices"
 )
 

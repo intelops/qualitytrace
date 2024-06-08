@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/intelops/qualityTrace/cli/cmd"
+	"github.com/intelops/qualitytrace/cli/cmd"
 )
 
 func main() {

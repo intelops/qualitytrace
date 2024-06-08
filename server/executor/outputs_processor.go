@@ -5,11 +5,11 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/intelops/qualityTrace/server/assertions/selectors"
-	"github.com/intelops/qualityTrace/server/expression"
-	"github.com/intelops/qualityTrace/server/pkg/maps"
-	"github.com/intelops/qualityTrace/server/test"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/server/assertions/selectors"
+	"github.com/intelops/qualitytrace/server/expression"
+	"github.com/intelops/qualitytrace/server/pkg/maps"
+	"github.com/intelops/qualitytrace/server/test"
+	"github.com/intelops/qualitytrace/server/traces"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
@@ -45,7 +45,7 @@ func (op instrumentedOutputProcessor) process(ctx context.Context, outputs test.
 	}
 
 	span.SetAttributes(
-		attribute.String("qualityTrace.run.output_processor.outputs", string(encoded)),
+		attribute.String("qualitytrace.run.output_processor.outputs", string(encoded)),
 	)
 
 	return result, err

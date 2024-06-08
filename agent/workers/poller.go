@@ -8,17 +8,17 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/fluidtruck/deepcopy"
-	"github.com/intelops/qualityTrace/agent/client"
-	"github.com/intelops/qualityTrace/agent/collector"
-	"github.com/intelops/qualityTrace/agent/event"
-	"github.com/intelops/qualityTrace/agent/proto"
-	"github.com/intelops/qualityTrace/agent/telemetry"
-	"github.com/intelops/qualityTrace/agent/tracedb"
-	"github.com/intelops/qualityTrace/agent/tracedb/connection"
-	"github.com/intelops/qualityTrace/agent/workers/poller"
-	"github.com/intelops/qualityTrace/server/datastore"
-	"github.com/intelops/qualityTrace/server/executor"
-	"github.com/intelops/qualityTrace/server/traces"
+	"github.com/intelops/qualitytrace/agent/client"
+	"github.com/intelops/qualitytrace/agent/collector"
+	"github.com/intelops/qualitytrace/agent/event"
+	"github.com/intelops/qualitytrace/agent/proto"
+	"github.com/intelops/qualitytrace/agent/telemetry"
+	"github.com/intelops/qualitytrace/agent/tracedb"
+	"github.com/intelops/qualitytrace/agent/tracedb/connection"
+	"github.com/intelops/qualitytrace/agent/workers/poller"
+	"github.com/intelops/qualitytrace/server/datastore"
+	"github.com/intelops/qualitytrace/server/executor"
+	"github.com/intelops/qualitytrace/server/traces"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
@@ -101,10 +101,10 @@ func (w *PollerWorker) Poll(ctx context.Context, request *proto.PollingRequest) 
 	ctx, span := w.tracer.Start(ctx, "PollingRequest Worker operation")
 	defer span.End()
 
-	runCounter, _ := w.meter.Int64Counter("qualityTrace.agent.pollerworker.runs")
+	runCounter, _ := w.meter.Int64Counter("qualitytrace.agent.pollerworker.runs")
 	runCounter.Add(ctx, 1)
 
-	errorCounter, _ := w.meter.Int64Counter("qualityTrace.agent.pollerworker.errors")
+	errorCounter, _ := w.meter.Int64Counter("qualitytrace.agent.pollerworker.errors")
 
 	w.logger.Debug("Received polling request", zap.Any("request", request))
 	w.observer.StartTracePoll(request)

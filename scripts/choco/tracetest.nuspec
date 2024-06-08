@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
-    <id>qualityTrace</id>
+    <id>qualitytrace</id>
     <version>%version%</version>
-    <title>qualityTrace</title>
+    <title>qualitytrace</title>
     <authors>Kubeshop</authors>
-    <projectUrl>https://qualityTrace.io</projectUrl>
-    <tags>qualityTrace opentelemetry trace-based-testing testing</tags>
+    <projectUrl>https://qualitytrace.io</projectUrl>
+    <tags>qualitytrace opentelemetry trace-based-testing testing</tags>
     <summary>Tracetest - the best way to develop and test your distributed system with OpenTelemetry</summary>
     <description>Tracetest - the best way to develop and test your distributed system with OpenTelemetry</description>
   </metadata>
