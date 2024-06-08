@@ -340,7 +340,7 @@ func (r *runRepository) GetRun(ctx context.Context, testID id.ID, runID int) (Ru
 
 	run, err := readRunRow(r.db.QueryRowContext(ctx, query, params...))
 	if err != nil {
-		return Run{}, fmt.Errorf("cannot read row: %w", err)
+		return Run{}, fmt.Errorf(" run repo 1 - cannot read row: %w", err)
 	}
 
 	return run, nil
@@ -392,7 +392,7 @@ func (r *runRepository) GetRunByTraceID(ctx context.Context, traceID trace.Trace
 
 	run, err := readRunRow(stmt.QueryRowContext(ctx, params...))
 	if err != nil {
-		return Run{}, fmt.Errorf("cannot read row: %w", err)
+		return Run{}, fmt.Errorf("run repo 2- cannot read row: %w", err)
 	}
 	return run, nil
 }
@@ -419,7 +419,7 @@ func (r *runRepository) readRunRows(ctx context.Context, rows *sql.Rows) ([]Run,
 	for rows.Next() {
 		run, err := readRunRow(rows)
 		if err != nil {
-			return []Run{}, fmt.Errorf("cannot read row: %w", err)
+			return []Run{}, fmt.Errorf("run repo 3 - cannot read row: %w", err)
 		}
 		runs = append(runs, run)
 	}
