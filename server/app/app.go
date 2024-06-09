@@ -356,8 +356,8 @@ func (app *App) Start(opts ...appOption) error {
 	registerTestRunner(testRunnerRepo, apiRouter, provisioner, tracer)
 	registerTestResource(testRepo, apiRouter, provisioner, tracer)
 
-	isQualitytraceDev := os.Getenv("QUALITYTRACE_DEV") != ""
-	registerSPAHandler(router, app.cfg, configFromDB.IsAnalyticsEnabled(), serverID, isQualitytraceDev)
+	isTracetestDev := os.Getenv("TRACETEST_DEV") != ""
+	registerSPAHandler(router, app.cfg, configFromDB.IsAnalyticsEnabled(), serverID, isTracetestDev)
 
 	if isNewInstall {
 		provision(provisioner, app.provisioningFile)
@@ -379,7 +379,7 @@ func (app *App) Start(opts ...appOption) error {
 	return nil
 }
 
-func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabled bool, serverID string, isQualitytraceDev bool) {
+func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabled bool, serverID string, isTracetestDev bool) {
 	router.
 		PathPrefix(cfg.ServerPathPrefix()).
 		Handler(
@@ -389,7 +389,7 @@ func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabl
 				serverID,
 				version.Version,
 				version.Env,
-				isQualitytraceDev,
+				isTracetestDev,
 			),
 		)
 }
