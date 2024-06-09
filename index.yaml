@@ -1,0 +1,19 @@
+apiVersion: v1
+entries:
+  qualitytrace:
+  - apiVersion: v2
+    appVersion: v1.0.0
+    created: "2024-06-09T16:28:11.375933477Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://kube-tarian.github.io/helmrepo-supporting-tools/
+      version: 1.x.x
+    description: A Helm chart for QualityTrace
+    digest: f2fe7f1374d5b9c5697289c8db6f85235e011734d7f8d757254af32dbc746a2f
+    name: qualitytrace
+    type: application
+    urls:
+    - https://github.com/intelops/qualitytrace/releases/download/qualitytrace-1.0.0/qualitytrace-1.0.0.tgz
+    version: 1.0.0
+generated: "2024-06-09T16:28:11.375946682Z"
