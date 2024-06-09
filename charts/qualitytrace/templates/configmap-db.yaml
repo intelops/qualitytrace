@@ -1,0 +1,20 @@
+{{- if not .Values.postgresql.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-query
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "1"
+    "helm.sh/hook-delete-policy": before-hook-creation
+data:
+  create-database.sql: |
+    SELECT 'CREATE DATABASE {{ .Values.externalPostgresql.qualitytrace.database }}'
+    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname='{{ .Values.externalPostgresql.qualitytrace.database }}')\gexec
+
+    SELECT 'CREATE USER {{ .Values.externalPostgresql.qualitytrace.username }} WITH PASSWORD ''' || :'db_password' || ''''
+    WHERE NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname='{{ .Values.externalPostgresql.qualitytrace.username }}')\gexec
+    
+    ALTER DATABASE {{ .Values.externalPostgresql.qualitytrace.database }} OWNER TO {{ .Values.externalPostgresql.qualitytrace.username }};
+    ALTER ROLE {{ .Values.externalPostgresql.qualitytrace.username }} CREATEDB;
+{{- end }}

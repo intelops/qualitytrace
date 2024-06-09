@@ -1,0 +1,26 @@
+{{- if .Values.otelCollector.ingressRoute.enabled -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "qualitytrace.fullname" . }}-otel-collector
+  {{- with .Values.otelCollector.ingressRoute.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`{{ .Values.otelCollector.ingressRoute.host }}`)
+    services:
+    - name: {{ include "qualitytrace.fullname" . }}-otel-collector
+      port: {{ .Values.otelCollector.ingressRoute.service.port }}
+      scheme: h2c
+  {{- if .Values.otelCollector.ingressRoute.tls }}
+  tls:
+    {{- range .Values.otelCollector.ingressRoute.tls }}
+    secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+{{- end }}
