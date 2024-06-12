@@ -70,11 +70,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: {{ include "qualitytrace.pathPrefix" . }}/healthz
+              path: {{ include "qualitytrace.pathPrefix" . }}healthz
               port: http
           readinessProbe:
             httpGet:
-              path: {{ include "qualitytrace.pathPrefix" . }}/healthz
+              path: {{ include "qualitytrace.pathPrefix" . }}healthz
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
