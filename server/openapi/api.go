@@ -54,6 +54,13 @@ type ApiApiRouter interface {
 	UpdateWizard(http.ResponseWriter, *http.Request)
 }
 
+// DefaultApiRouter defines the required methods for binding the api requests to a responses for the DefaultApi
+// The DefaultApiRouter implementation should parse necessary information from the http request,
+// pass the data to a DefaultApiServicer to perform the required actions, then write the service results to the http response.
+type DefaultApiRouter interface {
+	HealthzGet(http.ResponseWriter, *http.Request)
+}
+
 // ResourceApiApiRouter defines the required methods for binding the api requests to a responses for the ResourceApiApi
 // The ResourceApiApiRouter implementation should parse necessary information from the http request,
 // pass the data to a ResourceApiApiServicer to perform the required actions, then write the service results to the http response.
@@ -134,6 +141,14 @@ type ApiApiServicer interface {
 	TestConnection(context.Context, DataStore) (ImplResponse, error)
 	UpdateTestRun(context.Context, string, int32, TestRun) (ImplResponse, error)
 	UpdateWizard(context.Context, Wizard) (ImplResponse, error)
+}
+
+// DefaultApiServicer defines the api actions for the DefaultApi service
+// This interface intended to stay up to date with the openapi yaml used to generate it,
+// while the service implementation can be ignored with the .openapi-generator-ignore file
+// and updated with the logic required for the API.
+type DefaultApiServicer interface {
+	HealthzGet(context.Context) (ImplResponse, error)
 }
 
 // ResourceApiApiServicer defines the api actions for the ResourceApiApi service

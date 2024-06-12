@@ -340,7 +340,7 @@ func (td *RunRepository) GetTestSuiteRun(ctx context.Context, ID id.ID, runID in
 func (td *RunRepository) GetLatestRunByTestSuiteVersion(ctx context.Context, ID id.ID, version int) (TestSuiteRun, error) {
 	sortQuery := " ORDER BY created_at DESC LIMIT 1"
 	query, params := sqlutil.Tenant(ctx, selectTestSuiteRunQuery+" WHERE test_suite_id = $1 AND test_suite_version = $2", ID, version)
-	stmt, err := td.db.Prepare(query +" "+sortQuery)
+	stmt, err := td.db.Prepare(query + " " + sortQuery)
 	if err != nil {
 		return TestSuiteRun{}, fmt.Errorf("prepare: %w", err)
 	}
@@ -359,7 +359,7 @@ func (td *RunRepository) GetLatestRunByTestSuiteVersion(ctx context.Context, ID 
 func (td *RunRepository) GetTestSuiteRuns(ctx context.Context, ID id.ID, take, skip int32) ([]TestSuiteRun, error) {
 	sortQuery := " ORDER BY created_at DESC LIMIT $2 OFFSET $3"
 	query, params := sqlutil.Tenant(ctx, selectTestSuiteRunQuery+" WHERE test_suite_id = $1", ID.String(), take, skip)
-	stmt, err := td.db.Prepare(query +" "+ sortQuery)
+	stmt, err := td.db.Prepare(query + " " + sortQuery)
 	if err != nil {
 		return []TestSuiteRun{}, fmt.Errorf("prepare: %w", err)
 	}

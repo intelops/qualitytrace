@@ -68,14 +68,14 @@ spec:
             - name: otlp-http
               containerPort: {{ .Values.server.otlpHttpPort }}
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: {{ include "qualitytrace.pathPrefix" . }}
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: {{ include "qualitytrace.pathPrefix" . }}
-          #     port: http
+          livenessProbe:
+            httpGet:
+              path: {{ include "qualitytrace.pathPrefix" . }}/healthz
+              port: http
+          readinessProbe:
+            httpGet:
+              path: {{ include "qualitytrace.pathPrefix" . }}/healthz
+              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

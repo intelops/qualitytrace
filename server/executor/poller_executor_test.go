@@ -152,7 +152,7 @@ func Test_PollerExecutor_ExecuteRequest_NoRootSpan_TwoSpansCase(t *testing.T) {
 		StartTime: firstSpan.EndTime,
 		EndTime:   firstSpan.EndTime.Add(retryDelay),
 		Attributes: traces.NewAttributes(map[string]string{
-			"testSpan":                            "true",
+			"testSpan":                               "true",
 			traces.QualitytraceMetadataFieldParentID: firstSpan.ID.String(),
 		}),
 		Children: []*traces.Span{},
@@ -268,7 +268,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_OneSpanCase(t *testing.T) {
 			StartTime: time.Now(),
 			EndTime:   time.Now().Add(retryDelay),
 			Attributes: traces.NewAttributes(map[string]string{
-				"testSpan":                            "true",
+				"testSpan":                               "true",
 				traces.QualitytraceMetadataFieldParentID: rootSpanID.String(),
 			}),
 			Children: []*traces.Span{},
@@ -329,7 +329,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_OneDelayedSpanCase(t *testi
 		StartTime: time.Now(),
 		EndTime:   time.Now().Add(retryDelay),
 		Attributes: traces.NewAttributes(map[string]string{
-			"testSpan":                            "true",
+			"testSpan":                               "true",
 			traces.QualitytraceMetadataFieldParentID: rootSpan.ID.String(),
 		}),
 		Children: []*traces.Span{},
@@ -398,7 +398,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_TwoSpansCase(t *testing.T) 
 		StartTime: time.Now(),
 		EndTime:   time.Now().Add(retryDelay),
 		Attributes: traces.NewAttributes(map[string]string{
-			"testSpan":                            "true",
+			"testSpan":                               "true",
 			traces.QualitytraceMetadataFieldParentID: rootSpan.ID.String(),
 		}),
 		Children: []*traces.Span{},
@@ -410,7 +410,7 @@ func Test_PollerExecutor_ExecuteRequest_WithRootSpan_TwoSpansCase(t *testing.T) 
 		StartTime: firstSpan.EndTime,
 		EndTime:   firstSpan.EndTime.Add(retryDelay),
 		Attributes: traces.NewAttributes(map[string]string{
-			"testSpan":                            "true",
+			"testSpan":                               "true",
 			traces.QualitytraceMetadataFieldParentID: firstSpan.ID.String(),
 		}),
 		Children: []*traces.Span{},

@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"encoding/json"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -551,6 +552,12 @@ func registerWSHandler(router *mux.Router, mappers mappings.Mappings, subscripti
 	router.Handle("/ws", wsRouter.Handler())
 }
 
+func healthCheckHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	response := map[string]string{"status": "ok"}
+	json.NewEncoder(w).Encode(response)
+}
+
 func controller(
 	cfg httpServerConfig,
 
@@ -596,6 +603,8 @@ func controller(
 
 		mappers,
 	))
+	// Register the /healthz endpoint
+	router.HandleFunc("/healthz", healthCheckHandler).Methods("GET")
 
 	return router, mappers
 }
