@@ -1,0 +1,11 @@
+apiVersion: v2
+appVersion: v1.0.0
+dependencies:
+- name: postgresql
+  repository: https://kube-tarian.github.io/helmrepo-supporting-tools/
+  version: 1.x.x
+  condition: postgresql.enabled
+description: A Helm chart for QualityTrace
+name: qualitytrace
+type: application
+version: 1.0.0

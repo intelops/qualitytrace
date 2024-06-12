@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "qualitytrace.fullname" . }}
+  labels:
+    {{- include "qualitytrace.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "qualitytrace.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "qualitytrace.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "qualitytrace.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          env:
+          {{- if and (not .Values.postgresql.enabled) (.Values.externalPostgresql.qualitytrace.existingSecret) }}
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.externalPostgresql.qualitytrace.existingSecret.name }}
+                key: {{ .Values.externalPostgresql.qualitytrace.existingSecret.passwordKey }}
+          {{- end }}
+          - name: QUALITYTRACE_DEV
+            value: "{{ .Values.env.qualitytraceDev }}"
+          {{- if and (not .Values.postgresql.enabled) (.Values.externalPostgresql.qualitytrace.existingSecret) }}
+          command:
+            - sh
+            - -c
+            - |
+              cp /app/config/config.yaml /processed-config/
+              sed -i 's/db_password/'"$DB_PASSWORD"'/g' /processed-config/config.yaml
+              /app/qualitytrace-server serve --config /processed-config/config.yaml --provisioning-file /app/config/provisioning.yaml
+          {{- else }}
+          args:
+          - "--config"
+          - "/app/config/config.yaml"
+          - "--provisioning-file"
+          - "/app/config/provisioning.yaml"
+          {{- end }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.server.httpPort }}
+              protocol: TCP
+            - name: otlp-grpc
+              containerPort: {{ .Values.server.otlpGrpcPort }}
+              protocol: TCP
+            - name: otlp-http
+              containerPort: {{ .Values.server.otlpHttpPort }}
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: {{ include "qualitytrace.pathPrefix" . }}
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: {{ include "qualitytrace.pathPrefix" . }}
+          #     port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - name: config
+            mountPath: /app/config
+          {{- if and (not .Values.postgresql.enabled) (.Values.externalPostgresql.qualitytrace.existingSecret) }}
+          - name: processed-config-volume
+            mountPath: /processed-config
+          {{- end}}
+      volumes:
+      - name: config
+        configMap:
+          name: {{ include "qualitytrace.fullname" . }}
+      {{- if and (not .Values.postgresql.enabled) (.Values.externalPostgresql.qualitytrace.existingSecret) }}
+      - name: processed-config-volume
+        emptyDir: {}
+      {{- end}}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
