@@ -1,6 +1,0 @@
-dependencies:
-- name: postgresql
-  repository: https://kube-tarian.github.io/helmrepo-supporting-tools/
-  version: 1.0.3
-digest: sha256:1bf22f2f3d29a7d5103153d28cc97d6e0cbd3102242750d1fc03334ebdbb190c
-generated: "2024-06-12T20:34:20.277359575+05:30"
