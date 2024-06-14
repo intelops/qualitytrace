@@ -1,7 +1,6 @@
 package app
 
 import (
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/intelops/qualitytrace/agent/tracedb"
 	"github.com/intelops/qualitytrace/server/config"
 	"github.com/intelops/qualitytrace/server/datastore"
@@ -16,6 +15,7 @@ import (
 	"github.com/intelops/qualitytrace/server/subscription"
 	"github.com/intelops/qualitytrace/server/test"
 	"github.com/intelops/qualitytrace/server/testconnection"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/trace"
 )

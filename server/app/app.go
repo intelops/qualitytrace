@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"encoding/json"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -356,8 +357,8 @@ func (app *App) Start(opts ...appOption) error {
 	registerTestRunner(testRunnerRepo, apiRouter, provisioner, tracer)
 	registerTestResource(testRepo, apiRouter, provisioner, tracer)
 
-	isQualitytraceDev := os.Getenv("QUALITYTRACE_DEV") != ""
-	registerSPAHandler(router, app.cfg, configFromDB.IsAnalyticsEnabled(), serverID, isQualitytraceDev)
+	isTracetestDev := os.Getenv("TRACETEST_DEV") != ""
+	registerSPAHandler(router, app.cfg, configFromDB.IsAnalyticsEnabled(), serverID, isTracetestDev)
 
 	if isNewInstall {
 		provision(provisioner, app.provisioningFile)
@@ -379,7 +380,7 @@ func (app *App) Start(opts ...appOption) error {
 	return nil
 }
 
-func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabled bool, serverID string, isQualitytraceDev bool) {
+func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabled bool, serverID string, isTracetestDev bool) {
 	router.
 		PathPrefix(cfg.ServerPathPrefix()).
 		Handler(
@@ -389,7 +390,7 @@ func registerSPAHandler(router *mux.Router, cfg httpServerConfig, analyticsEnabl
 				serverID,
 				version.Version,
 				version.Env,
-				isQualitytraceDev,
+				isTracetestDev,
 			),
 		)
 }
@@ -551,6 +552,12 @@ func registerWSHandler(router *mux.Router, mappers mappings.Mappings, subscripti
 	router.Handle("/ws", wsRouter.Handler())
 }
 
+func healthCheckHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	response := map[string]string{"status": "ok"}
+	json.NewEncoder(w).Encode(response)
+}
+
 func controller(
 	cfg httpServerConfig,
 
@@ -596,6 +603,8 @@ func controller(
 
 		mappers,
 	))
+	// Register the /healthz endpoint
+	router.HandleFunc("/healthz", healthCheckHandler).Methods("GET")
 
 	return router, mappers
 }

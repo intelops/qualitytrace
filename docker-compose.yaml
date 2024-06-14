@@ -18,7 +18,7 @@ services:
       - 11633:11633
     command: --provisioning-file /app/provisioning.yaml
     healthcheck:
-      test: ["CMD", "wget", "--spider", "localhost:11633"]
+      test: ["CMD", "wget", "--spider", "localhost:11633/healthz"]
       interval: 1s
       timeout: 3s
       retries: 60

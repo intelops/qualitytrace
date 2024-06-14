@@ -8,4 +8,4 @@ dependencies:
 description: A Helm chart for QualityTrace
 name: qualitytrace
 type: application
-version: 1.0.0
+version: 1.0.1
